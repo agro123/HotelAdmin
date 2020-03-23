@@ -11,4 +11,5 @@ package Modelo;
 public class Empleado extends Persona {
     private int codigoEmpleado;
     private String cargo;
+  
 }
