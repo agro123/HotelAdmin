@@ -5,19 +5,41 @@
  */
 package Vistas;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author cristian
+ * @author crist
  */
-public class LoginGUI extends javax.swing.JPanel {
+public class LoginGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginGUI
      */
     public LoginGUI() {
         initComponents();
+        setLocationRelativeTo(null);
     }
-
+    public void ingresar(){
+     try{   
+        if(jTFusuario.getText().equalsIgnoreCase("admin") && jTFcontraseña.getText().equalsIgnoreCase("admin"))
+        {
+            
+            //--------------------------------------------------------------------------------------------------- Aqui debe ir el codigo que lleve a la ventana de opciones de administrador
+            JOptionPane.showMessageDialog(null, "Agregue el menu de inicio del administrador y borre esta linea");
+           
+            
+        } else {
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
+                //------------------------------------------------------------------------------------------------ Aqui debe ir el codigo para validar una contraseña y acceder al menu de empleados
+              
+               }
+     }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"Ah ocurrido un error durante la verificacion "+ "\nError :" + ex.getMessage());
+                dispose();
+     }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,83 +49,134 @@ public class LoginGUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jScrollBar1 = new javax.swing.JScrollBar();
-        BTNacceder = new javax.swing.JButton();
-        TFusuario = new javax.swing.JTextField();
-        TFcontraseña = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jTFusuario = new javax.swing.JTextField();
+        jTFcontraseña = new javax.swing.JTextField();
+        jBTNacceder = new javax.swing.JButton();
 
-        jTextField1.setText("jTextField1");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BTNacceder.setText("Acceder");
-        BTNacceder.addActionListener(new java.awt.event.ActionListener() {
+        jTFusuario.setText("Usuario");
+        jTFusuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNaccederActionPerformed(evt);
+                jTFusuarioActionPerformed(evt);
             }
         });
 
-        TFusuario.setText("Usuario");
-        TFusuario.addActionListener(new java.awt.event.ActionListener() {
+        jTFcontraseña.setText("Contraseña");
+        jTFcontraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TFusuarioActionPerformed(evt);
+                jTFcontraseñaActionPerformed(evt);
             }
         });
 
-        TFcontraseña.setText("Usuario");
-        TFcontraseña.addActionListener(new java.awt.event.ActionListener() {
+        jBTNacceder.setText("Acceder");
+        jBTNacceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TFcontraseñaActionPerformed(evt);
+                jBTNaccederActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(82, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTFusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addComponent(jBTNacceder)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(jTFusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(jTFcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addComponent(jBTNacceder)
+                .addGap(46, 46, 46))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(TFusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(TFcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(BTNacceder)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(TFusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(TFcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(BTNacceder)
-                .addContainerGap(91, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BTNaccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNaccederActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTNaccederActionPerformed
+    private void jTFusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFusuarioActionPerformed
+       jTFusuario.selectAll();//-----------------------------------------------------------------------------CAMPO USUARIO
+    }//GEN-LAST:event_jTFusuarioActionPerformed
 
-    private void TFusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFusuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TFusuarioActionPerformed
+    private void jTFcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFcontraseñaActionPerformed
+       jTFcontraseña.selectAll();//--------------------------------------------------------------------------CAMPO CONTRASEÑA
+    }//GEN-LAST:event_jTFcontraseñaActionPerformed
 
-    private void TFcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFcontraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TFcontraseñaActionPerformed
+    private void jBTNaccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNaccederActionPerformed
+       dispose();//-------------------------------------------------------------------------------------------BOTON ACCEDER
+       ingresar();
+    }//GEN-LAST:event_jBTNaccederActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LoginGUI().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTNacceder;
-    private javax.swing.JTextField TFcontraseña;
-    private javax.swing.JTextField TFusuario;
-    private javax.swing.JScrollBar jScrollBar1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jBTNacceder;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTFcontraseña;
+    private javax.swing.JTextField jTFusuario;
     // End of variables declaration//GEN-END:variables
 }

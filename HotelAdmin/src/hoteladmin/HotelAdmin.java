@@ -5,17 +5,19 @@
  */
 package hoteladmin;
 
+import Vistas.LoginGUI;
+
 /**
  *
  * @author Leonardo
  */
 public class HotelAdmin {
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String[] args) {
-        // TODO code application logic here
+       
+       LoginGUI inicio = new LoginGUI();
+       inicio.setVisible(true);
     }
     
 }
