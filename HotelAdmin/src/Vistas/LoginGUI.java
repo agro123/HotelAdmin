@@ -27,11 +27,11 @@ public class LoginGUI extends javax.swing.JFrame {
 
      /** Creates new form LoginFondo */
      public LoginFondo() {
-          this.setSize(283,133);
+          this.setSize(286,90);
      }
      public void paint(Graphics grafico){
         Dimension height = getSize();       
-        ImageIcon img = new ImageIcon(getClass().getResource("/Imagenes/p3.png"));
+        ImageIcon img = new ImageIcon(getClass().getResource("/Imagenes/L3.png"));
         grafico.drawImage(img.getImage(), 0, 0, height.width, height.height, null);
  
         setOpaque(false);
@@ -90,14 +90,17 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jDialog1 = new javax.swing.JDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        LoginFondo fnd = new LoginFondo();
+        jPanel2.add(fnd,BorderLayout.CENTER);
+        jPanel2.repaint();
         jTFcontraseña = new javax.swing.JPasswordField();
         jTFcontraseña.setBorder(BorderFactory.createLineBorder(Color.white));
         jTFusuario = new javax.swing.JTextField();
         jTFusuario.setBorder(BorderFactory.createLineBorder(Color.white));
         jBTNacceder = new javax.swing.JButton();
-        jBTNacceder.setBorder(BorderFactory.createLineBorder(Color.white));
         jBTNcrearcuenta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -112,14 +115,13 @@ public class LoginGUI extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
+        jButton1.setText("jButton1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(69, 170, 242));
 
-        jPanel1.setBackground(new java.awt.Color(69, 172, 242));
+        jPanel1.setBackground(new java.awt.Color(69, 170, 242));
 
-        LoginFondo fnd = new LoginFondo();
-        jPanel2.add(fnd,BorderLayout.CENTER);
-        jPanel2.repaint();
         jPanel2.setBackground(new java.awt.Color(69, 170, 242));
         jPanel2.setPreferredSize(new java.awt.Dimension(285, 133));
 
@@ -159,11 +161,11 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
-        jBTNacceder.setBackground(new java.awt.Color(255, 255, 255));
-        jBTNacceder.setFont(new java.awt.Font("Quicksand", 1, 18)); // NOI18N
+        jBTNacceder.setBackground(new java.awt.Color(69, 170, 242));
+        jBTNacceder.setBorder(BorderFactory.createLineBorder(new java.awt.Color(69, 170, 242)));
+        jBTNacceder.setFont(new java.awt.Font("Quicksand", 0, 18)); // NOI18N
         jBTNacceder.setForeground(new java.awt.Color(69, 170, 242));
-        jBTNacceder.setText("Iniciar sesión");
-        jBTNacceder.setToolTipText("");
+        jBTNacceder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/btnIN.png"))); // NOI18N
         jBTNacceder.setPreferredSize(new java.awt.Dimension(6, 29));
         jBTNacceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,16 +183,15 @@ public class LoginGUI extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTFcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jBTNacceder, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTFcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jBTNacceder, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,9 +200,8 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addComponent(jTFusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTFcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(jBTNacceder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8))
+                .addGap(18, 18, 18)
+                .addComponent(jBTNacceder, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
         );
 
         jTFusuario.getAccessibleContext().setAccessibleName("");
@@ -240,8 +240,8 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGap(74, 74, 74)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addComponent(jBTNcrearcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
@@ -268,20 +268,6 @@ public class LoginGUI extends javax.swing.JFrame {
        jTFcontraseña.selectAll();//--------------------------------------------------------------------------CAMPO CONTRASEÑA
     }//GEN-LAST:event_jTFcontraseñaActionPerformed
 
-    private void jBTNaccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNaccederActionPerformed
-        if(jTFusuario.getText().equalsIgnoreCase("") || jTFcontraseña.getText().equalsIgnoreCase("")){
-            
-            JOptionPane.showMessageDialog(null, "Campos vacios");}else{
-                 //-------------------------------------------------------------------------------------------BOTON ACCEDER
-                 
-                 ingresar();
-        }
-    }//GEN-LAST:event_jBTNaccederActionPerformed
-
-    private void jBTNaccederKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBTNaccederKeyPressed
- 
-    }//GEN-LAST:event_jBTNaccederKeyPressed
-
     private void jTFcontraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFcontraseñaKeyPressed
      enter(evt);
     }//GEN-LAST:event_jTFcontraseñaKeyPressed
@@ -297,6 +283,20 @@ public class LoginGUI extends javax.swing.JFrame {
     private void jTFusuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFusuarioMouseClicked
 
     }//GEN-LAST:event_jTFusuarioMouseClicked
+
+    private void jBTNaccederKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBTNaccederKeyPressed
+
+    }//GEN-LAST:event_jBTNaccederKeyPressed
+
+    private void jBTNaccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNaccederActionPerformed
+        if(jTFusuario.getText().equalsIgnoreCase("") || jTFcontraseña.getText().equalsIgnoreCase("")){
+
+            JOptionPane.showMessageDialog(null, "Campos vacios");}else{
+            //-------------------------------------------------------------------------------------------BOTON ACCEDER
+
+            ingresar();
+        }
+    }//GEN-LAST:event_jBTNaccederActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,6 +336,7 @@ public class LoginGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTNacceder;
     private javax.swing.JButton jBTNcrearcuenta;
+    private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
