@@ -28,21 +28,87 @@ public class Habitación extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jBhabitaciones = new javax.swing.JButton();
+        jBclientes = new javax.swing.JButton();
+        jBempleados = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLfondoGris = new javax.swing.JLabel();
+        jLfondoAzul = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(241, 242, 246));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/panel-azul.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 280, 690));
+        jBhabitaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/SinSelección-habi.png"))); // NOI18N
+        jBhabitaciones.setBorder(null);
+        jBhabitaciones.setBorderPainted(false);
+        jBhabitaciones.setContentAreaFilled(false);
+        jBhabitaciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBhabitaciones.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jBhabitaciones.setMaximumSize(new java.awt.Dimension(0, 0));
+        jBhabitaciones.setMinimumSize(new java.awt.Dimension(0, 0));
+        jBhabitaciones.setPreferredSize(new java.awt.Dimension(0, 129));
+        jBhabitaciones.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-habi.png"))); // NOI18N
+        jBhabitaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBhabitacionesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBhabitaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 150, 260, -1));
+
+        jBclientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Sinseleccion-cli.png"))); // NOI18N
+        jBclientes.setBorder(null);
+        jBclientes.setBorderPainted(false);
+        jBclientes.setContentAreaFilled(false);
+        jBclientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBclientes.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jBclientes.setMaximumSize(new java.awt.Dimension(0, 0));
+        jBclientes.setMinimumSize(new java.awt.Dimension(0, 0));
+        jBclientes.setPreferredSize(new java.awt.Dimension(0, 129));
+        jBclientes.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-cli.png"))); // NOI18N
+        jBclientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBclientesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 250, 260, -1));
+
+        jBempleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/SinSeleccionar-emp.png"))); // NOI18N
+        jBempleados.setBorder(null);
+        jBempleados.setBorderPainted(false);
+        jBempleados.setContentAreaFilled(false);
+        jBempleados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBempleados.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jBempleados.setMaximumSize(new java.awt.Dimension(0, 0));
+        jBempleados.setMinimumSize(new java.awt.Dimension(0, 0));
+        jBempleados.setPreferredSize(new java.awt.Dimension(0, 129));
+        jBempleados.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-empl_1.png"))); // NOI18N
+        jBempleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBempleadosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBempleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 355, 260, -1));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/botonSalida.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 590, -1, -1));
+
+        jLfondoGris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo-principal.png"))); // NOI18N
+        jPanel1.add(jLfondoGris, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 0, 900, 690));
+
+        jLfondoAzul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/panel-azul.png"))); // NOI18N
+        jPanel1.add(jLfondoAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 290, 690));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1118, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -51,6 +117,19 @@ public class Habitación extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBhabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBhabitacionesActionPerformed
+        // TODO add your handling code here:
+        jBhabitaciones.setEnabled(true);
+    }//GEN-LAST:event_jBhabitacionesActionPerformed
+
+    private void jBclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBclientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBclientesActionPerformed
+
+    private void jBempleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBempleadosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBempleadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,7 +167,12 @@ public class Habitación extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jBclientes;
+    private javax.swing.JButton jBempleados;
+    private javax.swing.JButton jBhabitaciones;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLfondoAzul;
+    private javax.swing.JLabel jLfondoGris;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
