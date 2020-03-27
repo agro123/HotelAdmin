@@ -5,6 +5,8 @@
  */
 package Vistas.Jframe;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nicol
@@ -36,12 +38,12 @@ public class Login extends javax.swing.JFrame {
         Menu = new javax.swing.JLabel();
         jLlogo = new javax.swing.JLabel();
         jPRegistro = new javax.swing.JPanel();
+        jTdireccion = new javax.swing.JTextField();
         jTcedula = new javax.swing.JTextField();
-        jTcedula1 = new javax.swing.JTextField();
         jTtelefono = new javax.swing.JTextField();
-        jTcedula3 = new javax.swing.JTextField();
+        jTcorreo = new javax.swing.JTextField();
         jTnombre = new javax.swing.JTextField();
-        jTcedula6 = new javax.swing.JTextField();
+        jTcargo = new javax.swing.JTextField();
         jBrgistrar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -51,10 +53,10 @@ public class Login extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLfondo1 = new javax.swing.JLabel();
         jPiniciarSesion = new javax.swing.JPanel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jTusername1 = new javax.swing.JTextField();
+        jPcontraseña = new javax.swing.JPasswordField();
+        jTusername = new javax.swing.JTextField();
         jLinput = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jBiniciarSesion = new javax.swing.JButton();
         jLfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -96,36 +98,50 @@ public class Login extends javax.swing.JFrame {
         jPRegistro.setBackground(new java.awt.Color(69, 170, 242));
         jPRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTdireccion.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jTdireccion.setForeground(new java.awt.Color(204, 204, 204));
+        jTdireccion.setText("Dirección");
+        jTdireccion.setBorder(null);
+        jTdireccion.setOpaque(false);
+        jTdireccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTdireccionFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTdireccionFocusLost(evt);
+            }
+        });
+        jPRegistro.add(jTdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 190, 30));
+
         jTcedula.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
-        jTcedula.setForeground(new java.awt.Color(112, 112, 112));
-        jTcedula.setText("Dirección");
+        jTcedula.setForeground(new java.awt.Color(204, 204, 204));
+        jTcedula.setText("Cédula");
         jTcedula.setBorder(null);
         jTcedula.setOpaque(false);
-        jTcedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTcedulaActionPerformed(evt);
+        jTcedula.setSelectedTextColor(new java.awt.Color(69, 170, 242));
+        jTcedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTcedulaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTcedulaFocusLost(evt);
             }
         });
-        jPRegistro.add(jTcedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 190, 30));
-
-        jTcedula1.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
-        jTcedula1.setForeground(new java.awt.Color(112, 112, 112));
-        jTcedula1.setText("Cédula");
-        jTcedula1.setBorder(null);
-        jTcedula1.setOpaque(false);
-        jTcedula1.setSelectedTextColor(new java.awt.Color(69, 170, 242));
-        jTcedula1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTcedula1ActionPerformed(evt);
-            }
-        });
-        jPRegistro.add(jTcedula1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 190, 30));
+        jPRegistro.add(jTcedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 190, 30));
 
         jTtelefono.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
-        jTtelefono.setForeground(new java.awt.Color(112, 112, 112));
+        jTtelefono.setForeground(new java.awt.Color(204, 204, 204));
         jTtelefono.setText("Télefono");
         jTtelefono.setBorder(null);
         jTtelefono.setOpaque(false);
+        jTtelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTtelefonoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTtelefonoFocusLost(evt);
+            }
+        });
         jTtelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTtelefonoActionPerformed(evt);
@@ -133,46 +149,60 @@ public class Login extends javax.swing.JFrame {
         });
         jPRegistro.add(jTtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 190, 30));
 
-        jTcedula3.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
-        jTcedula3.setForeground(new java.awt.Color(112, 112, 112));
-        jTcedula3.setText("Correo");
-        jTcedula3.setBorder(null);
-        jTcedula3.setOpaque(false);
-        jTcedula3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTcedula3ActionPerformed(evt);
+        jTcorreo.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jTcorreo.setForeground(new java.awt.Color(204, 204, 204));
+        jTcorreo.setText("Correo");
+        jTcorreo.setBorder(null);
+        jTcorreo.setOpaque(false);
+        jTcorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTcorreoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTcorreoFocusLost(evt);
             }
         });
-        jPRegistro.add(jTcedula3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 190, 30));
+        jPRegistro.add(jTcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 190, 30));
 
         jTnombre.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
-        jTnombre.setForeground(new java.awt.Color(112, 112, 112));
+        jTnombre.setForeground(new java.awt.Color(204, 204, 204));
         jTnombre.setText("Nombre");
         jTnombre.setBorder(null);
         jTnombre.setOpaque(false);
-        jTnombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTnombreActionPerformed(evt);
+        jTnombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTnombreFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTnombreFocusLost(evt);
             }
         });
         jPRegistro.add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 190, 30));
 
-        jTcedula6.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
-        jTcedula6.setForeground(new java.awt.Color(112, 112, 112));
-        jTcedula6.setText("Cargo");
-        jTcedula6.setBorder(null);
-        jTcedula6.setOpaque(false);
-        jTcedula6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTcedula6ActionPerformed(evt);
+        jTcargo.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jTcargo.setForeground(new java.awt.Color(204, 204, 204));
+        jTcargo.setText("Cargo");
+        jTcargo.setBorder(null);
+        jTcargo.setOpaque(false);
+        jTcargo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTcargoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTcargoFocusLost(evt);
             }
         });
-        jPRegistro.add(jTcedula6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 190, 30));
+        jPRegistro.add(jTcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 190, 30));
 
         jBrgistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Registro-select.png"))); // NOI18N
         jBrgistrar.setBorder(null);
         jBrgistrar.setContentAreaFilled(false);
         jBrgistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBrgistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBrgistrarActionPerformed(evt);
+            }
+        });
         jPRegistro.add(jBrgistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inputText.png"))); // NOI18N
@@ -205,32 +235,48 @@ public class Login extends javax.swing.JFrame {
         jPiniciarSesion.setBackground(new java.awt.Color(69, 170, 242));
         jPiniciarSesion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPasswordField1.setText("Contraseña");
-        jPasswordField1.setBorder(null);
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+        jPcontraseña.setText("Contraseña");
+        jPcontraseña.setBorder(null);
+        jPcontraseña.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPcontraseñaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPcontraseñaFocusLost(evt);
             }
         });
-        jPiniciarSesion.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 260, 20));
+        jPcontraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPcontraseñaActionPerformed(evt);
+            }
+        });
+        jPiniciarSesion.add(jPcontraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 260, 20));
 
-        jTusername1.setText("Usuario");
-        jTusername1.setBorder(null);
-        jTusername1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTusername1ActionPerformed(evt);
+        jTusername.setText("Usuario");
+        jTusername.setBorder(null);
+        jTusername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTusernameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTusernameFocusLost(evt);
             }
         });
-        jPiniciarSesion.add(jTusername1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 270, 20));
+        jPiniciarSesion.add(jTusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 270, 20));
 
         jLinput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Input.png"))); // NOI18N
         jPiniciarSesion.add(jLinput, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IniciarSesión-select.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPiniciarSesion.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
+        jBiniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IniciarSesión-select.png"))); // NOI18N
+        jBiniciarSesion.setBorder(null);
+        jBiniciarSesion.setContentAreaFilled(false);
+        jBiniciarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBiniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBiniciarSesionActionPerformed(evt);
+            }
+        });
+        jPiniciarSesion.add(jBiniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
 
         jLfondo.setBackground(new java.awt.Color(69, 170, 242));
         jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo-login.png"))); // NOI18N
@@ -246,13 +292,9 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTusername1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTusername1ActionPerformed
+    private void jPcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPcontraseñaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTusername1ActionPerformed
-
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_jPcontraseñaActionPerformed
 
     private void jBiniciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBiniciaActionPerformed
         // TODO add your handling code here:
@@ -267,30 +309,107 @@ public class Login extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jBregistrarActionPerformed
 
-    private void jTcedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcedulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTcedulaActionPerformed
-
-    private void jTcedula1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcedula1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTcedula1ActionPerformed
-
     private void jTtelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTtelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTtelefonoActionPerformed
 
-    private void jTcedula3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcedula3ActionPerformed
+    private void jTcedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcedulaFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTcedula3ActionPerformed
+         jTcedula.setText("");
+    }//GEN-LAST:event_jTcedulaFocusGained
 
-    private void jTnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTnombreActionPerformed
+    private void jTtelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTtelefonoFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTnombreActionPerformed
+         jTtelefono.setText("");
+    }//GEN-LAST:event_jTtelefonoFocusGained
 
-    private void jTcedula6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcedula6ActionPerformed
+    private void jTcorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcorreoFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTcedula6ActionPerformed
+         jTcorreo.setText("");
+    }//GEN-LAST:event_jTcorreoFocusGained
 
+    private void jTnombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTnombreFocusGained
+        // TODO add your handling code here:
+         jTnombre.setText("");
+    }//GEN-LAST:event_jTnombreFocusGained
+
+    private void jTcargoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcargoFocusGained
+        // TODO add your handling code here:
+         jTcargo.setText("");
+    }//GEN-LAST:event_jTcargoFocusGained
+
+    private void jTdireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTdireccionFocusGained
+        // TODO add your handling code here:
+         jTdireccion.setText("");
+    }//GEN-LAST:event_jTdireccionFocusGained
+
+    private void jTcedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcedulaFocusLost
+        // TODO add your handling code here:
+        jTcedula.setText("Cédula");
+    }//GEN-LAST:event_jTcedulaFocusLost
+
+    private void jTtelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTtelefonoFocusLost
+        // TODO add your handling code here:
+         jTtelefono.setText("Teléfono");
+    }//GEN-LAST:event_jTtelefonoFocusLost
+
+    private void jTcorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcorreoFocusLost
+        // TODO add your handling code here:
+         jTcorreo.setText("Correo eléctronico");
+    }//GEN-LAST:event_jTcorreoFocusLost
+
+    private void jTnombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTnombreFocusLost
+        // TODO add your handling code here:
+         jTnombre.setText("Nombre");
+    }//GEN-LAST:event_jTnombreFocusLost
+
+    private void jTcargoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcargoFocusLost
+        // TODO add your handling code here:
+         jTcargo.setText("Cargo");
+    }//GEN-LAST:event_jTcargoFocusLost
+
+    private void jTdireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTdireccionFocusLost
+        // TODO add your handling code here:
+         jTdireccion.setText("Dirección");
+    }//GEN-LAST:event_jTdireccionFocusLost
+   
+    private void jBrgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBrgistrarActionPerformed
+        
+     // --> FALTA AQUÍ EL LLAMADO A LAS VALIDACIONES
+        JOptionPane.showMessageDialog(null,"¡Se ha registrado con exito!");
+        jPRegistro.setVisible(false);
+        jPiniciarSesion.setVisible(true);
+       
+    }//GEN-LAST:event_jBrgistrarActionPerformed
+
+    private void jTusernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTusernameFocusGained
+        // TODO add your handling code here:
+         jTusername.setText("");
+    }//GEN-LAST:event_jTusernameFocusGained
+
+    private void jTusernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTusernameFocusLost
+        // TODO add your handling code here:
+        jTusername.setText("Usuario");      
+    }//GEN-LAST:event_jTusernameFocusLost
+
+    private void jPcontraseñaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPcontraseñaFocusGained
+        // TODO add your handling code here:
+        jPcontraseña.setText("");
+    }//GEN-LAST:event_jPcontraseñaFocusGained
+
+    private void jPcontraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPcontraseñaFocusLost
+        // TODO add your handling code here:
+        jPcontraseña.setText("Contraseña");
+    }//GEN-LAST:event_jPcontraseñaFocusLost
+
+    private void jBiniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBiniciarSesionActionPerformed
+             
+        //--> FALTA VALIDACIONES
+        setVisible(false);
+        new Login().setVisible(true);
+    }//GEN-LAST:event_jBiniciarSesionActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -329,9 +448,9 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Menu;
     private javax.swing.JButton jBinicia;
+    private javax.swing.JButton jBiniciarSesion;
     private javax.swing.JButton jBregistrar;
     private javax.swing.JButton jBrgistrar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -344,14 +463,14 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLlogo;
     private javax.swing.JPanel jPRegistro;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPcontraseña;
     private javax.swing.JPanel jPiniciarSesion;
+    private javax.swing.JTextField jTcargo;
     private javax.swing.JTextField jTcedula;
-    private javax.swing.JTextField jTcedula1;
-    private javax.swing.JTextField jTcedula3;
-    private javax.swing.JTextField jTcedula6;
+    private javax.swing.JTextField jTcorreo;
+    private javax.swing.JTextField jTdireccion;
     private javax.swing.JTextField jTnombre;
     private javax.swing.JTextField jTtelefono;
-    private javax.swing.JTextField jTusername1;
+    private javax.swing.JTextField jTusername;
     // End of variables declaration//GEN-END:variables
 }

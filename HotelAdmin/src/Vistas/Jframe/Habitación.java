@@ -5,6 +5,8 @@
  */
 package Vistas.Jframe;
 
+import Vistas.Jpanel.HabitacionAgregarModificarGUI;
+
 /**
  *
  * @author nicol
@@ -28,10 +30,15 @@ public class Habitación extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPcontenedor = new javax.swing.JPanel();
         jBhabitaciones = new javax.swing.JButton();
         jBclientes = new javax.swing.JButton();
         jBempleados = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jBcerrarSesion = new javax.swing.JButton();
+        jBagregar = new javax.swing.JButton();
+        jBeliminar = new javax.swing.JButton();
+        jBmodificar = new javax.swing.JButton();
+        jLmenuCrud = new javax.swing.JLabel();
         jLfondoGris = new javax.swing.JLabel();
         jLfondoAzul = new javax.swing.JLabel();
 
@@ -39,6 +46,10 @@ public class Habitación extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(241, 242, 246));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPcontenedor.setOpaque(false);
+        jPcontenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jPcontenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 730, 420));
 
         jBhabitaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/SinSelección-habi.png"))); // NOI18N
         jBhabitaciones.setBorder(null);
@@ -91,12 +102,49 @@ public class Habitación extends javax.swing.JFrame {
         });
         jPanel1.add(jBempleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 355, 260, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/botonSalida.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 590, -1, -1));
+        jBcerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/botonSalida.png"))); // NOI18N
+        jBcerrarSesion.setBorder(null);
+        jBcerrarSesion.setBorderPainted(false);
+        jBcerrarSesion.setContentAreaFilled(false);
+        jBcerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBcerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcerrarSesionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBcerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 590, -1, -1));
+
+        jBagregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-agregarGris.png"))); // NOI18N
+        jBagregar.setBorder(null);
+        jBagregar.setBorderPainted(false);
+        jBagregar.setContentAreaFilled(false);
+        jBagregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBagregar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-agregar.png"))); // NOI18N
+        jBagregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBagregarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(576, 97, -1, -1));
+
+        jBeliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-eliminarGris.png"))); // NOI18N
+        jBeliminar.setBorder(null);
+        jBeliminar.setBorderPainted(false);
+        jBeliminar.setContentAreaFilled(false);
+        jBeliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBeliminar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/seleccion-eliminar.png"))); // NOI18N
+        jPanel1.add(jBeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(756, 97, 100, 40));
+
+        jBmodificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-modificarGris.png"))); // NOI18N
+        jBmodificar.setBorder(null);
+        jBmodificar.setBorderPainted(false);
+        jBmodificar.setContentAreaFilled(false);
+        jBmodificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBmodificar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-modificar.png"))); // NOI18N
+        jPanel1.add(jBmodificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 97, 90, -1));
+
+        jLmenuCrud.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu-crud.png"))); // NOI18N
+        jPanel1.add(jLmenuCrud, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, -1, -1));
 
         jLfondoGris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo-principal.png"))); // NOI18N
         jPanel1.add(jLfondoGris, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 0, 900, 690));
@@ -130,6 +178,21 @@ public class Habitación extends javax.swing.JFrame {
     private void jBempleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBempleadosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBempleadosActionPerformed
+
+    private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
+        // TODO add your handling code here:
+     /*   HabitacionAgregarModificarGUI panelAM = new HabitacionAgregarModificarGUI();       
+        jPcontenedor.add(panelAM);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+      */
+    }//GEN-LAST:event_jBagregarActionPerformed
+
+    private void jBcerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcerrarSesionActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new Login().setVisible(true);
+    }//GEN-LAST:event_jBcerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,12 +230,17 @@ public class Habitación extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBagregar;
+    private javax.swing.JButton jBcerrarSesion;
     private javax.swing.JButton jBclientes;
+    private javax.swing.JButton jBeliminar;
     private javax.swing.JButton jBempleados;
     private javax.swing.JButton jBhabitaciones;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBmodificar;
     private javax.swing.JLabel jLfondoAzul;
     private javax.swing.JLabel jLfondoGris;
+    private javax.swing.JLabel jLmenuCrud;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPcontenedor;
     // End of variables declaration//GEN-END:variables
 }
