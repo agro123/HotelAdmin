@@ -43,7 +43,9 @@ public class Login extends javax.swing.JFrame {
         jTtelefono = new javax.swing.JTextField();
         jTcorreo = new javax.swing.JTextField();
         jTnombre = new javax.swing.JTextField();
-        jTcargo = new javax.swing.JTextField();
+        jTcontraseña = new javax.swing.JTextField();
+        jTusuario = new javax.swing.JTextField();
+        jPcontraseñaRe = new javax.swing.JPasswordField();
         jBrgistrar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -51,6 +53,8 @@ public class Login extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jLfondo1 = new javax.swing.JLabel();
         jPiniciarSesion = new javax.swing.JPanel();
         jPcontraseña = new javax.swing.JPasswordField();
@@ -111,7 +115,7 @@ public class Login extends javax.swing.JFrame {
                 jTdireccionFocusLost(evt);
             }
         });
-        jPRegistro.add(jTdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 190, 30));
+        jPRegistro.add(jTdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 190, 30));
 
         jTcedula.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTcedula.setForeground(new java.awt.Color(204, 204, 204));
@@ -127,7 +131,7 @@ public class Login extends javax.swing.JFrame {
                 jTcedulaFocusLost(evt);
             }
         });
-        jPRegistro.add(jTcedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 190, 30));
+        jPRegistro.add(jTcedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 190, 30));
 
         jTtelefono.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTtelefono.setForeground(new java.awt.Color(204, 204, 204));
@@ -147,7 +151,7 @@ public class Login extends javax.swing.JFrame {
                 jTtelefonoActionPerformed(evt);
             }
         });
-        jPRegistro.add(jTtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 190, 30));
+        jPRegistro.add(jTtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 190, 30));
 
         jTcorreo.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTcorreo.setForeground(new java.awt.Color(204, 204, 204));
@@ -162,7 +166,7 @@ public class Login extends javax.swing.JFrame {
                 jTcorreoFocusLost(evt);
             }
         });
-        jPRegistro.add(jTcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 190, 30));
+        jPRegistro.add(jTcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 190, 30));
 
         jTnombre.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTnombre.setForeground(new java.awt.Color(204, 204, 204));
@@ -177,22 +181,51 @@ public class Login extends javax.swing.JFrame {
                 jTnombreFocusLost(evt);
             }
         });
-        jPRegistro.add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 190, 30));
+        jPRegistro.add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 190, 30));
 
-        jTcargo.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
-        jTcargo.setForeground(new java.awt.Color(204, 204, 204));
-        jTcargo.setText("Cargo");
-        jTcargo.setBorder(null);
-        jTcargo.setOpaque(false);
-        jTcargo.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTcontraseña.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jTcontraseña.setForeground(new java.awt.Color(204, 204, 204));
+        jTcontraseña.setText("Cargo");
+        jTcontraseña.setBorder(null);
+        jTcontraseña.setOpaque(false);
+        jTcontraseña.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTcargoFocusGained(evt);
+                jTcontraseñaFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTcargoFocusLost(evt);
+                jTcontraseñaFocusLost(evt);
             }
         });
-        jPRegistro.add(jTcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 190, 30));
+        jPRegistro.add(jTcontraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 190, 30));
+
+        jTusuario.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jTusuario.setForeground(new java.awt.Color(204, 204, 204));
+        jTusuario.setText("Usuario");
+        jTusuario.setBorder(null);
+        jTusuario.setOpaque(false);
+        jTusuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTusuarioFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTusuarioFocusLost(evt);
+            }
+        });
+        jPRegistro.add(jTusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 190, 30));
+
+        jPcontraseñaRe.setForeground(new java.awt.Color(204, 204, 204));
+        jPcontraseñaRe.setText("Contraseña");
+        jPcontraseñaRe.setBorder(null);
+        jPcontraseñaRe.setOpaque(false);
+        jPcontraseñaRe.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPcontraseñaReFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPcontraseñaReFocusLost(evt);
+            }
+        });
+        jPRegistro.add(jPcontraseñaRe, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 200, 30));
 
         jBrgistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Registro-select.png"))); // NOI18N
         jBrgistrar.setBorder(null);
@@ -206,22 +239,28 @@ public class Login extends javax.swing.JFrame {
         jPRegistro.add(jBrgistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inputText.png"))); // NOI18N
-        jPRegistro.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, -1, -1));
+        jPRegistro.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inputText.png"))); // NOI18N
-        jPRegistro.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
+        jPRegistro.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inputText.png"))); // NOI18N
-        jPRegistro.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, -1, -1));
+        jPRegistro.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inputText.png"))); // NOI18N
-        jPRegistro.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, -1, -1));
+        jPRegistro.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inputText.png"))); // NOI18N
-        jPRegistro.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
+        jPRegistro.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inputText.png"))); // NOI18N
-        jPRegistro.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, -1, -1));
+        jPRegistro.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, -1));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inputText.png"))); // NOI18N
+        jPRegistro.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, -1, -1));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inputText.png"))); // NOI18N
+        jPRegistro.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
 
         jLfondo1.setBackground(new java.awt.Color(69, 170, 242));
         jLfondo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo-registro.png"))); // NOI18N
@@ -333,10 +372,10 @@ public class Login extends javax.swing.JFrame {
          jTnombre.setText("");
     }//GEN-LAST:event_jTnombreFocusGained
 
-    private void jTcargoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcargoFocusGained
+    private void jTcontraseñaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcontraseñaFocusGained
         // TODO add your handling code here:
-         jTcargo.setText("");
-    }//GEN-LAST:event_jTcargoFocusGained
+         jTcontraseña.setText("");
+    }//GEN-LAST:event_jTcontraseñaFocusGained
 
     private void jTdireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTdireccionFocusGained
         // TODO add your handling code here:
@@ -363,10 +402,10 @@ public class Login extends javax.swing.JFrame {
          jTnombre.setText("Nombre");
     }//GEN-LAST:event_jTnombreFocusLost
 
-    private void jTcargoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcargoFocusLost
+    private void jTcontraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcontraseñaFocusLost
         // TODO add your handling code here:
-         jTcargo.setText("Cargo");
-    }//GEN-LAST:event_jTcargoFocusLost
+         jTcontraseña.setText("Cargo");
+    }//GEN-LAST:event_jTcontraseñaFocusLost
 
     private void jTdireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTdireccionFocusLost
         // TODO add your handling code here:
@@ -408,6 +447,26 @@ public class Login extends javax.swing.JFrame {
         setVisible(false);
         new Login().setVisible(true);
     }//GEN-LAST:event_jBiniciarSesionActionPerformed
+
+    private void jTusuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTusuarioFocusGained
+        // TODO add your handling code here:         
+        jTusuario.setText("");
+    }//GEN-LAST:event_jTusuarioFocusGained
+
+    private void jTusuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTusuarioFocusLost
+        // TODO add your handling code here:
+        jTusuario.setText("Usuario");
+    }//GEN-LAST:event_jTusuarioFocusLost
+
+    private void jPcontraseñaReFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPcontraseñaReFocusGained
+        // TODO add your handling code here:
+         jPcontraseñaRe.setText("");
+    }//GEN-LAST:event_jPcontraseñaReFocusGained
+
+    private void jPcontraseñaReFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPcontraseñaReFocusLost
+        // TODO add your handling code here:
+         jPcontraseñaRe.setText("");
+    }//GEN-LAST:event_jPcontraseñaReFocusLost
 
     
     /**
@@ -456,7 +515,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLfondo;
     private javax.swing.JLabel jLfondo1;
     private javax.swing.JLabel jLinput;
@@ -464,13 +525,15 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPRegistro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPcontraseña;
+    private javax.swing.JPasswordField jPcontraseñaRe;
     private javax.swing.JPanel jPiniciarSesion;
-    private javax.swing.JTextField jTcargo;
     private javax.swing.JTextField jTcedula;
+    private javax.swing.JTextField jTcontraseña;
     private javax.swing.JTextField jTcorreo;
     private javax.swing.JTextField jTdireccion;
     private javax.swing.JTextField jTnombre;
     private javax.swing.JTextField jTtelefono;
     private javax.swing.JTextField jTusername;
+    private javax.swing.JTextField jTusuario;
     // End of variables declaration//GEN-END:variables
 }

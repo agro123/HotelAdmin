@@ -181,11 +181,15 @@ public class Habitación extends javax.swing.JFrame {
 
     private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
         // TODO add your handling code here:
-     /*   HabitacionAgregarModificarGUI panelAM = new HabitacionAgregarModificarGUI();       
+      
+      /*  HabitacionAgregarModificarGUI panelAM = new HabitacionAgregarModificarGUI();       
+        
+        jPcontenedor.setSize(735,429);
+        jPcontenedor.removeAll();
         jPcontenedor.add(panelAM);
         jPcontenedor.revalidate();
-        jPcontenedor.repaint();
-      */
+        jPcontenedor.repaint();*/
+      
     }//GEN-LAST:event_jBagregarActionPerformed
 
     private void jBcerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcerrarSesionActionPerformed
