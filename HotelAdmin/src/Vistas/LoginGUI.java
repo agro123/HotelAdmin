@@ -45,7 +45,7 @@ public class LoginGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setSize(381,496);
         setResizable(false);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/imagenes/Logo.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/imagenes/Logopq.png")));
         
     }
     public void ingresar(){ //-------------------------------------------- Verifica los campos para procionar el acceso dependiendo del tipo de usuario
