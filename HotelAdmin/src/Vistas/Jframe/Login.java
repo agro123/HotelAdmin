@@ -23,11 +23,12 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         jPRegistro.setVisible(false);
         this.setLocationRelativeTo(null);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/imagenes/Logo.png")));
+        setIconImage(Toolkit.getDefaultToolkit().
+                getImage(this.getClass().getResource("/imagenes/Logo.png")));
         setResizable(false);
     }
     
-    public void ingresar(){ //-------------------------------------------- Verifica los campos para procionar el acceso dependiendo del tipo de usuario
+    public void ingresar(){ //-------------------------------------------- _Verifica los campos para procionar el acceso dependiendo del tipo de usuario
      try{   
          
          
@@ -37,24 +38,58 @@ public class Login extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Campos vacios");
         }else
-              if(usuario.equalsIgnoreCase("admin") && contraseña.equalsIgnoreCase("admin"))
+              if(usuario.equalsIgnoreCase("admin") &&
+                      contraseña.equalsIgnoreCase("admin"))
               {
                   
                 Habitacion hab = new Habitacion();
                 hab.setVisible(true);
                 dispose();
               } else {
-                       JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
+                JOptionPane.showMessageDialog(null, 
+                        "Usuario o contraseña incorrecta");
                        //----------------------------------------------------------------------------------------- Aqui debe ir el codigo para validar una contraseña y acceder al menu de empleados          
-                     }
+                }
         
         
      }catch(Exception ex){
-                JOptionPane.showMessageDialog(null,"Ah ocurrido un error durante la verificacion "+ "\nError :" + ex.getMessage());
+                JOptionPane.showMessageDialog(
+                        null,"Ah ocurrido un error durante la verificacion "
+                                + "\nError :" + ex.getMessage());
                 
      }
     }
-    
+    public void registrar(){//----------------PERMITE REGISTRAR UN NUEVO USUARIO DE LA BASE DE DATOS
+    try{
+        String usuario = jTusuario .getText();
+        String contraseña = jPcontraseñaRe.getText();
+        String telefono = jTtelefono.getText();
+        String nombre = jTnombre.getText();
+        String direccion = jTdireccion.getText();
+        String correo = jTcorreo.getText();
+        String cedula = jTcedula.getText();
+        String cargo = jTcargo.getText();
+     
+        if(usuario.equalsIgnoreCase("Usuario")
+                ||contraseña.equalsIgnoreCase("Contraseña")
+                ||telefono.equalsIgnoreCase("Telefono")
+                ||nombre.equalsIgnoreCase("Nombre")
+                ||direccion.equalsIgnoreCase("Direccion")
+                ||correo.equalsIgnoreCase("Correo")
+                ||cedula.equalsIgnoreCase("Cedula")
+                ||cargo.equalsIgnoreCase("Cargo")){
+            
+            JOptionPane.showMessageDialog(null,"Hay campos vacios!");
+        }else {
+        JOptionPane.showMessageDialog(null,"¡Se ha registrado con exito!");
+        }
+    }catch(Exception ex){
+        JOptionPane.showMessageDialog(null
+                ,"Ah ocurrido un error durante la verificacion "+ "\nError :" 
+                        + ex.getMessage());
+                
+     }
+    }
     public void enter(KeyEvent evt){//------------------------------------------------------------------------------Al hacer enter se accede
          int key = evt.getKeyCode();
         if(key == KeyEvent.VK_ENTER){
@@ -71,6 +106,7 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         jBinicia = new javax.swing.JButton();
         jBregistrar = new javax.swing.JButton();
@@ -82,7 +118,7 @@ public class Login extends javax.swing.JFrame {
         jTtelefono = new javax.swing.JTextField();
         jTcorreo = new javax.swing.JTextField();
         jTnombre = new javax.swing.JTextField();
-        jTcontraseña = new javax.swing.JTextField();
+        jTcargo = new javax.swing.JTextField();
         jTusuario = new javax.swing.JTextField();
         jPcontraseñaRe = new javax.swing.JPasswordField();
         jBrgistrar = new javax.swing.JButton();
@@ -101,6 +137,8 @@ public class Login extends javax.swing.JFrame {
         jLinput = new javax.swing.JLabel();
         jBiniciarSesion = new javax.swing.JButton();
         jLfondo = new javax.swing.JLabel();
+
+        jInternalFrame1.setVisible(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -242,25 +280,25 @@ public class Login extends javax.swing.JFrame {
         });
         jPRegistro.add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 190, 30));
 
-        jTcontraseña.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
-        jTcontraseña.setForeground(new java.awt.Color(204, 204, 204));
-        jTcontraseña.setText("Cargo");
-        jTcontraseña.setBorder(null);
-        jTcontraseña.setOpaque(false);
-        jTcontraseña.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTcargo.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jTcargo.setForeground(new java.awt.Color(204, 204, 204));
+        jTcargo.setText("Cargo");
+        jTcargo.setBorder(null);
+        jTcargo.setOpaque(false);
+        jTcargo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTcontraseñaFocusGained(evt);
+                jTcargoFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTcontraseñaFocusLost(evt);
+                jTcargoFocusLost(evt);
             }
         });
-        jTcontraseña.addActionListener(new java.awt.event.ActionListener() {
+        jTcargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTcontraseñaActionPerformed(evt);
+                jTcargoActionPerformed(evt);
             }
         });
-        jPRegistro.add(jTcontraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 190, 30));
+        jPRegistro.add(jTcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 190, 30));
 
         jTusuario.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTusuario.setForeground(new java.awt.Color(204, 204, 204));
@@ -467,11 +505,11 @@ public class Login extends javax.swing.JFrame {
          jTnombre.setForeground(new java.awt.Color(0, 0, 0));
     }//GEN-LAST:event_jTnombreFocusGained
 
-    private void jTcontraseñaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcontraseñaFocusGained
+    private void jTcargoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcargoFocusGained
         // TODO add your handling code here:
-         jTcontraseña.setText("");
-         jTcontraseña.setForeground(new java.awt.Color(0, 0, 0));
-    }//GEN-LAST:event_jTcontraseñaFocusGained
+         jTcargo.setText("");
+         jTcargo.setForeground(new java.awt.Color(0, 0, 0));
+    }//GEN-LAST:event_jTcargoFocusGained
 
     private void jTdireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTdireccionFocusGained
         // TODO add your handling code here:
@@ -511,13 +549,13 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTnombreFocusLost
 
-    private void jTcontraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcontraseñaFocusLost
+    private void jTcargoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcargoFocusLost
         // TODO add your handling code here:
-         if(jTcontraseña.getText().equalsIgnoreCase("")){
-         jTcontraseña.setText("Cargo");
-         jTcontraseña.setForeground(new java.awt.Color(204, 204, 204)); 
+         if(jTcargo.getText().equalsIgnoreCase("")){
+         jTcargo.setText("Cargo");
+         jTcargo.setForeground(new java.awt.Color(204, 204, 204)); 
          }
-    }//GEN-LAST:event_jTcontraseñaFocusLost
+    }//GEN-LAST:event_jTcargoFocusLost
 
     private void jTdireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTdireccionFocusLost
         // TODO add your handling code here:
@@ -528,11 +566,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTdireccionFocusLost
    
     private void jBrgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBrgistrarActionPerformed
-        
-     // --> FALTA AQUÍ EL LLAMADO A LAS VALIDACIONES
-        JOptionPane.showMessageDialog(null,"¡Se ha registrado con exito!");
-        jPRegistro.setVisible(false);
-        jPiniciarSesion.setVisible(true);
+        registrar();
        
     }//GEN-LAST:event_jBrgistrarActionPerformed
 
@@ -570,9 +604,9 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jPcontraseñaFocusLost
 
     private void jBiniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBiniciarSesionActionPerformed
-        setVisible(false);
-        new Login().setVisible(true);
-         if(jTusuario.getText().equalsIgnoreCase("") || jTcontraseña.getText().equalsIgnoreCase("")){
+        
+         if(jTusuario.getText().equalsIgnoreCase("") 
+                 || jTcargo.getText().equalsIgnoreCase("")){
 
             JOptionPane.showMessageDialog(null, "Campos vacios");}else{
             //-------------------------------------------------------------------------------------------BOTON ACCEDER
@@ -630,9 +664,9 @@ public class Login extends javax.swing.JFrame {
         jTnombre.selectAll();
     }//GEN-LAST:event_jTnombreActionPerformed
 
-    private void jTcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcontraseñaActionPerformed
-        jTcontraseña.selectAll();
-    }//GEN-LAST:event_jTcontraseñaActionPerformed
+    private void jTcargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcargoActionPerformed
+        jTcargo.selectAll();
+    }//GEN-LAST:event_jTcargoActionPerformed
 
     private void jTcorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcorreoActionPerformed
         jTcorreo.selectAll();
@@ -692,6 +726,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton jBiniciarSesion;
     private javax.swing.JButton jBregistrar;
     private javax.swing.JButton jBrgistrar;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -709,8 +744,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPcontraseña;
     private javax.swing.JPasswordField jPcontraseñaRe;
     private javax.swing.JPanel jPiniciarSesion;
+    private javax.swing.JTextField jTcargo;
     private javax.swing.JTextField jTcedula;
-    private javax.swing.JTextField jTcontraseña;
     private javax.swing.JTextField jTcorreo;
     private javax.swing.JTextField jTdireccion;
     private javax.swing.JTextField jTnombre;

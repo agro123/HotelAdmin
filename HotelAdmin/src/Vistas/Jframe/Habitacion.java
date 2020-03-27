@@ -22,7 +22,8 @@ public class Habitacion extends javax.swing.JFrame {
         initComponents();       
         setResizable(false);
         this.setLocationRelativeTo(null);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/imagenes/Logo.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("/imagenes/Logo.png")));
     }
 
     /**
