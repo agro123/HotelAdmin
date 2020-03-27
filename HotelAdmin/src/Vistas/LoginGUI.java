@@ -213,7 +213,7 @@ public class LoginGUI extends javax.swing.JFrame {
         jBTNcrearcuenta.setForeground(new java.awt.Color(255, 255, 255));
         jBTNcrearcuenta.setText("Crear una cuenta");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logocm.png"))); // NOI18N
         jLabel1.setText(".");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
