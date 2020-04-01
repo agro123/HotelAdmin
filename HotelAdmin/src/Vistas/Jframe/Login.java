@@ -337,12 +337,18 @@ public class Login extends javax.swing.JFrame {
 
     private void jBiniciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBiniciaActionPerformed
         // TODO add your handling code here:
+        jBregistrar.setSelected(false);
+        jBinicia.setSelected(true);
+        
         jPRegistro.setVisible(false);
         jPiniciarSesion.setVisible(true);
     }//GEN-LAST:event_jBiniciaActionPerformed
 
     private void jBregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBregistrarActionPerformed
         // TODO add your handling code here:
+        jBinicia.setSelected(false);  
+        jBregistrar.setSelected(true);
+           
         jPiniciarSesion.setVisible(false);
         jPRegistro.setVisible(true);
        
@@ -442,10 +448,12 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jPcontraseñaFocusLost
 
     private void jBiniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBiniciarSesionActionPerformed
-             
+            
+        
         //--> FALTA VALIDACIONES
         setVisible(false);
-        new Login().setVisible(true);
+        new Principal().setVisible(true);
+        
     }//GEN-LAST:event_jBiniciarSesionActionPerformed
 
     private void jTusuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTusuarioFocusGained

@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jframe/Habitación.java</file>
-            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jframe/Login.java</file>
+            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jpanel/HabitacionAgregarModificarGUI.java</file>
+            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jframe/Habitaciones.java</file>
+            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jpanel/jPhabitacion.java</file>
+            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jpanel/HabitacionListaGUI.java</file>
         </group>
     </open-files>
 </project-private>
