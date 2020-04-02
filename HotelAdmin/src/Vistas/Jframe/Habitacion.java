@@ -201,7 +201,7 @@ public class Habitacion extends javax.swing.JFrame {
     private void jBcerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcerrarSesionActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        new Login().setVisible(true);
+        new Login_().setVisible(true);
     }//GEN-LAST:event_jBcerrarSesionActionPerformed
 
     /**
