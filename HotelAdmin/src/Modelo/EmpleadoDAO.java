@@ -27,17 +27,18 @@ public class EmpleadoDAO {
         rtdo = 0;
        try{
             con = Fachada.getConnection();
-            String sql = "INSERT INTO actor values (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO actor values (?,?,?,?,?,?,?,?,?,?)";
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, c.getID());
             pstm.setInt(2, c.getCodEmpleado());
             pstm.setString(3, c.getNombre());
-            pstm.setString(4, c.getCorreo());
-            pstm.setString(5, c.getDireccion());
-            pstm.setString(6, c.getTelefono());
-            pstm.setString(7, c.getCargo());
-            pstm.setBoolean(8, c.getEstado());
-            pstm.setTimestamp(9, c.getIngreso());
+            pstm.setString(4, c.getApellido());
+            pstm.setString(5, c.getCorreo());
+            pstm.setString(6, c.getDireccion());
+            pstm.setString(7, c.getTelefono());
+            pstm.setString(8, c.getCargo());
+            pstm.setBoolean(9, c.getEstado());
+            pstm.setTimestamp(10, c.getIngreso());
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){
@@ -58,7 +59,7 @@ public class EmpleadoDAO {
     
     //--------------------------------------------------------------------------
     
-    public int modificarActor(Empleado c){      
+    public int modificarEmpleado(Empleado c){      
         Connection con = null;
         PreparedStatement pstm;
         pstm = null;
@@ -67,13 +68,21 @@ public class EmpleadoDAO {
         try{
             con = Fachada.getConnection();
             String sql = "UPDATE actor " +
-                         "SET first_name = ?,last_name = ?, last_update = ? "
+                         "SET nombre = ?,apellido = ?, correo = ?, "
+                    + "direccion = ?, telefono = ?, cargo = ?, estado = ?,"
+                    + "ingreso = ? "
                     +    "WHERE actor_id=?";
-            pstm = con.prepareStatement(sql);            
-            pstm.setString(1, c.Name());
-            pstm.setString(2, c.getLastName());
-            pstm.setTimestamp(3, c.getLasUpdate());
-            pstm.setInt(4,c.getActorid());
+            pstm = con.prepareStatement(sql);  
+            pstm.setInt(1, c.getID());
+            pstm.setInt(2, c.getCodEmpleado());
+            pstm.setString(3, c.getNombre());
+            pstm.setString(4, c.getApellido());
+            pstm.setString(5, c.getCorreo());
+            pstm.setString(6, c.getDireccion());
+            pstm.setString(7, c.getTelefono());
+            pstm.setString(8, c.getCargo());
+            pstm.setBoolean(9, c.getEstado());
+            pstm.setTimestamp(10, c.getIngreso());
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){
