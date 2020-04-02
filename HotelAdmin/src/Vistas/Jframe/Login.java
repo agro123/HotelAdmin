@@ -23,11 +23,12 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         jPRegistro.setVisible(false);
         this.setLocationRelativeTo(null);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/imagenes/Logo.png")));
+        setIconImage(Toolkit.getDefaultToolkit().
+                getImage(this.getClass().getResource("/imagenes/Logo.png")));
         setResizable(false);
     }
     
-    public void ingresar(){ //-------------------------------------------- Verifica los campos para procionar el acceso dependiendo del tipo de usuario
+    public void ingresar(){ //-------------------------------------------- _Verifica los campos para procionar el acceso dependiendo del tipo de usuario
      try{   
          
          
@@ -37,20 +38,24 @@ public class Login extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Campos vacios");
         }else
-              if(usuario.equalsIgnoreCase("admin") && contraseña.equalsIgnoreCase("admin"))
+              if(usuario.equalsIgnoreCase("admin") &&
+                      contraseña.equalsIgnoreCase("admin"))
               {
                   
                 Habitacion hab = new Habitacion();
                 hab.setVisible(true);
                 dispose();
               } else {
-                       JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
+                JOptionPane.showMessageDialog(null, 
+                        "Usuario o contraseña incorrecta");
                        //----------------------------------------------------------------------------------------- Aqui debe ir el codigo para validar una contraseña y acceder al menu de empleados          
-                     }
+                }
         
         
      }catch(Exception ex){
-                JOptionPane.showMessageDialog(null,"Ah ocurrido un error durante la verificacion "+ "\nError :" + ex.getMessage());
+                JOptionPane.showMessageDialog(
+                        null,"Ah ocurrido un error durante la verificacion "
+                                + "\nError :" + ex.getMessage());
                 
      }
     }
@@ -65,17 +70,23 @@ public class Login extends javax.swing.JFrame {
         String cedula = jTcedula.getText();
         String cargo = jTcargo.getText();
      
-        if(usuario.equalsIgnoreCase("Usuario")||contraseña.equalsIgnoreCase("Contraseña")
-                ||telefono.equalsIgnoreCase("Telefono")||nombre.equalsIgnoreCase("Nombre")
-                ||direccion.equalsIgnoreCase("Direccion")||correo.equalsIgnoreCase("Correo")||
-                cedula.equalsIgnoreCase("Cedula")||cargo.equalsIgnoreCase("Cargo")){
+        if(usuario.equalsIgnoreCase("Usuario")
+                ||contraseña.equalsIgnoreCase("Contraseña")
+                ||telefono.equalsIgnoreCase("Telefono")
+                ||nombre.equalsIgnoreCase("Nombre")
+                ||direccion.equalsIgnoreCase("Direccion")
+                ||correo.equalsIgnoreCase("Correo")
+                ||cedula.equalsIgnoreCase("Cedula")
+                ||cargo.equalsIgnoreCase("Cargo")){
             
             JOptionPane.showMessageDialog(null,"Hay campos vacios!");
         }else {
         JOptionPane.showMessageDialog(null,"¡Se ha registrado con exito!");
         }
     }catch(Exception ex){
-        JOptionPane.showMessageDialog(null,"Ah ocurrido un error durante la verificacion "+ "\nError :" + ex.getMessage());
+        JOptionPane.showMessageDialog(null
+                ,"Ah ocurrido un error durante la verificacion "+ "\nError :" 
+                        + ex.getMessage());
                 
      }
     }
@@ -95,6 +106,7 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         jBinicia = new javax.swing.JButton();
         jBregistrar = new javax.swing.JButton();
@@ -125,6 +137,8 @@ public class Login extends javax.swing.JFrame {
         jLinput = new javax.swing.JLabel();
         jBiniciarSesion = new javax.swing.JButton();
         jLfondo = new javax.swing.JLabel();
+
+        jInternalFrame1.setVisible(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -578,11 +592,13 @@ public class Login extends javax.swing.JFrame {
        jPcontraseña.setForeground(new java.awt.Color(0, 0, 0));
        jPcontraseña.setText("");
        jPcontraseña.setEchoChar((char)1);
+       jPcontraseña.setFont(new java.awt.Font("Arial", 0, 18));
     }//GEN-LAST:event_jPcontraseñaFocusGained
 
     private void jPcontraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPcontraseñaFocusLost
         // TODO add your handling code here:
        if(jPcontraseña.getText().equalsIgnoreCase("")){ 
+       jPcontraseña.setFont(new java.awt.Font("Quicksand", 0, 18));
        jPcontraseña.setForeground(new java.awt.Color(204, 204, 204));
        jPcontraseña.setText("Contraseña");
        jPcontraseña.setEchoChar((char)0);
@@ -591,7 +607,8 @@ public class Login extends javax.swing.JFrame {
 
     private void jBiniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBiniciarSesionActionPerformed
         
-         if(jTusuario.getText().equalsIgnoreCase("") || jTcargo.getText().equalsIgnoreCase("")){
+         if(jTusuario.getText().equalsIgnoreCase("") 
+                 || jTcargo.getText().equalsIgnoreCase("")){
 
             JOptionPane.showMessageDialog(null, "Campos vacios");}else{
             //-------------------------------------------------------------------------------------------BOTON ACCEDER
@@ -711,6 +728,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton jBiniciarSesion;
     private javax.swing.JButton jBregistrar;
     private javax.swing.JButton jBrgistrar;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
