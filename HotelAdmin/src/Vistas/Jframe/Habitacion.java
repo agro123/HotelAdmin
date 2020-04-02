@@ -89,7 +89,7 @@ public class Habitacion extends javax.swing.JFrame {
                 jBclientesActionPerformed(evt);
             }
         });
-        jPanel1.add(jBclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 250, 260, -1));
+        jPanel1.add(jBclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 249, 260, 130));
 
         jBempleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/SinSeleccionar-emp.png"))); // NOI18N
         jBempleados.setBorder(null);

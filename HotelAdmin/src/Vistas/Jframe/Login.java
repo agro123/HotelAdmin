@@ -592,11 +592,13 @@ public class Login extends javax.swing.JFrame {
        jPcontraseña.setForeground(new java.awt.Color(0, 0, 0));
        jPcontraseña.setText("");
        jPcontraseña.setEchoChar((char)1);
+       jPcontraseña.setFont(new java.awt.Font("Arial", 0, 18));
     }//GEN-LAST:event_jPcontraseñaFocusGained
 
     private void jPcontraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPcontraseñaFocusLost
         // TODO add your handling code here:
        if(jPcontraseña.getText().equalsIgnoreCase("")){ 
+       jPcontraseña.setFont(new java.awt.Font("Quicksand", 0, 18));
        jPcontraseña.setForeground(new java.awt.Color(204, 204, 204));
        jPcontraseña.setText("Contraseña");
        jPcontraseña.setEchoChar((char)0);
