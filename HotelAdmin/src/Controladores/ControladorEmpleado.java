@@ -6,6 +6,7 @@
 package Controladores;
 
 import Modelo.Empleado;
+import Modelo.EmpleadoDAO;
 import java.util.ArrayList;
 
 /**
@@ -13,12 +14,13 @@ import java.util.ArrayList;
  * @author chris
  */
 public class ControladorEmpleado {
-    /*  public static int grabarEmpleado(Empleado c)
+      public static int grabarEmpleado(Empleado c)
     {
         EmpleadoDAO empleadoDAO = new EmpleadoDAO();
         int resultado = empleadoDAO.grabarEmpleado(c);
         return resultado; 
     }
+      
      public static ArrayList<Empleado> listadoEmpleado(int id)
     {
         ArrayList<Empleado> listado;
@@ -27,16 +29,11 @@ public class ControladorEmpleado {
         listado = Empleado.listadoEmpleado(id);
         return listado; 
     }
-      public static int borrarEmpleado(int id)
-    {
-       EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-        int resultado = empleadoDAO.borrarEmpleado(id);
-        return resultado; 
-    }
+     
            public static int modificarEmpleado(Empleado c)
     {
         EmpleadoDAO empleadoDAO = new EmpleadoDAO();
         int resultado =empleadoDAO.modificarEmpleado(c);
         return resultado; 
-    } */
+    } 
 }
