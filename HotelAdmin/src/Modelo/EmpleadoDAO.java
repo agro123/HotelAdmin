@@ -12,12 +12,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+
 /**
  *
- * @author crist
+ * @author chris
  */
-public class LoginDAO {
-        public int grabarLogin(LoginModelo c){
+public class EmpleadoDAO {
+    
+    //--------------------------------------------------------------------------
+    
+    public int grabarEmpleado(Empleado c){
         Connection con = null;
         PreparedStatement pstm;
         pstm = null;
@@ -25,10 +29,17 @@ public class LoginDAO {
         rtdo = 0;
        try{
             con = Fachada.getConnection();
-            String sql = "INSERT INTO Login values (?,?)";
+            String sql = "INSERT INTO empleado values (?,?,?,?,?,?,?,?,?,?)";
             pstm = con.prepareStatement(sql);
-            pstm.setString(1, c.getUsuario());
-            pstm.setString(2, c.getContrasena());
+            pstm.setInt(1, c.getID());
+            pstm.setString(2, c.getNombre());
+            pstm.setString(3, c.getApellido());
+            pstm.setString(4, c.getCorreo());
+            pstm.setString(5, c.getDireccion());
+            pstm.setString(6, c.getTelefono());
+            pstm.setString(7, c.getCargo());
+            pstm.setBoolean(8, c.getEstado());
+            pstm.setTimestamp(9, c.getIngreso());
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){
@@ -46,7 +57,10 @@ public class LoginDAO {
         }
         return rtdo;
     } 
-     public int modificarLogin(LoginModelo c){      
+    
+    //--------------------------------------------------------------------------
+    
+    public int modificarEmpleado(Empleado c){      
         Connection con = null;
         PreparedStatement pstm;
         pstm = null;
@@ -54,13 +68,21 @@ public class LoginDAO {
         rtdo = 0;
         try{
             con = Fachada.getConnection();
-            String sql = "UPDATE Login " +
-                         "SET ID_empleado = ?,contrasena = ?"
-                    +    "WHERE ID_empleado=?";
-            pstm = con.prepareStatement(sql);            
-            pstm.setString(1, c.getUsuario());
-            pstm.setString(2, c.getContrasena());
-            
+            String sql = "UPDATE empleado " +
+                         "SET id_empleado = ?, nombre_emp = ?,apellido_emp = ?, "
+                    + "direccion_emp = ?,  email_emp = ?,  telefono_emp = ?, "
+                    + "cargo_emp = ?, fecha_ingreso = ?, estado = ?"
+                    +    "WHERE id_empleado = ?";
+            pstm = con.prepareStatement(sql);  
+            pstm.setInt(1, c.getID());
+            pstm.setString(2, c.getNombre());
+            pstm.setString(3, c.getApellido());
+            pstm.setString(4, c.getCorreo());
+            pstm.setString(5, c.getDireccion());
+            pstm.setString(6, c.getTelefono());
+            pstm.setString(7, c.getCargo());
+            pstm.setBoolean(8, c.getEstado());
+            pstm.setTimestamp(9, c.getIngreso());
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){
@@ -78,64 +100,42 @@ public class LoginDAO {
         }
         return rtdo;
     }
-     
-     public int borrarLogin(String usuario){      
-        Connection con = null;
-        PreparedStatement pstm = null;
-        int rtdo;
-        rtdo = 0;
-        try{
-            con = Fachada.getConnection();
-            String sql = "DELETE FROM Login WHERE ID_empleado = ? ";
-            pstm = con.prepareStatement(sql);
-            pstm.setString(1, usuario);
-            rtdo = pstm.executeUpdate(); 
-            return rtdo;
-        }
-        catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
-        } 
-        finally{
-            try{
-                if(pstm!=null) pstm.close();                
-            }
-            catch(SQLException ex){
-                JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
-            }
-        }
-        return rtdo;
-    } 
-      public ArrayList<LoginModelo> listadoLogin(int usuario){      
+    
+    //--------------------------------------------------------------------------
+    public ArrayList<Empleado> listadoEmpleado(int id_empleado){      
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        ArrayList<LoginModelo> listado = new ArrayList<>();
+        ArrayList<Empleado> listado = new ArrayList<>();
         try{
             con = Fachada.getConnection();
             String sql="";
-            if(usuario==0){
-                sql = "SELECT * FROM Login ORDER BY id_empleado";            
+            if(id_empleado ==0){
+                sql = "SELECT * FROM empleado ORDER BY id_empleado";            
             }else{
-                sql = "SELECT * FROM Login where id_empleado = ? "
+                sql = "SELECT * FROM empleado where id_empleado = ? "
                     + "ORDER BY id_empleado";      
             }                     
             pstm = con.prepareStatement(sql);
             
-            if(usuario != 0){
-                pstm.setInt(1, usuario);
+            if(id_empleado != 0){
+                pstm.setInt(1, id_empleado);
             }
             
             rs = pstm.executeQuery();
                         
-           LoginModelo login = null;
+           Empleado empleado = null;
             while(rs.next()){
-                login = new LoginModelo();
-                login.setUsuario(rs.getString("id_empleado"));
-               login.setContrasena(rs.getString("contrasena"));
-               
-                listado.add(login);
+                empleado.setID(rs.getInt("id_empleado"));
+                empleado.setNombre(rs.getString("nombre_emp"));
+                empleado.setApellido(rs.getString("apellido_emp"));
+                empleado.setDireccion(rs.getString("direccion_emp"));
+                empleado.setCorreo(rs.getString("email_emp"));
+                empleado.setTelefono(rs.getString("telefono_emp"));
+                empleado.setCargo(rs.getString("cargo_emp"));
+                empleado.setFechaIngreso(rs.getTimestamp("fecha_ingreso"));
+                empleado.setEstado(rs.getBoolean("estado_emp"));
+                listado.add(empleado);
             }
         }
         catch(SQLException ex){
@@ -153,5 +153,6 @@ public class LoginDAO {
             }
         }
         return listado;
-    } 
+    }
+    
 }
