@@ -32,15 +32,14 @@ public class EmpleadoDAO {
             String sql = "INSERT INTO actor values (?,?,?,?,?,?,?,?,?,?)";
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, c.getID());
-            pstm.setInt(2, c.getCodEmpleado());
-            pstm.setString(3, c.getNombre());
-            pstm.setString(4, c.getApellido());
-            pstm.setString(5, c.getCorreo());
-            pstm.setString(6, c.getDireccion());
-            pstm.setString(7, c.getTelefono());
-            pstm.setString(8, c.getCargo());
-            pstm.setBoolean(9, c.getEstado());
-            pstm.setTimestamp(10, c.getIngreso());
+            pstm.setString(2, c.getNombre());
+            pstm.setString(3, c.getApellido());
+            pstm.setString(4, c.getCorreo());
+            pstm.setString(5, c.getDireccion());
+            pstm.setString(6, c.getTelefono());
+            pstm.setString(7, c.getCargo());
+            pstm.setBoolean(8, c.getEstado());
+            pstm.setTimestamp(9, c.getIngreso());
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){
@@ -70,21 +69,20 @@ public class EmpleadoDAO {
         try{
             con = Fachada.getConnection();
             String sql = "UPDATE actor " +
-                         "SET nombre_emp = ?,apellido_emp = ?, codigo_emp = ?,"
-                    + " correo = ?, direccion = ?, telefono = ?, cargo = ?, estado = ?,"
-                    + "ingreso = ? "
-                    +    "WHERE actor_id=?";
+                         "SET id_empleado = ?, nombre_emp = ?,apellido_emp = ?, "
+                    + "direccion_emp = ?,  email_emp = ?,  telefono_emp = ?, "
+                    + "cargo_emp = ?, fecha_ingreso = ?, estado = ?"
+                    +    "WHERE id_empleado = ?";
             pstm = con.prepareStatement(sql);  
             pstm.setInt(1, c.getID());
-            pstm.setInt(2, c.getCodEmpleado());
-            pstm.setString(3, c.getNombre());
-            pstm.setString(4, c.getApellido());
-            pstm.setString(5, c.getCorreo());
-            pstm.setString(6, c.getDireccion());
-            pstm.setString(7, c.getTelefono());
-            pstm.setString(8, c.getCargo());
-            pstm.setBoolean(9, c.getEstado());
-            pstm.setTimestamp(10, c.getIngreso());
+            pstm.setString(2, c.getNombre());
+            pstm.setString(3, c.getApellido());
+            pstm.setString(4, c.getCorreo());
+            pstm.setString(5, c.getDireccion());
+            pstm.setString(6, c.getTelefono());
+            pstm.setString(7, c.getCargo());
+            pstm.setBoolean(8, c.getEstado());
+            pstm.setTimestamp(9, c.getIngreso());
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){
@@ -104,36 +102,40 @@ public class EmpleadoDAO {
     }
     
     //--------------------------------------------------------------------------
-    public ArrayList<Actor> listadoActores(int actor_id){      
+    public ArrayList<Empleado> listadoEmpleado(int id_empleado){      
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        ArrayList<Actor> listado = new ArrayList<>();
+        ArrayList<Empleado> listado = new ArrayList<>();
         try{
             con = Fachada.getConnection();
             String sql="";
-            if(actor_id==0){
-                sql = "SELECT * FROM actor ORDER BY actor_id";            
+            if(id_empleado ==0){
+                sql = "SELECT * FROM empleado ORDER BY id_empleado";            
             }else{
-                sql = "SELECT * FROM actor where actor_id = ? "
-                    + "ORDER BY actor_id";      
+                sql = "SELECT * FROM empleado where id_empleado = ? "
+                    + "ORDER BY id_empleado";      
             }                     
             pstm = con.prepareStatement(sql);
             
-            if(actor_id != 0){
-                pstm.setInt(1, actor_id);
+            if(id_empleado != 0){
+                pstm.setInt(1, id_empleado);
             }
             
             rs = pstm.executeQuery();
                         
-           Actor actor = null;
+           Empleado empleado = null;
             while(rs.next()){
-                actor = new Actor();
-                actor.setActorid(rs.getInt("actor_id"));
-               actor.setName(rs.getString("first_name"));
-               actor.setLastName(rs.getString("last_name"));
-                actor.setLasUpdate(rs.getTimestamp("last_update"));
-                listado.add(actor);
+                empleado.setID(rs.getInt("id_empleado"));
+                empleado.setNombre(rs.getString("nombre_emp"));
+                empleado.setApellido(rs.getString("apellido_emp"));
+                empleado.setDireccion(rs.getString("direccion_emp"));
+                empleado.setCorreo(rs.getString("email_emp"));
+                empleado.setTelefono(rs.getString("telefono_emp"));
+                empleado.setCargo(rs.getString("cargo_emp"));
+                empleado.setFechaIngreso(rs.getTimestamp("fecha_ingreso"));
+                empleado.setEstado(rs.getBoolean("estado_emp"));
+                listado.add(empleado);
             }
         }
         catch(SQLException ex){

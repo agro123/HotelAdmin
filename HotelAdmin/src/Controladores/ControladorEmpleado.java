@@ -26,7 +26,7 @@ public class ControladorEmpleado {
         ArrayList<Empleado> listado;
         listado = new ArrayList();
         EmpleadoDAO empleados = new EmpleadoDAO();
-        listado = Empleado.listadoEmpleado(id);
+        listado = empleados.listadoEmpleado(id);
         return listado; 
     }
      

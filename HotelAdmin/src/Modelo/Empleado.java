@@ -11,7 +11,6 @@ import java.sql.Timestamp;
  * * @author Leonardo
  */
 public class Empleado extends Persona {
-    private int codigoEmpleado;
     private String cargo;
     private boolean estado;
     private Timestamp fecha_ingreso;
@@ -23,10 +22,6 @@ public class Empleado extends Persona {
     //------------------------------ SET EMPLEADO ------------------------------
    
     
-    public void setCodEmpleado (int codEmpl)
-    {
-        this.codigoEmpleado = codEmpl;
-    }
     
     public void setCargo (String cargo)
     {
@@ -44,10 +39,7 @@ public class Empleado extends Persona {
     }
     //-----------------------------GET EMPLEADO---------------------------------
     
-    public int getCodEmpleado()
-    {
-        return codigoEmpleado;
-    }
+    
     
     public String getCargo()
     {
