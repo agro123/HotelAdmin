@@ -16,16 +16,16 @@ public class jPempleado extends javax.swing.JPanel {
     /**
      * Creates new form jPempleado
      */
-    public jPempleado(int id_,int cedula_,String nombre_, String cargo_) {
+    public jPempleado(int id_,String nombre_, String cargo_) {
         
         this.id = id_;
-        this.cedula = cedula_;
+        
         this.nombre = nombre_;
         this.cargo = cargo_;
         initComponents();
         
         jLid.setText(String.valueOf(id_));
-        jLcedula.setText(String.valueOf(cedula_));
+        
         jLnombre.setText(nombre_);
         jLcargo.setText(cargo_);
     }

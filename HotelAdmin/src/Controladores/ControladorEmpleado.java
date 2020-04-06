@@ -30,6 +30,15 @@ public class ControladorEmpleado {
         return listado; 
     }
      
+     public static ArrayList<Empleado> listadoEmpleado()
+    {
+        ArrayList<Empleado> listado;
+        listado = new ArrayList();
+        EmpleadoDAO empleados = new EmpleadoDAO();
+        listado = empleados.listadoEmpleado();
+        return listado; 
+    }
+     
            public static int modificarEmpleado(Empleado c)
     {
         EmpleadoDAO empleadoDAO = new EmpleadoDAO();
