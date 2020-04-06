@@ -6,7 +6,6 @@
 package hoteladmin;
 
 import Vistas.Jframe.Login;
-import Vistas.LoginGUI;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -22,7 +21,7 @@ public class HotelAdmin{
     
         Login inicio = new Login();
         inicio.setVisible(true);
-         inicio.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        inicio.setDefaultCloseOperation(EXIT_ON_CLOSE);
     
     }
     

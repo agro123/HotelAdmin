@@ -29,7 +29,7 @@ public class EmpleadoDAO {
         rtdo = 0;
        try{
             con = Fachada.getConnection();
-            String sql = "INSERT INTO actor values (?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO empleado values (?,?,?,?,?,?,?,?,?,?)";
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, c.getID());
             pstm.setString(2, c.getNombre());
@@ -68,7 +68,7 @@ public class EmpleadoDAO {
         rtdo = 0;
         try{
             con = Fachada.getConnection();
-            String sql = "UPDATE actor " +
+            String sql = "UPDATE empleado " +
                          "SET id_empleado = ?, nombre_emp = ?,apellido_emp = ?, "
                     + "direccion_emp = ?,  email_emp = ?,  telefono_emp = ?, "
                     + "cargo_emp = ?, fecha_ingreso = ?, estado = ?"
