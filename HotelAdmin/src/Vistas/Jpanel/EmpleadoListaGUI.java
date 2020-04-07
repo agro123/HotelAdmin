@@ -8,6 +8,7 @@ package Vistas.Jpanel;
 import java.util.ArrayList;
 import Controladores.ControladorEmpleado;
 import Modelo.Empleado;
+import javax.swing.JOptionPane;
 /**
  *
  * @author nicol
@@ -86,8 +87,10 @@ public class EmpleadoListaGUI extends javax.swing.JPanel {
         //EN DONDE SE MUESTRA LOS DATOS PRINCIPALES DE LOS EMPLEADOS
        
         ArrayList<Empleado> listadoEmp = new ArrayList<>();
-        listadoEmp = ControladorEmp.listadoEmpleado();
+        listadoEmp = ControladorEmp.listadoEmpleado(0);
         
+        
+        jPmensajes.removeAll();
         for (int i=0;i<listadoEmp.size();i++){
         jPempleado jp = new jPempleado(listadoEmp.get(i).getID(),
                 listadoEmp.get(i).getNombre() + " " + listadoEmp.get(i).getApellido(),

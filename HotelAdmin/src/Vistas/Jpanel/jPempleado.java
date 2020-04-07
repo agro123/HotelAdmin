@@ -5,13 +5,15 @@
  */
 package Vistas.Jpanel;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nicol
  */
 public class jPempleado extends javax.swing.JPanel {
     
-    private int id,cedula;
+    private int id;
     private String nombre,cargo;
     /**
      * Creates new form jPempleado
@@ -19,13 +21,11 @@ public class jPempleado extends javax.swing.JPanel {
     public jPempleado(int id_,String nombre_, String cargo_) {
         
         this.id = id_;
-        
         this.nombre = nombre_;
         this.cargo = cargo_;
         initComponents();
         
         jLid.setText(String.valueOf(id_));
-        
         jLnombre.setText(nombre_);
         jLcargo.setText(cargo_);
     }

@@ -126,6 +126,7 @@ public class EmpleadoDAO {
                         
            Empleado empleado = null;
             while(rs.next()){
+                empleado = new Empleado();
                 empleado.setID(rs.getInt("id_empleado"));
                 empleado.setNombre(rs.getString("nombre_emp"));
                 empleado.setApellido(rs.getString("apellido_emp"));
@@ -134,56 +135,7 @@ public class EmpleadoDAO {
                 empleado.setTelefono(rs.getString("telefono_emp"));
                 empleado.setCargo(rs.getString("cargo_emp"));
                 empleado.setFechaIngreso(rs.getTimestamp("fecha_ingreso"));
-                empleado.setEstado(rs.getBoolean("estado_emp"));
-                listado.add(empleado);
-            }
-        }
-        catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
-        }
-        finally{
-            try{
-                if(rs!=null) rs.close();
-                if(pstm!=null) pstm.close();                
-            }
-            catch(SQLException ex){
-                JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
-            }
-        }
-        return listado;
-    }
-    
-    //------------------------------------ LISTAR SIN PARAMETROS----------------
-    
-    public ArrayList<Empleado> listadoEmpleado(){      
-        Connection con = null;
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
-        ArrayList<Empleado> listado = new ArrayList<>();
-        try{
-            con = Fachada.getConnection();
-            String sql="";
-            
-            sql = "SELECT * FROM empleado where id_empleado = ? "
-                    + "ORDER BY id_empleado";      
-                                
-            pstm = con.prepareStatement(sql);
-            
-            rs = pstm.executeQuery();
-                        
-           Empleado empleado = null;
-            while(rs.next()){
-                empleado.setID(rs.getInt("id_empleado"));
-                empleado.setNombre(rs.getString("nombre_emp"));
-                empleado.setApellido(rs.getString("apellido_emp"));
-                empleado.setDireccion(rs.getString("direccion_emp"));
-                empleado.setCorreo(rs.getString("email_emp"));
-                empleado.setTelefono(rs.getString("telefono_emp"));
-                empleado.setCargo(rs.getString("cargo_emp"));
-                empleado.setFechaIngreso(rs.getTimestamp("fecha_ingreso"));
-                empleado.setEstado(rs.getBoolean("estado_emp"));
+                empleado.setEstado(rs.getBoolean("estado"));
                 listado.add(empleado);
             }
         }
