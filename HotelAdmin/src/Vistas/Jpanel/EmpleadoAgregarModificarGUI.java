@@ -5,6 +5,8 @@
  */
 package Vistas.Jpanel;
 
+import Modelo.Empleado;
+
 /**
  *
  * @author nicol
@@ -18,6 +20,32 @@ public class EmpleadoAgregarModificarGUI extends javax.swing.JPanel {
         initComponents();
     }
 
+    
+    public void llenarValores(Empleado datos){
+        
+        String Cedula = String.valueOf(datos.getID());
+        jTcedula.setText(Cedula);
+        jTnombre.setText(datos.getNombre() + " " + datos.getApellido());
+        jTcargo.setText(datos.getCargo());
+        jTcorreo.setText(datos.getCorreo());
+        jTtelefono.setText(datos.getTelefono());
+        jTdireccion.setText(datos.getDireccion());
+        if (datos.getEstado() == true)
+        {
+            jCestado.setSelectedItem("Activo");
+        }else {
+            jCestado.setSelectedItem("Inactivo");
+        }
+                    
+       
+        
+        
+        
+        
+        
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,7 +56,6 @@ public class EmpleadoAgregarModificarGUI extends javax.swing.JPanel {
     private void initComponents() {
 
         jBcancelar = new javax.swing.JButton();
-        jTestado = new javax.swing.JTextField();
         jBguardar = new javax.swing.JButton();
         jTcedula = new javax.swing.JTextField();
         jTnombre = new javax.swing.JTextField();
@@ -37,6 +64,7 @@ public class EmpleadoAgregarModificarGUI extends javax.swing.JPanel {
         jTcargo = new javax.swing.JTextField();
         jTsalario = new javax.swing.JTextField();
         jTcorreo = new javax.swing.JTextField();
+        jCestado = new javax.swing.JComboBox<>();
         jLfondo = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -51,12 +79,6 @@ public class EmpleadoAgregarModificarGUI extends javax.swing.JPanel {
             }
         });
         add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 130, 50));
-
-        jTestado.setBackground(new java.awt.Color(241, 242, 246));
-        jTestado.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
-        jTestado.setForeground(new java.awt.Color(153, 153, 153));
-        jTestado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 190, 30));
 
         jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-blanco.png"))); // NOI18N
         jBguardar.setBorder(null);
@@ -117,6 +139,11 @@ public class EmpleadoAgregarModificarGUI extends javax.swing.JPanel {
         });
         add(jTcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 190, 30));
 
+        jCestado.setBackground(new java.awt.Color(241, 242, 246));
+        jCestado.setForeground(new java.awt.Color(153, 153, 153));
+        jCestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2" }));
+        add(jCestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 190, 30));
+
         jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo-emp.png"))); // NOI18N
         jLfondo.setPreferredSize(new java.awt.Dimension(739, 429));
         add(jLfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
@@ -140,12 +167,12 @@ public class EmpleadoAgregarModificarGUI extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBcancelar;
     private javax.swing.JButton jBguardar;
+    private javax.swing.JComboBox<String> jCestado;
     private javax.swing.JLabel jLfondo;
     private javax.swing.JTextField jTcargo;
     private javax.swing.JTextField jTcedula;
     private javax.swing.JTextField jTcorreo;
     private javax.swing.JTextField jTdireccion;
-    private javax.swing.JTextField jTestado;
     private javax.swing.JTextField jTnombre;
     private javax.swing.JTextField jTsalario;
     private javax.swing.JTextField jTtelefono;
