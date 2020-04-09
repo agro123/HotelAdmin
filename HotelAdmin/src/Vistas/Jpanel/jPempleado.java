@@ -5,29 +5,35 @@
  */
 package Vistas.Jpanel;
 
+import Modelo.Empleado;
+
 /**
  *
  * @author nicol
  */
 public class jPempleado extends javax.swing.JPanel {
     
-    private int id,cedula;
+    private Empleado datosEmp;
+    private int id;
     private String nombre,cargo;
     /**
      * Creates new form jPempleado
+     * 
+     * 
+     * @param datosEmp ES EL ARREGLO CON TODOS LOS DATOS DE ESE EMPLEADO
+     * PARA PODER LLENAR EL FORMULARIO DE EDITAR A LA HORA DE HACER ESTO
      */
-    public jPempleado(int id_,int cedula_,String nombre_, String cargo_) {
+    public jPempleado(Empleado datos) {
         
-        this.id = id_;
-        this.cedula = cedula_;
-        this.nombre = nombre_;
-        this.cargo = cargo_;
+        this.datosEmp = datos;
+        this.id = datosEmp.getID();
+        this.nombre = datosEmp.getNombre() + " " +  datosEmp.getApellido();
+        this.cargo = datosEmp.getCargo();
         initComponents();
         
-        jLid.setText(String.valueOf(id_));
-        jLcedula.setText(String.valueOf(cedula_));
-        jLnombre.setText(nombre_);
-        jLcargo.setText(cargo_);
+        jLid.setText(String.valueOf(id));
+        jLnombre.setText(nombre);
+        jLcargo.setText(cargo);
     }
 
     /**

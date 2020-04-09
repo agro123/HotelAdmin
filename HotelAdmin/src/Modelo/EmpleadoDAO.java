@@ -126,6 +126,7 @@ public class EmpleadoDAO {
                         
            Empleado empleado = null;
             while(rs.next()){
+                empleado = new Empleado();
                 empleado.setID(rs.getInt("id_empleado"));
                 empleado.setNombre(rs.getString("nombre_emp"));
                 empleado.setApellido(rs.getString("apellido_emp"));
@@ -134,7 +135,7 @@ public class EmpleadoDAO {
                 empleado.setTelefono(rs.getString("telefono_emp"));
                 empleado.setCargo(rs.getString("cargo_emp"));
                 empleado.setFechaIngreso(rs.getTimestamp("fecha_ingreso"));
-                empleado.setEstado(rs.getBoolean("estado_emp"));
+                empleado.setEstado(rs.getBoolean("estado"));
                 listado.add(empleado);
             }
         }

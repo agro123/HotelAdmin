@@ -122,10 +122,10 @@ public class Empleados extends javax.swing.JPanel {
         jPcontenedor.removeAll();
         jPcontenedor.add(panelE);
         jPcontenedor.revalidate();
-        jPcontenedor.repaint();
+        jPcontenedor.repaint();    
 
         
-
+        
     }//GEN-LAST:event_jBeliminarActionPerformed
 
     public void seleccionarPrimero(){
