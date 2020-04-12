@@ -5,6 +5,8 @@
  */
 package Vistas.Jframe;
 
+import Controladores.ControllerServicios;
+import Modelo.RoomServicesDAO;
 import Vistas.Jpanel.HabitacionAgregarModificarGUI;
 import Vistas.Jpanel.HabitacionListaGUI;
 import Vistas.Jpanel.jPhabitacion;
@@ -22,6 +24,8 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Habitación
      */
+    
+    Services JframeServices;
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -245,9 +249,13 @@ public class Principal extends javax.swing.JFrame {
         jBservicios.setSelected(true);
         
         jPcontenedor.setVisible(false);
-        Servicios ser = new Servicios() ;
+        
+        RoomServicesDAO modelo = new RoomServicesDAO();
+        JframeServices = new Services();
+        ControllerServicios controladorServicios = new ControllerServicios(JframeServices, modelo);
+        JframeServices.setControladorServicios(controladorServicios);
         jPcontenedor.removeAll();
-        jPcontenedor.add(ser);
+        jPcontenedor.add(JframeServices);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
