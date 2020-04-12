@@ -9,6 +9,11 @@ import Vistas.Jpanel.HabitacionAgregarModificarGUI;
 import Vistas.Jpanel.HabitacionListaGUI;
 import Vistas.Jpanel.jPhabitacion;
 import javax.swing.Icon;
+import Controladores.*;
+import Modelo.*;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,9 +24,92 @@ public class Habitaciones extends javax.swing.JPanel {
     /**
      * Creates new form HabitacionGUI
      */
+    HabitacionAgregarModificarGUI panelAgregar;
+    HabitacionListaGUI panelModificar;
+    HabitacionListaGUI panelEliminar; 
+    ControllerHabitacion controladorHabitacion;
+    
     public Habitaciones() {
         initComponents();
-        seleccionarPrimero();
+        panelAgregar = new HabitacionAgregarModificarGUI();
+        panelModificar = new HabitacionListaGUI(this);
+        panelEliminar = new HabitacionListaGUI(this);
+        mostrarPanelAgregar();
+        
+    }
+
+    public HabitacionAgregarModificarGUI getPanelAgregar() {
+        return panelAgregar;
+    }
+
+    public HabitacionListaGUI getPanelModificar() {
+        return panelModificar;
+    }
+
+    public HabitacionListaGUI getPanelEliminar() {
+        return panelEliminar;
+    }
+    
+    public JButton getjBeliminar() {
+        return jBeliminar;
+    }
+
+    public JButton getjBmodificar() {
+        return jBmodificar;
+    }
+
+    public JButton getjBagregar() {
+        return jBagregar;
+    }
+
+    public JPanel getjPcontenedor() {
+        return jPcontenedor;
+    }
+
+    public void setControladorHabitacion(ControllerHabitacion controladorHabitacion) {
+        this.controladorHabitacion = controladorHabitacion;
+    }
+
+    public ControllerHabitacion getControladorHabitacion() {
+        return controladorHabitacion;
+    }
+    
+    
+    
+    public void mostrarPanelModificar()
+    {
+        jBagregar.setSelected(false);
+        jBeliminar.setSelected(false);
+        jBmodificar.setSelected(true);
+        jPcontenedor.removeAll();
+        jPcontenedor.add(panelModificar);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);       
+    }
+    
+    
+    public void mostrarPanelAgregar(){
+        jBeliminar.setSelected(false);
+        jBmodificar.setSelected(false);
+        jBagregar.setSelected(true); 
+        jPcontenedor.removeAll();
+        jPcontenedor.add(panelAgregar);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
+    }
+    
+    public void mostrarPanelEliminar()
+    {
+        jBeliminar.setSelected(true);
+        jBmodificar.setSelected(false);
+        jBagregar.setSelected(false); 
+        jPcontenedor.removeAll();
+        jPcontenedor.add(panelEliminar);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
     }
 
     /**
@@ -91,58 +179,59 @@ public class Habitaciones extends javax.swing.JPanel {
 
     private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
         // TODO add your handling code here:
-        jBagregar.setSelected(false);
-        jBeliminar.setSelected(false);
-        jBmodificar.setSelected(true);
-        
-        jPcontenedor.setVisible(false);
-        jPcontenedor.setVisible(true);
-        
-        HabitacionListaGUI panelE = new HabitacionListaGUI();
-        jPcontenedor.removeAll();
-        jPcontenedor.add(panelE);
-        jPcontenedor.revalidate();
-        jPcontenedor.repaint();
-        jPhabitacion habi = new jPhabitacion("modificar");
+//        jBagregar.setSelected(false);
+//        jBeliminar.setSelected(false);
+//        jBmodificar.setSelected(true);       
+//        jPcontenedor.setVisible(false);
+//        jPcontenedor.setVisible(true);
+//        panelM = new HabitacionListaGUI();
+//        jPcontenedor.removeAll();
+//        jPcontenedor.add(panelM);
+//        jPcontenedor.revalidate();
+//        jPcontenedor.repaint();
+//        jPhabitacion habi = new jPhabitacion("modificar");
        
+//        HabitacionesDAO modelohabitacion = new HabitacionesDAO();
+//        ControllerHabitacion controladorHabitacion = new ControllerHabitacion(this, modelohabitacion);
+//        controladorHabitacion.leerHabitaciones();
     }//GEN-LAST:event_jBmodificarActionPerformed
 
     private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
         // TODO add your handling code here:
-        jBagregar.setSelected(false);
-        jBmodificar.setSelected(false);
-        jBeliminar.setSelected(true);
-        
-        jPcontenedor.setVisible(false);
-        jPcontenedor.setVisible(true);
-        
-        HabitacionListaGUI panelE = new HabitacionListaGUI();
-        jPcontenedor.removeAll();
-        jPcontenedor.add(panelE);
-        jPcontenedor.revalidate();
-        jPcontenedor.repaint();
-
-        jPhabitacion habi = new jPhabitacion("eliminar");
-     
-       
+//        jBagregar.setSelected(false);
+//        jBmodificar.setSelected(false);
+//        jBeliminar.setSelected(true);       
+//        jPcontenedor.setVisible(false);
+//        jPcontenedor.setVisible(true);        
+//        panelM = new HabitacionListaGUI();
+//        jPcontenedor.removeAll();
+//        jPcontenedor.add(panelM);
+//        jPcontenedor.revalidate();
+//        jPcontenedor.repaint();
+//
+//        jPhabitacion habi = new jPhabitacion("eliminar");
+//     
+//        HabitacionesDAO modelohabitacion = new HabitacionesDAO();
+//        ControllerHabitacion controladorHabitacion = new ControllerHabitacion(this, modelohabitacion); 
+//        controladorHabitacion.leerHabitaciones();
     }//GEN-LAST:event_jBeliminarActionPerformed
 
-    public void seleccionarPrimero(){
-        jBeliminar.setSelected(false);
-        jBmodificar.setSelected(false);
-        jBagregar.setSelected(true); 
-        HabitacionAgregarModificarGUI panelAM = new HabitacionAgregarModificarGUI();
-        jPcontenedor.removeAll();
-        jPcontenedor.add(panelAM);
-        jPcontenedor.revalidate();
-        jPcontenedor.repaint();
-        jPcontenedor.setVisible(true);
-    }
+//    public void MostrarPanelAgregar(){
+//        jBeliminar.setSelected(false);
+//        jBmodificar.setSelected(false);
+//        jBagregar.setSelected(true); 
+//        jPcontenedor.removeAll();
+//        jPcontenedor.add(panelA);
+//        jPcontenedor.revalidate();
+//        jPcontenedor.repaint();
+//        jPcontenedor.setVisible(true);
+//    }
     private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
         // TODO add your handling code here:
        
-        jPcontenedor.removeAll();
-        seleccionarPrimero();
+//        jPcontenedor.removeAll();
+//        seleccionarPrimero();
+        
   
     }//GEN-LAST:event_jBagregarActionPerformed
 

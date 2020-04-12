@@ -5,6 +5,8 @@
  */
 package Vistas.Jframe;
 
+import Controladores.ControllerHabitacion;
+import Modelo.HabitacionesDAO;
 import Vistas.Jpanel.HabitacionAgregarModificarGUI;
 import Vistas.Jpanel.HabitacionListaGUI;
 import Vistas.Jpanel.jPhabitacion;
@@ -22,6 +24,7 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Habitación
      */
+    Habitaciones Jframehabitaciones;
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -174,9 +177,9 @@ public class Principal extends javax.swing.JFrame {
         jBempleados.setSelected(false);
         jBclientes.setSelected(false);
         jBhabitaciones.setSelected(true);
-        Habitaciones habi = new Habitaciones() ;
+        Jframehabitaciones = new Habitaciones() ;
         jPcontenedor.removeAll();
-        jPcontenedor.add(habi);
+        jPcontenedor.add(Jframehabitaciones);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
@@ -195,6 +198,9 @@ public class Principal extends javax.swing.JFrame {
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);*/
         seleccionarPrimero();
+        HabitacionesDAO modelohabitacion = new HabitacionesDAO();
+        ControllerHabitacion controladorHabitacion = new ControllerHabitacion(Jframehabitaciones, modelohabitacion); 
+        Jframehabitaciones.setControladorHabitacion(controladorHabitacion);
        
     }//GEN-LAST:event_jBhabitacionesActionPerformed
 
