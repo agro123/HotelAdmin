@@ -83,7 +83,8 @@ public class ServiciosListaGUI extends javax.swing.JPanel {
         //EN DONDE SE MUESTRA LOS DATOS PRINCIPALES DE LOS SERVICIOS
         
         for(int i=0;i<100;i++){
-        jPservicio jp = new jPservicio(956,"Comida",5443.5,5); 
+        //jPservicio jp = new jPservicio(956,"Comida",5443.5,5); 
+        jPservicio jp = new jPservicio();
         servicios.add(jp);
           
        }
