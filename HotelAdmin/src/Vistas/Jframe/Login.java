@@ -29,7 +29,7 @@ public class Login extends javax.swing.JFrame {
         
          
         setIconImage(Toolkit.getDefaultToolkit().
-        getImage(this.getClass().getResource("/imagenes/Logo.png")));
+        getImage(this.getClass().getResource("/Imagenes/Logo.png")));
         setResizable(false);
     }
     
