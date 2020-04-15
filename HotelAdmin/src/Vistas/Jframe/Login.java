@@ -626,7 +626,7 @@ public class Login extends javax.swing.JFrame {
                  || jTcargo.getText().equalsIgnoreCase("")){
 
             JOptionPane.showMessageDialog(null, "Campos vacios");}else{
-            //-------------------------------------------------------------------------------------------BOTON ACCEDER
+           
 
             ingresar();
         }

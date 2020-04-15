@@ -59,8 +59,8 @@ public class ClientDAO {
         try{
             con = Fachada.getConnection();
             String sql = "UPDATE Cliente "
-                        + "SET id_cliente = ?, nombre_cli = ?,apellido_cli = ?, "
-                        + "direccion_cli = ?,  email_cli = ?,  telefono_cli = ?, "
+                        + "SET id_cliente = ?, nombre_cli = ?,apellido_cli = ?,"
+                        + "direccion_cli = ?,  email_cli = ?,  telefono_cli = ?,"
                         + "WHERE id_cliente = ?";
             pstm = con.prepareStatement(sql);  
             pstm.setInt(1, c.getID());

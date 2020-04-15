@@ -37,7 +37,8 @@ public class ControllerServicios {
         crearIdServicio();
         manejador_eventos = new serviciosListener();
 
-        this.vista.getPanelAgregar().getjBcancelar().addActionListener(manejador_eventos);
+        this.vista.getPanelAgregar().getjBcancelar().addActionListener
+        (manejador_eventos);
         this.vista.getjBagregar().addActionListener(manejador_eventos);
         this.vista.getjBeliminar().addActionListener(manejador_eventos);
         this.vista.getjBmodificar().addActionListener(manejador_eventos);
@@ -55,7 +56,8 @@ public class ControllerServicios {
             if (ae.getSource() == vista.getPanelAgregar().getjBcancelar()) {
                 if (vista.getPanelAgregar().getValidador() == "guardar") {
                     if (vista.getPanelAgregar().validarCampos() == 0) {
-                        JOptionPane.showMessageDialog(null, "Ingrese Todos los Campos Requeridos");
+                        JOptionPane.showMessageDialog(null, "Ingrese Todos los "
+                                + "Campos Requeridos");
 
                     }else
                     {
@@ -63,7 +65,8 @@ public class ControllerServicios {
                         vista.getPanelAgregar().setearCampos();
                     }
                      
-                } else if (vista.getPanelAgregar().getValidador() == "actualizar") {
+                } else if (vista.getPanelAgregar().getValidador() 
+                        == "actualizar") {
                     actualizarServicio();
                     vista.getPanelAgregar().setearCampos();
                 }
@@ -142,8 +145,10 @@ public class ControllerServicios {
 
         servicio.setId_servicio(num_servicio);
         servicio.setNombrePro(vista.getPanelAgregar().getjTNombre().getText().trim());
-        servicio.setCantidad(Integer.parseInt(vista.getPanelAgregar().getjTcantidad().getText().trim()));
-        servicio.setPrecio(Double.parseDouble(vista.getPanelAgregar().getjTprecio().getText().trim()));
+        servicio.setCantidad(Integer.parseInt(vista.getPanelAgregar()
+                .getjTcantidad().getText().trim()));
+        servicio.setPrecio(Double.parseDouble(vista.getPanelAgregar()
+                .getjTprecio().getText().trim()));
 
         int resultado = 0;
 
@@ -178,9 +183,12 @@ public class ControllerServicios {
     public void actualizarServicio() {
         RoomServices servicio = new RoomServices();
         servicio.setId_servicio(id_Seleccionado);
-        servicio.setNombrePro(vista.getPanelAgregar().getjTNombre().getText().trim());
-        servicio.setCantidad(Integer.parseInt(vista.getPanelAgregar().getjTcantidad().getText().trim()));
-        servicio.setPrecio(Double.parseDouble(vista.getPanelAgregar().getjTprecio().getText().trim()));
+        servicio.setNombrePro(vista.getPanelAgregar().getjTNombre()
+                .getText().trim());
+        servicio.setCantidad(Integer.parseInt(vista.getPanelAgregar()
+                .getjTcantidad().getText().trim()));
+        servicio.setPrecio(Double.parseDouble(vista.getPanelAgregar()
+                .getjTprecio().getText().trim()));
 
         if (modelo.modificarRoomSercices(servicio) == 1) {
             vista.gestionMensajes(
