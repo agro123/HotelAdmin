@@ -6,8 +6,6 @@
 package Vistas.Jpanel;
 
 import Modelo.Empleado;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,7 +51,7 @@ public class jPempleado extends javax.swing.JPanel {
         jLid = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -70,22 +68,8 @@ public class jPempleado extends javax.swing.JPanel {
         add(jLid, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 30, 60, 10));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Empleado-jpanel.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 240, 130));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // AQUI DEBE IR EL CODIGO PARA CARGAR LA INFO DE LA PERSONA PARA EDITAR
-        // O VER
-        
-        
-        
-        
-    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
