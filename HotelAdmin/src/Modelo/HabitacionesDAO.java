@@ -23,7 +23,7 @@ public class HabitacionesDAO {
      * @param h Objeto de la clase Habitacion a grabar
      * @return rtdo resultado de la operación grabar
      */
-    public int grabarHabitacion(Habitaciones1 h){      
+    public int grabarHabitacion(Habitacion h){      
         Connection con = null;
         PreparedStatement pstm;
         pstm = null;
@@ -63,7 +63,7 @@ public class HabitacionesDAO {
      * @param h Objeto de la clase Habitacion a modificar
      * @return rtdo resultado de la operación modificar
      */
-    public int modificarHabitacion(Habitaciones1 h){      
+    public int modificarHabitacion(Habitacion h){      
         Connection con = null;
         PreparedStatement pstm;
         pstm = null;
@@ -143,11 +143,11 @@ public class HabitacionesDAO {
      * @param id_habitacion id de habitación a listar
      * @return ArrayList, lista de objetos Habitación
      */
-    public ArrayList <Habitaciones1> listadoHabitacion(){      
+    public ArrayList <Habitacion> listadoHabitacion(){      
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        ArrayList <Habitaciones1> listadoHabitacion = new ArrayList<>();
+        ArrayList <Habitacion> listadoHabitacion = new ArrayList<>();
         try{
             con = Fachada.getConnection(); 
             String sql="";
@@ -158,10 +158,10 @@ public class HabitacionesDAO {
    
             rs = pstm.executeQuery();
                         
-            Habitaciones1 objhabitacion = null;
+            Habitacion objhabitacion = null;
             while(rs.next()){
                 
-                objhabitacion = new Habitaciones1();
+                objhabitacion = new Habitacion();
                 objhabitacion.setId_habitacion(rs.getInt("id_habitacion"));
                 objhabitacion.setTipo_habitacion(rs.getString("tipo_habitacion"));
                 objhabitacion.setPiso(rs.getString("piso"));
@@ -190,13 +190,13 @@ public class HabitacionesDAO {
     
     }
     
-public Habitaciones1 extraerHabitaciones_porID(int idHabitacion)
+public Habitacion extraerHabitaciones_porID(int idHabitacion)
     {
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
 
-        Habitaciones1 habitacion = new Habitaciones1();
+        Habitacion habitacion = new Habitacion();
         try {
             con = Fachada.getConnection();
             String sql = "";

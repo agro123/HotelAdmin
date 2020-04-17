@@ -5,7 +5,7 @@
  */
 package Vistas.Jpanel;
 
-import Modelo.Habitaciones1;
+import Modelo.Habitacion;
 import Vistas.Jframe.Habitaciones;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -87,7 +87,7 @@ public class HabitacionListaGUI extends javax.swing.JPanel {
         add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 40, 30));
     }// </editor-fold>//GEN-END:initComponents
 
-    public void CargarLista(ArrayList<Habitaciones1> lista_habitacion, String validador) {
+    public void CargarLista(ArrayList<Habitacion> lista_habitacion, String validador) {
 
         //TODA LAS HABITACIONES SON AGREGADAS AL JPANEL 
         //EN DONDE SE MUESTRA LOS DATOS PRINCIPALES DE LAS HABITACIONES
@@ -121,7 +121,7 @@ public class HabitacionListaGUI extends javax.swing.JPanel {
         return jPmensajes;
     }
 
-    public void llenarFormulario(Habitaciones1 habitacion) {
+    public void llenarFormulario(Habitacion habitacion) {
 
         int id_hab = habitacion.getId_habitacion();
         String tipo_hab = habitacion.getTipo_habitacion(); //combobox

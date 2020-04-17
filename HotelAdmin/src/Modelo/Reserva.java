@@ -15,6 +15,6 @@ public class Reserva {
     
     private int numero_reserva, dias_estancia;
     private Timestamp fecha_reserva, fecha_ingreso, fecha_salida;
-    private Habitaciones1 unaHabitacion;
+    private Habitacion unaHabitacion;
     private Cliente unCliente;    
 }

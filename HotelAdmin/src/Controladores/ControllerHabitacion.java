@@ -47,7 +47,7 @@ public class ControllerHabitacion {
     }*/
     //Método para leer las habitaciones y lograr cargar a la vista la información de habitaciones
     public void leerHabitaciones() {
-        ArrayList<Habitaciones1> lista_habitaciones;
+        ArrayList<Habitacion> lista_habitaciones;
 
         lista_habitaciones = modelo.listadoHabitacion();
         vista.getPanelModificar().CargarLista(lista_habitaciones, "actualizar");
@@ -57,7 +57,7 @@ public class ControllerHabitacion {
     public void leerHabitacionID(int idHabitacion) {
 
         id_seleccionado = idHabitacion;
-        Habitaciones1 objhabitaciones;
+        Habitacion objhabitaciones;
         objhabitaciones = modelo.extraerHabitaciones_porID(idHabitacion);
 
         vista.getPanelAgregar().setValidador("actualizar");
@@ -116,7 +116,7 @@ public class ControllerHabitacion {
                     "Error de Entrada", JOptionPane.ERROR_MESSAGE);
 
         } else {
-            Habitaciones1 habitacion = new Habitaciones1();
+            Habitacion habitacion = new Habitacion();
 
             habitacion.setId_habitacion(Integer.parseInt(vista.getPanelAgregar().getjTnumeroHabitacion().getText()));
             habitacion.setTipo_habitacion(vista.getPanelAgregar().getjCtipoHabi().getSelectedItem().toString());
@@ -148,7 +148,7 @@ public class ControllerHabitacion {
 
     public void actualizarHabitacion() {
 
-        Habitaciones1 habitacion = new Habitaciones1();
+        Habitacion habitacion = new Habitacion();
 
         habitacion.setId_habitacion(id_seleccionado);
 

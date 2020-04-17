@@ -11,7 +11,7 @@ package Modelo;
  */
 public class Ingreso {
     private int codigo_ingreso, cantidad_personas;
-    private Habitaciones1 unaHabitacion;
+    private Habitacion unaHabitacion;
     private Cliente unCliente;
     private Reserva unaReserva;
 }
