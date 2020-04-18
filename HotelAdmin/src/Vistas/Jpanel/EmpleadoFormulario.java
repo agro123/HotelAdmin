@@ -227,6 +227,7 @@ public class EmpleadoFormulario extends javax.swing.JPanel {
        if(validar_panel == "agregar")
         {
                 ControladorEmpleado.grabarEmpleado(registrarEmpleado());
+                JOptionPane.showMessageDialog(null, "Se ha agregado con éxito");
                
         } else
         {
