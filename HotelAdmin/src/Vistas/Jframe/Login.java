@@ -36,7 +36,7 @@ public class Login extends javax.swing.JFrame {
     
     public void ingresar(){ //-------------------------------------------------- Verifica los campos para procionar el acceso dependiendo del tipo de usuario
      try{   
-         
+         boolean found = false;
          
         String usuario=jTusername.getText();
         String contrasena=jPcontraseña.getText();
@@ -47,7 +47,8 @@ public class Login extends javax.swing.JFrame {
             
             if(usuario.equalsIgnoreCase("admin") &&
                 contrasena.equalsIgnoreCase("admin"))
-            {                 
+            {          
+                found = true;
                 Principal pri = new Principal();
                 pri.setVisible(true);
                 dispose();
@@ -57,32 +58,31 @@ public class Login extends javax.swing.JFrame {
                 ArrayList<LoginModelo> usuarios = new ArrayList<>();
         
                 usuarios = login.listadoLogin(0);
-        
+
                 for(int i=0; i< usuarios.size(); i++)
                 {
                   if(usuarios.get(i).getUsuario().equalsIgnoreCase(usuario)
                           &&usuarios.get(i).getContrasena()
                                   .equalsIgnoreCase(contrasena))
                   {
-                                    
+                    
                    // LoginModelo usu = usuarios.get(i);
                    // Principal c= new Principal(uau);    
                     Principal pri = new Principal();
                     pri.setVisible(true);
                     dispose();
-                    
-                  }else {
-                   JOptionPane.showMessageDialog
-                                  (null, "Usuario o contraseña incorrectos!");
-                   
-                  }            
+                    found=true;
+                    break;
+                     
+                  }           
                 }         
             }
         
-        
+        if(!found){ JOptionPane.showMessageDialog(null, "Datos incorrectos"); }
+               
      }catch(Exception ex){
                 JOptionPane.showMessageDialog(
-                        null,"Ah ocurrido un error durante la verificacion "
+                        null,"Ha ocurrido un error durante la verificacion "
                                 + "\nError :" + ex.getMessage());
                 
      }
@@ -626,7 +626,7 @@ public class Login extends javax.swing.JFrame {
                  || jTcargo.getText().equalsIgnoreCase("")){
 
             JOptionPane.showMessageDialog(null, "Campos vacios");}else{
-            //-------------------------------------------------------------------------------------------BOTON ACCEDER
+           
 
             ingresar();
         }

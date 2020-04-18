@@ -5,31 +5,88 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControllerServicios;
+import Modelo.RoomServicesDAO;
+import Vistas.Jframe.Services;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nicol
  */
 public class jPservicio extends javax.swing.JPanel {
-    private int id,cantidad;
-    private String nombre;
+
+    private int cantidad;
+    private String id, nombre;
     private double precio;
+    String validadorPanel; 
+   
+    Services frame_servicios;
+
     /**
      * Creates new form jPservicio
      */
-    public jPservicio(){
-        
+    public jPservicio() {
+
     }
-    public jPservicio(int id_,String nombre_,double precio_,int cantidad_) {
-        this.id = id_;
+
+    public jPservicio(String id_, String nombre_, double precio_, int cantidad_, Services s) {
+        /*this.id = id_;
         this.nombre = nombre_;
         this.precio = precio_;
-        this.cantidad = cantidad_;
+        this.cantidad = cantidad_;*/
         
+        id = id_;
+
         initComponents();
         jLid.setText(String.valueOf(id_));
         jLnombre.setText(nombre_);
         jLprecio.setText(String.valueOf(precio_));
         jLcantidad.setText(String.valueOf(cantidad_));
+        frame_servicios = s;
+    }
+
+    public void setValidadorPanel(String validadorPanel) {
+        this.validadorPanel = validadorPanel;
+    }
+
+    
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void cambiarPanel() {
+        frame_servicios.mostrarPanelAgregar();
+        frame_servicios.getControladorServicios().leerServicio_porID(id);
+    }
+    
+    public void deleteOfPanel()
+    {
+        frame_servicios.getControladorServicios().eliminarServicio(id);
+        frame_servicios.mostrarPanelEliminar();
+        frame_servicios.getControladorServicios().leerServicios();          
+                
     }
 
     /**
@@ -64,8 +121,27 @@ public class jPservicio extends javax.swing.JPanel {
         add(jLprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 65, 70, 10));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Servicio-jpanel.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 220, 130));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        int dialog = JOptionPane.YES_NO_OPTION;
+        int result = JOptionPane.showConfirmDialog(null, "Desea continuar?", "Eliminar", dialog);
+        if (result == 0) {
+            if(validadorPanel == "actualizar"){
+                cambiarPanel();
+            } else if(validadorPanel == "eliminar") {
+                deleteOfPanel();
+            }
+        }
+
+    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

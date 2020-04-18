@@ -5,24 +5,38 @@
  */
 package Vistas.Jpanel;
 
+import Modelo.Habitacion;
+import Vistas.Jframe.Habitaciones;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Set;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author nicol
  */
 public class HabitacionListaGUI extends javax.swing.JPanel {
-    private ArrayList<jPhabitacion> habitaciones;
+
+    // private ArrayList<jPhabitacion> jphabitaciones;
+    //private ArrayList <Habitaciones1> hab;
     /**
      * Creates new form HabitacionEliminarGUI
      */
-    public HabitacionListaGUI() {
-        habitaciones = new ArrayList<>();
+    Habitaciones frame_habitaciones;
+    jPhabitacion jp;
+
+    public HabitacionListaGUI(Habitaciones frame_habitaciones) {
+        //jphabitaciones = new ArrayList<>();
+        //hab = new ArrayList<>();
+        this.frame_habitaciones = frame_habitaciones;
+        //frame_habitaciones = new Habitaciones();
+
         initComponents();
-        
-        CargarLista();
+
     }
 
     /**
@@ -72,13 +86,118 @@ public class HabitacionListaGUI extends javax.swing.JPanel {
         jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 40, 30));
     }// </editor-fold>//GEN-END:initComponents
-   
-    public void CargarLista(){
+
+    public void CargarLista
+        (ArrayList<Habitacion> lista_habitacion, String validador) {
+
+        //TODA LAS HABITACIONES SON AGREGADAS AL JPANEL 
+        //EN DONDE SE MUESTRA LOS DATOS PRINCIPALES DE LAS HABITACIONES
+        jPmensajes.removeAll();
+        ArrayList<jPhabitacion> jphabitaciones = new ArrayList<>();
+
+        for (int i = 0; i < lista_habitacion.size(); i++) {
+
+            int id_hab = lista_habitacion.get(i).getId_habitacion();
+            String tipo_hab = lista_habitacion.get(i).getTipo_habitacion();
+            String piso = lista_habitacion.get(i).getPiso();
+            int cantidad_personas = lista_habitacion.get(i)
+                    .getCantidadPersonas();
+            int precio_hab = lista_habitacion.get(i).getPrecio_hab();
+            boolean estado_hab = lista_habitacion.get(i).getEstado();
+
+            jp = new jPhabitacion(id_hab, tipo_hab, piso, cantidad_personas, 
+                    precio_hab, estado_hab, frame_habitaciones);
+            jp.setValidadorPanel(validador);
+            jphabitaciones.add(jp);
+
+        }
+
+        for (int i = 0; i < jphabitaciones.size(); i++) {
+            jPmensajes.add(jphabitaciones.get(i));
+
+            jPmensajes.revalidate();
+            jPmensajes.repaint();
+        }
+    }
+
+    public JPanel getjPmensajes() {
+        return jPmensajes;
+    }
+
+    public void llenarFormulario(Habitacion habitacion) {
+
+        int id_hab = habitacion.getId_habitacion();
+        String tipo_hab = habitacion.getTipo_habitacion(); //combobox
+        String piso = habitacion.getPiso();
+        int cantidad_personas = habitacion.getCantidadPersonas();
+        int precio_hab = habitacion.getPrecio_hab();
+        int num_camas = habitacion.getNum_camas(); //combobox
+
+        frame_habitaciones.getPanelAgregar().getjTnumeroHabitacion()
+                .setText("" + id_hab);
+        frame_habitaciones.getPanelAgregar().getjTpiso().setText("" + piso);
+        frame_habitaciones.getPanelAgregar().getjTcapacidad()
+                .setText("" + cantidad_personas);
+        frame_habitaciones.getPanelAgregar().getjTprecio()
+                .setText("" + precio_hab);
+        
+        
+        establecerCombobox(frame_habitaciones.getPanelAgregar().getjCtipoHabi(),
+                tipo_hab);
+        establecerCombobox(frame_habitaciones.getPanelAgregar()
+                .getjCnumeroCamas(),
+                "" + num_camas);
+
+    }
+
+    public void establecerCombobox(JComboBox Jcombo, String valor) {
+
+       // JOptionPane.showMessageDialog
+       //(null, Jcombo.getItemAt(4) + " algo* " + valor + "****");
+        
+        for (int i = 0; i < Jcombo.getItemCount(); i++) {
+
+            if (valor.equalsIgnoreCase(Jcombo.getItemAt(i).toString())) {
+                Jcombo.setSelectedIndex(i);
+            }
+        }
+
+    }
+
+    /* public void cargarPeliculasTabla(ArrayList<Pelicula> listadoPelicula) {
+        DefaultTableModel defaultCombo;
+        defaultCombo = (DefaultTableModel) jTable2.getModel();
+        limpiarListadoTabla();
+        for (int i = 0; i < listadoPelicula.size(); i++) {
+            defaultCombo.addRow(new Object[]{
+                listadoPelicula.get(i).getPeliculaId(),
+                listadoPelicula.get(i).getTitulo(),
+                listadoPelicula.get(i).getAnhoLanzamiento(),
+                listadoPelicula.get(i).getLongitud() + " Minutos", 
+     
+            });
+        }
+
+        //Muestra en el campo de texto de la Interfaz el ID cliente Consecutivo
+        valor = Integer.parseInt("" + defaultCombo.getValueAt
+    //(defaultCombo.getRowCount() - 1, 0)) + 1;
+        jTid_peli.setText("" + valor);
+        jTid_peli.setEnabled(false);
+
+    }*/
+ /* //Cargar datos a la base
+     public void CargarListaBase(ArrayList){
         
         //TODA LAS HABITACIONES SON AGREGADAS AL JPANEL 
         //EN DONDE SE MUESTRA LOS DATOS PRINCIPALES DE LAS HABITACIONES
         
-        for(int i=0;i<100;i++){
+        for(int i=0;i<5;i++){
+              
+        hab.get(i).getId_habitacion();
+        hab.get(i).getTipo_habitacion();
+        hab.get(i).getPrecio_hab();
+        hab.get(i).getEstado();
+            
         jPhabitacion jp = new jPhabitacion(02,3.56,"Matrimonial",true);  
         habitaciones.add(jp);
           
@@ -88,15 +207,12 @@ public class HabitacionListaGUI extends javax.swing.JPanel {
         
         jPmensajes.revalidate();
         jPmensajes.repaint();}
-    }
-    
- 
-    
+    }*/
+
     private void jTbuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbuscadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTbuscadorActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;

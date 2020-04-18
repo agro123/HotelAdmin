@@ -35,5 +35,5 @@ public class ControladorEmpleado {
         EmpleadoDAO empleadoDAO = new EmpleadoDAO();
         int resultado =empleadoDAO.modificarEmpleado(c);
         return resultado; 
-    } 
+    }  
 }

@@ -55,7 +55,7 @@ public class LoginDAO {
         try{
             con = Fachada.getConnection();
             String sql = "UPDATE Login " +
-                         "SET ID_empleado = ?,contrasena = ?"
+                         "SET ID_empleado = ?,contraseña = ?"
                     +    "WHERE ID_empleado=?";
             pstm = con.prepareStatement(sql);            
             pstm.setString(1, c.getUsuario());
@@ -133,7 +133,7 @@ public class LoginDAO {
             while(rs.next()){
                 login = new LoginModelo();
                 login.setUsuario(rs.getString("id_empleado"));
-               login.setContrasena(rs.getString("contrasena"));
+               login.setContrasena(rs.getString("contraseña"));
                
                 listado.add(login);
             }
