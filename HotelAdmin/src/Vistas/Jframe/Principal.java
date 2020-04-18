@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Vistas.Jframe;
-
+import Controladores.ControladorEmpleado;
 import Controladores.ControllerServicios;
 import Modelo.RoomServicesDAO;
 import Controladores.ControllerHabitacion;
@@ -16,7 +16,8 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-
+import Vistas.Jpanel.EmpleadoFormulario;
+import Vistas.Jpanel.EmpleadoPanelListar;
 /**
  *
  * @author nicol
@@ -237,7 +238,9 @@ public class Principal extends javax.swing.JFrame {
         jBempleados.setSelected(true);
         
         jPcontenedor.setVisible(false);
-        Empleados emp = new Empleados() ;
+        ControladorEmpleado controladorEmp = new ControladorEmpleado();
+        Empleados emp = new Empleados();
+        emp.setControladorEmpleado(controladorEmp);
         jPcontenedor.removeAll();
         jPcontenedor.add(emp);
         jPcontenedor.revalidate();
