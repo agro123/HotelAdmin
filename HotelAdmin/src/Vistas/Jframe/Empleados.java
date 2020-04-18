@@ -37,7 +37,7 @@ public class Empleados extends javax.swing.JPanel {
     {
         initComponents();
         formulario = new EmpleadoFormulario(this);
-        panelListar = new EmpleadoPanelListar(this);
+        
         seleccionarPrimero(formulario);
     }
     
@@ -75,6 +75,7 @@ public class Empleados extends javax.swing.JPanel {
     
     public void btnModificar()
     {
+        panelListar = new EmpleadoPanelListar(this);
         jBagregar.setSelected(false);
         jBeliminar.setSelected(false);
         jBmodificar.setSelected(true);
