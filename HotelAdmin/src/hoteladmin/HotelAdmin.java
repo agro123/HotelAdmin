@@ -18,7 +18,6 @@ public class HotelAdmin{
 
 
     public static void main(String[] args) {
-    
         Login inicio = new Login();
         inicio.setVisible(true);
         inicio.setDefaultCloseOperation(EXIT_ON_CLOSE);

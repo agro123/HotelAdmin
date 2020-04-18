@@ -6,13 +6,19 @@
 package Vistas.Jpanel;
 
 import java.util.ArrayList;
+import Controladores.ControladorCliente;
+import Modelo.Cliente;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author nicol
  */
 public class ClienteListaGUI extends javax.swing.JPanel {
-     private ArrayList<jPcliente> clientes;
+    
+    ControladorCliente controladorCliente =  new ControladorCliente();
+    
+    private ArrayList<jPcliente> clientes;
     /**
      * Creates new form ClienteListaGUI
      */
@@ -77,14 +83,17 @@ public class ClienteListaGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jTbuscadorActionPerformed
 
      public void CargarLista(){
+       
+        ArrayList<Cliente> listaClientes = new ArrayList<>();
+        listaClientes = ControladorCliente.listClients(0);
         
-        //TODA LOS CLIENTES SON AGREGADAS AL JPANEL 
-        //EN DONDE SE MUESTRA LOS DATOS PRINCIPALES DE LOS CLIENTES
-        
-        //AÑADE CADA CLIENTE A UNA LISTA
-        for(int i=0;i<100;i++){
-        jPcliente jp = new jPcliente(12435643,1234567,"Laura","Aragon.2020@hotmail.com");  
-        clientes.add(jp);
+        for(int i=0;i<listaClientes.size();i++){
+            Integer cedula = listaClientes.get(i).getID();
+            Integer telefono = Integer.parseInt(listaClientes.get(i).getTelefono());
+            String nombre = listaClientes.get(i).getNombre() + " " + listaClientes.get(i).getApellido();
+            String correo = listaClientes.get(i).getCorreo();
+            jPcliente jp = new jPcliente(cedula, telefono, nombre, correo);  
+            clientes.add(jp);
           
        }
         

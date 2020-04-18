@@ -5,17 +5,64 @@
  */
 package Vistas.Jpanel;
 
+import Modelo.Cliente;
+import Modelo.ClientDAO;
+
 /**
  *
  * @author nicol
  */
 public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
+    
+    
+    ClientDAO clientDAO = new ClientDAO();
+    
 
     /**
      * Creates new form ClientesAgregarModificarGUI
      */
     public ClientesAgregarModificarGUI() {
+        
         initComponents();
+        
+        
+    }
+
+    public void llenarValores(Cliente cliente) {
+
+        String Cedula = String.valueOf(cliente.getID());
+        jTCedula.setText(Cedula);
+        jTnombre.setText(cliente.getNombre() + " " + cliente.getApellido());
+        jTcorreo.setText(cliente.getCorreo());
+        jTtelefono.setText(cliente.getTelefono());
+        jTdireccion.setText(cliente.getDireccion());
+    }
+    
+    public void saveData() {
+
+        int cedula, telefono;
+        String nombre, apellido, correo, direccion;
+       
+       // Se extrae la info de los campos y se guardan en una var(gClient) que cambiará de valor cada vez 
+       // que se oprima "Guardar", luego en añadir se enviará toda esta info a la BD
+    
+        Cliente gClient = new Cliente();
+       //Extraer el nombre y apellido de jTnombre
+       String[] names = jTnombre.getText().split(" ");
+       gClient.setNombre(names[0]);
+       if(names.length>1){
+           gClient.setApellido(names[1]);
+        } else {
+           apellido= "";
+       }
+       
+       gClient.setID(Integer.parseInt(jTCedula.getText())) ;
+       gClient.setCorreo(jTcorreo.getText());
+       gClient.setDireccion(jTdireccion.getText());
+       gClient.setTelefono(jTtelefono.getText());
+       clientDAO.addClient(gClient);
+
+       
     }
 
     /**
@@ -31,7 +78,7 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jBcancelar = new javax.swing.JButton();
         jTdireccion = new javax.swing.JTextField();
         jTnombre = new javax.swing.JTextField();
-        jTcedula2 = new javax.swing.JTextField();
+        jTCedula = new javax.swing.JTextField();
         jTcorreo = new javax.swing.JTextField();
         jTtelefono = new javax.swing.JTextField();
         jTcedula5 = new javax.swing.JTextField();
@@ -74,11 +121,16 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jTnombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 190, 30));
 
-        jTcedula2.setBackground(new java.awt.Color(241, 242, 246));
-        jTcedula2.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
-        jTcedula2.setForeground(new java.awt.Color(153, 153, 153));
-        jTcedula2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTcedula2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 190, 30));
+        jTCedula.setBackground(new java.awt.Color(241, 242, 246));
+        jTCedula.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jTCedula.setForeground(new java.awt.Color(153, 153, 153));
+        jTCedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jTCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTCedulaActionPerformed(evt);
+            }
+        });
+        add(jTCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 190, 30));
 
         jTcorreo.setBackground(new java.awt.Color(241, 242, 246));
         jTcorreo.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
@@ -104,19 +156,29 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
-        // TODO add your handling code here:
+        System.out.println("XXXXXXX");
+        saveData(); // Se ejecuta, se envia la data a la BD 
+        System.out.println("Cliente agregado!");
     }//GEN-LAST:event_jBguardarActionPerformed
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
-        // TODO add your handling code here:
+        jTCedula.setText("");
+        jTnombre.setText("");
+        jTcorreo.setText("");
+        jTtelefono.setText("");
+        jTdireccion.setText("");
     }//GEN-LAST:event_jBcancelarActionPerformed
+
+    private void jTCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTCedulaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBcancelar;
     private javax.swing.JButton jBguardar;
     private javax.swing.JLabel jLfondo;
-    private javax.swing.JTextField jTcedula2;
+    private javax.swing.JTextField jTCedula;
     private javax.swing.JTextField jTcedula5;
     private javax.swing.JTextField jTcorreo;
     private javax.swing.JTextField jTdireccion;
