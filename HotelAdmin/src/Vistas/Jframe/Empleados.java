@@ -5,11 +5,14 @@
  */
 package Vistas.Jframe;
 
-import Vistas.Jpanel.EmpleadoAgregarModificarGUI;
-import Vistas.Jpanel.EmpleadoListaGUI;
+import Controladores.ControladorEmpleado;
+import Modelo.Empleado;
+import Vistas.Jpanel.EmpleadoFormulario;
+import Vistas.Jpanel.EmpleadoPanelListar;
 import Vistas.Jpanel.HabitacionAgregarModificarGUI;
 import Vistas.Jpanel.HabitacionListaGUI;
 import Vistas.Jpanel.jPhabitacion;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,10 +23,70 @@ public class Empleados extends javax.swing.JPanel {
     /**
      * Creates new form EmpleadoGUI
      */
-    public Empleados() {
+    
+    /*public Empleados() {
         initComponents();
         seleccionarPrimero();
         
+    }*/
+    EmpleadoFormulario formulario;
+    EmpleadoPanelListar panelListar;
+    ControladorEmpleado controlador;
+    
+    public Empleados()
+    {
+        initComponents();
+        formulario = new EmpleadoFormulario(this);
+        
+        seleccionarPrimero(formulario);
+    }
+    
+    public void setControladorEmpleado(ControladorEmpleado s){
+        
+        this.controlador = s;
+        
+    }
+    
+    public ControladorEmpleado getControladorEmpleado()
+    {
+        return controlador;
+    }
+    
+    
+    public void AgregarEmpleado(Empleado c)
+    {
+        controlador.grabarEmpleado(c);
+    }
+    
+    
+    public void FormularioModificar(Empleado llenar){
+        jBeliminar.setSelected(false);
+        jBmodificar.setSelected(true);
+        jBagregar.setSelected(false); 
+        jPcontenedor.removeAll();
+        formulario.llenarValores(llenar);
+        formulario.setValidar("modificar");
+        jPcontenedor.add(formulario);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
+    }
+    
+    
+    public void btnModificar()
+    {
+        panelListar = new EmpleadoPanelListar(this);
+        jBagregar.setSelected(false);
+        jBeliminar.setSelected(false);
+        jBmodificar.setSelected(true);
+        jPcontenedor.setVisible(false);
+        jPcontenedor.setVisible(true);
+        jPcontenedor.removeAll();
+        
+        jPcontenedor.add(panelListar);
+        
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
     }
 
     /**
@@ -48,7 +111,7 @@ public class Empleados extends javax.swing.JPanel {
         jBmodificar.setBorder(null);
         jBmodificar.setBorderPainted(false);
         jBmodificar.setContentAreaFilled(false);
-        jBmodificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBmodificar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jBmodificar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-modificar.png"))); // NOI18N
         jBmodificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,7 +124,7 @@ public class Empleados extends javax.swing.JPanel {
         jBeliminar.setBorder(null);
         jBeliminar.setBorderPainted(false);
         jBeliminar.setContentAreaFilled(false);
-        jBeliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBeliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jBeliminar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/seleccion-eliminar.png"))); // NOI18N
         jBeliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,7 +137,7 @@ public class Empleados extends javax.swing.JPanel {
         jBagregar.setBorder(null);
         jBagregar.setBorderPainted(false);
         jBagregar.setContentAreaFilled(false);
-        jBagregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBagregar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jBagregar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-agregar.png"))); // NOI18N
         jBagregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,20 +156,7 @@ public class Empleados extends javax.swing.JPanel {
 
     private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
         // TODO add your handling code here:
-        jBagregar.setSelected(false);
-        jBeliminar.setSelected(false);
-        jBmodificar.setSelected(true);
-        
-       jPcontenedor.setVisible(false);
-        jPcontenedor.setVisible(true);
-        EmpleadoListaGUI panelE = new EmpleadoListaGUI();
-       // EmpleadoAgregarModificarGUI panelE = new EmpleadoAgregarModificarGUI();
-        jPcontenedor.removeAll();
-        jPcontenedor.add(panelE);
-        jPcontenedor.revalidate();
-        jPcontenedor.repaint();
-        
-        
+       btnModificar();
     }//GEN-LAST:event_jBmodificarActionPerformed
 
     private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
@@ -117,10 +167,7 @@ public class Empleados extends javax.swing.JPanel {
         
         jPcontenedor.setVisible(false);
         jPcontenedor.setVisible(true);
-        
-        EmpleadoListaGUI panelE = new EmpleadoListaGUI();
         jPcontenedor.removeAll();
-        jPcontenedor.add(panelE);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();    
 
@@ -128,13 +175,15 @@ public class Empleados extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jBeliminarActionPerformed
 
-    public void seleccionarPrimero(){
+    public void seleccionarPrimero(EmpleadoFormulario formulario){
+        formulario.limpiarCampos();
+        formulario.setValidar("agregar");
         jBeliminar.setSelected(false);
         jBmodificar.setSelected(false);
         jBagregar.setSelected(true); 
-        EmpleadoAgregarModificarGUI panelE = new EmpleadoAgregarModificarGUI();
+        
         jPcontenedor.removeAll();
-        jPcontenedor.add(panelE);
+        jPcontenedor.add(formulario);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
@@ -144,7 +193,7 @@ public class Empleados extends javax.swing.JPanel {
         // TODO add your handling code here:
         
          jPcontenedor.removeAll();
-         seleccionarPrimero();
+         seleccionarPrimero(formulario);
 
     }//GEN-LAST:event_jBagregarActionPerformed
 

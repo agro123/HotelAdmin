@@ -7,7 +7,7 @@ package Vistas.Jframe;
 
 import Controladores.ControllerServicios;
 import Modelo.RoomServicesDAO;
-import Vistas.Jpanel.EmpleadoAgregarModificarGUI;
+import Vistas.Jpanel.EmpleadoFormulario;
 import Vistas.Jpanel.panelAgregarServicio;
 import Vistas.Jpanel.panelModificarServicio;
 import Vistas.Jpanel.jPservicio;

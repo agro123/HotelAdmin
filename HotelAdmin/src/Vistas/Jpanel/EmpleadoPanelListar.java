@@ -8,21 +8,23 @@ package Vistas.Jpanel;
 import java.util.ArrayList;
 import Controladores.ControladorEmpleado;
 import Modelo.Empleado;
+import Vistas.Jframe.Empleados;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author nicol
  */
-public class EmpleadoListaGUI extends javax.swing.JPanel {
+public class EmpleadoPanelListar extends javax.swing.JPanel {
     
     ControladorEmpleado ControladorEmp =  new ControladorEmpleado();
-    
+    Empleados panel_prin;
     private ArrayList<jPempleado> empleados;
     /**
      * Creates new form EmpleadoListaGUI
      */
-    public EmpleadoListaGUI() {
+    public EmpleadoPanelListar(Empleados s) {
+        this.panel_prin = s;
         empleados = new ArrayList<>();
         initComponents();
         CargarLista();
@@ -74,7 +76,7 @@ public class EmpleadoListaGUI extends javax.swing.JPanel {
         jBbuscar.setBorder(null);
         jBbuscar.setBorderPainted(false);
         jBbuscar.setContentAreaFilled(false);
-        jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 40, 30));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -93,7 +95,7 @@ public class EmpleadoListaGUI extends javax.swing.JPanel {
         
         jPmensajes.removeAll();
         for (int i=0;i<listadoEmp.size();i++){
-        jPempleado jp = new jPempleado(listadoEmp.get(i));
+        jPempleado jp = new jPempleado(listadoEmp.get(i), panel_prin);
         empleados.add(jp);
           
        }

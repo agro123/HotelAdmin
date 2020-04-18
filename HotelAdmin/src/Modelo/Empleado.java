@@ -14,6 +14,7 @@ public class Empleado extends Persona {
     private String cargo;
     private boolean estado;
     private Timestamp fecha_ingreso;
+    private int salario;
   
     
     public Empleado()
@@ -33,9 +34,14 @@ public class Empleado extends Persona {
         this.estado = estado;
     }
     
-    public void setFechaIngreso(Timestamp ingreso)
+    public void setFechaIngreso(Timestamp timestamp)
     {
-        this.fecha_ingreso = ingreso;
+        this.fecha_ingreso = timestamp;
+    }
+    
+    public void setSalario(int salario)
+    {
+        this.salario = salario;
     }
     //-----------------------------GET EMPLEADO---------------------------------
     
@@ -54,5 +60,9 @@ public class Empleado extends Persona {
     public Timestamp getIngreso()
     {
         return fecha_ingreso;
+    }
+
+    public int getSalario() {
+        return salario;
     }
 }
