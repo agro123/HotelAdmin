@@ -113,7 +113,7 @@ public class jPhabitacion extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-                
+        
         borrarPanel();
         
         

@@ -5,8 +5,11 @@
  */
 package Vistas.Jframe;
 
+import Controladores.ControladorEmpleado;
 import Controladores.ControllerServicios;
 import Modelo.RoomServicesDAO;
+import Vistas.Jpanel.EmpleadoFormulario;
+import Vistas.Jpanel.EmpleadoPanelListar;
 import Vistas.Jpanel.HabitacionAgregarModificarGUI;
 import Vistas.Jpanel.HabitacionListaGUI;
 import Vistas.Jpanel.jPhabitacion;
@@ -232,7 +235,9 @@ public class Principal extends javax.swing.JFrame {
         jBempleados.setSelected(true);
         
         jPcontenedor.setVisible(false);
-        Empleados emp = new Empleados() ;
+        ControladorEmpleado controladorEmp = new ControladorEmpleado();
+        Empleados emp = new Empleados();
+        emp.setControladorEmpleado(controladorEmp);
         jPcontenedor.removeAll();
         jPcontenedor.add(emp);
         jPcontenedor.revalidate();

@@ -5,19 +5,38 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControladorEmpleado;
 import Modelo.Empleado;
+import Vistas.Jframe.Empleados;
+import java.sql.Timestamp;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author nicol
  */
-public class EmpleadoAgregarModificarGUI extends javax.swing.JPanel {
+public class EmpleadoFormulario extends javax.swing.JPanel {
+    
+    Empleados panel_prin;
+    String validar_panel;
 
     /**
      * Creates new form EmpleadoAgregarModificarGUI
      */
-    public EmpleadoAgregarModificarGUI() {
+    public EmpleadoFormulario(Empleados s) {
+        
+        this.panel_prin = s;
         initComponents();
+    }
+    
+    public void setValidar(String value)
+    {
+        this.validar_panel = value;
+    }
+    
+    public String getValidar()
+    {
+        return validar_panel;
     }
 
     
@@ -29,22 +48,64 @@ public class EmpleadoAgregarModificarGUI extends javax.swing.JPanel {
         jTcargo.setText(datos.getCargo());
         jTcorreo.setText(datos.getCorreo());
         jTtelefono.setText(datos.getTelefono());
+        jTsalario.setText(datos.getSalario() + "");
         jTdireccion.setText(datos.getDireccion());
+        jCestado.removeAllItems();
+        jCestado.addItem("Activo");
+        jCestado.addItem("Inactivo");
         if (datos.getEstado() == true)
         {
-            jCestado.setSelectedItem("Activo");
+            jCestado.setSelectedIndex(0);
         }else {
-            jCestado.setSelectedItem("Inactivo");
+            jCestado.setSelectedIndex(1);
         }
-                    
-       
-        
-        
-        
-        
-        
     }
     
+    
+    public void limpiarCampos()
+    {
+        jTcedula.setText("");
+        jTnombre.setText("");
+        jTcargo.setText("");
+        jTcorreo.setText("");
+        jTtelefono.setText("");
+        jTsalario.setText("");
+        jTdireccion.setText("");
+        jCestado.removeAllItems();
+        jCestado.addItem("Activo");
+        jCestado.addItem("Inactivo");
+    }
+    
+    private Empleado registrarEmpleado()
+    {
+        int z = jCestado.getSelectedIndex();
+        boolean h;
+        if (z == 0)
+        {
+            h = true;
+        } else
+        {
+            h = false;
+        }
+        
+         
+        Empleado empleado = new Empleado();
+        empleado.setID(Integer.parseInt(jTcedula.getText()));
+        empleado.setNombre(jTnombre.getText());
+        empleado.setApellido("");
+        empleado.setCargo(jTcargo.getText());
+        empleado.setCorreo(jTcorreo.getText());
+        empleado.setTelefono(jTtelefono.getText());
+        empleado.setSalario(Integer.parseInt(jTsalario.getText()));
+        empleado.setDireccion(jTdireccion.getText());
+        empleado.setEstado(h);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        empleado.setFechaIngreso(timestamp);
+        
+        return empleado;
+    }
+    
+   
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -150,12 +211,39 @@ public class EmpleadoAgregarModificarGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
-        // TODO add your handling code here:
+        
+        if(validar_panel == "agregar")
+        {
+            limpiarCampos();
+        } else
+        {
+            panel_prin.btnModificar();
+        }
 
     }//GEN-LAST:event_jBcancelarActionPerformed
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
-        // TODO add your handling code here:
+        
+       if(validar_panel == "agregar")
+        {
+                ControladorEmpleado.grabarEmpleado(registrarEmpleado());
+               
+        } else
+        {
+            try
+            {
+                ControladorEmpleado.modificarEmpleado(registrarEmpleado());
+                
+            }
+            catch (Error error)
+            {
+                JOptionPane.showMessageDialog(null, "Se ha producido un error "
+                        + "modificando");
+            }
+            JOptionPane.showMessageDialog(null, "Se ha modificado con "
+                        + "éxito");
+            
+        }
 
     }//GEN-LAST:event_jBguardarActionPerformed
 
