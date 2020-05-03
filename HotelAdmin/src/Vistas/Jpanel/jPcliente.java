@@ -10,8 +10,8 @@ package Vistas.Jpanel;
  * @author nicol
  */
 public class jPcliente extends javax.swing.JPanel {
-    private int cedula,telefono;
-    private String nombre,correo;
+    private int cedula, telefono;
+    private String nombre, correo;
     /**
      * Creates new form jPcliente
      */

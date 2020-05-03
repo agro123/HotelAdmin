@@ -7,6 +7,8 @@ package Vistas.Jpanel;
 
 import Modelo.Cliente;
 import Modelo.ClientDAO;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -38,8 +40,7 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jTdireccion.setText(cliente.getDireccion());
     }
     
-    public void saveData() {
-
+    public Cliente getData() {
         int cedula, telefono;
         String nombre, apellido, correo, direccion;
        
@@ -56,12 +57,67 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
            apellido= "";
        }
        
-       gClient.setID(Integer.parseInt(jTCedula.getText())) ;
-       gClient.setCorreo(jTcorreo.getText());
-       gClient.setDireccion(jTdireccion.getText());
-       gClient.setTelefono(jTtelefono.getText());
-       clientDAO.addClient(gClient);
+       gClient.setID(Integer.parseInt(jTCedula.getText().trim())) ;
+       gClient.setCorreo(jTcorreo.getText().trim());
+       gClient.setDireccion(jTdireccion.getText().trim());
+       gClient.setTelefono(jTtelefono.getText().trim());
+       
+       return gClient;
+        
+    }
+    
+    
+    public void saveData() {
+       try{
+           Cliente cliente=getData();
+           if(verifyData(cliente)){
+                clientDAO.addClient(cliente);
+                System.out.println("Cliente agregado!");
+            }
+       }
+       catch(Exception e){}
+    }
+    
+    public boolean verifyData(Cliente gClient) {
+       int cedula, telefono;
+       String nombre, apellido, correo, direccion;
+       String regexEmail = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+ 
+        Pattern pattern = Pattern.compile(regexEmail);
+        correo="";
+        Matcher matcher = pattern.matcher(correo);
+       try{
+            cedula=gClient.getID();
+            try{
+                telefono=Integer.parseInt(gClient.getTelefono());
+            }
+            catch(Exception e)
+            {
+                // TODO :: Add the report of an invalid field on a notification
+                telefono=999101999;
+                System.out.println("Error // Phone:" + e.toString());
+            };
 
+            nombre=gClient.getNombre();
+            apellido=gClient.getApellido();
+            Matcher matcherEmail = pattern.matcher(correo);
+            try{
+                if(matcherEmail.matches()) {
+                correo=gClient.getCorreo();
+                }
+                
+              
+            }
+            catch(Exception e){}
+            direccion=gClient.getDireccion();
+            
+       } catch(Exception e){
+           System.out.println("Error: " + e.toString());
+           return false;
+       }
+        
+       
+       return true;
        
     }
 
@@ -81,7 +137,6 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jTCedula = new javax.swing.JTextField();
         jTcorreo = new javax.swing.JTextField();
         jTtelefono = new javax.swing.JTextField();
-        jTcedula5 = new javax.swing.JTextField();
         jLfondo = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -142,13 +197,12 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jTtelefono.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTtelefono.setForeground(new java.awt.Color(153, 153, 153));
         jTtelefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jTtelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTtelefonoActionPerformed(evt);
+            }
+        });
         add(jTtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 190, 30));
-
-        jTcedula5.setBackground(new java.awt.Color(241, 242, 246));
-        jTcedula5.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
-        jTcedula5.setForeground(new java.awt.Color(153, 153, 153));
-        jTcedula5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTcedula5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 190, 30));
 
         jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo-cli.png"))); // NOI18N
         jLfondo.setPreferredSize(new java.awt.Dimension(739, 429));
@@ -156,9 +210,8 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
-        System.out.println("XXXXXXX");
         saveData(); // Se ejecuta, se envia la data a la BD 
-        System.out.println("Cliente agregado!");
+        jBcancelarActionPerformed(evt);
     }//GEN-LAST:event_jBguardarActionPerformed
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
@@ -173,13 +226,16 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTCedulaActionPerformed
 
+    private void jTtelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTtelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTtelefonoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBcancelar;
     private javax.swing.JButton jBguardar;
     private javax.swing.JLabel jLfondo;
     private javax.swing.JTextField jTCedula;
-    private javax.swing.JTextField jTcedula5;
     private javax.swing.JTextField jTcorreo;
     private javax.swing.JTextField jTdireccion;
     private javax.swing.JTextField jTnombre;
