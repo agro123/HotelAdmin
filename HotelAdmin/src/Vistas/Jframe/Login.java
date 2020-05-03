@@ -5,8 +5,11 @@
  */
 package Vistas.Jframe;
 
+import Controladores.LoginControlador;
+import Modelo.LoginModelo;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,43 +29,65 @@ public class Login extends javax.swing.JFrame {
         
          
         setIconImage(Toolkit.getDefaultToolkit().
-                getImage(this.getClass().getResource("/imagenes/Logo.png")));
+        getImage(this.getClass().getResource("/imagenes/Logo.png")));
         setResizable(false);
     }
     
     
-    public void ingresar(){ //-------------------------------------------- _Verifica los campos para procionar el acceso dependiendo del tipo de usuario
+    public void ingresar(){ //-------------------------------------------------- Verifica los campos para procionar el acceso dependiendo del tipo de usuario
      try{   
-         
+         boolean found = false;
          
         String usuario=jTusername.getText();
-        String contraseña=jPcontraseña.getText();
-        if(usuario.equalsIgnoreCase("") ||contraseña.equalsIgnoreCase("")){
-            
-            JOptionPane.showMessageDialog(null, "Campos vacios");
+        String contrasena=jPcontraseña.getText();
+        if(usuario.equalsIgnoreCase("Usuario") 
+                ||contrasena.equalsIgnoreCase("Contraseña")){            
+            JOptionPane.showMessageDialog(null, "Hay campos vacios!");
         }else
-              if(usuario.equalsIgnoreCase("admin") &&
-                      contraseña.equalsIgnoreCase("admin"))
-              {
-                  
+            
+            if(usuario.equalsIgnoreCase("admin") &&
+                contrasena.equalsIgnoreCase("admin"))
+            {          
+                found = true;
                 Principal pri = new Principal();
                 pri.setVisible(true);
                 dispose();
-              } else {
-                JOptionPane.showMessageDialog(null, 
-                        "Usuario o contraseña incorrecta");
-                       //----------------------------------------------------------------------------------------- Aqui debe ir el codigo para validar una contraseña y acceder al menu de empleados          
-                }
+            }else {
+                LoginControlador login = new LoginControlador();
+
+                ArrayList<LoginModelo> usuarios = new ArrayList<>();
         
+                usuarios = login.listadoLogin(0);
+
+                for(int i=0; i< usuarios.size(); i++)
+                {
+                  if(usuarios.get(i).getUsuario().equalsIgnoreCase(usuario)
+                          &&usuarios.get(i).getContrasena()
+                                  .equalsIgnoreCase(contrasena))
+                  {
+                    
+                   // LoginModelo usu = usuarios.get(i);
+                   // Principal c= new Principal(uau);    
+                    Principal pri = new Principal();
+                    pri.setVisible(true);
+                    dispose();
+                    found=true;
+                    break;
+                     
+                  }           
+                }         
+            }
         
+        if(!found){ JOptionPane.showMessageDialog(null, "Datos incorrectos"); }
+               
      }catch(Exception ex){
                 JOptionPane.showMessageDialog(
-                        null,"Ah ocurrido un error durante la verificacion "
+                        null,"Ha ocurrido un error durante la verificacion "
                                 + "\nError :" + ex.getMessage());
                 
      }
     }
-    public void registrar(){//----------------PERMITE REGISTRAR UN NUEVO USUARIO DE LA BASE DE DATOS
+    public void registrar(){//-------------------------------------------------- PERMITE REGISTRAR UN NUEVO USUARIO DE LA BASE DE DATOS
     try{
         String usuario = jTusuario.getText();
         String contraseña = jPcontraseñaRe.getText();
@@ -93,8 +118,8 @@ public class Login extends javax.swing.JFrame {
                 
      }
     }
-    public void enter(KeyEvent evt){//------------------------------------------------------------------------------Al hacer enter se accede
-         int key = evt.getKeyCode();
+    public void enter(KeyEvent evt){
+        int key = evt.getKeyCode();
         if(key == KeyEvent.VK_ENTER){
          ingresar();
         }
@@ -402,6 +427,11 @@ public class Login extends javax.swing.JFrame {
                 jPcontraseñaActionPerformed(evt);
             }
         });
+        jPcontraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPcontraseñaKeyPressed(evt);
+            }
+        });
         jPiniciarSesion.add(jPcontraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 260, 20));
 
         jTusername.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
@@ -414,6 +444,11 @@ public class Login extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTusernameFocusLost(evt);
+            }
+        });
+        jTusername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTusernameKeyPressed(evt);
             }
         });
         jPiniciarSesion.add(jTusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 270, 20));
@@ -591,12 +626,10 @@ public class Login extends javax.swing.JFrame {
                  || jTcargo.getText().equalsIgnoreCase("")){
 
             JOptionPane.showMessageDialog(null, "Campos vacios");}else{
-            //-------------------------------------------------------------------------------------------BOTON ACCEDER
+           
 
             ingresar();
         }
-        setVisible(false); 
-        new Principal().setVisible(true);
         
     }//GEN-LAST:event_jBiniciarSesionActionPerformed
 
@@ -656,6 +689,17 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         enter(evt);
     }//GEN-LAST:event_jPcontraseñaReKeyPressed
+
+    private void jPcontraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPcontraseñaKeyPressed
+        int key = evt.getKeyCode();
+        if(key == KeyEvent.VK_ENTER){
+         ingresar();
+        }
+    }//GEN-LAST:event_jPcontraseñaKeyPressed
+
+    private void jTusernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTusernameKeyPressed
+
+    }//GEN-LAST:event_jTusernameKeyPressed
 
     
     
