@@ -82,10 +82,7 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
        int cedula, telefono;
        String nombre, apellido, correo, direccion;
        String regexEmail = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
- 
-        Pattern pattern = Pattern.compile(regexEmail);
         correo="";
-        Matcher matcher = pattern.matcher(correo);
        try{
             cedula=gClient.getID();
             try{
@@ -100,9 +97,8 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
 
             nombre=gClient.getNombre();
             apellido=gClient.getApellido();
-            Matcher matcherEmail = pattern.matcher(correo);
             try{
-                if(matcherEmail.matches()) {
+                if(gClient.getCorreo().matches(regexEmail)) {
                 correo=gClient.getCorreo();
                 }
                 
@@ -212,6 +208,7 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
         saveData(); // Se ejecuta, se envia la data a la BD 
         jBcancelarActionPerformed(evt);
+        
     }//GEN-LAST:event_jBguardarActionPerformed
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
