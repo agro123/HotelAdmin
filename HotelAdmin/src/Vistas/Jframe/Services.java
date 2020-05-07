@@ -8,8 +8,8 @@ package Vistas.Jframe;
 import Controladores.ControllerServicios;
 import Modelo.RoomServicesDAO;
 import Vistas.Jpanel.EmpleadoFormulario;
-import Vistas.Jpanel.panelAgregarServicio;
-import Vistas.Jpanel.panelModificarServicio;
+import Vistas.Jpanel.ServicioFormulario;
+import Vistas.Jpanel.ServicioPanelListar;
 import Vistas.Jpanel.jPservicio;
 import Vistas.Jframe.*;
 import java.awt.Color;
@@ -28,17 +28,17 @@ public class Services extends javax.swing.JPanel {
      * Creates new form Servicios
      */
     
-    panelAgregarServicio panelAgregar;
-    panelModificarServicio panelModificar;
-    panelModificarServicio panelEliminar;
+    ServicioFormulario panelAgregar;
+    ServicioPanelListar panelModificar;
+    ServicioPanelListar panelEliminar;
     ControllerServicios controladorServicios;
    
      
     public Services() {
         initComponents();
-        panelAgregar = new panelAgregarServicio();
-        panelModificar = new panelModificarServicio(this);
-        panelEliminar = new panelModificarServicio(this);
+        panelAgregar = new ServicioFormulario();
+        panelModificar = new ServicioPanelListar(this);
+        panelEliminar = new ServicioPanelListar(this);
         mostrarPanelAgregar();
     }
 
@@ -180,15 +180,15 @@ public class Services extends javax.swing.JPanel {
 
     
 
-    public panelAgregarServicio getPanelAgregar() {
+    public ServicioFormulario getPanelAgregar() {
         return panelAgregar;
     }
 
-    public panelModificarServicio getPanelModificar() {
+    public ServicioPanelListar getPanelModificar() {
         return panelModificar;
     }
     
-    public panelModificarServicio getPanelEliminar() {
+    public ServicioPanelListar getPanelEliminar() {
         return panelEliminar;
     }
 

@@ -32,7 +32,6 @@ public class RoomServicesDAO {
             String sql = "INSERT INTO roomservices values(?,?,?,?)";
             
             pstm = con.prepareStatement(sql);
-            
             pstm.setString(1, rs.getId_servicio());
             pstm.setString(2,rs.getNombrePro());
             pstm.setInt(3, rs.getCantidad());
@@ -104,19 +103,18 @@ public class RoomServicesDAO {
     
     }
     
-     public RoomServices extraerServicio_porID(String idServicio)
+    public RoomServices extraerServicio_porID(String idServicio)
     {
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
-
         RoomServices servicio = new RoomServices();
+        
         try {
             con = Fachada.getConnection();
             String sql = "";
 
-            sql
-                    = "SELECT * FROM roomservices"      
+            sql     = "SELECT * FROM roomservices"      
                     + " WHERE id_Servicio = ?";   
             
             pstm = con.prepareStatement(sql);

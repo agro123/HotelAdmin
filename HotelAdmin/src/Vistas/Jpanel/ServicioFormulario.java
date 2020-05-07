@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  *
  * @author nicol
  */
-public class panelAgregarServicio extends javax.swing.JPanel {
+public class ServicioFormulario extends javax.swing.JPanel {
 
     /**
      * Creates new form ServiciosAgregarModificar
@@ -22,7 +22,7 @@ public class panelAgregarServicio extends javax.swing.JPanel {
     String validadorBoton; //valida si se requiere hacer una actuslizacion o una ingreso del un registro
     
 
-    public panelAgregarServicio() {
+    public ServicioFormulario() {
         validadorBoton = "guardar";
         initComponents();
     }

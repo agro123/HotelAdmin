@@ -6,21 +6,36 @@
 package Vistas.Jpanel;
 
 import java.util.ArrayList;
+import Modelo.*;
+import Controladores.*;
+import Vistas.Jframe.Services;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author nicol
  */
-public class ServiciosListaGUI extends javax.swing.JPanel {
-    private ArrayList<jPservicio> servicios;
+public class ServicioPanelListar extends javax.swing.JPanel {
+
     /**
      * Creates new form ServiciosListaGUI
      */
-    public ServiciosListaGUI() {
-        servicios = new ArrayList<>();
+    jPservicio jp;
+    
+                           
+    
+    Services frame_Servicios;
+    public ServicioPanelListar(Services s) {
+        frame_Servicios = s;
         initComponents();
-        CargarLista();
+        jp = new jPservicio();
+
     }
+
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,14 +92,19 @@ public class ServiciosListaGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTbuscadorActionPerformed
 
+    public jPservicio getJp() {
+        return jp;
+    }
+
+
+    /*
     public void CargarLista(){
         
         //TODA LOS SERVICIOS SON AGREGADAS AL JPANEL 
         //EN DONDE SE MUESTRA LOS DATOS PRINCIPALES DE LOS SERVICIOS
         
         for(int i=0;i<100;i++){
-        //jPservicio jp = new jPservicio(956,"Comida",5443.5,5); 
-        jPservicio jp = new jPservicio();
+        jPservicio jp = new jPservicio(956,"Comida",5443.5,5); 
         servicios.add(jp);
           
        }
@@ -93,7 +113,37 @@ public class ServiciosListaGUI extends javax.swing.JPanel {
         
         jPmensajes.revalidate();
         jPmensajes.repaint();}
+    }*/
+    public void CargarLista(ArrayList<RoomServices> lista_roomServices,String validador) {
+
+        //TODA LAS HABITACIONES SON AGREGADAS AL JPANEL 
+        //EN DONDE SE MUESTRA LOS DATOS PRINCIPALES DE LAS HABITACIONES
+        
+        jPmensajes.removeAll();
+        for (int i = 0; i < lista_roomServices.size(); i++) {
+            String id_ser = lista_roomServices.get(i).getId_servicio();
+            String nombre_ser = lista_roomServices.get(i).getNombrePro();
+            double precio_ser = lista_roomServices.get(i).getPrecio();
+            int cantidad = lista_roomServices.get(i).getCantidad();
+            jp = new jPservicio(id_ser, nombre_ser, precio_ser, cantidad,frame_Servicios);
+            jp.setValidadorPanel(validador);
+            jPmensajes.add(jp);
+        }
     }
+    
+    public void llenarFormulario(RoomServices roomService)
+    {
+            //String id_ser = lista_roomServices.get(i).getId_servicio();
+            String nombre_ser = roomService.getNombrePro();
+            double precio_ser = roomService.getPrecio();
+            int cantidad = roomService.getCantidad();
+            frame_Servicios.getPanelAgregar().getjTNombre().setText(nombre_ser);
+            frame_Servicios.getPanelAgregar().getjTcantidad().setText(""+cantidad);
+            frame_Servicios.getPanelAgregar().getjTprecio().setText(""+precio_ser); 
+    }
+    
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
