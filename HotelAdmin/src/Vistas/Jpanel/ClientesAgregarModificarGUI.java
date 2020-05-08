@@ -5,17 +5,117 @@
  */
 package Vistas.Jpanel;
 
+import Modelo.Cliente;
+import Modelo.ClientDAO;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  *
  * @author nicol
  */
 public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
+    
+    
+    ClientDAO clientDAO = new ClientDAO();
+    
 
     /**
      * Creates new form ClientesAgregarModificarGUI
      */
     public ClientesAgregarModificarGUI() {
+        
         initComponents();
+        
+        
+    }
+
+    public void llenarValores(Cliente cliente) {
+
+        String Cedula = String.valueOf(cliente.getID());
+        jTCedula.setText(Cedula);
+        jTnombre.setText(cliente.getNombre() + " " + cliente.getApellido());
+        jTcorreo.setText(cliente.getCorreo());
+        jTtelefono.setText(cliente.getTelefono());
+        jTdireccion.setText(cliente.getDireccion());
+    }
+    
+    public Cliente getData() {
+        int cedula, telefono;
+        String nombre, apellido, correo, direccion;
+       
+       // Se extrae la info de los campos y se guardan en una var(gClient) que cambiará de valor cada vez 
+       // que se oprima "Guardar", luego en añadir se enviará toda esta info a la BD
+    
+        Cliente gClient = new Cliente();
+       //Extraer el nombre y apellido de jTnombre
+       String[] names = jTnombre.getText().split(" ");
+       gClient.setNombre(names[0]);
+       if(names.length>1){
+           gClient.setApellido(names[1]);
+        } else {
+           apellido= "";
+       }
+       
+       gClient.setID(Integer.parseInt(jTCedula.getText().trim())) ;
+       gClient.setCorreo(jTcorreo.getText().trim());
+       gClient.setDireccion(jTdireccion.getText().trim());
+       gClient.setTelefono(jTtelefono.getText().trim());
+       
+       return gClient;
+        
+    }
+    
+    
+    public void saveData() {
+       try{
+           Cliente cliente=getData();
+           if(verifyData(cliente)){
+                clientDAO.addClient(cliente);
+                System.out.println("Cliente agregado!");
+            }
+       }
+       catch(Exception e){}
+    }
+    
+    public boolean verifyData(Cliente gClient) {
+       int cedula, telefono;
+       String nombre, apellido, correo, direccion;
+       String regexEmail = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|"
+               + "}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        correo="";
+       try{
+            cedula=gClient.getID();
+            try{
+                telefono=Integer.parseInt(gClient.getTelefono());
+            }
+            catch(Exception e)
+            {
+                // TODO :: Add the report of an invalid field on a notification
+                telefono=999101999;
+                System.out.println("Error // Phone:" + e.toString());
+            };
+
+            nombre=gClient.getNombre();
+            apellido=gClient.getApellido();
+            try{
+                if(gClient.getCorreo().matches(regexEmail)) {
+                correo=gClient.getCorreo();
+                }
+                
+              
+            }
+            catch(Exception e){}
+            direccion=gClient.getDireccion();
+            
+       } catch(Exception e){
+           System.out.println("Error: " + e.toString());
+           return false;
+       }
+        
+       
+       return true;
+       
     }
 
     /**
@@ -31,10 +131,9 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jBcancelar = new javax.swing.JButton();
         jTdireccion = new javax.swing.JTextField();
         jTnombre = new javax.swing.JTextField();
-        jTcedula2 = new javax.swing.JTextField();
+        jTCedula = new javax.swing.JTextField();
         jTcorreo = new javax.swing.JTextField();
         jTtelefono = new javax.swing.JTextField();
-        jTcedula5 = new javax.swing.JTextField();
         jLfondo = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -74,11 +173,16 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jTnombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 190, 30));
 
-        jTcedula2.setBackground(new java.awt.Color(241, 242, 246));
-        jTcedula2.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
-        jTcedula2.setForeground(new java.awt.Color(153, 153, 153));
-        jTcedula2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTcedula2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 190, 30));
+        jTCedula.setBackground(new java.awt.Color(241, 242, 246));
+        jTCedula.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jTCedula.setForeground(new java.awt.Color(153, 153, 153));
+        jTCedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jTCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTCedulaActionPerformed(evt);
+            }
+        });
+        add(jTCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 190, 30));
 
         jTcorreo.setBackground(new java.awt.Color(241, 242, 246));
         jTcorreo.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
@@ -90,13 +194,12 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jTtelefono.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTtelefono.setForeground(new java.awt.Color(153, 153, 153));
         jTtelefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jTtelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTtelefonoActionPerformed(evt);
+            }
+        });
         add(jTtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 190, 30));
-
-        jTcedula5.setBackground(new java.awt.Color(241, 242, 246));
-        jTcedula5.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
-        jTcedula5.setForeground(new java.awt.Color(153, 153, 153));
-        jTcedula5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTcedula5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 190, 30));
 
         jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo-cli.png"))); // NOI18N
         jLfondo.setPreferredSize(new java.awt.Dimension(739, 429));
@@ -104,20 +207,33 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
-        // TODO add your handling code here:
+        saveData(); // Se ejecuta, se envia la data a la BD 
+        jBcancelarActionPerformed(evt);
+        
     }//GEN-LAST:event_jBguardarActionPerformed
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
-        // TODO add your handling code here:
+        jTCedula.setText("");
+        jTnombre.setText("");
+        jTcorreo.setText("");
+        jTtelefono.setText("");
+        jTdireccion.setText("");
     }//GEN-LAST:event_jBcancelarActionPerformed
+
+    private void jTCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTCedulaActionPerformed
+
+    private void jTtelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTtelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTtelefonoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBcancelar;
     private javax.swing.JButton jBguardar;
     private javax.swing.JLabel jLfondo;
-    private javax.swing.JTextField jTcedula2;
-    private javax.swing.JTextField jTcedula5;
+    private javax.swing.JTextField jTCedula;
     private javax.swing.JTextField jTcorreo;
     private javax.swing.JTextField jTdireccion;
     private javax.swing.JTextField jTnombre;

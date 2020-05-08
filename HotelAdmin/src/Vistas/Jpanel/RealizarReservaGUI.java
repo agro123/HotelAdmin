@@ -23,7 +23,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         
         jPcontenido.removeAll();
         for (int i=0;i<9;i++){
-        jPhabitacionCheckIn jp = new jPhabitacionCheckIn(05,"Simple",56.000,02);
+        jPhabitacionCheckIn jp = new jPhabitacionCheckIn(05,"Simple",53.000,02);
         jPcontenido.add(jp);
           
        }
