@@ -5,6 +5,14 @@
  */
 package Vistas.Jpanel;
 
+import Modelo.Habitacion;
+import com.toedter.calendar.JDateChooser;
+import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author nicol
@@ -16,20 +24,99 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
      */
     public RealizarReservaGUI() {
         initComponents();
-        agregarHabitaciones();
+        
+
     }
 
-    private void agregarHabitaciones(){
-        
+    public void agregarHabitaciones(ArrayList<Habitacion> lista) {
+        /*JOptionPane.showMessageDialog(null,lista.size());
         jPcontenido.removeAll();
+        for (int i = 0; i < lista.size(); i++) {
+            
+            int num = lista.get(i).getId_habitacion();
+            String Tipo = lista.get(i).getTipo_habitacion();
+            int prec = lista.get(i).getPrecio_hab();
+            int capac = lista.get(i).getCantidadPersonas();
+            System.err.println(Tipo+"  "+prec+"  "+capac+"   "+num);
+            //if(jComboBox1.getSelectedItem().equals(Tipo)){
+                jPhabitacionCheckIn jp = new jPhabitacionCheckIn(num,Tipo,prec,capac);
+                jPcontenido.add(jp);
+                
+            //}
+        }
+        jPcontenido.revalidate();
+                jPcontenido.repaint();
+        */
         for (int i=0;i<9;i++){
-        jPhabitacionCheckIn jp = new jPhabitacionCheckIn(05,"Simple",56.000,02);
+        jPhabitacionCheckIn jp = new jPhabitacionCheckIn(05,"Simple",56,02);
         jPcontenido.add(jp);
           
        }
         jPcontenido.revalidate();
         jPcontenido.repaint();
+               
+        
     }
+
+    public JComboBox getjComboBox1() {
+        return jComboBox1;
+    }
+
+    public JButton getjBbuscar() {
+        return jBbuscar;
+    }
+
+    public JButton getjBcancelar() {
+        return jBcancelar;
+    }
+
+    public JButton getjBguardar() {
+        return jBguardar;
+    }
+
+    public JTextField getjTfechaIngreso() {
+        return jTfechaIngreso;
+    }
+
+    public JTextField getjTfechaRserva() {
+        return jTfechaRserva;
+    }
+
+    public JTextField getjTfechaSalida() {
+        return jTfechaSalida;
+    }
+
+    public JTextField getjTidCliente() {
+        return jTidCliente;
+    }
+
+    public JTextField getjTidHabitacion() {
+        return jTidHabitacion;
+    }
+
+    public JDateChooser getJdFechaIngreso() {
+        return jdFechaIngreso;
+    }
+
+    public JDateChooser getJdFechaSalida() {
+        return jdFechaSalida;
+    }
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
     
 
     /**
@@ -55,6 +142,8 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jdFechaSalida = new com.toedter.calendar.JDateChooser();
+        jdFechaIngreso = new com.toedter.calendar.JDateChooser();
 
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -93,6 +182,11 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         jTfechaRserva.setForeground(new java.awt.Color(191, 191, 191));
         jTfechaRserva.setText("Fecha de reserva");
         jTfechaRserva.setBorder(null);
+        jTfechaRserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTfechaRservaActionPerformed(evt);
+            }
+        });
         add(jTfechaRserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 301, 240, 23));
 
         jTidHabitacion.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
@@ -149,6 +243,8 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(165, 165, 165));
         jLabel2.setText("Habitaciones :");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 37, -1, -1));
+        add(jdFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 250, -1, -1));
+        add(jdFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 340, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -158,6 +254,10 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
     private void jTidClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTidClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTidClienteActionPerformed
+
+    private void jTfechaRservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTfechaRservaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTfechaRservaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -175,5 +275,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
     private javax.swing.JTextField jTfechaSalida;
     private javax.swing.JTextField jTidCliente;
     private javax.swing.JTextField jTidHabitacion;
+    private com.toedter.calendar.JDateChooser jdFechaIngreso;
+    private com.toedter.calendar.JDateChooser jdFechaSalida;
     // End of variables declaration//GEN-END:variables
 }

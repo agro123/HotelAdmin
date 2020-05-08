@@ -5,15 +5,22 @@
  */
 package Vistas.Jframe;
 
+import Controladores.*;
+import Modelo.ReservaDAO;
+
+
 /**
  *
  * @author nicol
  */
+
 public class Recepcionista extends javax.swing.JFrame {
 
     /**
      * Creates new form Recepcionista
      */
+    Reservas JframeReservas;
+    
     public Recepcionista() {
         initComponents();
         seleccionarPrimero();
@@ -143,14 +150,21 @@ public class Recepcionista extends javax.swing.JFrame {
         jBreservar.setSelected(true);
         
         jPcontenedor.setVisible(false);
-        Reserva reser_ = new Reserva();
+        Reservas reser_ = new Reservas();
         jPcontenedor.removeAll();
         jPcontenedor.add(reser_);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
+        
+        ReservaDAO modelo = new ReservaDAO();
+        JframeReservas = new Reservas();
+        ControllerReserva controlador = new ControllerReserva(JframeReservas,modelo);
     }//GEN-LAST:event_jBreservarActionPerformed
 
+    
+    
+    
     /**
      * @param args the command line arguments
      */

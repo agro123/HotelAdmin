@@ -203,7 +203,7 @@ public class Services extends javax.swing.JPanel {
     
     
     
-      public void gestionMensajes(String mensaje, String titulo, int icono) {
+    public void gestionMensajes(String mensaje, String titulo, int icono) {
         JOptionPane.showMessageDialog(this, mensaje, titulo, icono);
     }
       

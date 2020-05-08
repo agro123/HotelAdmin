@@ -202,7 +202,7 @@ public class Principal extends javax.swing.JFrame {
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);*/
         seleccionarPrimero();
-       HabitacionDAO modelohabitacion = new HabitacionDAO();
+        HabitacionDAO modelohabitacion = new HabitacionDAO();
         ControllerHabitacion controladorHabitacion 
                = new ControllerHabitacion(Jframehabitaciones, modelohabitacion); 
         Jframehabitaciones.setControladorHabitacion(controladorHabitacion);

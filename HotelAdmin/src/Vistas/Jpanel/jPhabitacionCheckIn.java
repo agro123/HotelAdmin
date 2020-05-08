@@ -12,7 +12,7 @@ package Vistas.Jpanel;
 public class jPhabitacionCheckIn extends javax.swing.JPanel {
     int numeroHabitacion;
     String tipo;
-    double precio;
+    int precio;
     int capacidad;
     /**
      * Creates new form jPhabitacionCheckIn
@@ -21,19 +21,21 @@ public class jPhabitacionCheckIn extends javax.swing.JPanel {
      }
      
     public jPhabitacionCheckIn(int numeroHabitacion_,String tipo_,
-        double precio_, int capacidad_) {
-        
+        int precio_, int capacidad_) {
+         initComponents();
+      
         this.numeroHabitacion = numeroHabitacion_;
         this.tipo = tipo_;
         this.precio = precio_;
         this.capacidad = capacidad_;
         
         
-        initComponents();
+        
         jLnumero.setText(String.valueOf(numeroHabitacion_));
         jLtipo.setText(tipo_);
         jLprecio.setText(String.valueOf(precio_));
         jLcapacidad.setText(String.valueOf(capacidad_));
+       
     }
 
     /**

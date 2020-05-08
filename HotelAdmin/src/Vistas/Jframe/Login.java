@@ -21,109 +21,114 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    public Login() {     
-        super( "Login" );       
+    public Login() {
+        super("Login");
         initComponents();
         this.setLocationRelativeTo(null);
         jPRegistro.setVisible(false);
-        
-         
+
         setIconImage(Toolkit.getDefaultToolkit().
-        getImage(this.getClass().getResource("/imagenes/Logo.png")));
+                getImage(this.getClass().getResource("/imagenes/Logo.png")));
         setResizable(false);
     }
-    
-    
-    public void ingresar(){ //-------------------------------------------------- Verifica los campos para procionar el acceso dependiendo del tipo de usuario
-     try{   
-         boolean found = false;
-         
-        String usuario=jTusername.getText();
-        String contrasena=jPcontraseña.getText();
-        if(usuario.equalsIgnoreCase("Usuario") 
-                ||contrasena.equalsIgnoreCase("Contraseña")){            
-            JOptionPane.showMessageDialog(null, "Hay campos vacios!");
-        }else
-            
-            if(usuario.equalsIgnoreCase("admin") &&
-                contrasena.equalsIgnoreCase("admin"))
-            {          
+
+    public void ingresar() { //-------------------------------------------------- Verifica los campos para procionar el acceso dependiendo del tipo de usuario
+        try {
+            boolean found = false;
+
+            String usuario = jTusername.getText();
+            String contrasena = jPcontraseña.getText();
+            if (usuario.equalsIgnoreCase("Usuario")
+                    || contrasena.equalsIgnoreCase("Contraseña")) {
+                JOptionPane.showMessageDialog(null, "Hay campos vacios!");
+                
+            }else if (usuario.equalsIgnoreCase("re")
+                    && contrasena.equalsIgnoreCase("re")) {
+                found = true;
+                Recepcionista rec = new Recepcionista();
+                rec.setVisible(true);
+                dispose();
+            }else if (usuario.equalsIgnoreCase("admin")
+                    && contrasena.equalsIgnoreCase("admin")) {
                 found = true;
                 Principal pri = new Principal();
                 pri.setVisible(true);
                 dispose();
-            }else {
+                
+            } else {
                 LoginControlador login = new LoginControlador();
 
                 ArrayList<LoginModelo> usuarios = new ArrayList<>();
-        
+
                 usuarios = login.listadoLogin(0);
 
-                for(int i=0; i< usuarios.size(); i++)
-                {
-                  if(usuarios.get(i).getUsuario().equalsIgnoreCase(usuario)
-                          &&usuarios.get(i).getContrasena()
-                                  .equalsIgnoreCase(contrasena))
-                  {
-                    
-                   // LoginModelo usu = usuarios.get(i);
-                   // Principal c= new Principal(uau);    
-                   //Principal pri = new Principal();
-                   //pri.setVisible(true);
-                    Recepcionista recep = new Recepcionista();
-                    recep.setVisible(true);
-                    dispose();
-                    found=true;
-                    break;
-                     
-                  }           
-                }         
+                for (int i = 0; i < usuarios.size(); i++) {
+                    if (usuarios.get(i).getUsuario().equalsIgnoreCase(usuario)
+                            && usuarios.get(i).getContrasena()
+                                    .equalsIgnoreCase(contrasena)) {
+
+                        // LoginModelo usu = usuarios.get(i);
+                        // Principal c= new Principal(uau);    
+                        //Principal pri = new Principal();
+                        //pri.setVisible(true);
+                        Recepcionista recep = new Recepcionista();
+                        recep.setVisible(true);
+                        dispose();
+                        found = true;
+                        break;
+
+                    }
+                }
             }
-        
-        if(!found){ JOptionPane.showMessageDialog(null, "Datos incorrectos"); }
+
+            if (!found) {
+                JOptionPane.showMessageDialog(null, "Datos incorrectos");
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(
+                    null, "Ha ocurrido un error durante la verificacion "
+                    + "\nError :" + ex.getMessage());
                
-     }catch(Exception ex){
-                JOptionPane.showMessageDialog(
-                        null,"Ha ocurrido un error durante la verificacion "
-                                + "\nError :" + ex.getMessage());
-                
-     }
-    }
-    public void registrar(){//-------------------------------------------------- PERMITE REGISTRAR UN NUEVO USUARIO DE LA BASE DE DATOS
-    try{
-        String usuario = jTusuario.getText();
-        String contraseña = jPcontraseñaRe.getText();
-        String telefono = jTtelefono.getText();
-        String nombre = jTnombre.getText();
-        String direccion = jTdireccion.getText();
-        String correo = jTcorreo.getText();
-        String cedula = jTcedula.getText();
-        String cargo = jTcargo.getText();
-     
-        if(usuario.equalsIgnoreCase("Usuario")
-                ||contraseña.equalsIgnoreCase("Contraseña")
-                ||telefono.equalsIgnoreCase("Telefono")
-                ||nombre.equalsIgnoreCase("Nombre")
-                ||direccion.equalsIgnoreCase("Direccion")
-                ||correo.equalsIgnoreCase("Correo")
-                ||cedula.equalsIgnoreCase("Cedula")
-                ||cargo.equalsIgnoreCase("Cargo")){
-            
-            JOptionPane.showMessageDialog(null,"Hay campos vacios!");
-        }else {
-        JOptionPane.showMessageDialog(null,"¡Se ha registrado con exito!");
         }
-    }catch(Exception ex){
-        JOptionPane.showMessageDialog(null
-                ,"Ah ocurrido un error durante la verificacion "+ "\nError :" 
-                        + ex.getMessage());
-                
-     }
     }
-    public void enter(KeyEvent evt){
+
+    public void registrar() {//-------------------------------------------------- PERMITE REGISTRAR UN NUEVO USUARIO DE LA BASE DE DATOS
+        try {
+            String usuario = jTusuario.getText();
+            String contraseña = jPcontraseñaRe.getText();
+            String telefono = jTtelefono.getText();
+            String nombre = jTnombre.getText();
+            String direccion = jTdireccion.getText();
+            String correo = jTcorreo.getText();
+            String cedula = jTcedula.getText();
+            String cargo = jTcargo.getText();
+
+            if (usuario.equalsIgnoreCase("Usuario")
+                    || contraseña.equalsIgnoreCase("Contraseña")
+                    || telefono.equalsIgnoreCase("Telefono")
+                    || nombre.equalsIgnoreCase("Nombre")
+                    || direccion.equalsIgnoreCase("Direccion")
+                    || correo.equalsIgnoreCase("Correo")
+                    || cedula.equalsIgnoreCase("Cedula")
+                    || cargo.equalsIgnoreCase("Cargo")) {
+
+                JOptionPane.showMessageDialog(null, "Hay campos vacios!");
+            } else {
+                JOptionPane.showMessageDialog(null, "¡Se ha registrado con exito!");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,
+                     "Ah ocurrido un error durante la verificacion " + "\nError :"
+                    + ex.getMessage());
+
+        }
+    }
+
+    public void enter(KeyEvent evt) {
         int key = evt.getKeyCode();
-        if(key == KeyEvent.VK_ENTER){
-         ingresar();
+        if (key == KeyEvent.VK_ENTER) {
+            ingresar();
         }
     }
 
@@ -485,26 +490,26 @@ public class Login extends javax.swing.JFrame {
 
     private void jPcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPcontraseñaActionPerformed
         // TODO add your handling code here:
-         jPcontraseña.selectAll();
+        jPcontraseña.selectAll();
     }//GEN-LAST:event_jPcontraseñaActionPerformed
 
     private void jBiniciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBiniciaActionPerformed
         // TODO add your handling code here:
         jBregistrar.setSelected(false);
         jBinicia.setSelected(true);
-        
+
         jPRegistro.setVisible(false);
         jPiniciarSesion.setVisible(true);
     }//GEN-LAST:event_jBiniciaActionPerformed
 
     private void jBregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBregistrarActionPerformed
         // TODO add your handling code here:
-        jBinicia.setSelected(false);  
+        jBinicia.setSelected(false);
         jBregistrar.setSelected(true);
-           
+
         jPiniciarSesion.setVisible(false);
         jPRegistro.setVisible(true);
-       
+
     }//GEN-LAST:event_jBregistrarActionPerformed
 
     private void jTtelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTtelefonoActionPerformed
@@ -519,78 +524,78 @@ public class Login extends javax.swing.JFrame {
 
     private void jTtelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTtelefonoFocusGained
         // TODO add your handling code here:
-         jTtelefono.setText("");
+        jTtelefono.setText("");
     }//GEN-LAST:event_jTtelefonoFocusGained
 
     private void jTcorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcorreoFocusGained
         // TODO add your handling code here:
-         jTcorreo.setText("");
+        jTcorreo.setText("");
     }//GEN-LAST:event_jTcorreoFocusGained
 
     private void jTnombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTnombreFocusGained
         // TODO add your handling code here:
-         jTnombre.setText("");
+        jTnombre.setText("");
     }//GEN-LAST:event_jTnombreFocusGained
 
     private void jTcargoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcargoFocusGained
         // TODO add your handling code here:
-         jTcargo.setText("");
+        jTcargo.setText("");
     }//GEN-LAST:event_jTcargoFocusGained
 
     private void jTdireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTdireccionFocusGained
         // TODO add your handling code here:
-         jTdireccion.setText("");
+        jTdireccion.setText("");
     }//GEN-LAST:event_jTdireccionFocusGained
 
     private void jTcedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcedulaFocusLost
         // TODO add your handling code here:
-        if(jTcedula.getText().equalsIgnoreCase("")){    
-        jTcedula.setText("Cédula");
+        if (jTcedula.getText().equalsIgnoreCase("")) {
+            jTcedula.setText("Cédula");
         }
     }//GEN-LAST:event_jTcedulaFocusLost
 
     private void jTtelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTtelefonoFocusLost
         // TODO add your handling code here:
-         if(jTtelefono.getText().equalsIgnoreCase("")){
-         jTtelefono.setText("Teléfono");
-         }
+        if (jTtelefono.getText().equalsIgnoreCase("")) {
+            jTtelefono.setText("Teléfono");
+        }
     }//GEN-LAST:event_jTtelefonoFocusLost
 
     private void jTcorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcorreoFocusLost
         // TODO add your handling code here:
-        if(jTcorreo.getText().equalsIgnoreCase("")){
-         jTcorreo.setText("Correo eléctronico");
+        if (jTcorreo.getText().equalsIgnoreCase("")) {
+            jTcorreo.setText("Correo eléctronico");
         }
     }//GEN-LAST:event_jTcorreoFocusLost
 
     private void jTnombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTnombreFocusLost
         // TODO add your handling code here:
-         if(jTnombre.getText().equalsIgnoreCase("")){
-         jTnombre.setText("Nombre");
+        if (jTnombre.getText().equalsIgnoreCase("")) {
+            jTnombre.setText("Nombre");
         }
     }//GEN-LAST:event_jTnombreFocusLost
 
     private void jTcargoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcargoFocusLost
         // TODO add your handling code here:
-        if(jTcargo.getText().equalsIgnoreCase("")){
-         jTcargo.setText("Cargo");
-         }
+        if (jTcargo.getText().equalsIgnoreCase("")) {
+            jTcargo.setText("Cargo");
+        }
     }//GEN-LAST:event_jTcargoFocusLost
 
     private void jTdireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTdireccionFocusLost
         // TODO add your handling code here:
-         if(jTdireccion.getText().equalsIgnoreCase("")){
-         jTdireccion.setText("Dirección");
-         }
+        if (jTdireccion.getText().equalsIgnoreCase("")) {
+            jTdireccion.setText("Dirección");
+        }
     }//GEN-LAST:event_jTdireccionFocusLost
-   
+
     private void jBrgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBrgistrarActionPerformed
-        
-     // --> FALTA AQUÍ EL LLAMADO A LAS VALIDACIONES
-         registrar();
-        jPRegistro.setVisible(false);     
+
+        // --> FALTA AQUÍ EL LLAMADO A LAS VALIDACIONES
+        registrar();
+        jPRegistro.setVisible(false);
         jPiniciarSesion.setVisible(true);
-       
+
     }//GEN-LAST:event_jBrgistrarActionPerformed
 
     private void jTusernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTusernameFocusGained
@@ -600,39 +605,37 @@ public class Login extends javax.swing.JFrame {
 
     private void jTusernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTusernameFocusLost
         // TODO add your handling code here:
-        if(jTusername.getText().equalsIgnoreCase("")){ 
-        jTusername.setText("Usuario");
-      }     
+        if (jTusername.getText().equalsIgnoreCase("")) {
+            jTusername.setText("Usuario");
+        }
     }//GEN-LAST:event_jTusernameFocusLost
 
     private void jPcontraseñaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPcontraseñaFocusGained
         // TODO add your handling code here:
-       jPcontraseña.setText("");
-       jPcontraseña.setEchoChar((char)1);
+        jPcontraseña.setText("");
+        jPcontraseña.setEchoChar((char) 1);
     }//GEN-LAST:event_jPcontraseñaFocusGained
 
     private void jPcontraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPcontraseñaFocusLost
         // TODO add your handling code here:
-       if(jPcontraseña.getText().equalsIgnoreCase("")){ 
-       jPcontraseña.setText("Contraseña");
-       jPcontraseña.setEchoChar((char)0);
-      }
+        if (jPcontraseña.getText().equalsIgnoreCase("")) {
+            jPcontraseña.setText("Contraseña");
+            jPcontraseña.setEchoChar((char) 0);
+        }
     }//GEN-LAST:event_jPcontraseñaFocusLost
 
     private void jBiniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBiniciarSesionActionPerformed
-            
-        
-        //--> FALTA VALIDACIONES
-        
-        if(jTusuario.getText().equalsIgnoreCase("") 
-                 || jTcargo.getText().equalsIgnoreCase("")){
 
-            JOptionPane.showMessageDialog(null, "Campos vacios");}else{
-           
+        //--> FALTA VALIDACIONES
+        if (jTusuario.getText().equalsIgnoreCase("")
+                || jTcargo.getText().equalsIgnoreCase("")) {
+
+            JOptionPane.showMessageDialog(null, "Campos vacios");
+        } else {
 
             ingresar();
         }
-        
+
     }//GEN-LAST:event_jBiniciarSesionActionPerformed
 
     private void jTusuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTusuarioFocusGained
@@ -642,24 +645,24 @@ public class Login extends javax.swing.JFrame {
 
     private void jTusuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTusuarioFocusLost
         // TODO add your handling code here:
-         if(jTusuario.getText().equalsIgnoreCase("")){ 
-        jTusuario.setText("Usuario");
+        if (jTusuario.getText().equalsIgnoreCase("")) {
+            jTusuario.setText("Usuario");
         }
-      
+
     }//GEN-LAST:event_jTusuarioFocusLost
 
     private void jPcontraseñaReFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPcontraseñaReFocusGained
         // TODO add your handling code here:
-         jPcontraseñaRe.setText("");
-         jPcontraseñaRe.setEchoChar((char)1); 
+        jPcontraseñaRe.setText("");
+        jPcontraseñaRe.setEchoChar((char) 1);
     }//GEN-LAST:event_jPcontraseñaReFocusGained
 
     private void jPcontraseñaReFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPcontraseñaReFocusLost
         // TODO add your handling code here:
-         if(jPcontraseñaRe.getText().equalsIgnoreCase("")){ 
-         jPcontraseñaRe.setText("Contraseña");
-         jPcontraseñaRe.setEchoChar((char)0); 
-         }
+        if (jPcontraseñaRe.getText().equalsIgnoreCase("")) {
+            jPcontraseñaRe.setText("Contraseña");
+            jPcontraseñaRe.setEchoChar((char) 0);
+        }
     }//GEN-LAST:event_jPcontraseñaReFocusLost
 
     private void jTcedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcedulaActionPerformed
@@ -684,7 +687,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jPcontraseñaReActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPcontraseñaReActionPerformed
         // TODO add your handling code here:
-        jPcontraseña.selectAll();       
+        jPcontraseña.selectAll();
     }//GEN-LAST:event_jPcontraseñaReActionPerformed
 
     private void jPcontraseñaReKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPcontraseñaReKeyPressed
@@ -694,8 +697,8 @@ public class Login extends javax.swing.JFrame {
 
     private void jPcontraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPcontraseñaKeyPressed
         int key = evt.getKeyCode();
-        if(key == KeyEvent.VK_ENTER){
-         ingresar();
+        if (key == KeyEvent.VK_ENTER) {
+            ingresar();
         }
     }//GEN-LAST:event_jPcontraseñaKeyPressed
 
@@ -703,9 +706,6 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTusernameKeyPressed
 
-    
-    
-    
     /**
      * @param args the command line arguments
      */
