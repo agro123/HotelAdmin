@@ -6,20 +6,26 @@
 package Vistas.Jpanel;
 
 import java.util.ArrayList;
+import Controladores.ControladorCliente;
+import Modelo.Cliente;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author nicol
  */
 public class ClienteListaGUI extends javax.swing.JPanel {
-     private ArrayList<jPcliente> clientes;
+    
+    ControladorCliente controladorCliente =  new ControladorCliente();
+    
+    private ArrayList<jPcliente> clientes;
     /**
      * Creates new form ClienteListaGUI
      */
     public ClienteListaGUI() {
         clientes = new ArrayList<>();
         initComponents();
-        CargarLista();
+        CargarLista(0);
     }
 
     /**
@@ -68,30 +74,82 @@ public class ClienteListaGUI extends javax.swing.JPanel {
         jBbuscar.setBorder(null);
         jBbuscar.setBorderPainted(false);
         jBbuscar.setContentAreaFilled(false);
-        jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jBbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscarActionPerformed(evt);
+            }
+        });
         add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 40, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTbuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbuscadorActionPerformed
-        // TODO add your handling code here:
+     
     }//GEN-LAST:event_jTbuscadorActionPerformed
 
-     public void CargarLista(){
+    private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
         
-        //TODA LOS CLIENTES SON AGREGADAS AL JPANEL 
-        //EN DONDE SE MUESTRA LOS DATOS PRINCIPALES DE LOS CLIENTES
+        try{
+            cleanLista();
+            if (jTbuscador.getText().isEmpty() ) {
+                CargarLista(0);
+            }
+            if(jTbuscador.getText().matches("[0-9]*")){
+            CargarLista(Integer.parseInt(jTbuscador.getText()));
+            } else{
+                cleanLista();
+                jPmensajes.add(new jPmensaje("Tu búsqueda no tuvo resultados!"));
+            }
+            
+            
+        }
+        catch(Exception e){}
+    }//GEN-LAST:event_jBbuscarActionPerformed
+
         
-        //AÑADE CADA CLIENTE A UNA LISTA
-        for(int i=0;i<100;i++){
-        jPcliente jp = new jPcliente(12435643,1234567,"Laura","Aragon.2020@hotmail.com");  
-        clientes.add(jp);
+    private void cleanLista(){
+        
+        clientes.clear();
+        jPmensajes.removeAll();
+        jPmensajes.revalidate();
+        jPmensajes.repaint();
+        
+        
+    }
+     public void CargarLista(int id){
+       
+        ArrayList<Cliente> listaClientes = new ArrayList<>();
+        listaClientes = ControladorCliente.listClients(0);
+        
+        
+        for(int i=0;i<listaClientes.size();i++){
+            int cedula = listaClientes.get(i).getID();
+            
+            String telefono = listaClientes.get(i).getTelefono();
+            
+            String nombre = listaClientes.get(i).getNombre() + " " 
+                    + listaClientes.get(i).getApellido();
+            String correo = listaClientes.get(i).getCorreo();
+            jPcliente jp = new jPcliente(cedula, telefono, nombre, correo);
+            if(id==0){
+                clientes.add(jp);
+            }else{
+                if (id==cedula) {
+                    cleanLista();
+                    clientes.add(jp);
+                    break;
+                } else {
+                    cleanLista();
+                    jPmensajes.add(
+                            new jPmensaje("Tu búsqueda no tuvo resultados!"));
+                }
+            }
           
        }
         
         //LA LISTA ES CARGADA EN UN JPANEL 
         for(int i=0;i<clientes.size();i++){          
         jPmensajes.add(clientes.get(i));
-        
         jPmensajes.revalidate();
         jPmensajes.repaint();}
     }

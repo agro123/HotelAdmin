@@ -68,8 +68,10 @@ public class Login extends javax.swing.JFrame {
                     
                    // LoginModelo usu = usuarios.get(i);
                    // Principal c= new Principal(uau);    
-                    Principal pri = new Principal();
-                    pri.setVisible(true);
+                   //Principal pri = new Principal();
+                   //pri.setVisible(true);
+                    Recepcionista recep = new Recepcionista();
+                    recep.setVisible(true);
                     dispose();
                     found=true;
                     break;
