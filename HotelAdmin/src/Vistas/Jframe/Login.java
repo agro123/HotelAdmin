@@ -36,18 +36,12 @@ public class Login extends javax.swing.JFrame {
         try {
             boolean found = false;
 
-            String usuario = jTusername.getText();
+            String usuario = jTusername.getText().trim();
             String contrasena = jPcontraseña.getText();
             if (usuario.equalsIgnoreCase("Usuario")
                     || contrasena.equalsIgnoreCase("Contraseña")) {
                 JOptionPane.showMessageDialog(null, "Hay campos vacios!");
                 
-            }else if (usuario.equalsIgnoreCase("re")
-                    && contrasena.equalsIgnoreCase("re")) {
-                found = true;
-                Recepcionista rec = new Recepcionista();
-                rec.setVisible(true);
-                dispose();
             }else if (usuario.equalsIgnoreCase("admin")
                     && contrasena.equalsIgnoreCase("admin")) {
                 found = true;
@@ -71,7 +65,8 @@ public class Login extends javax.swing.JFrame {
                         // Principal c= new Principal(uau);    
                         //Principal pri = new Principal();
                         //pri.setVisible(true);
-                        Recepcionista recep = new Recepcionista();
+                        int numUser = Integer.parseInt(usuario);
+                        Recepcionista recep = new Recepcionista(numUser);
                         recep.setVisible(true);
                         dispose();
                         found = true;

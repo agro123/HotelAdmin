@@ -20,8 +20,10 @@ public class Recepcionista extends javax.swing.JFrame {
      * Creates new form Recepcionista
      */
     Reservas JframeReservas;
+    int numEmpleado;
     
-    public Recepcionista() {
+    public Recepcionista(int numEmpleado) {
+        this.numEmpleado = numEmpleado;
         initComponents();
         seleccionarPrimero();
  
@@ -150,16 +152,17 @@ public class Recepcionista extends javax.swing.JFrame {
         jBreservar.setSelected(true);
         
         jPcontenedor.setVisible(false);
-        Reservas reser_ = new Reservas();
+        JframeReservas = new Reservas();
         jPcontenedor.removeAll();
-        jPcontenedor.add(reser_);
+        jPcontenedor.add(JframeReservas);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
         
         ReservaDAO modelo = new ReservaDAO();
-        JframeReservas = new Reservas();
         ControllerReserva controlador = new ControllerReserva(JframeReservas,modelo);
+        controlador.setNumEmpleado(numEmpleado);
+        
     }//GEN-LAST:event_jBreservarActionPerformed
 
     
@@ -195,7 +198,7 @@ public class Recepcionista extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Recepcionista().setVisible(true);
+                new Recepcionista(123).setVisible(true);
             }
         });
     }

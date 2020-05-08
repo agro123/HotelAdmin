@@ -21,6 +21,7 @@ public class Fecha {
         java.util.Date now = calendar.getTime();
         Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
         return currentTimestamp;
+        
 
     }
     
@@ -29,9 +30,23 @@ public class Fecha {
         
         Timestamp ts = new Timestamp(fecha.getTime());
         return ts;
+        
    }
+   
+    public static Date dateTomorrow(Date now)
+    {
+        
+        Date f = new Date(now.getTime()+86400000);
+        return f;
+    }
     
     
+    public static Date dateYesterday(Date now)
+    {
+        
+        Date f = new Date(now.getTime()-86400000);
+        return f;
+    }
     
    
     public static Timestamp crearFechaTimeStampEspecifico(int año,int mes,int dia)

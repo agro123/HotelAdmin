@@ -98,7 +98,7 @@ public class ControllerServicios {
                 valor = Integer.parseInt(s.substring(0));
             }
         }
-        JOptionPane.showMessageDialog(null, "hola  " + valor);
+        
         return valor;
     }
 

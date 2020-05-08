@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -31,6 +32,48 @@ public class ReservaDAO {
     }
     
     
+    public int extraerUltimoId()
+    {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        int id = 0;
+
+        
+        try {
+            con = Fachada.getConnection();
+            String sql = "";
+
+            sql
+                    = "select  max(id_reserva) as id_reserva from reserva";
+            
+            pstm = con.prepareStatement(sql);
+            
+            rs = pstm.executeQuery();
+            
+            while (rs.next()) {
+                id = rs.getInt("id_reserva");
+                
+            }
+        } catch (SQLException ex) {
+            mensajeError(ex);;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException ex) {
+                mensajeError(ex);
+            }
+        }
+        return id;
+    }
+    
+    
+    
     public int grabarReserva (Reserva reserva)
     {
         Connection con = null;
@@ -44,7 +87,7 @@ public class ReservaDAO {
             String sql = "INSERT INTO reserva values(?,?,?,?,?,?,?,?)";
             
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, reserva.getNumero_reserva());
+            pstm.setInt(1,reserva.getNumero_reserva());
             pstm.setInt(2,reserva.getNum_Habitacion());
             pstm.setInt(3, reserva.getNumCliente());
             pstm.setInt(4, reserva.getNum_Empleado());
@@ -81,7 +124,7 @@ public class ReservaDAO {
             con = Fachada.getConnection(); 
             String sql="";
                        
-            sql = "SELECT * FROM reserva ORDER BY id_reserva";             
+            sql = "SELECT * FROM reserva WHERE estado = TRUE ORDER BY id_reserva";             
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery();
             Reserva objReserva = null;

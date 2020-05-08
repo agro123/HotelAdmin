@@ -133,7 +133,7 @@ public class LoginDAO {
             while(rs.next()){
                 login = new LoginModelo();
                 login.setUsuario(rs.getString("id_empleado"));
-               login.setContrasena(rs.getString("contraseña"));
+               login.setContrasena(rs.getString("contrasena"));
                
                 listado.add(login);
             }

@@ -28,14 +28,16 @@ public class Reservas extends javax.swing.JPanel {
     
     public Reservas() {
         initComponents();
+        pListareserva = new ListaReservasGUI();
+        pRealizarReserva = new RealizarReservaGUI();
         seleccionarPrimero();
+        
     }
     
     public void seleccionarPrimero(){
         jBlistaReserva.setSelected(false); 
         jBrrealizarReserva.setSelected(true);
                 
-        pRealizarReserva = new RealizarReservaGUI();
         jPcontenedor.removeAll();
         jPcontenedor.add(pRealizarReserva);
         jPcontenedor.revalidate();
@@ -135,18 +137,13 @@ public class Reservas extends javax.swing.JPanel {
     
     
     
-    public String getTextjTfechaIngreso() {
-        return pRealizarReserva.getjTfechaIngreso().getText().trim();
-    }
+   
 
     public String getTextjTfechaRserva() {
-        return pRealizarReserva.getjTfechaRserva().getText().trim();
+        return pRealizarReserva.getjTnumPersonas().getText().trim();
     }
 
-    public String getTextjTfechaSalida() {
-        return pRealizarReserva.getjTfechaSalida().getText().trim();
-    }
-
+  
     public String getTextjTidCliente() {
         return pRealizarReserva.getjTidCliente().getText().trim();
     }
