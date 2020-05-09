@@ -367,13 +367,13 @@ public class HabitacionAgregarModificarGUI extends javax.swing.JPanel {
         if(jCtipoHabi.getSelectedItem().equals("Seleccione...")){
           
             rtdo= 0;
-            animacionCombobox();
+            //animacionCombobox();
         }       
   
         return rtdo;
     }
     
-    public void animacionCombobox(){
+    /*public void animacionCombobox(){
         
         Thread obj = new Thread();
         
@@ -388,7 +388,7 @@ public class HabitacionAgregarModificarGUI extends javax.swing.JPanel {
         } catch (InterruptedException ex) {
             Logger.getLogger(HabitacionAgregarModificarGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
     
     
 

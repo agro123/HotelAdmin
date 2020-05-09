@@ -23,7 +23,9 @@ public class ClientDAO {
         rtdo = 0;
        try{
             con = Fachada.getConnection();
-            String sql = "INSERT INTO Cliente values (?,?,?,?,?,?)";
+            String sql = "INSERT INTO Cliente "
+                    + "(id_cliente, nombre_cli, apellido_cli,email_cli, "
+                    + "direccion_cli, telefono_cli ) values (?,?,?,?,?,?)";
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, c.getID());
             pstm.setString(2, c.getNombre());
@@ -66,9 +68,9 @@ public class ClientDAO {
             pstm.setInt(1, c.getID());
             pstm.setString(2, c.getNombre());
             pstm.setString(3, c.getApellido());
-            pstm.setString(4, c.getCorreo());
+            pstm.setString(6, c.getCorreo());
             pstm.setString(5, c.getDireccion());
-            pstm.setString(6, c.getTelefono());
+            pstm.setString(4, c.getTelefono());
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){

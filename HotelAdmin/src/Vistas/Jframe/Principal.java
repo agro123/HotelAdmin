@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import Vistas.Jpanel.EmpleadoFormulario;
 import Vistas.Jpanel.EmpleadoPanelListar;
+import java.awt.Toolkit;
 /**
  *
  * @author nicol
@@ -34,8 +35,15 @@ public class Principal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         seleccionarPrimero();
+        setResizable(false);
         
+        setIconImage(Toolkit.getDefaultToolkit().
+        getImage(this.getClass().getResource("/imagenes/Logo.png")));
        
+       HabitacionDAO modelohabitacion = new HabitacionDAO();
+       ControllerHabitacion controladorHabitacion 
+               = new ControllerHabitacion(Jframehabitaciones, modelohabitacion); 
+        Jframehabitaciones.setControladorHabitacion(controladorHabitacion);
         
     }
     
@@ -201,9 +209,9 @@ public class Principal extends javax.swing.JFrame {
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);*/
-        seleccionarPrimero();
+       seleccionarPrimero();
        HabitacionDAO modelohabitacion = new HabitacionDAO();
-        ControllerHabitacion controladorHabitacion 
+       ControllerHabitacion controladorHabitacion 
                = new ControllerHabitacion(Jframehabitaciones, modelohabitacion); 
         Jframehabitaciones.setControladorHabitacion(controladorHabitacion);
     }//GEN-LAST:event_jBhabitacionesActionPerformed
@@ -260,7 +268,8 @@ public class Principal extends javax.swing.JFrame {
         
         RoomServicesDAO modelo = new RoomServicesDAO();
         JframeServices = new Services();
-        ControllerServicios controladorServicios = new ControllerServicios(JframeServices, modelo);
+        ControllerServicios controladorServicios 
+                = new ControllerServicios(JframeServices, modelo);
         JframeServices.setControladorServicios(controladorServicios);
         jPcontenedor.removeAll();
         jPcontenedor.add(JframeServices);

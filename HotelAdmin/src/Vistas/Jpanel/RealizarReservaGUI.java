@@ -5,6 +5,19 @@
  */
 package Vistas.Jpanel;
 
+import Modelo.Habitacion;
+import Servicios.Fecha;
+import com.toedter.calendar.JDateChooser;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author nicol
@@ -16,20 +29,162 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
      */
     public RealizarReservaGUI() {
         initComponents();
-        agregarHabitaciones();
+        jdFechaIngreso.setDate(Fecha.crearFechaTimeStamp());
+        jdFechaSalida.setDate(Fecha.dateTomorrow(Fecha.crearFechaTimeStamp()));
+        
+        jdFechaIngreso.setMinSelectableDate(Fecha.crearFechaTimeStamp());
+        jdFechaSalida.setMinSelectableDate(Fecha.crearFechaTimeStamp());
+        
+        jTidHabitacion.setEditable(false);
+        /*jTidHabitacion.setEnabled(false);
+        jTnumPersonas.setEnabled(false);
+        jdFechaIngreso.setEnabled(false);
+        jdFechaSalida.setEnabled(false);*/
+         
+
     }
 
-    private void agregarHabitaciones(){
+    
+    public void setearCampos() {
+        
+        jTidCliente.setText("Cliente");
+        jTidHabitacion.setText("Número de habitación");
+        jTnumPersonas.setText("Cantidad de personas");
+       
+        
+        jdFechaIngreso.setDate(Fecha.crearFechaTimeStamp());
+        
+        jdFechaSalida.setDate(Fecha.dateTomorrow(Fecha.crearFechaTimeStamp()));
+        
+        
+        
+        
+    }
+    
+    
+     public int validarCampos() {
+        int rtdo = 1;
+
+        if (jTidCliente.getText().equals("")
+                ||jTidCliente.getText().equalsIgnoreCase("Cliente"))
+        {
+
+            rtdo = 0;
+            JOptionPane.showMessageDialog(this,"Hay Campos Vacios");
+
+        }else
+        if (jTidHabitacion.getText().equals("") 
+            || jTidHabitacion.getText().equalsIgnoreCase("Número de habitación"))
+        {
+            rtdo = 0;
+            JOptionPane.showMessageDialog(this,"Seleccione una Habitación");
+        }else
+        if(jTnumPersonas.getText().equals("") || 
+                jTnumPersonas.getText().equalsIgnoreCase("Cantidad de personas"))
+        {
+            rtdo = 0;
+            JOptionPane.showMessageDialog(this,"Hay Campos Vacios");
+            
+        }else
+        if(jdFechaIngreso.getDate().getTime() >= jdFechaSalida.getDate().getTime()){
+            JOptionPane.showMessageDialog(this,"No coinciden las fechas");
+            rtdo = 0;
+        }
+        
+        
+        return rtdo;
+    }
+    
+    public void mostrarCamposVacios(JTextField jt) {
+        jt.setForeground(Color.blue);
+        jt.setText("****");
+    }
+    
+    
+    
+    public void agregarHabitaciones(ArrayList<Habitacion> lista) {
+         
         
         jPcontenido.removeAll();
-        for (int i=0;i<9;i++){
-        jPhabitacionCheckIn jp = new jPhabitacionCheckIn(05,"Simple",56.000,02);
-        jPcontenido.add(jp);
-          
-       }
+        for (int i = 0; i < lista.size(); i++) {
+            
+            int num = lista.get(i).getId_habitacion();
+            String Tipo = lista.get(i).getTipo_habitacion();
+            int prec = lista.get(i).getPrecio_hab();
+            int capac = lista.get(i).getCantidadPersonas();
+            System.err.println(Tipo+"  "+prec+"  "+capac+"   "+num);
+            if(jComboBox1.getSelectedItem().equals(Tipo)){
+            
+            jPhabitacionCheckIn jp = new jPhabitacionCheckIn(num,Tipo,prec,capac);
+            jp.setjThabitacion(jTidHabitacion);
+            
+            jPcontenido.add(jp);  
+              
+            }
+        }
+        
         jPcontenido.revalidate();
         jPcontenido.repaint();
+         
     }
+    
+    
+    
+    
+
+    public JComboBox getjComboBox1() {
+        return jComboBox1;
+    }
+
+    public JButton getjBbuscar() {
+        return jBbuscar;
+    }
+
+    public JButton getjBcancelar() {
+        return jBcancelar;
+    }
+
+    public JButton getjBguardar() {
+        return jBguardar;
+    }
+
+    public JTextField getjTnumPersonas() {
+        return jTnumPersonas;
+    }
+
+ 
+
+    public JTextField getjTidCliente() {
+        return jTidCliente;
+    }
+
+    public JTextField getjTidHabitacion() {
+        return jTidHabitacion;
+    }
+
+    public JDateChooser getJdFechaIngreso() {
+        return jdFechaIngreso;
+    }
+
+    public JDateChooser getJdFechaSalida() {
+        return jdFechaSalida;
+    }
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
     
 
     /**
@@ -41,13 +196,15 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jdFechaSalida = new com.toedter.calendar.JDateChooser();
+        jdFechaIngreso = new com.toedter.calendar.JDateChooser();
         jBcancelar = new javax.swing.JButton();
         jBguardar = new javax.swing.JButton();
         jTidCliente = new javax.swing.JTextField();
-        jTfechaIngreso = new javax.swing.JTextField();
-        jTfechaRserva = new javax.swing.JTextField();
+        jTnumPersonas = new javax.swing.JTextField();
         jTidHabitacion = new javax.swing.JTextField();
-        jTfechaSalida = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPcontenido = new javax.swing.JPanel();
         jBbuscar = new javax.swing.JButton();
@@ -59,53 +216,137 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel4.setText("Fecha Salida");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 345, 83, 23));
+
+        jLabel3.setText("Fecha ingreso");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 300, 83, 23));
+
+        jdFechaSalida.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jdFechaSalidaInputMethodTextChanged(evt);
+            }
+        });
+        jdFechaSalida.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdFechaSalidaPropertyChange(evt);
+            }
+        });
+        add(jdFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 345, 190, 23));
+        jdFechaSalida.getAccessibleContext().setAccessibleName("");
+
+        jdFechaIngreso.setMinSelectableDate(new java.util.Date(-62135747907000L));
+        jdFechaIngreso.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdFechaIngresoPropertyChange(evt);
+            }
+        });
+        add(jdFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 301, 190, 23));
+
         jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
         jBcancelar.setBorder(null);
         jBcancelar.setBorderPainted(false);
         jBcancelar.setContentAreaFilled(false);
         jBcancelar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-seleccionado.png"))); // NOI18N
+        jBcancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcancelarActionPerformed(evt);
+            }
+        });
         add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 395, 125, 40));
 
         jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-blanco.png"))); // NOI18N
         jBguardar.setBorder(null);
         jBguardar.setContentAreaFilled(false);
         jBguardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-seleccionado.png"))); // NOI18N
+        jBguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBguardarActionPerformed(evt);
+            }
+        });
         add(jBguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(706, 395, 125, 40));
 
         jTidCliente.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jTidCliente.setForeground(new java.awt.Color(191, 191, 191));
         jTidCliente.setText("Cliente");
         jTidCliente.setBorder(null);
+        jTidCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTidClienteFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTidClienteFocusLost(evt);
+            }
+        });
         jTidCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTidClienteActionPerformed(evt);
             }
         });
-        add(jTidCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 152, 240, 23));
+        jTidCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTidClienteKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTidClienteKeyTyped(evt);
+            }
+        });
+        add(jTidCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 152, 274, 23));
 
-        jTfechaIngreso.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
-        jTfechaIngreso.setForeground(new java.awt.Color(191, 191, 191));
-        jTfechaIngreso.setText("Fecha de ingreso");
-        jTfechaIngreso.setBorder(null);
-        add(jTfechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 345, 240, 23));
-
-        jTfechaRserva.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
-        jTfechaRserva.setForeground(new java.awt.Color(191, 191, 191));
-        jTfechaRserva.setText("Fecha de reserva");
-        jTfechaRserva.setBorder(null);
-        add(jTfechaRserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 301, 240, 23));
+        jTnumPersonas.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
+        jTnumPersonas.setForeground(new java.awt.Color(191, 191, 191));
+        jTnumPersonas.setText("Cantidad de personas");
+        jTnumPersonas.setBorder(null);
+        jTnumPersonas.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTnumPersonasFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTnumPersonasFocusLost(evt);
+            }
+        });
+        jTnumPersonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTnumPersonasActionPerformed(evt);
+            }
+        });
+        jTnumPersonas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTnumPersonasKeyTyped(evt);
+            }
+        });
+        add(jTnumPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 252, 274, 23));
 
         jTidHabitacion.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jTidHabitacion.setForeground(new java.awt.Color(191, 191, 191));
-        jTidHabitacion.setText("  Número de habitación");
+        jTidHabitacion.setText("Número de habitación");
         jTidHabitacion.setBorder(null);
+        jTidHabitacion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTidHabitacionFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTidHabitacionFocusLost(evt);
+            }
+        });
+        jTidHabitacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTidHabitacionMouseClicked(evt);
+            }
+        });
+        jTidHabitacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTidHabitacionActionPerformed(evt);
+            }
+        });
+        jTidHabitacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTidHabitacionKeyTyped(evt);
+            }
+        });
         add(jTidHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 203, 274, 23));
-
-        jTfechaSalida.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
-        jTfechaSalida.setForeground(new java.awt.Color(191, 191, 191));
-        jTfechaSalida.setText("Fecha salida");
-        jTfechaSalida.setBorder(null);
-        add(jTfechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 252, 240, 23));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
@@ -136,7 +377,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
 
         jComboBox1.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(204, 204, 204));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Simple" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SIMPLE", "DOBLE", "MATRIMONIAL", "SUITES" }));
         jComboBox1.setBorder(null);
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +400,116 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTidClienteActionPerformed
 
+    private void jTnumPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTnumPersonasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTnumPersonasActionPerformed
+
+    private void jTidHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTidHabitacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTidHabitacionActionPerformed
+
+    private void jTidClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidClienteKeyPressed
+        
+    }//GEN-LAST:event_jTidClienteKeyPressed
+
+    private void jTidClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidClienteKeyTyped
+        validaNumero(evt.getKeyChar(), evt);
+    }//GEN-LAST:event_jTidClienteKeyTyped
+
+    private void jTnumPersonasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTnumPersonasKeyTyped
+        validaNumero(evt.getKeyChar(), evt);
+    }//GEN-LAST:event_jTnumPersonasKeyTyped
+
+    private void jTidClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidClienteFocusGained
+        if(jTidCliente.getText().equalsIgnoreCase("Cliente")){
+            jTidCliente.setText(""); 
+        }
+        
+    }//GEN-LAST:event_jTidClienteFocusGained
+
+    private void jTnumPersonasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTnumPersonasFocusGained
+        if(jTnumPersonas.getText().equalsIgnoreCase("Cantidad de personas")){
+        
+            jTnumPersonas.setText("");
+        }
+    }//GEN-LAST:event_jTnumPersonasFocusGained
+
+    private void jTidClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidClienteFocusLost
+       
+        if(jTidCliente.getText().equals(""))
+        {
+            jTidCliente.setText("Cliente");
+        }
+    }//GEN-LAST:event_jTidClienteFocusLost
+
+    private void jTnumPersonasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTnumPersonasFocusLost
+        if(jTnumPersonas.getText().equals("")){
+            jTnumPersonas.setText("Cantidad de personas");
+        }
+    }//GEN-LAST:event_jTnumPersonasFocusLost
+
+    private void jTidHabitacionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidHabitacionFocusGained
+        /*if(jTidHabitacion.getText().equalsIgnoreCase("Número de habitación")){
+            jTidHabitacion.setText("");
+            JOptionPane.showMessageDialog(null,"Seleccione una Habitacion de la lista");
+        }*/
+        
+    }//GEN-LAST:event_jTidHabitacionFocusGained
+
+    private void jTidHabitacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidHabitacionFocusLost
+        if(jTidHabitacion.getText().equals("")){
+            
+            jTidHabitacion.setText("Número de Habitación");
+        }
+    }//GEN-LAST:event_jTidHabitacionFocusLost
+
+    private void jTidHabitacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidHabitacionKeyTyped
+         validaNumero(evt.getKeyChar(), evt);
+    }//GEN-LAST:event_jTidHabitacionKeyTyped
+
+    private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
+        
+    }//GEN-LAST:event_jBguardarActionPerformed
+
+    private void jdFechaSalidaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaSalidaPropertyChange
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jdFechaSalidaPropertyChange
+
+    private void jdFechaIngresoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaIngresoPropertyChange
+        if(jdFechaIngreso.getDate() != null){
+            
+            Date f = Fecha.dateTomorrow(jdFechaIngreso.getDate());
+            jdFechaSalida.setMinSelectableDate(f); 
+        }  
+    }//GEN-LAST:event_jdFechaIngresoPropertyChange
+
+    private void jdFechaSalidaInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jdFechaSalidaInputMethodTextChanged
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "kxkxxkxkxkxkxkxk");
+    }//GEN-LAST:event_jdFechaSalidaInputMethodTextChanged
+
+    private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBcancelarActionPerformed
+
+    private void jTidHabitacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTidHabitacionMouseClicked
+       
+        if(jTidHabitacion.getText().equalsIgnoreCase("Número de habitación")){
+            JOptionPane.showMessageDialog
+                (null,"Seleccione una Habitacion de la lista");
+        }
+    }//GEN-LAST:event_jTidHabitacionMouseClicked
+
+    public void validaNumeroMenor(char c, KeyEvent evt) {
+       
+    }
+    
+    public void validaNumero(char c, KeyEvent evt) {
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
@@ -167,13 +518,15 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLformulario;
     private javax.swing.JPanel jPcontenido;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTfechaIngreso;
-    private javax.swing.JTextField jTfechaRserva;
-    private javax.swing.JTextField jTfechaSalida;
     private javax.swing.JTextField jTidCliente;
     private javax.swing.JTextField jTidHabitacion;
+    private javax.swing.JTextField jTnumPersonas;
+    private com.toedter.calendar.JDateChooser jdFechaIngreso;
+    private com.toedter.calendar.JDateChooser jdFechaSalida;
     // End of variables declaration//GEN-END:variables
 }
