@@ -21,14 +21,15 @@ public class CheckInSinReservaGUI extends javax.swing.JPanel {
     
     private void agregarHabitaciones(){
         
-         jPcontenido.removeAll();
+        // jPcontenido.removeAll();
         for (int i=0;i<9;i++){
-        jPhabitacionCheckIn jp = new jPhabitacionCheckIn(05,"Simple",56.000,02);
+        jPhabitacionCheckIn jp = new jPhabitacionCheckIn(05,"Simple",56,02);
         jPcontenido.add(jp);
           
        }
         jPcontenido.revalidate();
         jPcontenido.repaint();
+        
     }
 
     /**

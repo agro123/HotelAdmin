@@ -5,6 +5,10 @@
  */
 package Vistas.Jpanel;
 
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author nicol
@@ -12,8 +16,15 @@ package Vistas.Jpanel;
 public class jPhabitacionCheckIn extends javax.swing.JPanel {
     int numeroHabitacion;
     String tipo;
-    double precio;
+    int precio;
     int capacidad;
+    JTextField jLabelHab;
+
+    public void setjThabitacion(JTextField jThabitacion) {
+        this.jLabelHab = jThabitacion;
+    }
+    
+    
     /**
      * Creates new form jPhabitacionCheckIn
      */
@@ -21,19 +32,21 @@ public class jPhabitacionCheckIn extends javax.swing.JPanel {
      }
      
     public jPhabitacionCheckIn(int numeroHabitacion_,String tipo_,
-        double precio_, int capacidad_) {
-        
+        int precio_, int capacidad_) {
+         initComponents();
+      
         this.numeroHabitacion = numeroHabitacion_;
         this.tipo = tipo_;
         this.precio = precio_;
         this.capacidad = capacidad_;
         
         
-        initComponents();
+        
         jLnumero.setText(String.valueOf(numeroHabitacion_));
         jLtipo.setText(tipo_);
         jLprecio.setText(String.valueOf(precio_));
         jLcapacidad.setText(String.valueOf(capacidad_));
+       
     }
 
     /**
@@ -53,6 +66,14 @@ public class jPhabitacionCheckIn extends javax.swing.JPanel {
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setOpaque(false);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLcapacidad.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
@@ -80,8 +101,33 @@ public class jPhabitacionCheckIn extends javax.swing.JPanel {
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/HabitacionSeleccion.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        
+    }//GEN-LAST:event_formMouseClicked
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_formMousePressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int dialog = JOptionPane.YES_NO_OPTION;
+        int result = JOptionPane.showConfirmDialog(null, "Desea "
+            + "seleccionar la Habitación "+numeroHabitacion, "Eliminar", dialog);
+        if (result == 0){
+            jLabelHab.setText(""+numeroHabitacion);
+            
+        }     
+          
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
