@@ -5,6 +5,18 @@
  */
 package Vistas.Jpanel;
 
+import java.awt.event.KeyEvent;
+import Modelo.Reserva;
+import Controladores.ControladorHospedaje;
+import Modelo.Hospedaje;
+import Controladores.ControllerReserva;
+import javax.swing.JOptionPane;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author nicol
@@ -19,31 +31,87 @@ public class CheckInReservaPreviaGUI extends javax.swing.JPanel {
     String fechaIngreso;
     String fechSalida;
     */
-    
-    
+    int numEmpleado;
+    int comprobacion;
     /**
      * Creates new form CheckInReservaPreviaGUI
      */
-    public CheckInReservaPreviaGUI() {
+    public CheckInReservaPreviaGUI(int ie) {
+        numEmpleado = ie;
         initComponents();
     }
     
     private void agregarDatosReserva(){
-      
-      //DATOS A MOSTRAR UNA VEZ SEA BUSCADA LA RESERVA
-     /*   
-      jLnumeroReserva.setText(String.valueOf());
-      jLidHabitacion.setText(String.valueOf());
-      jLidCliente.setText(String.valueOf());
-      jLidEmpleado.setText(String.valueOf());
-      jLnumeroPersonas.setText(String.valueOf());
-      jLfechaReserva.setText();
-      jLfechaIngreso.setText();
-      jLfechaSalida.setText();
-      
-      */  
-    }
+     
+      ControllerReserva rc = new ControllerReserva();
+      String id = jTbuscador.getText().trim();
+      Reserva r = new Reserva();
+      int idcliente;
+      if(id.equalsIgnoreCase("")||
+             id.equalsIgnoreCase("Buscar reserva por ID de cliente")){
+            JOptionPane.showMessageDialog(null,
+               " Debe ingresar la identificacion de un cliente "
+                       + "para encontrar la reserva");
+            vaciarCampos();
+        }
+        else{
+          idcliente = Integer.parseInt(id);
+          r = rc.getReserva(idcliente);
+          if(r.getNumero_reserva()!=0){
+              jLnumeroReserva.setText(r.getNumero_reserva()+"");
+              jLidHabitacion.setText(r.getNum_Habitacion()+"");
+              jLidCliente.setText(r.getNumCliente()+"");
+              jLidEmpleado.setText(r.getNum_Empleado()+"");
+              jLnumeroPersonas.setText(r.getNum_Personas()+"");
+              jLfechaReserva.setText(r.getFecha_reserva()+"");
+              jLfechaIngreso.setText(r.getFecha_ingreso()+"");
+              jLfechaSalida.setText(r.getFecha_salida()+"");
+           }else {
+              JOptionPane.showMessageDialog(null,
+                 "No se encontro ninguna reserva con este ID,"
+                       + " verifique si fue ingresado correctamente");
+              vaciarCampos();
+            }   
+      }     
+   }
+    
+   private void hacerHospedaje(){
+       Hospedaje h = new Hospedaje();
+       ControladorHospedaje ch = new ControladorHospedaje();
+       
+       h.setIdHabitacion(Integer.parseInt(jLidHabitacion.getText()));
+       h.setIdCliente(Integer.parseInt(jLidCliente.getText()));
+       h.setNumeroPesonas(Integer.parseInt(jLnumeroPersonas.getText()));
+       h.setFechaIngreso(Timestamp.valueOf (jLfechaIngreso.getText()));
+       h.setFechaSalida(Timestamp.valueOf (jLfechaSalida.getText()));
+       h.setEstado(true);
+       h.setIdEmpleado(numEmpleado);
+       
+      int i = ch.grabarHospedaje(h);
+      if(i==1){
+          JOptionPane.showMessageDialog(null,
+                 "Hospedaje registrado con exito."); 
+            vaciarCampos();
+      }
+      else {
+          JOptionPane.showMessageDialog(null,
+                 "Ocurrio un error al realizar el Hospedaje.");
+          vaciarCampos();
+      }
+   }
+   
+  private void vaciarCampos(){
+               jLnumeroReserva.setText("  ");
+              jLidHabitacion.setText("  ");
+              jLidCliente.setText("  ");
+              jLidEmpleado.setText("  ");
+              jLnumeroPersonas.setText("  ");
+              jLfechaReserva.setText("  ");
+              jLfechaIngreso.setText("  ");
+              jLfechaSalida.setText("  "); 
+  }
 
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,42 +142,42 @@ public class CheckInReservaPreviaGUI extends javax.swing.JPanel {
 
         jLidHabitacion.setFont(new java.awt.Font("Decker", 0, 15)); // NOI18N
         jLidHabitacion.setForeground(new java.awt.Color(112, 112, 112));
-        jLidHabitacion.setText("09");
+        jLidHabitacion.setText("  ");
         add(jLidHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 185, 190, -1));
 
         jLidCliente.setFont(new java.awt.Font("Decker", 0, 15)); // NOI18N
         jLidCliente.setForeground(new java.awt.Color(112, 112, 112));
-        jLidCliente.setText("09");
+        jLidCliente.setText("  ");
         add(jLidCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(505, 215, 300, -1));
 
         jLidEmpleado.setFont(new java.awt.Font("Decker", 0, 15)); // NOI18N
         jLidEmpleado.setForeground(new java.awt.Color(112, 112, 112));
-        jLidEmpleado.setText("09");
+        jLidEmpleado.setText("  ");
         add(jLidEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 245, 300, -1));
 
         jLfechaReserva.setFont(new java.awt.Font("Decker", 0, 15)); // NOI18N
         jLfechaReserva.setForeground(new java.awt.Color(112, 112, 112));
-        jLfechaReserva.setText("09");
+        jLfechaReserva.setText("  ");
         add(jLfechaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 275, 255, -1));
 
         jLfechaIngreso.setFont(new java.awt.Font("Decker", 0, 15)); // NOI18N
         jLfechaIngreso.setForeground(new java.awt.Color(112, 112, 112));
-        jLfechaIngreso.setText("09");
+        jLfechaIngreso.setText("  ");
         add(jLfechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 305, 260, -1));
 
         jLfechaSalida.setFont(new java.awt.Font("Decker", 0, 15)); // NOI18N
         jLfechaSalida.setForeground(new java.awt.Color(112, 112, 112));
-        jLfechaSalida.setText("09");
+        jLfechaSalida.setText("  ");
         add(jLfechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 335, 260, -1));
 
         jLnumeroPersonas.setFont(new java.awt.Font("Decker", 0, 15)); // NOI18N
         jLnumeroPersonas.setForeground(new java.awt.Color(112, 112, 112));
-        jLnumeroPersonas.setText("09");
+        jLnumeroPersonas.setText("  ");
         add(jLnumeroPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 365, 220, -1));
 
         jLnumeroReserva.setFont(new java.awt.Font("Decker", 1, 17)); // NOI18N
         jLnumeroReserva.setForeground(new java.awt.Color(112, 112, 112));
-        jLnumeroReserva.setText("09");
+        jLnumeroReserva.setText("  ");
         add(jLnumeroReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(639, 143, 60, -1));
 
         jLabel10.setFont(new java.awt.Font("Decker", 1, 17)); // NOI18N
@@ -132,19 +200,50 @@ public class CheckInReservaPreviaGUI extends javax.swing.JPanel {
         jTbuscador.setForeground(new java.awt.Color(191, 191, 191));
         jTbuscador.setText("Buscar reserva por ID de cliente");
         jTbuscador.setBorder(null);
-        add(jTbuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 47, -1, -1));
+        jTbuscador.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTbuscadorFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTbuscadorFocusLost(evt);
+            }
+        });
+        jTbuscador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTbuscadorActionPerformed(evt);
+            }
+        });
+        jTbuscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTbuscadorKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTbuscadorKeyTyped(evt);
+            }
+        });
+        add(jTbuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 47, 210, -1));
 
         jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
         jBcancelar.setBorder(null);
         jBcancelar.setBorderPainted(false);
         jBcancelar.setContentAreaFilled(false);
         jBcancelar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-seleccionado.png"))); // NOI18N
+        jBcancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcancelarActionPerformed(evt);
+            }
+        });
         add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 440, 125, 40));
 
         jBcheckIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check-inBoton.png"))); // NOI18N
         jBcheckIn.setBorder(null);
         jBcheckIn.setContentAreaFilled(false);
         jBcheckIn.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check-in-seleccionado.png"))); // NOI18N
+        jBcheckIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcheckInActionPerformed(evt);
+            }
+        });
         add(jBcheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 440, 125, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MostrarReserva.png"))); // NOI18N
@@ -152,8 +251,50 @@ public class CheckInReservaPreviaGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        agregarDatosReserva();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTbuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbuscadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTbuscadorActionPerformed
+
+    private void jTbuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTbuscadorFocusGained
+ 
+        jTbuscador.setText("");
+       
+    }//GEN-LAST:event_jTbuscadorFocusGained
+
+    private void jTbuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTbuscadorFocusLost
+        if(jTbuscador.getText().equalsIgnoreCase("")){ 
+        jTbuscador.setText("Buscar reserva por ID de cliente");
+        }
+    }//GEN-LAST:event_jTbuscadorFocusLost
+
+    private void jTbuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyPressed
+        int key = evt.getKeyCode();
+        if(key == KeyEvent.VK_ENTER){
+        agregarDatosReserva();
+        }
+    }//GEN-LAST:event_jTbuscadorKeyPressed
+
+    private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
+        vaciarCampos();
+    }//GEN-LAST:event_jBcancelarActionPerformed
+
+    private void jTbuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyTyped
+        char car = evt.getKeyChar();
+        if((car<'0' || car>'9')) evt.consume();
+    }//GEN-LAST:event_jTbuscadorKeyTyped
+
+    private void jBcheckInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcheckInActionPerformed
+        if(!jLnumeroReserva.getText().equalsIgnoreCase("  ")){
+           hacerHospedaje();
+        }else{   
+          JOptionPane.showMessageDialog(null,
+                  "Debe buscar una reserva primero.");
+          vaciarCampos();
+        }
+    }//GEN-LAST:event_jBcheckInActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

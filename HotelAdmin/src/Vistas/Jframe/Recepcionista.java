@@ -5,21 +5,33 @@
  */
 package Vistas.Jframe;
 
+import Controladores.*;
+import Modelo.ReservaDAO;
+
+
 /**
  *
  * @author nicol
  */
+
 public class Recepcionista extends javax.swing.JFrame {
 
     /**
      * Creates new form Recepcionista
      */
-    public Recepcionista() {
+    Reservas JframeReservas;
+    int numEmpleado;
+    
+    public Recepcionista(int numEmpleado) {
+        this.numEmpleado = numEmpleado;
         initComponents();
-        seleccionarPrimero();
- 
-       
+        seleccionarPrimero();      
     }
+    //--------------------------------------------------------------------------
+    public int getNumEmpleado(){
+        return numEmpleado;
+    }
+    //--------------------------------------------------------------------------
 
      public void seleccionarPrimero(){
         jBclientes.setSelected(false);
@@ -28,7 +40,7 @@ public class Recepcionista extends javax.swing.JFrame {
         jBreservar.setSelected(false);
         jBservicios.setSelected(false);
         jBcheckIn.setSelected(true);
-        CheckIn check = new CheckIn();
+        CheckIn check = new CheckIn(numEmpleado);
         jPcontenedor.removeAll();
         jPcontenedor.add(check);
         jPcontenedor.revalidate();
@@ -143,14 +155,22 @@ public class Recepcionista extends javax.swing.JFrame {
         jBreservar.setSelected(true);
         
         jPcontenedor.setVisible(false);
-        Reserva reser_ = new Reserva();
+        JframeReservas = new Reservas();
         jPcontenedor.removeAll();
-        jPcontenedor.add(reser_);
+        jPcontenedor.add(JframeReservas);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
+        
+        ReservaDAO modelo = new ReservaDAO();
+        ControllerReserva controlador = new ControllerReserva(JframeReservas,modelo);
+        controlador.setNumEmpleado(numEmpleado);
+        
     }//GEN-LAST:event_jBreservarActionPerformed
 
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -181,7 +201,7 @@ public class Recepcionista extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Recepcionista().setVisible(true);
+                new Recepcionista(123).setVisible(true);
             }
         });
     }

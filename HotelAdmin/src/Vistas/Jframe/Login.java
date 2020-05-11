@@ -34,60 +34,60 @@ public class Login extends javax.swing.JFrame {
     }
     
     
-    public void ingresar(){ //-------------------------------------------------- Verifica los campos para procionar el acceso dependiendo del tipo de usuario
-     try{   
-         boolean found = false;
-         
-        String usuario=jTusername.getText();
-        String contrasena=jPcontraseña.getText();
-        if(usuario.equalsIgnoreCase("Usuario") 
-                ||contrasena.equalsIgnoreCase("Contraseña")){            
-            JOptionPane.showMessageDialog(null, "Hay campos vacios!");
-        }else
-            
-            if(usuario.equalsIgnoreCase("admin") &&
-                contrasena.equalsIgnoreCase("admin"))
-            {          
+    public void ingresar() { //-------------------------------------------------- Verifica los campos para procionar el acceso dependiendo del tipo de usuario
+        try {
+            boolean found = false;
+
+            String usuario = jTusername.getText().trim();
+            String contrasena = jPcontraseña.getText();
+            if (usuario.equalsIgnoreCase("Usuario")
+                    || contrasena.equalsIgnoreCase("Contraseña")) {
+                JOptionPane.showMessageDialog(null, "Hay campos vacios!");
+                
+            }else if (usuario.equalsIgnoreCase("admin")
+                    && contrasena.equalsIgnoreCase("admin")) {
                 found = true;
                 Principal pri = new Principal();
                 pri.setVisible(true);
                 dispose();
-            }else {
+                
+            } else {
                 LoginControlador login = new LoginControlador();
 
                 ArrayList<LoginModelo> usuarios = new ArrayList<>();
-        
+
                 usuarios = login.listadoLogin(0);
 
-                for(int i=0; i< usuarios.size(); i++)
-                {
-                  if(usuarios.get(i).getUsuario().equalsIgnoreCase(usuario)
-                          &&usuarios.get(i).getContrasena()
-                                  .equalsIgnoreCase(contrasena))
-                  {
-                    
-                   // LoginModelo usu = usuarios.get(i);
-                   // Principal c= new Principal(uau);    
-                   //Principal pri = new Principal();
-                   //pri.setVisible(true);
-                    Recepcionista recep = new Recepcionista();
-                    recep.setVisible(true);
-                    dispose();
-                    found=true;
-                    break;
-                     
-                  }           
-                }         
+                for (int i = 0; i < usuarios.size(); i++) {
+                    if (usuarios.get(i).getUsuario().equalsIgnoreCase(usuario)
+                            && usuarios.get(i).getContrasena()
+                                    .equalsIgnoreCase(contrasena)) {
+
+                        // LoginModelo usu = usuarios.get(i);
+                        // Principal c= new Principal(uau);    
+                        //Principal pri = new Principal();
+                        //pri.setVisible(true);
+                        int numUser = Integer.parseInt(usuario);
+                        Recepcionista recep = new Recepcionista(numUser);
+                        recep.setVisible(true);
+                        dispose();
+                        found = true;
+                        break;
+
+                    }
+                }
             }
-        
-        if(!found){ JOptionPane.showMessageDialog(null, "Datos incorrectos"); }
+
+            if (!found) {
+                JOptionPane.showMessageDialog(null, "Datos incorrectos");
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(
+                    null, "Ha ocurrido un error durante la verificacion "
+                    + "\nError :" + ex.getMessage());
                
-     }catch(Exception ex){
-                JOptionPane.showMessageDialog(
-                        null,"Ha ocurrido un error durante la verificacion "
-                                + "\nError :" + ex.getMessage());
-                
-     }
+        }
     }
     public void registrar(){//-------------------------------------------------- PERMITE REGISTRAR UN NUEVO USUARIO DE LA BASE DE DATOS
     try{
@@ -341,6 +341,7 @@ public class Login extends javax.swing.JFrame {
 
         jPcontraseñaRe.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jPcontraseñaRe.setForeground(new java.awt.Color(204, 204, 204));
+        jPcontraseñaRe.setEchoChar((char)0);
         jPcontraseñaRe.setText("Contraseña");
         jPcontraseñaRe.setBorder(null);
         jPcontraseñaRe.setOpaque(false);
@@ -413,6 +414,7 @@ public class Login extends javax.swing.JFrame {
 
         jPcontraseña.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jPcontraseña.setForeground(new java.awt.Color(204, 204, 204));
+        jPcontraseña.setEchoChar((char)0);
         jPcontraseña.setText("Contraseña");
         jPcontraseña.setBorder(null);
         jPcontraseña.setCaretColor(new java.awt.Color(204, 204, 204));
@@ -628,8 +630,7 @@ public class Login extends javax.swing.JFrame {
                  || jTcargo.getText().equalsIgnoreCase("")){
 
             JOptionPane.showMessageDialog(null, "Campos vacios");}else{
-           
-
+          
             ingresar();
         }
         

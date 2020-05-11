@@ -13,20 +13,24 @@ import Vistas.Jpanel.CheckInSinReservaGUI;
  * @author nicol
  */
 public class CheckIn extends javax.swing.JPanel {
-
+   //---------------------------------------------------------------------------
+    int numEmpleado;
+  
     /**
      * Creates new form NewJPanel
      */
-    public CheckIn() {
+    public CheckIn(int numE) {
+         numEmpleado = numE;
         initComponents();
         seleccionarPrimero();     
     }
     
-      public void seleccionarPrimero(){
+     public void seleccionarPrimero(){
         jBsinReserva.setSelected(false);
         jBreservaPrevia.setSelected(true); 
         
-        CheckInReservaPreviaGUI check = new CheckInReservaPreviaGUI();
+        CheckInReservaPreviaGUI check = 
+                new CheckInReservaPreviaGUI(numEmpleado);
         jPcontenedor.removeAll();
         jPcontenedor.add(check);
         jPcontenedor.revalidate();
@@ -90,6 +94,7 @@ public class CheckIn extends javax.swing.JPanel {
         // TODO add your handling code here:
       
         jPcontenedor.removeAll();
+        
         seleccionarPrimero();
     }//GEN-LAST:event_jBreservaPreviaActionPerformed
 

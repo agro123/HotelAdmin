@@ -12,27 +12,27 @@ import java.util.Date;
  * @author crist
  */
 public class Hospedaje {
-    private String id_hospedaje, id_habitacion, id_cliente, id_empleado;
+    private int id_hospedaje, id_habitacion, id_cliente, id_empleado;
     private Timestamp fIngreso, fSalida;
     private int numPersonas;
     private boolean estado;
     //---------Hospedaje con datos de Habitacion
-    private String piso;
+    private int piso;
     
     
     public Hospedaje() {
      Date fecha = new Date();
-     this.id_hospedaje  = "";
-     this.id_habitacion  = "";
-     this.id_cliente = "";
-     this.id_empleado  = "";
+     this.id_hospedaje  = 0;
+     this.id_habitacion  = 0;
+     this.id_cliente = 0;
+     this.id_empleado  = 0;
      this.fIngreso = new Timestamp(fecha.getTime());
      this.fSalida = new Timestamp(fecha.getTime());
      this.numPersonas= 0;
-     this.estado = false;
-     this.piso = "";
+     this.estado = true;
+     this.piso = 0;
     }
-    public Hospedaje(String iho, String iha, String icl, String iem, 
+    public Hospedaje(int iho, int iha, int icl, int iem, 
             Timestamp fin, Timestamp fsa, int nump, boolean es ) {
      Date fecha = new Date();
      this.id_hospedaje  = iho;
@@ -44,7 +44,7 @@ public class Hospedaje {
      this.numPersonas= nump;
      this.estado = es;
     }
-    public Hospedaje(String iho, String iha, String icl,  String p ) {
+    public Hospedaje(int iho, int iha, int icl,  int p ) {
      Date fecha = new Date();
      this.id_hospedaje  = iho;
      this.id_habitacion  = iha;
@@ -53,19 +53,19 @@ public class Hospedaje {
     }    
 
      //------------------------------ SET Hospedaje ----------------------------
-    public void setIdHospedaje (String iho)
+    public void setIdHospedaje (int iho)
     {
         this.id_hospedaje = iho;
     }
-    public void setIdHabitacion (String iha)
+    public void setIdHabitacion (int iha)
     {
         this.id_habitacion = iha;
     }
-    public void setIdEmpleado (String iem)
+    public void setIdEmpleado (int iem)
     {
         this.id_empleado = iem;
     }
-    public void setIdCliente (String icl)
+    public void setIdCliente (int icl)
     {
         this.id_cliente = icl;
     }
@@ -88,19 +88,19 @@ public class Hospedaje {
         this.estado = estado;
     }
     //-----------------------------GET Hospedaje--------------------------------
-    public String getIdHospedaje ()
+    public int getIdHospedaje ()
     {
         return this.id_hospedaje;
     }
-    public String getIdHabitacion ()
+    public int getIdHabitacion ()
     {
         return this.id_habitacion;
     }
-    public String getIdEmpleado ()
+    public int getIdEmpleado ()
     {
         return this.id_empleado;
     }
-    public String getIdCliente ()
+    public int getIdCliente ()
     {
         return this.id_cliente;
     }
