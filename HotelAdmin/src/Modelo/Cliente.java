@@ -11,4 +11,11 @@ package Modelo;
  */
 public class Cliente extends Persona{
     private String usuario, contraseña;
+    
+    public Cliente(){}
+    
+    // Creo constructor para Cliente para crear e insertar directamente a la BD
+    public Cliente(int cedula, String nombre, String apellido, String correo, String direccion, int telefono){
+    
+    }
 }

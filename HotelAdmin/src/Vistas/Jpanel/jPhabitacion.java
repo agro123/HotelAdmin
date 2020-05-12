@@ -5,7 +5,9 @@
  */
 package Vistas.Jpanel;
 
+import Vistas.Jframe.Habitaciones;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -17,18 +19,28 @@ public class jPhabitacion extends javax.swing.JPanel {
     private int numero;
     private double precio;
     private String tipo;
+    private String piso;
+    private int cantidadPersonas;
     private boolean estado;
     private String eleccion;
     private int result;
+    Habitaciones frame_habitaciones;
+    
+    String validadorPanel;
     
     /**
      * Creates new form jPhabitacion
      */
 
-    public jPhabitacion(int numero_,double precio_, String tipo_,boolean estado_) {
+    public jPhabitacion(int numero_,String tipo_, String piso, int cantidadPersonas, double precio_, boolean estado_, Habitaciones frame_habitaciones) {
+        
+        
+        this.frame_habitaciones = frame_habitaciones; 
         this.numero = numero_;
         this.precio = precio_;
         this.tipo = tipo_;
+        this.piso = piso;
+        this.cantidadPersonas = cantidadPersonas;
         this.estado = estado_;       
         initComponents();
         
@@ -40,12 +52,16 @@ public class jPhabitacion extends javax.swing.JPanel {
           jLestado.setText("Disponible");
         else
             jLestado.setText("Ocupado");
+        
+        
                
     }
 
     public jPhabitacion(){
         
+                
     }
+    
     public jPhabitacion(String eleccion_) {
        this.eleccion = eleccion_;
        setEleccion(eleccion_);
@@ -56,22 +72,46 @@ public class jPhabitacion extends javax.swing.JPanel {
     public void setEleccion(String val){
         eleccion = val;
     }
-    
-    public void borrarPanel(){
-  
-        if(eleccion == "eliminar"){
-          new HabitacionAgregarModificarGUI().setVisible(true);
-            
-   }else{
-        int dialog = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null,"Desea continuar?","Eliminar",dialog);
-        
-                if(result == 0)
-                {                     
-                setVisible(false);
-                }
-       }
+
+    public void setValidadorPanel(String validadorPanel) {
+        this.validadorPanel = validadorPanel;
     }
+    
+    
+    
+ //Método para borrar panel
+//    public void borrarPanel(){
+//  
+//     //   if(eleccion == "eliminar"){
+//          new HabitacionAgregarModificarGUI().setVisible(true);
+//            
+//  // }else{
+//        int dialog = JOptionPane.YES_NO_OPTION;
+//        int result = JOptionPane.showConfirmDialog(null,"Desea continuar?","Eliminar",dialog);
+//        
+//                if(result == 0)
+//                {                     
+//                setVisible(false);
+//                }
+//       //}
+//    }
+    
+    public void cambiarPanel() {
+            
+        frame_habitaciones.mostrarPanelAgregar();    
+        frame_habitaciones.getControladorHabitacion().leerHabitacionID(numero);
+        
+    }
+    
+    public void deleteOfPanel()
+    {
+        frame_habitaciones.getControladorHabitacion().eliminarhabitacion(numero);
+        frame_habitaciones.mostrarPanelEliminar();
+        frame_habitaciones.getControladorHabitacion().leerHabitaciones();
+                
+    }
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,8 +153,16 @@ public class jPhabitacion extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        
-        borrarPanel();
+        int dialog = JOptionPane.YES_NO_OPTION;
+        int result = JOptionPane.showConfirmDialog(null, "Desea continuar?", "Mensaje", dialog);
+        if (result == 0) {
+           if(validadorPanel == "actualizar"){
+                cambiarPanel();
+            } else if(validadorPanel == "eliminar") {
+                deleteOfPanel();
+            }
+              
+        }
         
         
         

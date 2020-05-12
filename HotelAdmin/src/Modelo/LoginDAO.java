@@ -27,7 +27,7 @@ public class LoginDAO {
             con = Fachada.getConnection();
             String sql = "INSERT INTO Login values (?,?)";
             pstm = con.prepareStatement(sql);
-            pstm.setString(1, c.getUsuario());
+            pstm.setInt(1,  Integer.parseInt(c.getUsuario()));
             pstm.setString(2, c.getContrasena());
             rtdo = pstm.executeUpdate();  
         }
@@ -133,6 +133,7 @@ public class LoginDAO {
             while(rs.next()){
                 login = new LoginModelo();
                 login.setUsuario(rs.getString("id_empleado"));
+      
                login.setContrasena(rs.getString("contrasena"));
                
                 listado.add(login);

@@ -4,12 +4,11 @@
  * and open the template in the editor.
  */
 package Vistas.Jframe;
-
 import Controladores.ControladorEmpleado;
 import Controladores.ControllerServicios;
 import Modelo.RoomServicesDAO;
-import Vistas.Jpanel.EmpleadoFormulario;
-import Vistas.Jpanel.EmpleadoPanelListar;
+import Controladores.ControllerHabitacion;
+import Modelo.HabitacionDAO;
 import Vistas.Jpanel.HabitacionAgregarModificarGUI;
 import Vistas.Jpanel.HabitacionListaGUI;
 import Vistas.Jpanel.jPhabitacion;
@@ -17,7 +16,9 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-
+import Vistas.Jpanel.EmpleadoFormulario;
+import Vistas.Jpanel.EmpleadoPanelListar;
+import java.awt.Toolkit;
 /**
  *
  * @author nicol
@@ -27,15 +28,22 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Habitación
      */
-    
+    Habitaciones Jframehabitaciones;
     Services JframeServices;
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
         
         seleccionarPrimero();
+        setResizable(false);
         
+        setIconImage(Toolkit.getDefaultToolkit().
+        getImage(this.getClass().getResource("/imagenes/Logo.png")));
        
+       HabitacionDAO modelohabitacion = new HabitacionDAO();
+       ControllerHabitacion controladorHabitacion 
+               = new ControllerHabitacion(Jframehabitaciones, modelohabitacion); 
+        Jframehabitaciones.setControladorHabitacion(controladorHabitacion);
         
     }
     
@@ -181,9 +189,9 @@ public class Principal extends javax.swing.JFrame {
         jBempleados.setSelected(false);
         jBclientes.setSelected(false);
         jBhabitaciones.setSelected(true);
-        Habitaciones habi = new Habitaciones() ;
+        Jframehabitaciones = new Habitaciones() ;
         jPcontenedor.removeAll();
-        jPcontenedor.add(habi);
+        jPcontenedor.add(Jframehabitaciones);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
@@ -201,8 +209,11 @@ public class Principal extends javax.swing.JFrame {
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);*/
-        seleccionarPrimero();
-       
+       seleccionarPrimero();
+       HabitacionDAO modelohabitacion = new HabitacionDAO();
+       ControllerHabitacion controladorHabitacion 
+               = new ControllerHabitacion(Jframehabitaciones, modelohabitacion); 
+        Jframehabitaciones.setControladorHabitacion(controladorHabitacion);
     }//GEN-LAST:event_jBhabitacionesActionPerformed
 
     private void jBclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBclientesActionPerformed
@@ -257,7 +268,8 @@ public class Principal extends javax.swing.JFrame {
         
         RoomServicesDAO modelo = new RoomServicesDAO();
         JframeServices = new Services();
-        ControllerServicios controladorServicios = new ControllerServicios(JframeServices, modelo);
+        ControllerServicios controladorServicios 
+                = new ControllerServicios(JframeServices, modelo);
         JframeServices.setControladorServicios(controladorServicios);
         jPcontenedor.removeAll();
         jPcontenedor.add(JframeServices);
