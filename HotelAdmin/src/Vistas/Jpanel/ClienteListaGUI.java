@@ -15,10 +15,11 @@ import javax.swing.JOptionPane;
  * @author nicol
  */
 public class ClienteListaGUI extends javax.swing.JPanel {
-    
-    ControladorCliente controladorCliente =  new ControladorCliente();
-    
+
+    ControladorCliente controladorCliente = new ControladorCliente();
+
     private ArrayList<jPcliente> clientes;
+
     /**
      * Creates new form ClienteListaGUI
      */
@@ -50,6 +51,11 @@ public class ClienteListaGUI extends javax.swing.JPanel {
         jTbuscador.setForeground(new java.awt.Color(204, 204, 204));
         jTbuscador.setText("Buscador...");
         jTbuscador.setBorder(null);
+        jTbuscador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbuscadorMouseClicked(evt);
+            }
+        });
         jTbuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTbuscadorActionPerformed(evt);
@@ -84,54 +90,66 @@ public class ClienteListaGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTbuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbuscadorActionPerformed
-     
+      
     }//GEN-LAST:event_jTbuscadorActionPerformed
 
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
-        
-        try{
+
+        try {
+            
             cleanLista();
-            if (jTbuscador.getText().isEmpty() ) {
+            if (jTbuscador.getText().isEmpty()) {
                 CargarLista(0);
             }
-            if(jTbuscador.getText().matches("[0-9]*")){
-            CargarLista(Integer.parseInt(jTbuscador.getText()));
-            } else{
+            if (jTbuscador.getText().matches("[0-9]*")) {
+                CargarLista(Integer.parseInt(jTbuscador.getText()));
+            } else {
                 cleanLista();
                 jPmensajes.add(new jPmensaje("Tu búsqueda no tuvo resultados!"));
             }
-            
-            
+
+        } catch (Exception e) {
         }
-        catch(Exception e){}
     }//GEN-LAST:event_jBbuscarActionPerformed
 
+    private void jTbuscadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbuscadorMouseClicked
+        try{
+            if(jTbuscador.getText().length()>0)
+        {
+         } else{
+            jTbuscador.setText("");
+        }}
         
-    private void cleanLista(){
+        catch(Exception e){
+                    }
         
+        
+    }//GEN-LAST:event_jTbuscadorMouseClicked
+
+    private void cleanLista() {
+
         clientes.clear();
         jPmensajes.removeAll();
         jPmensajes.revalidate();
         jPmensajes.repaint();
-        
-        
+
     }
-     public void CargarLista(int id){
-       
+
+    public void CargarLista(int id) {
+
         ArrayList<Cliente> listaClientes = new ArrayList<>();
         listaClientes = ControladorCliente.listClients(0);
-        
-        
-        for(int i=0;i<listaClientes.size();i++){
+
+        for (int i = 0; i < listaClientes.size(); i++) {
             Integer cedula = listaClientes.get(i).getID();
             Integer telefono = Integer.parseInt(listaClientes.get(i).getTelefono());
             String nombre = listaClientes.get(i).getNombre() + " " + listaClientes.get(i).getApellido();
             String correo = listaClientes.get(i).getCorreo();
             jPcliente jp = new jPcliente(cedula, telefono, nombre, correo);
-            if(id==0){
+            if (id == 0) {
                 clientes.add(jp);
-            }else{
-                if (id==cedula) {
+            } else {
+                if (id == cedula) {
                     cleanLista();
                     clientes.add(jp);
                     break;
@@ -140,14 +158,15 @@ public class ClienteListaGUI extends javax.swing.JPanel {
                     jPmensajes.add(new jPmensaje("Tu búsqueda no tuvo resultados!"));
                 }
             }
-          
-       }
-        
+
+        }
+
         //LA LISTA ES CARGADA EN UN JPANEL 
-        for(int i=0;i<clientes.size();i++){          
-        jPmensajes.add(clientes.get(i));
-        jPmensajes.revalidate();
-        jPmensajes.repaint();}
+        for (int i = 0; i < clientes.size(); i++) {
+            jPmensajes.add(clientes.get(i));
+            jPmensajes.revalidate();
+            jPmensajes.repaint();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
