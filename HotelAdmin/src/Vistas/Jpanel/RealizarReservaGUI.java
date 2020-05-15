@@ -216,12 +216,18 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setText("Fecha Salida");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 345, 83, 23));
+        jLabel4.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(191, 191, 191));
+        jLabel4.setText("Fecha Salida:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 345, 110, 23));
 
-        jLabel3.setText("Fecha ingreso");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 300, 83, 23));
+        jLabel3.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(191, 191, 191));
+        jLabel3.setText("Fecha ingreso:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 300, 110, 23));
 
+        jdFechaSalida.setBackground(new java.awt.Color(255, 255, 255));
+        jdFechaSalida.setForeground(new java.awt.Color(191, 191, 191));
         jdFechaSalida.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
@@ -234,21 +240,25 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jdFechaSalidaPropertyChange(evt);
             }
         });
-        add(jdFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 345, 190, 23));
+        add(jdFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 345, 160, 25));
         jdFechaSalida.getAccessibleContext().setAccessibleName("");
 
+        jdFechaIngreso.setBackground(new java.awt.Color(255, 255, 255));
+        jdFechaIngreso.setForeground(new java.awt.Color(191, 191, 191));
+        jdFechaIngreso.setFont(new java.awt.Font("Decker", 0, 11)); // NOI18N
         jdFechaIngreso.setMinSelectableDate(new java.util.Date(-62135747907000L));
         jdFechaIngreso.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jdFechaIngresoPropertyChange(evt);
             }
         });
-        add(jdFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 301, 190, 23));
+        add(jdFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 301, 160, 25));
 
         jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
         jBcancelar.setBorder(null);
         jBcancelar.setBorderPainted(false);
         jBcancelar.setContentAreaFilled(false);
+        jBcancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBcancelar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-seleccionado.png"))); // NOI18N
         jBcancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,10 +267,11 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         });
         add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 395, 125, 40));
 
-        jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-blanco.png"))); // NOI18N
+        jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-SinSele.png"))); // NOI18N
         jBguardar.setBorder(null);
         jBguardar.setContentAreaFilled(false);
-        jBguardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-seleccionado.png"))); // NOI18N
+        jBguardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBguardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/GuardarSele.png"))); // NOI18N
         jBguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBguardarActionPerformed(evt);
@@ -271,7 +282,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         jTidCliente.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jTidCliente.setForeground(new java.awt.Color(191, 191, 191));
         jTidCliente.setText("Cliente");
-        jTidCliente.setBorder(null);
+        jTidCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 191, 191)));
         jTidCliente.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTidClienteFocusGained(evt);
@@ -293,12 +304,12 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jTidClienteKeyTyped(evt);
             }
         });
-        add(jTidCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 152, 274, 23));
+        add(jTidCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 152, 276, 25));
 
         jTnumPersonas.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jTnumPersonas.setForeground(new java.awt.Color(191, 191, 191));
         jTnumPersonas.setText("Cantidad de personas");
-        jTnumPersonas.setBorder(null);
+        jTnumPersonas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 191, 191)));
         jTnumPersonas.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTnumPersonasFocusGained(evt);
@@ -317,12 +328,12 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jTnumPersonasKeyTyped(evt);
             }
         });
-        add(jTnumPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 252, 274, 23));
+        add(jTnumPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 252, 276, 25));
 
         jTidHabitacion.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jTidHabitacion.setForeground(new java.awt.Color(191, 191, 191));
         jTidHabitacion.setText("Número de habitación");
-        jTidHabitacion.setBorder(null);
+        jTidHabitacion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 191, 191)));
         jTidHabitacion.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTidHabitacionFocusGained(evt);
@@ -346,7 +357,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jTidHabitacionKeyTyped(evt);
             }
         });
-        add(jTidHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 203, 274, 23));
+        add(jTidHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 203, 276, 25));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);

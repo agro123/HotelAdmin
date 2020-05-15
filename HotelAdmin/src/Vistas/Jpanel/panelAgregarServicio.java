@@ -51,6 +51,9 @@ public class panelAgregarServicio extends javax.swing.JPanel {
         jTprecio = new javax.swing.JTextField();
         jTNombre = new javax.swing.JTextField();
         jTcantidad = new javax.swing.JTextField();
+        jLnombre = new javax.swing.JLabel();
+        jLcantidad = new javax.swing.JLabel();
+        jLprecio = new javax.swing.JLabel();
         jBcancelar = new javax.swing.JButton();
         jBguardar = new javax.swing.JButton();
         jLfondo = new javax.swing.JLabel();
@@ -58,7 +61,6 @@ public class panelAgregarServicio extends javax.swing.JPanel {
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTprecio.setBackground(new java.awt.Color(241, 242, 246));
         jTprecio.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTprecio.setForeground(new java.awt.Color(153, 153, 153));
         jTprecio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -72,9 +74,8 @@ public class panelAgregarServicio extends javax.swing.JPanel {
                 jTprecioKeyTyped(evt);
             }
         });
-        add(jTprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 190, 30));
+        add(jTprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 322, 276, 25));
 
-        jTNombre.setBackground(new java.awt.Color(241, 242, 246));
         jTNombre.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTNombre.setForeground(new java.awt.Color(153, 153, 153));
         jTNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -88,9 +89,8 @@ public class panelAgregarServicio extends javax.swing.JPanel {
                 jTNombreKeyTyped(evt);
             }
         });
-        add(jTNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 190, 30));
+        add(jTNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 184, 276, 25));
 
-        jTcantidad.setBackground(new java.awt.Color(241, 242, 246));
         jTcantidad.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTcantidad.setForeground(new java.awt.Color(153, 153, 153));
         jTcantidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -104,33 +104,52 @@ public class panelAgregarServicio extends javax.swing.JPanel {
                 jTcantidadKeyTyped(evt);
             }
         });
-        add(jTcantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 190, 30));
+        add(jTcantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 250, 276, 25));
 
-        jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-seleccionado.png"))); // NOI18N
-        jBcancelar.setBorder(new javax.swing.border.MatteBorder(null));
+        jLnombre.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
+        jLnombre.setForeground(new java.awt.Color(191, 191, 191));
+        jLnombre.setText("Nombre");
+        add(jLnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 152, -1, -1));
+
+        jLcantidad.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
+        jLcantidad.setForeground(new java.awt.Color(191, 191, 191));
+        jLcantidad.setText("Cantidad");
+        add(jLcantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 222, -1, -1));
+
+        jLprecio.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
+        jLprecio.setForeground(new java.awt.Color(191, 191, 191));
+        jLprecio.setText("Precio");
+        add(jLprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 291, -1, -1));
+
+        jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
+        jBcancelar.setBorder(null);
+        jBcancelar.setBorderPainted(false);
         jBcancelar.setContentAreaFilled(false);
+        jBcancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBcancelar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-seleccionado.png"))); // NOI18N
         jBcancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBcancelarActionPerformed(evt);
             }
         });
-        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 130, 50));
+        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 374, 130, 50));
 
-        jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-seleccionado.png"))); // NOI18N
-        jBguardar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-SinSele.png"))); // NOI18N
+        jBguardar.setBorder(null);
         jBguardar.setContentAreaFilled(false);
-        jBguardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-seleccionado.png"))); // NOI18N
+        jBguardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBguardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/GuardarSele.png"))); // NOI18N
         jBguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBguardarActionPerformed(evt);
             }
         });
-        add(jBguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, -1, -1));
+        add(jBguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(529, 374, -1, -1));
 
-        jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo-servicios.png"))); // NOI18N
+        jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MarcoServicio.png"))); // NOI18N
+        jLfondo.setOpaque(true);
         jLfondo.setPreferredSize(new java.awt.Dimension(739, 429));
-        add(jLfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 380, 340));
+        add(jLfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 68, 575, 397));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
@@ -244,7 +263,10 @@ public class panelAgregarServicio extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBcancelar;
     private javax.swing.JButton jBguardar;
+    private javax.swing.JLabel jLcantidad;
     private javax.swing.JLabel jLfondo;
+    private javax.swing.JLabel jLnombre;
+    private javax.swing.JLabel jLprecio;
     private javax.swing.JTextField jTNombre;
     private javax.swing.JTextField jTcantidad;
     private javax.swing.JTextField jTprecio;

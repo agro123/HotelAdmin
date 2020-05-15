@@ -51,40 +51,41 @@ public class HabitacionListaGUI extends javax.swing.JPanel {
         jTbuscador = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPmensajes = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jBbuscar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTbuscador.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
-        jTbuscador.setForeground(new java.awt.Color(204, 204, 204));
-        jTbuscador.setText("Buscador...");
+        jTbuscador.setFont(new java.awt.Font("Decker", 0, 15)); // NOI18N
+        jTbuscador.setForeground(new java.awt.Color(191, 191, 191));
+        jTbuscador.setText("Buscar habitación por ID");
         jTbuscador.setBorder(null);
         jTbuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTbuscadorActionPerformed(evt);
             }
         });
-        add(jTbuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 360, 20));
+        add(jTbuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 47, 174, 19));
 
+        jScrollPane3.setBorder(null);
         jScrollPane3.setHorizontalScrollBar(null);
 
         jPmensajes.setBackground(new java.awt.Color(255, 255, 255));
         jPmensajes.setLayout(new java.awt.GridLayout(0, 3, 0, 1));
         jScrollPane3.setViewportView(jPmensajes);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 730, 400));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 90, 710, 340));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Buscador.png"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
-
-        jBbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
+        jBbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar-azul.png"))); // NOI18N
         jBbuscar.setBorder(null);
         jBbuscar.setBorderPainted(false);
         jBbuscar.setContentAreaFilled(false);
         jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 40, 30));
+        add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 44, 24, 24));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ContornoHabitacion.png"))); // NOI18N
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 84, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     public void CargarLista
@@ -216,7 +217,7 @@ public class HabitacionListaGUI extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPmensajes;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTbuscador;

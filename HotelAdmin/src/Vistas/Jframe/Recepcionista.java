@@ -53,18 +53,22 @@ public class Recepcionista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jBreservar = new javax.swing.JButton();
         jBclientes = new javax.swing.JButton();
         jBcheckIn = new javax.swing.JButton();
         jBcheckOut = new javax.swing.JButton();
         jBservicios = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
         jPcontenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1118, 680));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setMinimumSize(new java.awt.Dimension(1118, 680));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1118, 680));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(72, 159, 229));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -87,6 +91,11 @@ public class Recepcionista extends javax.swing.JFrame {
         jBclientes.setContentAreaFilled(false);
         jBclientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBclientes.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ClienteBotonSele.png"))); // NOI18N
+        jBclientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBclientesActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 121, -1, -1));
 
         jBcheckIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CheckInBoton.png"))); // NOI18N
@@ -106,6 +115,11 @@ public class Recepcionista extends javax.swing.JFrame {
         jBcheckOut.setContentAreaFilled(false);
         jBcheckOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBcheckOut.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CheckoutBotonSele.png"))); // NOI18N
+        jBcheckOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcheckOutActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBcheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 301, -1, -1));
 
         jBservicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/serviciosBoton.png"))); // NOI18N
@@ -113,16 +127,17 @@ public class Recepcionista extends javax.swing.JFrame {
         jBservicios.setContentAreaFilled(false);
         jBservicios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBservicios.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/serviciosBotonSele.png"))); // NOI18N
+        jBservicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBserviciosActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBservicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 468, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 97, 680));
-
-        jPanel2.setMinimumSize(new java.awt.Dimension(1118, 680));
-        jPanel2.setPreferredSize(new java.awt.Dimension(1118, 680));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 97, 680));
 
         jPcontenedor.setLayout(new java.awt.BorderLayout());
-        jPanel2.add(jPcontenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 0, 1021, 680));
+        jPanel2.add(jPcontenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 0, 1118, 680));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1118, 680));
 
@@ -164,6 +179,64 @@ public class Recepcionista extends javax.swing.JFrame {
         controlador.setNumEmpleado(numEmpleado);
         
     }//GEN-LAST:event_jBreservarActionPerformed
+
+    private void jBclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBclientesActionPerformed
+        // TODO add your handling code here:
+        
+        jBcheckOut.setSelected(false);
+        jBclientes.setSelected(false);       
+        jBservicios.setSelected(false);
+        jBcheckIn.setSelected(false);
+        jBreservar.setSelected(false);
+        jBclientes.setSelected(true);
+        
+        jPcontenedor.setVisible(false);
+        ClienteRecepcionista cli = new ClienteRecepcionista();
+        jPcontenedor.removeAll();
+        jPcontenedor.add(cli);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
+        
+    }//GEN-LAST:event_jBclientesActionPerformed
+
+    private void jBcheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcheckOutActionPerformed
+        // TODO add your handling code here:
+        
+        jBclientes.setSelected(false);       
+        jBservicios.setSelected(false);
+        jBcheckIn.setSelected(false);
+        jBreservar.setSelected(false);
+        jBclientes.setSelected(false);
+        jBcheckOut.setSelected(true);
+        
+        jPcontenedor.setVisible(false);
+        CheckOut check = new CheckOut();
+        jPcontenedor.removeAll();
+        jPcontenedor.add(check);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
+    }//GEN-LAST:event_jBcheckOutActionPerformed
+
+    private void jBserviciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBserviciosActionPerformed
+        // TODO add your handling code here:
+        jBclientes.setSelected(false);           
+        jBcheckIn.setSelected(false);
+        jBreservar.setSelected(false);
+        jBclientes.setSelected(false);
+        jBcheckOut.setSelected(false);
+        jBservicios.setSelected(true);
+        
+        jPcontenedor.setVisible(false);
+        ServiciosRecepcionista ser = new ServiciosRecepcionista ();
+        jPcontenedor.removeAll();
+        jPcontenedor.add(ser);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
+                                         
+    }//GEN-LAST:event_jBserviciosActionPerformed
 
     
     

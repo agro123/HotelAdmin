@@ -122,7 +122,10 @@ public class EmpleadoFormulario extends javax.swing.JPanel {
         jTnombre = new javax.swing.JTextField();
         jTtelefono = new javax.swing.JTextField();
         jTdireccion = new javax.swing.JTextField();
+        jTapellido = new javax.swing.JTextField();
         jTcargo = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jTsalario = new javax.swing.JTextField();
         jTcorreo = new javax.swing.JTextField();
         jCestado = new javax.swing.JComboBox<>();
@@ -133,81 +136,110 @@ public class EmpleadoFormulario extends javax.swing.JPanel {
 
         jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
         jBcancelar.setContentAreaFilled(false);
+        jBcancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBcancelar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-seleccionado.png"))); // NOI18N
         jBcancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBcancelarActionPerformed(evt);
             }
         });
-        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 130, 50));
+        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 405, 130, 50));
 
-        jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-blanco.png"))); // NOI18N
+        jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-SinSele.png"))); // NOI18N
         jBguardar.setBorder(null);
         jBguardar.setBorderPainted(false);
         jBguardar.setContentAreaFilled(false);
+        jBguardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBguardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-seleccionado.png"))); // NOI18N
         jBguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBguardarActionPerformed(evt);
             }
         });
-        add(jBguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, -1, -1));
+        add(jBguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 405, -1, -1));
 
-        jTcedula.setBackground(new java.awt.Color(241, 242, 246));
         jTcedula.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTcedula.setForeground(new java.awt.Color(153, 153, 153));
+        jTcedula.setText("Cédula");
         jTcedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTcedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 190, 30));
+        add(jTcedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 148, 276, 25));
 
-        jTnombre.setBackground(new java.awt.Color(241, 242, 246));
         jTnombre.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTnombre.setForeground(new java.awt.Color(153, 153, 153));
+        jTnombre.setText("Nombre");
         jTnombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 190, 30));
+        add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 198, 276, 25));
 
-        jTtelefono.setBackground(new java.awt.Color(241, 242, 246));
         jTtelefono.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTtelefono.setForeground(new java.awt.Color(153, 153, 153));
+        jTtelefono.setText("Teléfono");
         jTtelefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 190, 30));
+        add(jTtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(533, 148, 276, 25));
 
-        jTdireccion.setBackground(new java.awt.Color(241, 242, 246));
         jTdireccion.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTdireccion.setForeground(new java.awt.Color(153, 153, 153));
+        jTdireccion.setText("Dirección");
         jTdireccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 190, 30));
+        add(jTdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(533, 198, 276, 25));
 
-        jTcargo.setBackground(new java.awt.Color(241, 242, 246));
+        jTapellido.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jTapellido.setForeground(new java.awt.Color(153, 153, 153));
+        jTapellido.setText("Apellido");
+        jTapellido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jTapellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTapellidoActionPerformed(evt);
+            }
+        });
+        add(jTapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 248, 276, 25));
+
         jTcargo.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTcargo.setForeground(new java.awt.Color(153, 153, 153));
+        jTcargo.setText("Cargo");
         jTcargo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 190, 30));
+        add(jTcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(533, 248, 276, 25));
 
-        jTsalario.setBackground(new java.awt.Color(241, 242, 246));
+        jLabel2.setFont(new java.awt.Font("Decker", 0, 17)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(112, 112, 112));
+        jLabel2.setText("Empleado");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 94, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel1.setText("Estado");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(533, 302, -1, -1));
+
         jTsalario.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTsalario.setForeground(new java.awt.Color(153, 153, 153));
+        jTsalario.setText("Salario");
         jTsalario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTsalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 190, 30));
+        jTsalario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTsalarioActionPerformed(evt);
+            }
+        });
+        add(jTsalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 298, 276, 25));
 
-        jTcorreo.setBackground(new java.awt.Color(241, 242, 246));
         jTcorreo.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTcorreo.setForeground(new java.awt.Color(153, 153, 153));
+        jTcorreo.setText("Correo");
         jTcorreo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jTcorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTcorreoActionPerformed(evt);
             }
         });
-        add(jTcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 190, 30));
+        add(jTcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 348, 276, 25));
 
         jCestado.setBackground(new java.awt.Color(241, 242, 246));
+        jCestado.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jCestado.setForeground(new java.awt.Color(153, 153, 153));
         jCestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2" }));
-        add(jCestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 190, 30));
+        add(jCestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(589, 298, 220, 25));
 
-        jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo-emp.png"))); // NOI18N
+        jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/marcoEmpleado.png"))); // NOI18N
         jLfondo.setPreferredSize(new java.awt.Dimension(739, 429));
-        add(jLfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        add(jLfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 73, 695, 388));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
@@ -252,12 +284,23 @@ public class EmpleadoFormulario extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTcorreoActionPerformed
 
+    private void jTapellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTapellidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTapellidoActionPerformed
+
+    private void jTsalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTsalarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTsalarioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBcancelar;
     private javax.swing.JButton jBguardar;
     private javax.swing.JComboBox<String> jCestado;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLfondo;
+    private javax.swing.JTextField jTapellido;
     private javax.swing.JTextField jTcargo;
     private javax.swing.JTextField jTcedula;
     private javax.swing.JTextField jTcorreo;
