@@ -5,8 +5,10 @@
  */
 package Vistas.Jpanel;
 
+import java.awt.Container;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
@@ -64,6 +66,7 @@ public class jPhabitacionCheckIn extends javax.swing.JPanel {
         jLprecio = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 153, 204));
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setOpaque(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,14 +122,17 @@ public class jPhabitacionCheckIn extends javax.swing.JPanel {
     }//GEN-LAST:event_formMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int dialog = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null, "Desea "
-            + "seleccionar la Habitación "+numeroHabitacion, "Eliminar", dialog);
-        if (result == 0){
+        jButton1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 102, 255))); 
             jLabelHab.setText(""+numeroHabitacion);
-            
-        }     
-          
+            JPanel panel = (JPanel)getParent();
+            for(int a = 0; a < panel.getComponentCount(); a++){
+                if(!panel.getComponent(a).equals(this)){
+                    jPhabitacionCheckIn panelsito;
+                    panelsito = (jPhabitacionCheckIn)panel.getComponent(a);
+                    panelsito.jButton1.setBorder(null);
+                    System.out.println("No son Iguales"+" "+a);
+                }   
+            }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

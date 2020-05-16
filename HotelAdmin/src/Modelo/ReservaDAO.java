@@ -25,14 +25,14 @@ public class ReservaDAO {
     
    
     
-    public void mensajeError(SQLException ex){
+    public static void mensajeError(SQLException ex){
 
         JOptionPane.showMessageDialog(null,"Código "+
                     ex.getErrorCode() + "\n Error" + ex.getMessage());
     }
     
     
-    public int extraerUltimoId()
+    public static int extraerUltimoId()
     {
         Connection con = null;
         PreparedStatement pstm = null;
@@ -74,7 +74,7 @@ public class ReservaDAO {
     
     
     
-    public int grabarReserva (Reserva reserva)
+    public static int grabarReserva (Reserva reserva)
     {
         Connection con = null;
         PreparedStatement pstm;
@@ -115,7 +115,7 @@ public class ReservaDAO {
     
     
         
-    public ArrayList <Reserva> listadoReservas(){      
+    public static  ArrayList <Reserva> listadoReservas(){      
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -159,7 +159,7 @@ public class ReservaDAO {
     }
     
     
-    public Reserva extraerReserva_porID(int idReserva)
+    public static Reserva extraerReserva_porID(int idReserva)
     {
         Connection con = null;
         PreparedStatement pstm = null;

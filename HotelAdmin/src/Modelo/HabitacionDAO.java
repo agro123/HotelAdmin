@@ -152,7 +152,8 @@ public class HabitacionDAO {
             con = Fachada.getConnection(); 
             String sql="";
                        
-            sql = "SELECT * FROM habitacion ORDER BY id_habitacion";            
+            sql = "SELECT * FROM habitacion where"
+                    + " estado = true ORDER BY id_habitacion ";            
                
             pstm = con.prepareStatement(sql);
    

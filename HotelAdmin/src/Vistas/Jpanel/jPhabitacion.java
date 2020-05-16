@@ -154,7 +154,7 @@ public class jPhabitacion extends javax.swing.JPanel {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
         int dialog = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null, "Desea continuar?", "Mensaje", dialog);
+        int result = JOptionPane.showConfirmDialog(this, "Desea continuar?", "Mensaje", dialog);
         if (result == 0) {
            if(validadorPanel == "actualizar"){
                 cambiarPanel();

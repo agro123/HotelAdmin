@@ -28,7 +28,7 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Habitación
      */
     Habitaciones Jframehabitaciones;
-    Services JframeServices;
+   
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -258,10 +258,8 @@ public class Principal extends javax.swing.JFrame {
         
         jPcontenedor.setVisible(false);
         
-        RoomServicesDAO modelo = new RoomServicesDAO();
+        Services JframeServices;
         JframeServices = new Services();
-        ControllerServicios controladorServicios = new ControllerServicios(JframeServices, modelo);
-        JframeServices.setControladorServicios(controladorServicios);
         jPcontenedor.removeAll();
         jPcontenedor.add(JframeServices);
         jPcontenedor.revalidate();

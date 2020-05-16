@@ -16,39 +16,31 @@ import java.util.GregorianCalendar;
 public class Fecha {
 
     public static Timestamp crearFechaTimeStamp() {
-
         Calendar calendar = Calendar.getInstance();
         java.util.Date now = calendar.getTime();
         Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
         return currentTimestamp;
-        
-
     }
     
     
     public static Timestamp cambiarFecha(Date fecha){
-        
         Timestamp ts = new Timestamp(fecha.getTime());
         return ts;
-        
    }
    
-    public static Date dateTomorrow(Date now)
-    {
-        
+    public static Date dateTomorrow(Date now){
         Date f = new Date(now.getTime()+86400000);
         return f;
     }
     
     
-    public static Date dateYesterday(Date now)
-    {
-        
+    
+    public static Date dateYesterday(Date now){
         Date f = new Date(now.getTime()-86400000);
         return f;
     }
     
-   
+   /*
     public static Timestamp crearFechaTimeStampEspecifico(int año,int mes,int dia)
     {
         Calendar calendar = Calendar.getInstance();
@@ -57,5 +49,5 @@ public class Fecha {
         now = calendar.getTime();
         Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
         return currentTimestamp;
-    }
+    }*/
 }

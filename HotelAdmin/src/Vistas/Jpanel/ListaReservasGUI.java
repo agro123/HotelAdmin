@@ -5,6 +5,10 @@
  */
 package Vistas.Jpanel;
 
+import Modelo.Reserva;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+
 /**
  *
  * @author nicol
@@ -33,6 +37,38 @@ public class ListaReservasGUI extends javax.swing.JPanel {
         jPcontenido.repaint();
     }
 
+    
+    public void cargarListaReservas(ArrayList<Reserva> lista_res){
+        
+        jPcontenido.removeAll();
+        for (int i = 0; i < lista_res.size(); i++) {
+            
+            int num_res = lista_res.get(i).getNumero_reserva();
+            int id_cli = lista_res.get(i).getNumCliente();
+            int id_hab = lista_res.get(i).getNum_Habitacion();
+            int cant_per = lista_res.get(i).getNum_Personas();
+            
+            String fech_in = lista_res.get(i).getFecha_ingreso().toString();
+            String fech_out = lista_res.get(i).getFecha_salida().toString();
+        
+           
+            
+            
+            jPreservasHospedaje jp = new jPreservasHospedaje
+                    (num_res,id_cli,id_hab,cant_per,fech_in,fech_out);
+            
+            
+            
+            jPcontenido.add(jp);  
+              
+           
+        }
+        
+        jPcontenido.revalidate();
+        jPcontenido.repaint();
+        
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

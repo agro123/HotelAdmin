@@ -11,6 +11,8 @@ import Vistas.Jpanel.ListaReservasGUI;
 import Vistas.Jpanel.RealizarReservaGUI;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,22 +25,20 @@ public class Reservas extends javax.swing.JPanel {
      * Creates new form Reserva
      */
     
-    ListaReservasGUI pListareserva;
-    RealizarReservaGUI pRealizarReserva;
+    //ListaReservasGUI pListareserva;
+    //RealizarReservaGUI pRealizarReserva;
     
     public Reservas() {
         initComponents();
-        pListareserva = new ListaReservasGUI();
-        pRealizarReserva = new RealizarReservaGUI();
         seleccionarPrimero();
-        
     }
     
     public void seleccionarPrimero(){
         jBlistaReserva.setSelected(false); 
-        jBrrealizarReserva.setSelected(true);
-                
+        jBrrealizarReserva.setSelected(true);  
         jPcontenedor.removeAll();
+        RealizarReservaGUI pRealizarReserva;
+        pRealizarReserva = new RealizarReservaGUI();
         jPcontenedor.add(pRealizarReserva);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
@@ -105,13 +105,12 @@ public class Reservas extends javax.swing.JPanel {
     private void jBlistaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlistaReservaActionPerformed
         // TODO add your handling code here:        
         jBrrealizarReserva.setSelected(false);
-        jBlistaReserva.setSelected(true); 
-           
+        jBlistaReserva.setSelected(true);  
         jPcontenedor.setVisible(false);
         jPcontenedor.setVisible(true);
         jPcontenedor.removeAll();
+        ListaReservasGUI pListareserva;
         pListareserva = new ListaReservasGUI();
-
         jPcontenedor.add(pListareserva);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
@@ -120,54 +119,7 @@ public class Reservas extends javax.swing.JPanel {
     }//GEN-LAST:event_jBlistaReservaActionPerformed
 
     
-    public void CargarHabitaciones(ArrayList<Habitacion> lista){
-        
-        pRealizarReserva.agregarHabitaciones(lista);
-        
-    }
-
-    public ListaReservasGUI getpListareserva() {
-        return pListareserva;
-    }
-
-    public RealizarReservaGUI getpRealizarReserva() {
-        return pRealizarReserva;
-    }
     
-    
-    
-    
-   
-
-    public String getTextjTfechaRserva() {
-        return pRealizarReserva.getjTnumPersonas().getText().trim();
-    }
-
-  
-    public String getTextjTidCliente() {
-        return pRealizarReserva.getjTidCliente().getText().trim();
-    }
-
-    public String getTextjTidHabitacion() {
-        return pRealizarReserva.getjTidHabitacion().getText().trim();
-        
-    }
-    
-    public Timestamp getFechaIngreso(){
-        return Fecha.cambiarFecha(pRealizarReserva.getJdFechaIngreso().getDate());
-    }
-    
-    public Timestamp getFechaSalida(){
-        return Fecha.cambiarFecha(pRealizarReserva.getJdFechaSalida().getDate());
-    }
-
-    
-    public void gestionMensajes(String mensaje, String titulo, int icono) {
-        JOptionPane.showMessageDialog(this, mensaje, titulo, icono);
-    }
-    
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBlistaReserva;
     private javax.swing.JButton jBrrealizarReserva;

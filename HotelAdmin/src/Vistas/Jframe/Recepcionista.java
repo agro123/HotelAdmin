@@ -19,7 +19,7 @@ public class Recepcionista extends javax.swing.JFrame {
     /**
      * Creates new form Recepcionista
      */
-    Reservas JframeReservas;
+    
     int numEmpleado;
     
     public Recepcionista(int numEmpleado) {
@@ -139,30 +139,27 @@ public class Recepcionista extends javax.swing.JFrame {
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);*/
+        
+        
     }//GEN-LAST:event_jBcheckInActionPerformed
 
     private void jBreservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBreservarActionPerformed
-        // TODO add your handling code here:
-             
+        // TODO add your handling code here: 
         jBclientes.setSelected(false);
         jBcheckOut.setSelected(false);
         jBclientes.setSelected(false);       
         jBservicios.setSelected(false);
         jBcheckIn.setSelected(false);
         jBreservar.setSelected(true);
-        
         jPcontenedor.setVisible(false);
+        Reservas JframeReservas;
         JframeReservas = new Reservas();
         jPcontenedor.removeAll();
         jPcontenedor.add(JframeReservas);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
-        
-        ReservaDAO modelo = new ReservaDAO();
-        ControllerReserva controlador = new ControllerReserva(JframeReservas,modelo);
-        controlador.setNumEmpleado(numEmpleado);
-        
+        ControllerReserva.setNumEmpleado(numEmpleado);
     }//GEN-LAST:event_jBreservarActionPerformed
 
     

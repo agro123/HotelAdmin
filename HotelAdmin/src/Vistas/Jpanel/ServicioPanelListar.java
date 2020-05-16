@@ -6,18 +6,23 @@
 package Vistas.Jpanel;
 
 import java.util.ArrayList;
+import Modelo.*;
+import Controladores.*;
+import Vistas.Jframe.Services;
 
 /**
  *
  * @author nicol
  */
-public class ServiciosListaGUI extends javax.swing.JPanel {
-    private ArrayList<jPservicio> servicios;
+public class ServicioPanelListar extends javax.swing.JPanel {
+
     /**
      * Creates new form ServiciosListaGUI
      */
-    public ServiciosListaGUI() {
-        servicios = new ArrayList<>();
+    Services frame_Servicios;
+
+    public ServicioPanelListar(Services s) {
+        frame_Servicios = s;
         initComponents();
         CargarLista();
     }
@@ -77,23 +82,23 @@ public class ServiciosListaGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTbuscadorActionPerformed
 
-    public void CargarLista(){
-        
-        //TODA LOS SERVICIOS SON AGREGADAS AL JPANEL 
+    public void CargarLista() {
+        //TODOS LOS SERVICIOS SON AGREGADOS AL JPANEL 
         //EN DONDE SE MUESTRA LOS DATOS PRINCIPALES DE LOS SERVICIOS
-        
-        for(int i=0;i<100;i++){
-        //jPservicio jp = new jPservicio(956,"Comida",5443.5,5); 
-        jPservicio jp = new jPservicio();
-        servicios.add(jp);
-          
-       }
-        for(int i=0;i<servicios.size();i++){          
-        jPmensajes.add(servicios.get(i));
-        
-        jPmensajes.revalidate();
-        jPmensajes.repaint();}
+        ArrayList<RoomServices> lista_roomServices;
+        lista_roomServices = ControllerServicios.desplegarServicios();
+        jPmensajes.removeAll();
+        for (int i = 0; i < lista_roomServices.size(); i++) {
+            int id_ser = lista_roomServices.get(i).getId_servicio();
+            String nombre_ser = lista_roomServices.get(i).getNombrePro();
+            double precio_ser = lista_roomServices.get(i).getPrecio();
+            int cantidad = lista_roomServices.get(i).getCantidad();
+            jPservicio jp;
+            jp = new jPservicio(id_ser, nombre_ser, precio_ser, cantidad, frame_Servicios);
+            jPmensajes.add(jp);
+        }
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
