@@ -18,7 +18,12 @@ import javax.swing.JOptionPane;
  * @author crist
  */
 public class HospedajeDAO {
-            public int grabarHospedaje(Hospedaje c){
+    private void mensajeError(SQLException ex){
+
+        JOptionPane.showMessageDialog(null,"Código "+
+                    ex.getErrorCode() + "\n Error" + ex.getMessage());
+    }
+    public int grabarHospedaje(Hospedaje c){
         Connection con = null;
         PreparedStatement pstm;
         pstm = null;
@@ -26,35 +31,34 @@ public class HospedajeDAO {
         rtdo = 0;
        try{
             con = Fachada.getConnection();
-            String sql = "INSERT INTO Hospedaje values (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Hospedaje values (?,?,?,?,?,?,?,?,?)";
             pstm = con.prepareStatement(sql);
-            pstm.setString(1, c.getIdHospedaje());
-            pstm.setString(2, c.getIdHabitacion());
-            pstm.setString(3, c.getIdCliente());
-            pstm.setString(4, c.getIdEmpleado());
+            pstm.setInt(1, c.getIdHospedaje());
+            pstm.setInt(2, c.getIdHabitacion());
+            pstm.setInt(3, c.getIdCliente());
+            pstm.setInt(4, c.getIdEmpleado());
             pstm.setTimestamp(5, c.getFechaIngreso());
             pstm.setTimestamp(6, c.getFechaSalida());
             pstm.setInt(7, c.getNumeroPesonas());
             pstm.setBoolean(8, c.getEstado());
+            pstm.setInt(9, c.getId_reserva());
             
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+            mensajeError(ex);
         }
         finally{
             try{
                 if(pstm!=null) pstm.close();                
             }
             catch(SQLException ex){
-                JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+                mensajeError(ex);
             }
         }
         return rtdo;
     } 
-     public int modificarHospedaje(Hospedaje c){      
+    public int modificarHospedaje(Hospedaje c){      
         Connection con = null;
         PreparedStatement pstm;
         pstm = null;
@@ -68,10 +72,10 @@ public class HospedajeDAO {
                     + " estado = ?"
                     +    "WHERE id_hospedaje=?";
             pstm = con.prepareStatement(sql);            
-            pstm.setString(8, c.getIdHospedaje());
-            pstm.setString(1, c.getIdHabitacion());
-            pstm.setString(2, c.getIdCliente());
-            pstm.setString(3, c.getIdEmpleado());
+            pstm.setInt(8, c.getIdHospedaje());
+            pstm.setInt(1, c.getIdHabitacion());
+            pstm.setInt(2, c.getIdCliente());
+            pstm.setInt(3, c.getIdEmpleado());
             pstm.setTimestamp(4, c.getFechaIngreso());
             pstm.setTimestamp(5, c.getFechaSalida());
             pstm.setInt(6, c.getNumeroPesonas());
@@ -80,22 +84,20 @@ public class HospedajeDAO {
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+            mensajeError(ex);
         }
         finally{
             try{
                 if(pstm!=null) pstm.close();                
             }
             catch(SQLException ex){
-                JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+                mensajeError(ex);
             }
         }
         return rtdo;
     }
      
-     public int borrarHospedaje(String id_hospedaje){      
+    public int borrarHospedaje(String id_hospedaje){      
         Connection con = null;
         PreparedStatement pstm = null;
         int rtdo;
@@ -110,21 +112,55 @@ public class HospedajeDAO {
             return rtdo;
         }
         catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+            mensajeError(ex);
         } 
         finally{
             try{
                 if(pstm!=null) pstm.close();                
             }
             catch(SQLException ex){
-                JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+                mensajeError(ex);
             }
         }
         return rtdo;
-    } 
-      public ArrayList<Hospedaje> listadoHospedaje(int s){ 
+    }
+    public int extraerUltimoId()
+    {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        int id = 0;       
+        try {
+            con = Fachada.getConnection();
+            String sql = "";
+
+            sql = "select  max(id_hospedaje) as id_hospedaje from hospedaje";
+            
+            pstm = con.prepareStatement(sql);
+            
+            rs = pstm.executeQuery();
+            
+            while (rs.next()) {
+                id = rs.getInt("id_hospedaje");
+                
+            }
+        } catch (SQLException ex) {
+            mensajeError(ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException ex) {
+                mensajeError(ex);
+            }
+        }
+        return id;
+    }
+    public ArrayList<Hospedaje> listadoHospedaje(int s){ 
           //si s=1 entonces muestra una vista con datos de la habitacion
         Connection con = null;
         PreparedStatement pstm = null;
@@ -137,7 +173,7 @@ public class HospedajeDAO {
                 sql = "SELECT * FROM hospedaje ORDER BY estado";            
             }else{
                 sql = "SELECT * FROM datos_hospedaje "
-                    + "ORDER BY id_habitacion";      
+                    + "ORDER BY habitacion";      
             }                     
             pstm = con.prepareStatement(sql);            
             
@@ -145,31 +181,31 @@ public class HospedajeDAO {
                         
            Hospedaje h = null;
             while(rs.next()){
-                if(s==0){
+                if(s==0){                    
                     h = new Hospedaje(
-                        rs.getString("id_hospedaje"),
-                        rs.getString("id_habitacion"),
-                        rs.getString("id_cliente"),
-                        rs.getString("id_empleado"),
+                        rs.getInt("id_hospedaje"),
+                        rs.getInt("id_habitacion"),
+                        rs.getInt("id_cliente"),
+                        rs.getInt("id_empleado"),
                         rs.getTimestamp("fecha_ingreso"),
                         rs.getTimestamp("fecha_salida"),
                         rs.getInt("num_personas"),
-                        rs.getBoolean("estado")                       
+                        rs.getBoolean("estado"),  
+                        rs.getInt("id_reserva")  
                     );           
                 } else {
                     h = new Hospedaje(
-                        rs.getString("id_hospedaje"),
-                        rs.getString("id_habitacion"),
-                        rs.getString("id_cliente"),
-                        rs.getString("piso")
+                        rs.getInt("id_hospedaje"),
+                        rs.getInt("habitacion"),
+                        rs.getInt("cedula_cliente"),
+                        rs.getInt("piso")
                     );
                 }
                 listado.add(h);
             }
         }
         catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+            mensajeError(ex);
         }
         finally{
             try{
@@ -177,8 +213,7 @@ public class HospedajeDAO {
                 if(pstm!=null) pstm.close();                
             }
             catch(SQLException ex){
-                JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+                mensajeError(ex);
             }
         }
         return listado;

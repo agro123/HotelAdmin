@@ -33,7 +33,8 @@ public class LoginDAO {
         }
         catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+                        ex.getErrorCode() + "\nError : "
+                                + "Ocurrio un error al almacenar el usuario");
         }
         finally{
             try{
@@ -41,7 +42,8 @@ public class LoginDAO {
             }
             catch(SQLException ex){
                 JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+                        ex.getErrorCode() + "\nError : "
+                                + "Ocurrio un error al almacenar el usuario");
             }
         }
         return rtdo;
@@ -141,7 +143,8 @@ public class LoginDAO {
         }
         catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+                        ex.getErrorCode() + "\nError :" + 
+                                "Ah ocurrido un error durante la verificacion");
         }
         finally{
             try{
@@ -150,7 +153,8 @@ public class LoginDAO {
             }
             catch(SQLException ex){
                 JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+                        ex.getErrorCode() + "\nError :" + 
+                                "Ah ocurrido un error durante la verificacion");
             }
         }
         return listado;
