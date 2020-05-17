@@ -46,46 +46,44 @@ public class panelModificarServicio extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTbuscador = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
         jPmensajes = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTbuscador = new javax.swing.JTextField();
         jBbuscar = new javax.swing.JButton();
 
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTbuscador.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
-        jTbuscador.setForeground(new java.awt.Color(204, 204, 204));
-        jTbuscador.setText("Buscador...");
+        jScrollPane3.setBorder(null);
+        jScrollPane3.setHorizontalScrollBar(null);
+
+        jPmensajes.setBackground(new java.awt.Color(255, 255, 255));
+        jPmensajes.setLayout(new java.awt.GridLayout(0, 3, 0, 1));
+        jScrollPane3.setViewportView(jPmensajes);
+
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 90, 710, 340));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ContornoHabitacion.png"))); // NOI18N
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 84, -1, -1));
+
+        jTbuscador.setFont(new java.awt.Font("Decker", 0, 15)); // NOI18N
+        jTbuscador.setForeground(new java.awt.Color(191, 191, 191));
+        jTbuscador.setText("Buscar servicio por nombre");
         jTbuscador.setBorder(null);
         jTbuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTbuscadorActionPerformed(evt);
             }
         });
-        add(jTbuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 360, 20));
+        add(jTbuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 47, 230, 19));
 
-        jScrollPane2.setToolTipText("");
-        jScrollPane2.setHorizontalScrollBar(null);
-        jScrollPane2.setMaximumSize(new java.awt.Dimension(706, 374));
-
-        jPmensajes.setBackground(new java.awt.Color(255, 255, 255));
-        jPmensajes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
-        jPmensajes.setLayout(new java.awt.GridLayout(0, 3, 0, 1));
-        jScrollPane2.setViewportView(jPmensajes);
-
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 730, 400));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Buscador.png"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
-
-        jBbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
+        jBbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar-azul.png"))); // NOI18N
         jBbuscar.setBorder(null);
         jBbuscar.setBorderPainted(false);
         jBbuscar.setContentAreaFilled(false);
         jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 40, 30));
+        add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 44, 24, 24));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTbuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbuscadorActionPerformed
@@ -147,9 +145,9 @@ public class panelModificarServicio extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPmensajes;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTbuscador;
     // End of variables declaration//GEN-END:variables
 }

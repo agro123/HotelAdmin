@@ -249,6 +249,55 @@ public class ReservaDAO {
         return rtdo;
     }
     
+ //----------------------------------------------------------------------------
+    public Reserva getReserva(int idcliente)
+    {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        Reserva objReserva = new Reserva();
+        
+        try {
+            con = Fachada.getConnection();
+            String sql = "";
+
+            sql     = "SELECT * FROM reserva"      
+                    + " WHERE id_cliente = ?";   
+            
+            pstm = con.prepareStatement(sql);
+            pstm.setInt(1, idcliente);
+            rs = pstm.executeQuery();
+            
+            while (rs.next()) {
+                objReserva = new Reserva();
+                objReserva.setNumero_reserva(rs.getInt("id_reserva"));
+                objReserva.setNum_Habitacion(rs.getInt("id_habitacion"));
+                objReserva.setNumCliente(rs.getInt("id_cliente"));
+                objReserva.setNum_Empleado(rs.getInt("id_empleado"));
+                objReserva.setFecha_reserva(rs.getTimestamp("fecha_reserva"));
+                objReserva.setFecha_ingreso(rs.getTimestamp("fecha_ingreso"));
+                objReserva.setFecha_salida(rs.getTimestamp("fecha_salida"));
+                objReserva.setNum_Personas(rs.getInt("num_personas"));
+                
+            }
+        } catch (SQLException ex) {
+            mensajeError(ex);
+         
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException ex) {
+                mensajeError(ex);
+            }
+        }
+        return objReserva;    
+    }
+//------------------------------------------------------------------------------    
     
     public int borrarReserva(int id_reserva){      
         Connection con = null;

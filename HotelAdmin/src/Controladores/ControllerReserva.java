@@ -35,6 +35,9 @@ public class ControllerReserva {
     int numEmpleado;
     boolean verCliente;
     
+    public ControllerReserva(){
+        
+    }
     public ControllerReserva(Reservas vista,ReservaDAO modelo) {
         verCliente = false;
         ReservasListener escucha = new ReservasListener();
@@ -124,9 +127,13 @@ public class ControllerReserva {
             
         
     }
-            
-    
-    
+//------------------------------------------------------------------------------           
+    public Reserva getReserva(int idcliente){
+        ReservaDAO modelo = new ReservaDAO();
+        Reserva r =  modelo.getReserva(idcliente);        
+        return r;
+    }
+//------------------------------------------------------------------------------    
     
     
     public class ReservasListener implements ItemListener, ActionListener{
@@ -150,8 +157,8 @@ public class ControllerReserva {
                         vista.getpRealizarReserva().setearCampos();
                         cargarListaHabitaciones();
                     }else{
-                        JOptionPane.showMessageDialog(null,"No existe el cliente "
-                                + "en la base de datos");
+                        JOptionPane.showMessageDialog(null,
+                                "No existe el cliente en la base de datos");
                     }
                         
                 }
@@ -164,14 +171,7 @@ public class ControllerReserva {
                 
                 
             }
-        }
-            
-                
-        
-        
-        
-        
-        
+        }  
     }
 
     public void setNumEmpleado(int numEmpleado) {

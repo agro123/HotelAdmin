@@ -17,7 +17,11 @@ public class HabitacionDAO {
     public HabitacionDAO(){
         
     }
-    
+    public void mensajeError(SQLException ex){
+
+        JOptionPane.showMessageDialog(null,"Código "+
+                    ex.getErrorCode() + "\n Error" + ex.getMessage());
+    }
     /**
      * 
      * @param h Objeto de la clase Habitacion a grabar
@@ -42,16 +46,14 @@ public class HabitacionDAO {
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"Habitación : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+            mensajeError(ex);
         }
         finally{
             try{
                 if(pstm!=null) pstm.close();                
             }
             catch(SQLException ex){
-                JOptionPane.showMessageDialog(null,"Habitación : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+                mensajeError(ex);
             }
         }
         return rtdo;
@@ -89,16 +91,14 @@ public int modificarHabitacion(Habitacion h){
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"Habitación : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+            mensajeError(ex);
         }
         finally{
             try{
                 if(pstm!=null) pstm.close();                
             }
             catch(SQLException ex){
-                JOptionPane.showMessageDialog(null,"Habitación : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+                mensajeError(ex);
             }
         }
         return rtdo;
@@ -123,16 +123,14 @@ public int modificarHabitacion(Habitacion h){
             return rtdo;
         }
         catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"Habitación : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+            mensajeError(ex);
         } 
         finally{
             try{
                 if(pstm!=null) pstm.close();                
             }
             catch(SQLException ex){
-                JOptionPane.showMessageDialog(null,"Habitación : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+                mensajeError(ex);
             }
         }
         return rtdo;
@@ -153,16 +151,11 @@ public int modificarHabitacion(Habitacion h){
             String sql="";
                        
             sql = "SELECT * FROM habitacion "
-                    + "Where estado = true"
                     + " ORDER BY id_habitacion";            
-               
             pstm = con.prepareStatement(sql);
-   
             rs = pstm.executeQuery();
-                        
             Habitacion objhabitacion = null;
-            while(rs.next()){
-                
+            while(rs.next()){                
                 objhabitacion = new Habitacion();
                 objhabitacion.setId_habitacion(rs.getInt("id_habitacion"));
                 objhabitacion.setTipo_habitacion(
@@ -177,8 +170,7 @@ public int modificarHabitacion(Habitacion h){
             }
         }
         catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"Código : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+            mensajeError(ex);
         }
         finally{
             try{
@@ -186,12 +178,10 @@ public int modificarHabitacion(Habitacion h){
                 if(pstm!=null) pstm.close();                
             }
             catch(SQLException ex){
-                JOptionPane.showMessageDialog(null,"Habitación : " + 
-                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+                mensajeError(ex);
             }
         }
         return listadoHabitacion;
-    
     }
     
 public Habitacion extraerHabitaciones_porID(int idHabitacion)
@@ -226,8 +216,7 @@ public Habitacion extraerHabitaciones_porID(int idHabitacion)
                                
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Código : "
-                    + ex.getErrorCode() + "\nError :" + ex.getMessage());
+            mensajeError(ex);
         } finally {
             try {
                 if (rs != null) {
@@ -237,13 +226,14 @@ public Habitacion extraerHabitaciones_porID(int idHabitacion)
                     pstm.close();
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Código : "
-                        + ex.getErrorCode() + "\nError :" + ex.getMessage());
+                mensajeError(ex);
             }
         }
         return habitacion;
         
     }
+
+
 
 
     

@@ -134,22 +134,30 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jTCedula = new javax.swing.JTextField();
         jTcorreo = new javax.swing.JTextField();
         jTtelefono = new javax.swing.JTextField();
+        jTapellido = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLcedula = new javax.swing.JLabel();
+        jLnombre = new javax.swing.JLabel();
+        jLapellido = new javax.swing.JLabel();
+        jLdirección = new javax.swing.JLabel();
+        jLtelefono = new javax.swing.JLabel();
+        jLtcorreo = new javax.swing.JLabel();
         jLfondo = new javax.swing.JLabel();
 
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-blanco.png"))); // NOI18N
+        jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-SinSele.png"))); // NOI18N
         jBguardar.setBorder(null);
         jBguardar.setBorderPainted(false);
         jBguardar.setContentAreaFilled(false);
-        jBguardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-seleccionado.png"))); // NOI18N
+        jBguardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/GuardarSele.png"))); // NOI18N
         jBguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBguardarActionPerformed(evt);
             }
         });
-        add(jBguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, -1, -1));
+        add(jBguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 371, -1, -1));
 
         jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
         jBcancelar.setContentAreaFilled(false);
@@ -159,38 +167,39 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
                 jBcancelarActionPerformed(evt);
             }
         });
-        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 130, 50));
+        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(362, 371, 130, 50));
 
-        jTdireccion.setBackground(new java.awt.Color(241, 242, 246));
         jTdireccion.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTdireccion.setForeground(new java.awt.Color(153, 153, 153));
         jTdireccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, 190, 30));
+        add(jTdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 310, 276, 25));
 
-        jTnombre.setBackground(new java.awt.Color(241, 242, 246));
         jTnombre.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTnombre.setForeground(new java.awt.Color(153, 153, 153));
         jTnombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 190, 30));
+        add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 246, 276, 25));
 
-        jTCedula.setBackground(new java.awt.Color(241, 242, 246));
         jTCedula.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTCedula.setForeground(new java.awt.Color(153, 153, 153));
+        jTCedula.setToolTipText("");
         jTCedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jTCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTCedulaActionPerformed(evt);
             }
         });
-        add(jTCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 190, 30));
+        add(jTCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 188, 276, 25));
 
-        jTcorreo.setBackground(new java.awt.Color(241, 242, 246));
         jTcorreo.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTcorreo.setForeground(new java.awt.Color(153, 153, 153));
         jTcorreo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        add(jTcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 190, 30));
+        jTcorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTcorreoActionPerformed(evt);
+            }
+        });
+        add(jTcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 188, 276, 25));
 
-        jTtelefono.setBackground(new java.awt.Color(241, 242, 246));
         jTtelefono.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTtelefono.setForeground(new java.awt.Color(153, 153, 153));
         jTtelefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -199,11 +208,51 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
                 jTtelefonoActionPerformed(evt);
             }
         });
-        add(jTtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 190, 30));
+        add(jTtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 246, 276, 25));
 
-        jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo-cli.png"))); // NOI18N
+        jTapellido.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jTapellido.setForeground(new java.awt.Color(153, 153, 153));
+        jTapellido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        add(jTapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 310, 276, 25));
+
+        jLabel1.setFont(new java.awt.Font("Decker", 0, 17)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(112, 112, 112));
+        jLabel1.setText("Cliente");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 111, 85, 21));
+
+        jLcedula.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jLcedula.setForeground(new java.awt.Color(191, 191, 191));
+        jLcedula.setText("Cédula");
+        add(jLcedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 162, 180, 20));
+
+        jLnombre.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jLnombre.setForeground(new java.awt.Color(191, 191, 191));
+        jLnombre.setText("Nombre");
+        add(jLnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 220, 180, 20));
+
+        jLapellido.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jLapellido.setForeground(new java.awt.Color(191, 191, 191));
+        jLapellido.setText("Apellido");
+        add(jLapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 284, 180, 20));
+
+        jLdirección.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jLdirección.setForeground(new java.awt.Color(191, 191, 191));
+        jLdirección.setText("Dirección");
+        add(jLdirección, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 284, 180, 20));
+
+        jLtelefono.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jLtelefono.setForeground(new java.awt.Color(191, 191, 191));
+        jLtelefono.setText("Teléfono");
+        add(jLtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 220, 180, 20));
+
+        jLtcorreo.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
+        jLtcorreo.setForeground(new java.awt.Color(191, 191, 191));
+        jLtcorreo.setText("Correo");
+        add(jLtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 162, 180, 20));
+
+        jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ContornoHabitacion.png"))); // NOI18N
         jLfondo.setPreferredSize(new java.awt.Dimension(739, 429));
-        add(jLfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        add(jLfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 84, 726, 354));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
@@ -228,12 +277,24 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTtelefonoActionPerformed
 
+    private void jTcorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTcorreoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBcancelar;
     private javax.swing.JButton jBguardar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLapellido;
+    private javax.swing.JLabel jLcedula;
+    private javax.swing.JLabel jLdirección;
     private javax.swing.JLabel jLfondo;
+    private javax.swing.JLabel jLnombre;
+    private javax.swing.JLabel jLtcorreo;
+    private javax.swing.JLabel jLtelefono;
     private javax.swing.JTextField jTCedula;
+    private javax.swing.JTextField jTapellido;
     private javax.swing.JTextField jTcorreo;
     private javax.swing.JTextField jTdireccion;
     private javax.swing.JTextField jTnombre;
