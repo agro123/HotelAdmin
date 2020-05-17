@@ -144,7 +144,7 @@ public class LoginDAO {
         catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"Código : " + 
                         ex.getErrorCode() + "\nError :" + 
-                                "Ah ocurrido un error durante la verificacion");
+                                "Ocurrio un error durante la verificacion");
         }
         finally{
             try{
@@ -154,7 +154,7 @@ public class LoginDAO {
             catch(SQLException ex){
                 JOptionPane.showMessageDialog(null,"Código : " + 
                         ex.getErrorCode() + "\nError :" + 
-                                "Ah ocurrido un error durante la verificacion");
+                                "Ocurrio un error durante la verificacion");
             }
         }
         return listado;
