@@ -86,6 +86,7 @@ public class CheckInReservaPreviaGUI extends javax.swing.JPanel {
        h.setFechaSalida(Timestamp.valueOf (jLfechaSalida.getText()));
        h.setEstado(true);
        h.setIdEmpleado(numEmpleado);
+       h.setId_reserva(Integer.parseInt(jLnumeroReserva.getText()));
        
       int i = ch.grabarHospedaje(h);
       if(i==1){

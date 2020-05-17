@@ -71,6 +71,7 @@ public class Reservas extends javax.swing.JPanel {
         jBrrealizarReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/RealizarReserva.png"))); // NOI18N
         jBrrealizarReserva.setBorder(null);
         jBrrealizarReserva.setContentAreaFilled(false);
+        jBrrealizarReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBrrealizarReserva.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/RealizarReservaSele.png"))); // NOI18N
         jBrrealizarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +83,7 @@ public class Reservas extends javax.swing.JPanel {
         jBlistaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ListaReserva.png"))); // NOI18N
         jBlistaReserva.setBorder(null);
         jBlistaReserva.setContentAreaFilled(false);
+        jBlistaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBlistaReserva.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ListaReservaSele.png"))); // NOI18N
         jBlistaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

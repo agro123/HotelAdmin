@@ -12,7 +12,7 @@ import java.util.Date;
  * @author crist
  */
 public class Hospedaje {
-    private int id_hospedaje, id_habitacion, id_cliente, id_empleado;
+    private int id_hospedaje, id_habitacion, id_cliente, id_empleado,id_reserva;
     private Timestamp fIngreso, fSalida;
     private int numPersonas;
     private boolean estado;
@@ -31,9 +31,10 @@ public class Hospedaje {
      this.numPersonas= 0;
      this.estado = true;
      this.piso = 0;
+     this.id_reserva = 0;
     }
     public Hospedaje(int iho, int iha, int icl, int iem, 
-            Timestamp fin, Timestamp fsa, int nump, boolean es ) {
+            Timestamp fin, Timestamp fsa, int nump, boolean es, int idr ) {
      Date fecha = new Date();
      this.id_hospedaje  = iho;
      this.id_habitacion  = iha;
@@ -43,6 +44,7 @@ public class Hospedaje {
      this.fSalida = fsa;
      this.numPersonas= nump;
      this.estado = es;
+     this.id_reserva = idr;
     }
     public Hospedaje(int iho, int iha, int icl,  int p ) {
      Date fecha = new Date();
@@ -87,6 +89,9 @@ public class Hospedaje {
     {
         this.estado = estado;
     }
+    public void setId_reserva(int idr){
+        this.id_reserva = idr;
+    }
     //-----------------------------GET Hospedaje--------------------------------
     public int getIdHospedaje ()
     {
@@ -122,6 +127,10 @@ public class Hospedaje {
     {
         return this.estado;
     }
-    
-    
+    public int getId_reserva(){
+        return this.id_reserva;
+    }
+    public int getPiso(){
+        return this.piso;
+    }
 }

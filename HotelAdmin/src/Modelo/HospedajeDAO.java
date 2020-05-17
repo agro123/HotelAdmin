@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  * @author crist
  */
 public class HospedajeDAO {
-    public void mensajeError(SQLException ex){
+    private void mensajeError(SQLException ex){
 
         JOptionPane.showMessageDialog(null,"Código "+
                     ex.getErrorCode() + "\n Error" + ex.getMessage());
@@ -31,7 +31,7 @@ public class HospedajeDAO {
         rtdo = 0;
        try{
             con = Fachada.getConnection();
-            String sql = "INSERT INTO Hospedaje values (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Hospedaje values (?,?,?,?,?,?,?,?,?)";
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, c.getIdHospedaje());
             pstm.setInt(2, c.getIdHabitacion());
@@ -41,6 +41,7 @@ public class HospedajeDAO {
             pstm.setTimestamp(6, c.getFechaSalida());
             pstm.setInt(7, c.getNumeroPesonas());
             pstm.setBoolean(8, c.getEstado());
+            pstm.setInt(9, c.getId_reserva());
             
             rtdo = pstm.executeUpdate();  
         }
@@ -172,7 +173,7 @@ public class HospedajeDAO {
                 sql = "SELECT * FROM hospedaje ORDER BY estado";            
             }else{
                 sql = "SELECT * FROM datos_hospedaje "
-                    + "ORDER BY id_habitacion";      
+                    + "ORDER BY habitacion";      
             }                     
             pstm = con.prepareStatement(sql);            
             
@@ -180,7 +181,7 @@ public class HospedajeDAO {
                         
            Hospedaje h = null;
             while(rs.next()){
-                if(s==0){
+                if(s==0){                    
                     h = new Hospedaje(
                         rs.getInt("id_hospedaje"),
                         rs.getInt("id_habitacion"),
@@ -189,13 +190,14 @@ public class HospedajeDAO {
                         rs.getTimestamp("fecha_ingreso"),
                         rs.getTimestamp("fecha_salida"),
                         rs.getInt("num_personas"),
-                        rs.getBoolean("estado")                       
+                        rs.getBoolean("estado"),  
+                        rs.getInt("id_reserva")  
                     );           
                 } else {
                     h = new Hospedaje(
                         rs.getInt("id_hospedaje"),
-                        rs.getInt("id_habitacion"),
-                        rs.getInt("id_cliente"),
+                        rs.getInt("habitacion"),
+                        rs.getInt("cedula_cliente"),
                         rs.getInt("piso")
                     );
                 }

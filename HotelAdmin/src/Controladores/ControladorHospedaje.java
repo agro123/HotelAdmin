@@ -28,7 +28,7 @@ public class ControladorHospedaje {
         return resultado; 
     }
 
-     public static ArrayList<Hospedaje> listadoActor(int s)
+     public static ArrayList<Hospedaje> listadoHospedaje(int s)
     {
         ArrayList<Hospedaje> listado;
         listado = new ArrayList();
@@ -36,13 +36,13 @@ public class ControladorHospedaje {
         listado = a.listadoHospedaje(s);
         return listado; 
     }
-      public static int borrarActor(String s)
+      public static int borrarHospedaje(String s)
     {
        HospedajeDAO a = new HospedajeDAO();
         int resultado = a.borrarHospedaje(s);
         return resultado; 
     }
-           public static int modificarActor(Hospedaje c)
+           public static int modificarHospedaje(Hospedaje c)
     {
         HospedajeDAO a = new HospedajeDAO();
         int resultado =a.modificarHospedaje(c);

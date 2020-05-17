@@ -7,26 +7,29 @@ package Vistas.Jframe;
 
 import Vistas.Jpanel.CheckInReservaPreviaGUI;
 import Vistas.Jpanel.CheckInSinReservaGUI;
+import Vistas.Jpanel.ListaHospedajesGUI;
 
 /**
  *
  * @author nicol
  */
 public class CheckIn extends javax.swing.JPanel {
-   //---------------------------------------------------------------------------
-    int numEmpleado;
-  
+
     /**
      * Creates new form NewJPanel
      */
-    public CheckIn(int numE) {
+   //--------------------------------------------------------------------------
+    int numEmpleado;
+    //--------------------------------------------------------------------------
+      public CheckIn(int numE) {
          numEmpleado = numE;
         initComponents();
         seleccionarPrimero();     
     }
     
-     public void seleccionarPrimero(){
+      public void seleccionarPrimero(){
         jBsinReserva.setSelected(false);
+        jBhospedajes.setSelected(false);
         jBreservaPrevia.setSelected(true); 
         
         CheckInReservaPreviaGUI check = 
@@ -52,6 +55,7 @@ public class CheckIn extends javax.swing.JPanel {
         jPcontenedor = new javax.swing.JPanel();
         jBreservaPrevia = new javax.swing.JButton();
         jBsinReserva = new javax.swing.JButton();
+        jBhospedajes = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(239, 239, 239));
@@ -65,6 +69,7 @@ public class CheckIn extends javax.swing.JPanel {
         jBreservaPrevia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ReservaPrevia.png"))); // NOI18N
         jBreservaPrevia.setBorder(null);
         jBreservaPrevia.setContentAreaFilled(false);
+        jBreservaPrevia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBreservaPrevia.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ReservaPrevia-Selección.png"))); // NOI18N
         jBreservaPrevia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +81,7 @@ public class CheckIn extends javax.swing.JPanel {
         jBsinReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/SinReserva.png"))); // NOI18N
         jBsinReserva.setBorder(null);
         jBsinReserva.setContentAreaFilled(false);
+        jBsinReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBsinReserva.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/SinReservaSelec.png"))); // NOI18N
         jBsinReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +89,18 @@ public class CheckIn extends javax.swing.JPanel {
             }
         });
         add(jBsinReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 115, -1, -1));
+
+        jBhospedajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/botonHospedajesSinSele.png"))); // NOI18N
+        jBhospedajes.setBorder(null);
+        jBhospedajes.setContentAreaFilled(false);
+        jBhospedajes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBhospedajes.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/botonHospedajesSele.png"))); // NOI18N
+        jBhospedajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBhospedajesActionPerformed(evt);
+            }
+        });
+        add(jBhospedajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 115, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Decker", 0, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(112, 112, 112));
@@ -94,15 +112,15 @@ public class CheckIn extends javax.swing.JPanel {
         // TODO add your handling code here:
       
         jPcontenedor.removeAll();
-        
         seleccionarPrimero();
     }//GEN-LAST:event_jBreservaPreviaActionPerformed
 
     private void jBsinReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsinReservaActionPerformed
         // TODO add your handling code here:
         jBreservaPrevia.setSelected(false); 
+        jBhospedajes.setSelected(false); 
         jBsinReserva.setSelected(true);
-           
+              
         jPcontenedor.setVisible(false);
         jPcontenedor.setVisible(true);
         jPcontenedor.removeAll();
@@ -113,8 +131,29 @@ public class CheckIn extends javax.swing.JPanel {
         jPcontenedor.setVisible(true);
     }//GEN-LAST:event_jBsinReservaActionPerformed
 
+    private void jBhospedajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBhospedajesActionPerformed
+        // TODO add your handling code here:
+        jBreservaPrevia.setSelected(false); 
+        jBsinReserva.setSelected(false);
+        jBhospedajes.setSelected(true);
+                  
+        jPcontenedor.setVisible(false);
+        jPcontenedor.setVisible(true);
+        jPcontenedor.removeAll();
+        ListaHospedajesGUI lista = new ListaHospedajesGUI();
+      //  CheckInSinReservaGUI check = new CheckInSinReservaGUI();      
+        jPcontenedor.add(lista);
+       // ListaHospedajesGUI list = new ListaHospedajesGUI();      
+      //  jPcontenedor.add(list);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
+        
+    }//GEN-LAST:event_jBhospedajesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBhospedajes;
     private javax.swing.JButton jBreservaPrevia;
     private javax.swing.JButton jBsinReserva;
     private javax.swing.JLabel jLabel1;
