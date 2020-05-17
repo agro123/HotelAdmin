@@ -6,6 +6,7 @@
 package Vistas.Jpanel;
 
 import java.awt.Container;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -50,6 +51,12 @@ public class jPhabitacionCheckIn extends javax.swing.JPanel {
         jLcapacidad.setText(String.valueOf(capacidad_));
        
     }
+
+    public JButton getjButton1() {
+        return jButton1;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

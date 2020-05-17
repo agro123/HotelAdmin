@@ -5,6 +5,7 @@
  */
 package Controladores;
 
+import static Controladores.ControllerServicios.gestionMensajes;
 import Modelo.HabitacionDAO;
 import Modelo.Reserva;
 import Modelo.ReservaDAO;
@@ -12,6 +13,8 @@ import Modelo.ReservaDAO;
 import Modelo.ClientDAO;
 import Modelo.Cliente;
 import Modelo.Habitacion;
+import Modelo.RoomServicesDAO;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -51,10 +54,10 @@ public class ControllerReserva {
     
     
     
-    public static ArrayList<Habitacion> cargarListaHabitaciones(){
+    public static ArrayList<Habitacion> cargarListaHabitaciones(Timestamp fi,Timestamp fs){
         ArrayList<Habitacion> lista;
-        HabitacionDAO modeloHab = new HabitacionDAO();
-        lista = modeloHab.listadoHabitacion();
+        ReservaDAO modeloHab = new ReservaDAO();
+        lista = modeloHab.listadoHabitacion(fi, fs);
         System.out.println(lista.size());
         return lista; 
     }
@@ -65,13 +68,13 @@ public class ControllerReserva {
         numeroReserva = modelo.extraerUltimoId();
     }
     
-    /*public void listarReservas()
+    public static ArrayList<Reserva> listarReservas()
     {
+        ReservaDAO modelo = new ReservaDAO();
         ArrayList<Reserva> lista_reservas;
         lista_reservas = modelo.listadoReservas();
-        vista.getpListareserva().cargarListaReservas(lista_reservas);
-        //vista.getPanelEliminar().CargarLista(lista_reservas, "eliminar");
-    }*/
+        return lista_reservas;
+    }
     
     public static void registrarReserva(Reserva reserva) {
         int resultado = 0;
@@ -98,6 +101,23 @@ public class ControllerReserva {
                 a = listaClientes.size();
             }
         }     
+    }
+    
+    
+    
+    public static void eliminarReserva(int ID) {
+        ReservaDAO modelo = new ReservaDAO();
+        if (modelo.borrarReserva(ID) == 1) {
+            gestionMensajes(
+                    "Registro Borrado con éxtio",
+                    "Confirmación de acción",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            gestionMensajes(
+                    "Error al borrar",
+                    "Confirmación de acción",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
                         
         

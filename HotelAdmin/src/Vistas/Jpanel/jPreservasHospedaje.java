@@ -5,6 +5,10 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControllerReserva;
+import javax.swing.JPanel;
+import javax.swing.JViewport;
+
 /**
  *
  * @author nicol
@@ -105,6 +109,11 @@ public class jPreservasHospedaje extends javax.swing.JPanel {
 
         jBeditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconEditar.png"))); // NOI18N
         jBeditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBeditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBeditarMouseClicked(evt);
+            }
+        });
         add(jBeditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 25, 16, 16));
 
         jBtodoPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ReservSinSele.png"))); // NOI18N
@@ -122,6 +131,20 @@ public class jPreservasHospedaje extends javax.swing.JPanel {
     private void jBtodoPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtodoPanelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtodoPanelActionPerformed
+
+    private void jBeditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBeditarMouseClicked
+        JPanel panel = (JPanel)getParent();
+        JPanel jvp = (JPanel)getParent();
+        JPanel jvp2 = (JPanel)getParent();
+        
+        //ControllerReserva.eliminarReserva(numero);
+        
+            System.out.println(panel.getClass());
+            System.out.println(jvp.getClass());
+            System.out.println(jvp2.getClass());
+        
+            
+    }//GEN-LAST:event_jBeditarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

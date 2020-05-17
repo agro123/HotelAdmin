@@ -30,20 +30,10 @@ public class Reservas extends javax.swing.JPanel {
     
     public Reservas() {
         initComponents();
-        seleccionarPrimero();
+        PanelRealizarReserva();
     }
     
-    public void seleccionarPrimero(){
-        jBlistaReserva.setSelected(false); 
-        jBrrealizarReserva.setSelected(true);  
-        jPcontenedor.removeAll();
-        RealizarReservaGUI pRealizarReserva;
-        pRealizarReserva = new RealizarReservaGUI();
-        jPcontenedor.add(pRealizarReserva);
-        jPcontenedor.revalidate();
-        jPcontenedor.repaint();
-        jPcontenedor.setVisible(true);
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,17 +86,18 @@ public class Reservas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBrrealizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBrrealizarReservaActionPerformed
-        // TODO add your handling code here:
-
-        jPcontenedor.removeAll();
-        seleccionarPrimero();
+        PanelRealizarReserva();
     }//GEN-LAST:event_jBrrealizarReservaActionPerformed
 
     private void jBlistaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlistaReservaActionPerformed
-        // TODO add your handling code here:        
+        panelListarReserva();
+    }//GEN-LAST:event_jBlistaReservaActionPerformed
+
+    
+    
+    public void panelListarReserva(){
         jBrrealizarReserva.setSelected(false);
         jBlistaReserva.setSelected(true);  
-        jPcontenedor.setVisible(false);
         jPcontenedor.setVisible(true);
         jPcontenedor.removeAll();
         ListaReservasGUI pListareserva;
@@ -115,10 +106,21 @@ public class Reservas extends javax.swing.JPanel {
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
-        
-    }//GEN-LAST:event_jBlistaReservaActionPerformed
-
+    }
     
+    
+    public void PanelRealizarReserva(){
+        
+        jBlistaReserva.setSelected(false); 
+        jBrrealizarReserva.setSelected(true);  
+        jPcontenedor.removeAll();
+        RealizarReservaGUI pRealizarReserva;
+        pRealizarReserva = new RealizarReservaGUI();
+        jPcontenedor.add(pRealizarReserva);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBlistaReserva;

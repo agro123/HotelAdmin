@@ -5,7 +5,10 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControllerReserva;
+import Controladores.ControllerServicios;
 import Modelo.Reserva;
+import Modelo.RoomServices;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -20,7 +23,8 @@ public class ListaReservasGUI extends javax.swing.JPanel {
      */
     public ListaReservasGUI() {
         initComponents();        
-        agregarReservas();
+        //agregarReservas();
+        cargarListaReservas();
         
     }
     
@@ -38,18 +42,21 @@ public class ListaReservasGUI extends javax.swing.JPanel {
     }
 
     
-    public void cargarListaReservas(ArrayList<Reserva> lista_res){
+    public void cargarListaReservas(){
         
+        
+        ArrayList<Reserva> listaReservas;
+        listaReservas = ControllerReserva.listarReservas();
         jPcontenido.removeAll();
-        for (int i = 0; i < lista_res.size(); i++) {
+        for (int i = 0; i < listaReservas.size(); i++) {
             
-            int num_res = lista_res.get(i).getNumero_reserva();
-            int id_cli = lista_res.get(i).getNumCliente();
-            int id_hab = lista_res.get(i).getNum_Habitacion();
-            int cant_per = lista_res.get(i).getNum_Personas();
+            int num_res = listaReservas.get(i).getNumero_reserva();
+            int id_cli = listaReservas.get(i).getNumCliente();
+            int id_hab = listaReservas.get(i).getNum_Habitacion();
+            int cant_per = listaReservas.get(i).getNum_Personas();
             
-            String fech_in = lista_res.get(i).getFecha_ingreso().toString();
-            String fech_out = lista_res.get(i).getFecha_salida().toString();
+            String fech_in = listaReservas.get(i).getFecha_ingreso().toString();
+            String fech_out = listaReservas.get(i).getFecha_salida().toString();
         
            
             
