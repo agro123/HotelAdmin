@@ -219,12 +219,12 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(191, 191, 191));
         jLabel4.setText("Fecha Salida:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 345, 110, 23));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 203, 110, 23));
 
         jLabel3.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(191, 191, 191));
         jLabel3.setText("Fecha ingreso:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 300, 110, 23));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 152, 110, 23));
 
         jdFechaSalida.setBackground(new java.awt.Color(255, 255, 255));
         jdFechaSalida.setForeground(new java.awt.Color(191, 191, 191));
@@ -240,7 +240,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jdFechaSalidaPropertyChange(evt);
             }
         });
-        add(jdFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 345, 160, 25));
+        add(jdFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 203, 160, 25));
         jdFechaSalida.getAccessibleContext().setAccessibleName("");
 
         jdFechaIngreso.setBackground(new java.awt.Color(255, 255, 255));
@@ -252,7 +252,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jdFechaIngresoPropertyChange(evt);
             }
         });
-        add(jdFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 301, 160, 25));
+        add(jdFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 152, 160, 25));
 
         jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
         jBcancelar.setBorder(null);
@@ -304,7 +304,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jTidClienteKeyTyped(evt);
             }
         });
-        add(jTidCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 152, 276, 25));
+        add(jTidCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 252, 276, 25));
 
         jTnumPersonas.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jTnumPersonas.setForeground(new java.awt.Color(191, 191, 191));
@@ -328,7 +328,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jTnumPersonasKeyTyped(evt);
             }
         });
-        add(jTnumPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 252, 276, 25));
+        add(jTnumPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 345, 276, 25));
 
         jTidHabitacion.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jTidHabitacion.setForeground(new java.awt.Color(191, 191, 191));
@@ -357,7 +357,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jTidHabitacionKeyTyped(evt);
             }
         });
-        add(jTidHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 203, 276, 25));
+        add(jTidHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 300, 276, 25));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
@@ -375,7 +375,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         jBbuscar.setBorder(null);
         jBbuscar.setContentAreaFilled(false);
         jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(837, 153, 24, 24));
+        add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(837, 252, 24, 24));
 
         jLformulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MarcoReserva.png"))); // NOI18N
         add(jLformulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 85, 575, 397));

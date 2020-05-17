@@ -4,7 +4,17 @@
  * and open the template in the editor.
  */
 package Vistas.Jpanel;
-
+import Servicios.Fecha;
+import com.toedter.calendar.JDateChooser;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 /**
  *
  * @author nicol
@@ -42,18 +52,20 @@ public class CheckInSinReservaGUI extends javax.swing.JPanel {
     private void initComponents() {
 
         jTidCliente = new javax.swing.JTextField();
-        jTfechaIngreso = new javax.swing.JTextField();
-        jTfechaSalida = new javax.swing.JTextField();
         jTcantidadPersonas = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPcontenido = new javax.swing.JPanel();
         jBbuscar = new javax.swing.JButton();
         jBcancelar = new javax.swing.JButton();
         jBcheckIn = new javax.swing.JButton();
-        jLformulario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jdFechaIngreso = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
+        jdFechaSalida = new com.toedter.calendar.JDateChooser();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jLformulario = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
@@ -62,26 +74,14 @@ public class CheckInSinReservaGUI extends javax.swing.JPanel {
         jTidCliente.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jTidCliente.setForeground(new java.awt.Color(191, 191, 191));
         jTidCliente.setText("Cliente");
-        jTidCliente.setBorder(null);
-        add(jTidCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 172, 240, 23));
-
-        jTfechaIngreso.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
-        jTfechaIngreso.setForeground(new java.awt.Color(191, 191, 191));
-        jTfechaIngreso.setText("Fecha de ingreso");
-        jTfechaIngreso.setBorder(null);
-        add(jTfechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 223, 240, 23));
-
-        jTfechaSalida.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
-        jTfechaSalida.setForeground(new java.awt.Color(191, 191, 191));
-        jTfechaSalida.setText("Fecha de salida");
-        jTfechaSalida.setBorder(null);
-        add(jTfechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 272, 240, 23));
+        jTidCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 191, 191)));
+        add(jTidCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 172, 276, 25));
 
         jTcantidadPersonas.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jTcantidadPersonas.setForeground(new java.awt.Color(191, 191, 191));
         jTcantidadPersonas.setText("Cantidad de personas");
-        jTcantidadPersonas.setBorder(null);
-        add(jTcantidadPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 321, 240, 23));
+        jTcantidadPersonas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 191, 191)));
+        add(jTcantidadPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 223, 276, 25));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
@@ -115,14 +115,48 @@ public class CheckInSinReservaGUI extends javax.swing.JPanel {
         jBcheckIn.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check-in-seleccionado.png"))); // NOI18N
         add(jBcheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(706, 395, 125, 40));
 
-        jLformulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CheckInSinReserva.png"))); // NOI18N
-        add(jLformulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 85, 575, 397));
-
         jLabel1.setBackground(new java.awt.Color(112, 112, 112));
         jLabel1.setFont(new java.awt.Font("Decker", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(112, 112, 112));
         jLabel1.setText("Número    Tipo     Precio   Capacidad");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 89, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(191, 191, 191));
+        jLabel3.setText("Fecha ingreso:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 272, 110, 23));
+
+        jdFechaIngreso.setBackground(new java.awt.Color(255, 255, 255));
+        jdFechaIngreso.setForeground(new java.awt.Color(191, 191, 191));
+        jdFechaIngreso.setFont(new java.awt.Font("Decker", 0, 11)); // NOI18N
+        jdFechaIngreso.setMinSelectableDate(new java.util.Date(-62135747907000L));
+        jdFechaIngreso.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdFechaIngresoPropertyChange(evt);
+            }
+        });
+        add(jdFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 272, 160, 25));
+
+        jLabel4.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(191, 191, 191));
+        jLabel4.setText("Fecha Salida:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 321, 110, 23));
+
+        jdFechaSalida.setBackground(new java.awt.Color(255, 255, 255));
+        jdFechaSalida.setForeground(new java.awt.Color(191, 191, 191));
+        jdFechaSalida.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jdFechaSalidaInputMethodTextChanged(evt);
+            }
+        });
+        jdFechaSalida.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdFechaSalidaPropertyChange(evt);
+            }
+        });
+        add(jdFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 321, 160, 25));
 
         jComboBox1.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(204, 204, 204));
@@ -139,11 +173,32 @@ public class CheckInSinReservaGUI extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(165, 165, 165));
         jLabel2.setText("Habitaciones :");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 37, -1, -1));
+
+        jLformulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MarcoCheckin.png"))); // NOI18N
+        add(jLformulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 85, 575, 397));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jdFechaIngresoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaIngresoPropertyChange
+        if(jdFechaIngreso.getDate() != null){
+
+            Date f = Fecha.dateTomorrow(jdFechaIngreso.getDate());
+            jdFechaSalida.setMinSelectableDate(f);
+        }
+    }//GEN-LAST:event_jdFechaIngresoPropertyChange
+
+    private void jdFechaSalidaInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jdFechaSalidaInputMethodTextChanged
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "kxkxxkxkxkxkxkxk");
+    }//GEN-LAST:event_jdFechaSalidaInputMethodTextChanged
+
+    private void jdFechaSalidaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaSalidaPropertyChange
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jdFechaSalidaPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -153,12 +208,14 @@ public class CheckInSinReservaGUI extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLformulario;
     private javax.swing.JPanel jPcontenido;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTcantidadPersonas;
-    private javax.swing.JTextField jTfechaIngreso;
-    private javax.swing.JTextField jTfechaSalida;
     private javax.swing.JTextField jTidCliente;
+    private com.toedter.calendar.JDateChooser jdFechaIngreso;
+    private com.toedter.calendar.JDateChooser jdFechaSalida;
     // End of variables declaration//GEN-END:variables
 }

@@ -60,6 +60,7 @@ public class Recepcionista extends javax.swing.JFrame {
         jBcheckIn = new javax.swing.JButton();
         jBcheckOut = new javax.swing.JButton();
         jBservicios = new javax.swing.JButton();
+        jBcerrarSesion = new javax.swing.JButton();
         jPcontenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -133,6 +134,18 @@ public class Recepcionista extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jBservicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 468, -1, -1));
+
+        jBcerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/botonSalida.png"))); // NOI18N
+        jBcerrarSesion.setBorder(null);
+        jBcerrarSesion.setBorderPainted(false);
+        jBcerrarSesion.setContentAreaFilled(false);
+        jBcerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBcerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcerrarSesionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBcerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 610, 30, 30));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 97, 680));
 
@@ -238,6 +251,12 @@ public class Recepcionista extends javax.swing.JFrame {
                                          
     }//GEN-LAST:event_jBserviciosActionPerformed
 
+    private void jBcerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcerrarSesionActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new Login().setVisible(true);
+    }//GEN-LAST:event_jBcerrarSesionActionPerformed
+
     
     
     
@@ -277,6 +296,7 @@ public class Recepcionista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBcerrarSesion;
     private javax.swing.JButton jBcheckIn;
     private javax.swing.JButton jBcheckOut;
     private javax.swing.JButton jBclientes;
