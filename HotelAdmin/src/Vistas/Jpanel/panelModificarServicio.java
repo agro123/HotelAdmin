@@ -46,14 +46,23 @@ public class panelModificarServicio extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jPmensajes = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTbuscador = new javax.swing.JTextField();
         jBbuscar = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jPmensajes = new javax.swing.JPanel();
 
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane3.setBorder(null);
+        jScrollPane3.setHorizontalScrollBar(null);
+
+        jPmensajes.setBackground(new java.awt.Color(255, 255, 255));
+        jPmensajes.setLayout(new java.awt.GridLayout(0, 3, 0, 1));
+        jScrollPane3.setViewportView(jPmensajes);
+
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 90, 710, 340));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ContornoHabitacion.png"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 84, -1, -1));
@@ -75,15 +84,6 @@ public class panelModificarServicio extends javax.swing.JPanel {
         jBbuscar.setContentAreaFilled(false);
         jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 44, 24, 24));
-
-        jScrollPane3.setBorder(null);
-        jScrollPane3.setHorizontalScrollBar(null);
-
-        jPmensajes.setBackground(new java.awt.Color(255, 255, 255));
-        jPmensajes.setLayout(new java.awt.GridLayout(0, 3, 0, 1));
-        jScrollPane3.setViewportView(jPmensajes);
-
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 90, 710, 340));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTbuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbuscadorActionPerformed

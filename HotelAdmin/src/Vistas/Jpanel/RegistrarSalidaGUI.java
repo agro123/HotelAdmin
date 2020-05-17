@@ -89,6 +89,8 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jListServicios = new javax.swing.JList<>();
         jLfactura = new javax.swing.JLabel();
+        jBcancelar = new javax.swing.JButton();
+        jBcheckOut = new javax.swing.JButton();
 
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -151,14 +153,49 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
 
         jLfactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Factura.png"))); // NOI18N
         add(jLfactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 88, -1, -1));
+
+        jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
+        jBcancelar.setContentAreaFilled(false);
+        jBcancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBcancelar.setInheritsPopupMenu(true);
+        jBcancelar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-seleccionado.png"))); // NOI18N
+        jBcancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcancelarActionPerformed(evt);
+            }
+        });
+        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 445, 130, 50));
+
+        jBcheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/botonCheckOutSinSele.png"))); // NOI18N
+        jBcheckOut.setBorder(null);
+        jBcheckOut.setContentAreaFilled(false);
+        jBcheckOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBcheckOut.setInheritsPopupMenu(true);
+        jBcheckOut.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/botonCheckOutSele.png"))); // NOI18N
+        jBcheckOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcheckOutActionPerformed(evt);
+            }
+        });
+        add(jBcheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(506, 445, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBcancelarActionPerformed
+
+    private void jBcheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcheckOutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBcheckOutActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBcancelar;
+    private javax.swing.JButton jBcheckOut;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLcliente;
     private javax.swing.JLabel jLempleado;

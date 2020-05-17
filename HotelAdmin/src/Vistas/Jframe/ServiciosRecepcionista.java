@@ -50,6 +50,7 @@ public class ServiciosRecepcionista extends javax.swing.JPanel {
         jBagregarServicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/botonAregarServicioSinSele.png"))); // NOI18N
         jBagregarServicio.setBorder(null);
         jBagregarServicio.setContentAreaFilled(false);
+        jBagregarServicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBagregarServicio.setSelected(true);
         jBagregarServicio.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/botonAregarServicio.png"))); // NOI18N
         add(jBagregarServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 115, -1, -1));

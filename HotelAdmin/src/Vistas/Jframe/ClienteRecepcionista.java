@@ -44,7 +44,7 @@ public class ClienteRecepcionista extends javax.swing.JPanel {
         jBlistaClientes.setBorder(null);
         jBlistaClientes.setBorderPainted(false);
         jBlistaClientes.setContentAreaFilled(false);
-        jBlistaClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jBlistaClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBlistaClientes.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BotonRegistradosSele.png"))); // NOI18N
         jBlistaClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,7 +57,7 @@ public class ClienteRecepcionista extends javax.swing.JPanel {
         jBregistrar.setBorder(null);
         jBregistrar.setBorderPainted(false);
         jBregistrar.setContentAreaFilled(false);
-        jBregistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jBregistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBregistrar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/botonRegistrarSele.png"))); // NOI18N
         jBregistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

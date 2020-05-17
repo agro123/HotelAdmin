@@ -147,7 +147,6 @@ public class panelAgregarServicio extends javax.swing.JPanel {
         add(jBguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(529, 374, -1, -1));
 
         jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MarcoServicio.png"))); // NOI18N
-        jLfondo.setOpaque(true);
         jLfondo.setPreferredSize(new java.awt.Dimension(739, 429));
         add(jLfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 68, 575, 397));
     }// </editor-fold>//GEN-END:initComponents

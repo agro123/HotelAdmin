@@ -51,6 +51,8 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
         jCservicios = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jBcancelar = new javax.swing.JButton();
+        jBguardar = new javax.swing.JButton();
 
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -101,6 +103,31 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MarcoServicioAgregar.png"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 78, -1, -1));
+
+        jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
+        jBcancelar.setContentAreaFilled(false);
+        jBcancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBcancelar.setInheritsPopupMenu(true);
+        jBcancelar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-seleccionado.png"))); // NOI18N
+        jBcancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcancelarActionPerformed(evt);
+            }
+        });
+        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 350, 130, 50));
+
+        jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-SinSele.png"))); // NOI18N
+        jBguardar.setBorder(null);
+        jBguardar.setContentAreaFilled(false);
+        jBguardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBguardar.setInheritsPopupMenu(true);
+        jBguardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/GuardarSele.png"))); // NOI18N
+        jBguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBguardarActionPerformed(evt);
+            }
+        });
+        add(jBguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(842, 350, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCtipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtipoHabitacionActionPerformed
@@ -111,8 +138,20 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCserviciosActionPerformed
 
+    private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jBcancelarActionPerformed
+
+    private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jBguardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBcancelar;
+    private javax.swing.JButton jBguardar;
     private javax.swing.JComboBox jCservicios;
     private javax.swing.JComboBox jCtipoHabitacion;
     private javax.swing.JLabel jLabel1;
