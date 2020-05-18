@@ -11,8 +11,8 @@ package Modelo;
  */
 public class RoomServices {
     
-    String id_servicio,nombrePro;
-    int cantidad;
+    String nombrePro;
+    int cantidad,id_servicio;
     Double precio;
 
     public RoomServices() {
@@ -28,7 +28,7 @@ public class RoomServices {
     
     
 
-    public String getId_servicio() {
+    public int getId_servicio() {
         return id_servicio;
     }
 
@@ -44,7 +44,7 @@ public class RoomServices {
         return precio;
     }
 
-    public void setId_servicio(String id_servicio) {
+    public void setId_servicio(int id_servicio) {
         this.id_servicio = id_servicio;
     }
 
