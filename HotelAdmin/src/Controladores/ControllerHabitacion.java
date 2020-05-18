@@ -27,19 +27,35 @@ public class ControllerHabitacion {
     HabitacionDAO modelo;
     int id_seleccionado;
 
-    public ControllerHabitacion(Habitaciones vista_agregar, HabitacionDAO modelo) {
+    public ControllerHabitacion(Habitaciones vista_agregar, 
+            HabitacionDAO modelo) {
 
         this.vista = vista_agregar;
         this.modelo = modelo;
 
         HabitacionListener manejadoreventos = new HabitacionListener();
-        this.vista.getPanelAgregar().getjBcancelar().addActionListener(manejadoreventos);
+        this.vista.getPanelAgregar().getjBcancelar()
+                .addActionListener(manejadoreventos);
 
         this.vista.getjBagregar().addActionListener(manejadoreventos);
         this.vista.getjBmodificar().addActionListener(manejadoreventos);
         this.vista.getjBeliminar().addActionListener(manejadoreventos);
     }
-
+    
+    //--------------------------------------------------------------------------
+    public ControllerHabitacion(){
+        
+    }
+    
+    public int getPrecioHabitacion(int idHabitacion){
+        int precio= 0;
+        HabitacionDAO hd = new HabitacionDAO();
+        Habitacion h = new Habitacion();
+        h = hd.extraerHabitaciones_porID(idHabitacion);
+        precio = h.getPrecio_hab();
+        return precio;
+    }
+    //--------------------------------------------------------------------------
     /*public ControllerHabitacion (HabitacionListaGUI vista_actualizar_eliminar, HabitacionDAO modelo){
         
         this.vista_actualizar_eliminar = vista_actualizar_eliminar;
