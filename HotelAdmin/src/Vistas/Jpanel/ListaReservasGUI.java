@@ -5,6 +5,11 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControllerReserva;
+import Modelo.Reserva;
+import Vistas.Jframe.Reservas;
+import java.util.ArrayList;
+
 /**
  *
  * @author nicol
@@ -14,9 +19,12 @@ public class ListaReservasGUI extends javax.swing.JPanel {
     /**
      * Creates new form listaReservas
      */
-    public ListaReservasGUI() {
+    
+    
+    public ListaReservasGUI(Reservas frame_reservas) {
+        
         initComponents();        
-        agregarReservas();
+        cargarListaReservas(frame_reservas);
         
     }
     
@@ -31,6 +39,43 @@ public class ListaReservasGUI extends javax.swing.JPanel {
        }
         jPcontenido.revalidate();
         jPcontenido.repaint();
+    }
+    
+    
+    public void cargarListaReservas(Reservas frame_reservas){
+        
+        
+        ArrayList<Reserva> listaReservas;
+        listaReservas = ControllerReserva.listarReservas();
+        jPcontenido.removeAll();
+        for (int i = 0; i < listaReservas.size(); i++) {
+            
+            int num_res = listaReservas.get(i).getNumero_reserva();
+            int id_cli = listaReservas.get(i).getNumCliente();
+            int id_hab = listaReservas.get(i).getNum_Habitacion();
+            int cant_per = listaReservas.get(i).getNum_Personas();
+            
+            String fech_in = listaReservas.get(i).getFecha_ingreso().toString();
+            String fech_out = listaReservas.get(i).getFecha_salida().toString();
+        
+           
+            
+            
+            jPreservasHospedaje jp = new jPreservasHospedaje
+                    (num_res,id_cli,id_hab,cant_per,fech_in,fech_out);
+            jp.setFrame_reservas(frame_reservas);
+            
+            
+            
+            jPcontenido.add(jp);  
+              
+           
+        }
+        
+        jPcontenido.revalidate();
+        jPcontenido.repaint();
+        
+        
     }
 
     /**

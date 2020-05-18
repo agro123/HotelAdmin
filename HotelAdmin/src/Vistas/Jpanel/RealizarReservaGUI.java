@@ -5,7 +5,9 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControllerReserva;
 import Modelo.Habitacion;
+import Modelo.Reserva;
 import Servicios.Fecha;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
@@ -27,48 +29,63 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
     /**
      * Creates new form RealizarReservaGUI
      */
+    
+    int numeroReserva;
+    String validaOperacion = "guardar";
     public RealizarReservaGUI() {
         initComponents();
-        jdFechaIngreso.setDate(Fecha.crearFechaTimeStamp());
-        jdFechaSalida.setDate(Fecha.dateTomorrow(Fecha.crearFechaTimeStamp()));
-        
-        jdFechaIngreso.setMinSelectableDate(Fecha.crearFechaTimeStamp());
-        jdFechaSalida.setMinSelectableDate(Fecha.crearFechaTimeStamp());
-        
-        jTidHabitacion.setEditable(false);
-        /*jTidHabitacion.setEnabled(false);
-        jTnumPersonas.setEnabled(false);
-        jdFechaIngreso.setEnabled(false);
-        jdFechaSalida.setEnabled(false);*/
-         
-
+        establecerCalendarios();
+        Timestamp fi = Fecha.formatearFechaIngreso(jdFechaIngreso.getDate());
+        Timestamp fs = Fecha.formatearFechaSalida(jdFechaSalida.getDate()); 
+        cargarHabitaciones(ControllerReserva.cargarListaHabitaciones(fi,fs));
     }
-
+    
+    
+    public void establecerCalendarios(){
+        jTidHabitacion.setEditable(false);
+        jdFechaIngreso.setMinSelectableDate(Fecha.crearFechaTimestamp());
+        jdFechaSalida.setMinSelectableDate(Fecha.dateTomorrow(Fecha.crearFechaTimestamp()));
+        jdFechaIngreso.setDate(Fecha.crearFechaTimestamp());
+        jdFechaSalida.setDate(Fecha.dateTomorrow(Fecha.crearFechaTimestamp()));   
+    }
     
     public void setearCampos() {
-        
         jTidCliente.setText("Cliente");
         jTidHabitacion.setText("Número de habitación");
         jTnumPersonas.setText("Cantidad de personas");
-       
-        
-        jdFechaIngreso.setDate(Fecha.crearFechaTimeStamp());
-        
-        jdFechaSalida.setDate(Fecha.dateTomorrow(Fecha.crearFechaTimeStamp()));
-        
-        
-        
-        
+        jdFechaIngreso.setDate(Fecha.crearFechaTimestamp());
+        jdFechaSalida.setDate(Fecha.dateTomorrow(Fecha.crearFechaTimestamp())); 
     }
     
     
-     public int validarCampos() {
+    private Reserva infoRerserva() {
+        Reserva reserva = new Reserva();
+        int numReserva = ControllerReserva.getNumeroReserva()+1;
+        int idHab = Integer.parseInt(jTidHabitacion.getText());
+        int idCli = Integer.parseInt(jTidCliente.getText());
+        int numPer = Integer.parseInt(jTnumPersonas.getText());
+        Timestamp fi = Fecha.formatearFechaIngreso(jdFechaIngreso.getDate());
+        Timestamp fs = Fecha.formatearFechaSalida(jdFechaSalida.getDate());
+        Timestamp fecha = Fecha.crearFechaTimestamp();
+        System.err.println("AL Registrar una reserva"+fi +"        "+fs+"            "+fecha);
+        reserva.setNumero_reserva(numReserva);
+        reserva.setNum_Habitacion(idHab);
+        reserva.setNumCliente(idCli);
+        reserva.setNum_Empleado(ControllerReserva.getNumEmpleado());
+        reserva.setFecha_reserva(fecha);
+        reserva.setFecha_ingreso(fi);
+        reserva.setFecha_salida(fs);
+        reserva.setNum_Personas(numPer);
+        return reserva;
+        
+    }
+    
+    public int validarCampos() {
         int rtdo = 1;
 
         if (jTidCliente.getText().equals("")
-                ||jTidCliente.getText().equalsIgnoreCase("Cliente"))
-        {
-
+                ||jTidCliente.getText().equalsIgnoreCase("Cliente")){
+            
             rtdo = 0;
             JOptionPane.showMessageDialog(this,"Hay Campos Vacios");
 
@@ -86,11 +103,16 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Hay Campos Vacios");
             
         }else
+        if(jdFechaIngreso.getDate() == null || jdFechaSalida.getDate() == null){
+            JOptionPane.showMessageDialog(this,"Hay campos de fecha vacios");
+            rtdo = 0;
+            
+        }else{
         if(jdFechaIngreso.getDate().getTime() >= jdFechaSalida.getDate().getTime()){
             JOptionPane.showMessageDialog(this,"No coinciden las fechas");
             rtdo = 0;
         }
-        
+        }
         
         return rtdo;
     }
@@ -102,90 +124,74 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
     
     
     
-    public void agregarHabitaciones(ArrayList<Habitacion> lista) {
-         
-        
-        jPcontenido.removeAll();
-        for (int i = 0; i < lista.size(); i++) {
+    public void reestablecerBorderPanel()
+    {
+        for(int i = 0; i < jPcontenido.getComponentCount();i++){
+            jPhabitacionCheckIn jp;
+            jp = (jPhabitacionCheckIn)jPcontenido.getComponent(i);
+            if(jp.getjButton1().getBorder() != null){
+                jp.getjButton1().setBorder(null);
+                i = jPcontenido.getComponentCount();
+            }
             
+        }
+    }
+    
+    
+    public void llenarFormulario(Reserva reserva){
+        validaOperacion = "actualizar";
+        jdFechaIngreso.setDate(reserva.getFecha_ingreso());
+        jdFechaSalida.setDate(reserva.getFecha_salida());
+        jTidCliente.setText(""+reserva.getNumCliente());
+        jTidHabitacion.setText(""+reserva.getNum_Habitacion());
+        System.out.println("HHH "+reserva.getNum_Habitacion());
+        jTnumPersonas.setText(""+reserva.getNum_Personas());
+        numeroReserva = reserva.getNumero_reserva();
+        cambiarCombobobox(reserva.getNum_Habitacion());
+    }
+    
+    public void cambiarCombobobox(int numHab){
+        /*ESTABLECE EL COMBOBOBOX EN LA CATEGORIA DE LA HABITACION SELECCIONADA 
+          PARA ACTUALIZAR*/
+        if(numHab > 100 && numHab < 200 ){
+            jComboBox1.setSelectedIndex(0);
+        }else
+        if(numHab > 200 && numHab < 300 ){
+            jComboBox1.setSelectedIndex(1);
+        }else
+        if(numHab > 300 && numHab < 400){
+            jComboBox1.setSelectedIndex(2);
+        }else
+        if(numHab > 400 && numHab < 500 ){
+            jComboBox1.setSelectedIndex(3);
+        }
+    }
+    
+    
+    public void cargarHabitaciones(ArrayList<Habitacion> lista) {
+        jPcontenido.removeAll();
+        for(int i = 0; i < lista.size(); i++) {
             int num = lista.get(i).getId_habitacion();
-            String Tipo = lista.get(i).getTipo_habitacion();
             int prec = lista.get(i).getPrecio_hab();
             int capac = lista.get(i).getCantidadPersonas();
-            System.err.println(Tipo+"  "+prec+"  "+capac+"   "+num);
+            String Tipo = lista.get(i).getTipo_habitacion();
             if(jComboBox1.getSelectedItem().equals(Tipo)){
-            
-            jPhabitacionCheckIn jp = new jPhabitacionCheckIn(num,Tipo,prec,capac);
-            jp.setjThabitacion(jTidHabitacion);
-            
-            jPcontenido.add(jp);  
-              
+                jPhabitacionCheckIn jp;
+                jp = new jPhabitacionCheckIn(num,Tipo,prec,capac);
+                jp.setjThabitacion(jTidHabitacion);
+                jPcontenido.add(jp); 
             }
         }
-        
         jPcontenido.revalidate();
         jPcontenido.repaint();
-         
     }
     
     
-    
-    
-
-    public JComboBox getjComboBox1() {
-        return jComboBox1;
+    public void validaNumero(char c, KeyEvent evt) {
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
     }
-
-    public JButton getjBbuscar() {
-        return jBbuscar;
-    }
-
-    public JButton getjBcancelar() {
-        return jBcancelar;
-    }
-
-    public JButton getjBguardar() {
-        return jBguardar;
-    }
-
-    public JTextField getjTnumPersonas() {
-        return jTnumPersonas;
-    }
-
- 
-
-    public JTextField getjTidCliente() {
-        return jTidCliente;
-    }
-
-    public JTextField getjTidHabitacion() {
-        return jTidHabitacion;
-    }
-
-    public JDateChooser getJdFechaIngreso() {
-        return jdFechaIngreso;
-    }
-
-    public JDateChooser getJdFechaSalida() {
-        return jdFechaSalida;
-    }
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -390,6 +396,11 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         jComboBox1.setForeground(new java.awt.Color(204, 204, 204));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SIMPLE", "DOBLE", "MATRIMONIAL", "SUITES" }));
         jComboBox1.setBorder(null);
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -403,26 +414,6 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 37, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jTidClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTidClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTidClienteActionPerformed
-
-    private void jTnumPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTnumPersonasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTnumPersonasActionPerformed
-
-    private void jTidHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTidHabitacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTidHabitacionActionPerformed
-
-    private void jTidClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidClienteKeyPressed
-        
-    }//GEN-LAST:event_jTidClienteKeyPressed
-
     private void jTidClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidClienteKeyTyped
         validaNumero(evt.getKeyChar(), evt);
     }//GEN-LAST:event_jTidClienteKeyTyped
@@ -435,20 +426,17 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         if(jTidCliente.getText().equalsIgnoreCase("Cliente")){
             jTidCliente.setText(""); 
         }
-        
     }//GEN-LAST:event_jTidClienteFocusGained
 
     private void jTnumPersonasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTnumPersonasFocusGained
         if(jTnumPersonas.getText().equalsIgnoreCase("Cantidad de personas")){
-        
             jTnumPersonas.setText("");
         }
     }//GEN-LAST:event_jTnumPersonasFocusGained
 
     private void jTidClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidClienteFocusLost
        
-        if(jTidCliente.getText().equals(""))
-        {
+        if(jTidCliente.getText().equals("")){
             jTidCliente.setText("Cliente");
         }
     }//GEN-LAST:event_jTidClienteFocusLost
@@ -459,68 +447,113 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTnumPersonasFocusLost
 
-    private void jTidHabitacionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidHabitacionFocusGained
-        /*if(jTidHabitacion.getText().equalsIgnoreCase("Número de habitación")){
-            jTidHabitacion.setText("");
-            JOptionPane.showMessageDialog(null,"Seleccione una Habitacion de la lista");
-        }*/
-        
-    }//GEN-LAST:event_jTidHabitacionFocusGained
-
-    private void jTidHabitacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidHabitacionFocusLost
-        if(jTidHabitacion.getText().equals("")){
-            
-            jTidHabitacion.setText("Número de Habitación");
-        }
-    }//GEN-LAST:event_jTidHabitacionFocusLost
-
-    private void jTidHabitacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidHabitacionKeyTyped
-         validaNumero(evt.getKeyChar(), evt);
-    }//GEN-LAST:event_jTidHabitacionKeyTyped
-
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
-        
+        ControllerReserva.verificarCliente(jTidCliente.getText());
+        if(validarCampos()==1){
+            if(validaOperacion.equals("guardar")){
+                if(ControllerReserva.isVerCliente() == true){
+                    ControllerReserva.extraerId();
+                    ControllerReserva.registrarReserva(infoRerserva());
+                    setearCampos();
+                    reestablecerBorderPanel();
+                }else{
+                    JOptionPane.showMessageDialog(null,"No existe el cliente "
+                        + "en la base de datos");
+                }  
+            }else 
+            if(validaOperacion.equals("actualizar")){
+                //ControllerReserva.actualizarReserva();
+            }
+        }
     }//GEN-LAST:event_jBguardarActionPerformed
 
     private void jdFechaSalidaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaSalidaPropertyChange
-        // TODO add your handling code here:
-       
+        if(jdFechaIngreso.getDate() != null && jdFechaSalida.getDate() != null){
+            Timestamp fi = Fecha.formatearFechaIngreso(jdFechaIngreso.getDate());
+            Timestamp fs = Fecha.formatearFechaSalida(jdFechaSalida.getDate());
+            cargarHabitaciones(ControllerReserva.cargarListaHabitaciones(fi,fs));
+            jTidHabitacion.setText("Número de habitación");
+        }
     }//GEN-LAST:event_jdFechaSalidaPropertyChange
 
     private void jdFechaIngresoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaIngresoPropertyChange
-        if(jdFechaIngreso.getDate() != null){
-            
+        if(jdFechaIngreso.getDate() != null && jdFechaSalida.getDate() != null){
+            Timestamp fi = Fecha.formatearFechaIngreso(jdFechaIngreso.getDate());
+            Timestamp fs = Fecha.formatearFechaSalida(jdFechaSalida.getDate());
+            cargarHabitaciones(ControllerReserva.cargarListaHabitaciones(fi,fs));
+            jTidHabitacion.setText("Número de habitación");
             Date f = Fecha.dateTomorrow(jdFechaIngreso.getDate());
-            jdFechaSalida.setMinSelectableDate(f); 
-        }  
+            jdFechaSalida.setMinSelectableDate(f);
+        } 
     }//GEN-LAST:event_jdFechaIngresoPropertyChange
+
+    private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
+        setearCampos();
+        reestablecerBorderPanel();
+    }//GEN-LAST:event_jBcancelarActionPerformed
+
+    private void jTidHabitacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidHabitacionKeyTyped
+        validaNumero(evt.getKeyChar(), evt);
+    }//GEN-LAST:event_jTidHabitacionKeyTyped
+
+    private void jTidHabitacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTidHabitacionMouseClicked
+
+        if(jTidHabitacion.getText().equalsIgnoreCase("Número de habitación")){
+            JOptionPane.showMessageDialog
+            (null,"Seleccione una Habitacion de la lista");
+        }
+    }//GEN-LAST:event_jTidHabitacionMouseClicked
+
+    private void jTidHabitacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidHabitacionFocusLost
+        if(jTidHabitacion.getText().equals("")){
+
+            jTidHabitacion.setText("Número de Habitación");
+        }
+    }//GEN-LAST:event_jTidHabitacionFocusLost
 
     private void jdFechaSalidaInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jdFechaSalidaInputMethodTextChanged
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, "kxkxxkxkxkxkxkxk");
     }//GEN-LAST:event_jdFechaSalidaInputMethodTextChanged
 
-    private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
+    private void jTnumPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTnumPersonasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jBcancelarActionPerformed
+    }//GEN-LAST:event_jTnumPersonasActionPerformed
 
-    private void jTidHabitacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTidHabitacionMouseClicked
-       
-        if(jTidHabitacion.getText().equalsIgnoreCase("Número de habitación")){
-            JOptionPane.showMessageDialog
-                (null,"Seleccione una Habitacion de la lista");
-        }
-    }//GEN-LAST:event_jTidHabitacionMouseClicked
+    private void jTidHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTidHabitacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTidHabitacionActionPerformed
 
-    public void validaNumeroMenor(char c, KeyEvent evt) {
-       
-    }
+    private void jTidHabitacionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidHabitacionFocusGained
+        /*if(jTidHabitacion.getText().equalsIgnoreCase("Número de habitación")){
+            jTidHabitacion.setText("");
+            JOptionPane.showMessageDialog(null,"Seleccione una Habitacion de la lista");
+        }*/
+
+    }//GEN-LAST:event_jTidHabitacionFocusGained
+
+    private void jTidClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidClienteKeyPressed
+
+    }//GEN-LAST:event_jTidClienteKeyPressed
+
+    private void jTidClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTidClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTidClienteActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        Timestamp fi = Fecha.formatearFechaIngreso(jdFechaIngreso.getDate());
+        Timestamp fs = Fecha.formatearFechaSalida(jdFechaSalida.getDate());
+        cargarHabitaciones(ControllerReserva.cargarListaHabitaciones(fi,fs));
+        jTidHabitacion.setText("Número de habitación");
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
     
-    public void validaNumero(char c, KeyEvent evt) {
-        if (!Character.isDigit(c)) {
-            evt.consume();
-        }
-    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
