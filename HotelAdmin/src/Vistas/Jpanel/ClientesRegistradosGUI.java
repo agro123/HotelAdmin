@@ -5,6 +5,11 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControladorCliente;
+import Modelo.Cliente;
+import Vistas.Jframe.ClienteRecepcionista;
+import java.util.ArrayList;
+
 /**
  *
  * @author nicol
@@ -14,19 +19,36 @@ public class ClientesRegistradosGUI extends javax.swing.JPanel {
     /**
      * Creates new form ClientesRegistradosGUI
      */
-    public ClientesRegistradosGUI() {
+    
+    ControladorCliente Controladorcliente = new ControladorCliente();
+    ClienteRecepcionista panel_prin;
+    private ArrayList<jPclienteRecepcionista> clientes;
+
+    
+    public ClientesRegistradosGUI(ClienteRecepcionista cr) {
+        this.panel_prin = cr;
+        clientes = new ArrayList<>();
         initComponents();
         cargarLista();
     }
     
-    public void cargarLista(){
-        jPclienteRecepcionista cli = new jPclienteRecepcionista();
-        for (int i = 0; i < 9; i++) {
-            jPcontenido.add(cli);
+    public void cargarLista() {
 
+        ArrayList<Cliente> listadoCli = new ArrayList<>();
+        listadoCli = Controladorcliente.listClients(0);
+
+        jPcontenido.removeAll();
+        for (int i = 0; i < listadoCli.size(); i++) {
+            jPclienteRecepcionista jpcli = new 
+                jPclienteRecepcionista(listadoCli.get(i), panel_prin);
+            clientes.add(jpcli);
+        }
+        for (int i = 0; i < clientes.size(); i++) {
+            jPcontenido.add(clientes.get(i));
             jPcontenido.revalidate();
             jPcontenido.repaint();
         }
+
     }
 
     /**

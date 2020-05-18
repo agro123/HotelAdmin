@@ -18,7 +18,7 @@ public class ClienteRecepcionista extends javax.swing.JPanel {
 
     
     ClientesAgregarModificarGUI formulario;
-    ClienteListaGUI panelListar;
+    ClientesRegistradosGUI panelListar;
     ControladorCliente controlador;
     
 
@@ -30,16 +30,6 @@ public class ClienteRecepcionista extends javax.swing.JPanel {
     
     }
     
-//    public void setControladorCliente(ControladorCliente s){
-//        
-//        this.controlador = s;
-//        
-//    }
-//    
-//    public ControladorCliente getControladorEmpleado()
-//    {
-//        return controlador;
-//    }
     
     public void AgregarCliente (Cliente  c)
     {
@@ -101,16 +91,18 @@ public class ClienteRecepcionista extends javax.swing.JPanel {
 
     private void jBlistaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlistaClientesActionPerformed
         // TODO add your handling code here:
-
+        panelListar = new ClientesRegistradosGUI(this);
         jBregistrar.setSelected(false);
         jBlistaClientes.setSelected(true);            
         jPcontenedor.setVisible(false);
         jPcontenedor.setVisible(true);
-        ClientesRegistradosGUI panelE = new ClientesRegistradosGUI();
+       // ClientesRegistradosGUI panelE = new ClientesRegistradosGUI();
         jPcontenedor.removeAll();
-        jPcontenedor.add(panelE);
+        jPcontenedor.add(panelListar);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
+        
+        
     }//GEN-LAST:event_jBlistaClientesActionPerformed
 
      public void seleccionarPrimero(ClientesAgregarModificarGUI formulario){
