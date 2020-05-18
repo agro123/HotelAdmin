@@ -139,6 +139,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
     
     
     public void llenarFormulario(Reserva reserva){
+        cambiarCombobobox(reserva.getNum_Habitacion());
         validaOperacion = "actualizar";
         jdFechaIngreso.setDate(reserva.getFecha_ingreso());
         jdFechaSalida.setDate(reserva.getFecha_salida());
@@ -147,7 +148,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         System.out.println("HHH "+reserva.getNum_Habitacion());
         jTnumPersonas.setText(""+reserva.getNum_Personas());
         numeroReserva = reserva.getNumero_reserva();
-        cambiarCombobobox(reserva.getNum_Habitacion());
+        
     }
     
     public void cambiarCombobobox(int numHab){

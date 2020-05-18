@@ -125,7 +125,54 @@ public class ReservaDAO {
             con = Fachada.getConnection(); 
             String sql="";
                        
-            sql = "SELECT * FROM reserva ORDER BY id_reserva";   
+            sql = "SELECT * FROM reserva ORDER BY fecha_ingreso";   
+            
+            
+            pstm = con.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            Reserva objReserva = null;
+            
+            while(rs.next()){
+                
+                objReserva = new Reserva();
+                objReserva.setNumero_reserva(rs.getInt("id_reserva"));
+                objReserva.setNum_Habitacion(rs.getInt("id_habitacion"));
+                objReserva.setNumCliente(rs.getInt("id_cliente"));
+                objReserva.setNum_Empleado(rs.getInt("id_empleado"));
+                objReserva.setFecha_reserva(rs.getTimestamp("fecha_reserva"));
+                objReserva.setFecha_ingreso(rs.getTimestamp("fecha_ingreso"));
+                objReserva.setFecha_salida(rs.getTimestamp("fecha_salida"));
+                objReserva.setNum_Personas(rs.getInt("num_personas"));
+                listadoReservas.add(objReserva);
+            }
+        }
+        catch(SQLException ex){
+            mensajeError(ex);
+        }
+        finally{
+            try{
+                if(rs!=null) rs.close();
+                if(pstm!=null) pstm.close();                
+            }
+            catch(SQLException ex){
+                mensajeError(ex);
+            }
+        }
+        return listadoReservas;
+    }
+    
+    
+    public  ArrayList <Reserva> listReservasLike(int i){      
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        ArrayList <Reserva> listadoReservas = new ArrayList<>();
+        try{
+            con = Fachada.getConnection(); 
+            String sql="";
+                       
+            sql = " select * from Reserva where "
+                    + "(SELECT CAST (id_cliente AS varchar(1))) like '"+i+"%'";   
             
             
             pstm = con.prepareStatement(sql);
@@ -388,6 +435,8 @@ public class ReservaDAO {
         return listadoHabitacion;
     
     }
+    
+    
     
     
 }
