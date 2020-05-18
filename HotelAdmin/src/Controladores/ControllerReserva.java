@@ -109,6 +109,13 @@ public class ControllerReserva {
         }     
     }
     
+    public static ArrayList<Reserva> listarReservasLike(int numReserva){
+        ReservaDAO modelo = new ReservaDAO();
+        ArrayList<Reserva> lista_reservas;
+        lista_reservas = modelo.listReservasLike(numReserva);
+        return lista_reservas;
+    }
+    
     
     
     public static void eliminarReserva(int ID) {

@@ -10,6 +10,8 @@ import Modelo.Reserva;
 import Servicios.Fecha;
 import Vistas.Jframe.Reservas;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -49,6 +51,10 @@ public class jPreservasHospedaje extends javax.swing.JPanel {
         jLcantPersonas.setText(String.valueOf(cantPersonas_));
         jLfechaIngreso.setText(ingreso_);
         jLfechaSalida.setText(salida_);
+        
+        /*if(Fecha.toTimestamp(ingreso).getTime()>Fecha.crearFechaTimestamp().getTime()){
+            jBtodoPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ReservSele.png")));
+        }*/
             
     }
 
@@ -168,7 +174,7 @@ public class jPreservasHospedaje extends javax.swing.JPanel {
                     (this, "Desea continuar?", "Eliminar", dialog);
         if (result == 0) {
             ControllerReserva.eliminarReserva(numero);
-        frame_reservas.panelListarReserva();
+            frame_reservas.panelListarReserva();
         }    
     }//GEN-LAST:event_jBeliminarMouseClicked
 
