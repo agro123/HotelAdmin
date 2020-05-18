@@ -5,16 +5,9 @@
  */
 package Controladores;
 
-import Vistas.Jframe.*;
-import Vistas.Jpanel.*;
 import Modelo.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -22,206 +15,101 @@ import javax.swing.JPanel;
  */
 public class ControllerServicios {
 
-    String num_servicio;
-    Services vista;
-    RoomServicesDAO modelo;
-    serviciosListener manejador_eventos;
-    String id_Seleccionado;
+    static int num_servicio = 0;
 
-    public ControllerServicios(Services vista, RoomServicesDAO modelo) {
-        //serviciosListener esc = new serviciosListener(vista);
-        
-        this.modelo = modelo;
-        this.vista = vista;
-        extraerId();
-        crearIdServicio();
-        manejador_eventos = new serviciosListener();
+    //valida si se requiere hacer una actuslizacion o ingresar un registro
+    static String opcionEjec = "guardar";
 
-        this.vista.getPanelAgregar().getjBcancelar().addActionListener
-        (manejador_eventos);
-        this.vista.getjBagregar().addActionListener(manejador_eventos);
-        this.vista.getjBeliminar().addActionListener(manejador_eventos);
-        this.vista.getjBmodificar().addActionListener(manejador_eventos);
-
-        //this.vista.getPanelM().getJp().addMouseListener(manejador_eventos);
-    }
-    
-    
-
-    public class serviciosListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-
-            if (ae.getSource() == vista.getPanelAgregar().getjBcancelar()) {
-                if (vista.getPanelAgregar().getValidador() == "guardar") {
-                    if (vista.getPanelAgregar().validarCampos() == 0) {
-                        JOptionPane.showMessageDialog(null, "Ingrese Todos los "
-                                + "Campos Requeridos");
-
-                    }else
-                    {
-                        registrarServicio();
-                        vista.getPanelAgregar().setearCampos();
-                    }
-                     
-                } else if (vista.getPanelAgregar().getValidador() 
-                        == "actualizar") {
-                    actualizarServicio();
-                    vista.getPanelAgregar().setearCampos();
-                }
-            }
-            if (ae.getSource() == vista.getjBagregar()) {
-
-                vista.mostrarPanelAgregar();
-            }
-            if (ae.getSource() == vista.getjBmodificar()) {
-                vista.mostrarPanelModificar();
-                leerServicios();
-            }
-            if (ae.getSource() == vista.getjBeliminar()) {
-
-                vista.mostrarPanelEliminar();
-                leerServicios();
-            }
-
-        }
-
-    }
-
-    public int extraerEntero(String s) {
-
-        int valor = 0;
-        for (int a = 0; a < s.length(); a++) {
-            if (Integer.parseInt(s.substring(a, a + 1)) == 0) {
-            } else {
-                valor = Integer.parseInt(s.substring(0));
-            }
-        }
-  
-        return valor;
-    }
-
-    public void crearIdServicio() {
-        int valor_num_extraido = extraerEntero(num_servicio.substring(1));
-        int nuevoNum = valor_num_extraido + 1;
-        String numero_ser = "" + nuevoNum;
-
-        if (valor_num_extraido >= 999) {
-
-            num_servicio = "S" + nuevoNum;
-        } else if (valor_num_extraido >= 99) {
-            num_servicio = "S0" + nuevoNum;
-        } else if (valor_num_extraido >= 9) {
-            num_servicio = "S00" + nuevoNum;
-        } else {
-            num_servicio = "S000" + nuevoNum;
-        }
-
-    }
-
-    public void leerServicios() {
-
+    public static ArrayList<RoomServices> desplegarServicios() {
+        RoomServicesDAO modelo = new RoomServicesDAO();
         ArrayList<RoomServices> lista_roomServices;
         lista_roomServices = modelo.listadoRoomServices();
-        vista.getPanelModificar().CargarLista(lista_roomServices, "actualizar");
-        vista.getPanelEliminar().CargarLista(lista_roomServices, "eliminar");
-
+        return lista_roomServices;
     }
 
-    public void leerServicio_porID(String ID) {
-        id_Seleccionado = ID;
+    public static RoomServices leerServicio_porID(int ID) {
+        RoomServicesDAO modelo = new RoomServicesDAO();
         RoomServices obj;
         obj = modelo.extraerServicio_porID(ID);
-        vista.getPanelAgregar().setValidadorBoton("actualizar");
-        vista.getPanelModificar().llenarFormulario(obj);
+        return obj;
     }
-    
-    
 
-    public void registrarServicio() {
-
-        RoomServices servicio = new RoomServices();
-
-        servicio.setId_servicio(num_servicio);
-        servicio.setNombrePro(vista.getPanelAgregar().getjTNombre().getText().trim());
-        servicio.setCantidad(Integer.parseInt(vista.getPanelAgregar()
-                .getjTcantidad().getText().trim()));
-        servicio.setPrecio(Double.parseDouble(vista.getPanelAgregar()
-                .getjTprecio().getText().trim()));
-
+    public static void registrarServicio(RoomServices servicio) {
+        RoomServicesDAO modelo = new RoomServicesDAO();
         int resultado = 0;
-
         resultado = modelo.grabarServicio(servicio);
-
         if (resultado == 1) {
-            vista.gestionMensajes("Registro Grabado con éxito",
+            gestionMensajes("Registro Grabado con éxito",
                     "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-            crearIdServicio();
-
         } else {
-            vista.gestionMensajes("Error al grabar",
+            gestionMensajes("Error al grabar",
                     "Confirmación", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    public void extraerId()
-    {
-        String id="";
-    
+
+    public static void extraerId() {
+        int id = 0;
+        RoomServicesDAO modelo = new RoomServicesDAO();
         id = modelo.extraerUltimoId();
-        if(id == null)
-        {
-            num_servicio = "S0000";
-        }
-        else
-        {
-            num_servicio = id;
+        if (id == 0) {
+            num_servicio = 1;
+        } else {
+            num_servicio = id + 1;
         }
     }
 
-    public void actualizarServicio() {
-        RoomServices servicio = new RoomServices();
-        servicio.setId_servicio(id_Seleccionado);
-        servicio.setNombrePro(vista.getPanelAgregar().getjTNombre()
-                .getText().trim());
-        servicio.setCantidad(Integer.parseInt(vista.getPanelAgregar()
-                .getjTcantidad().getText().trim()));
-        servicio.setPrecio(Double.parseDouble(vista.getPanelAgregar()
-                .getjTprecio().getText().trim()));
+    public static void actualizarServicio(RoomServices servicio) {
 
+        RoomServicesDAO modelo = new RoomServicesDAO();
         if (modelo.modificarRoomSercices(servicio) == 1) {
-            vista.gestionMensajes(
-                   
+            gestionMensajes(
                     "Actualización exitosa",
                     "Confirmación ",
                     JOptionPane.INFORMATION_MESSAGE);
-                    vista.getPanelAgregar().setValidadorBoton("guardar");
+            opcionEjec = "guardar";
         } else {
-            vista.gestionMensajes(
-                    "Actualización Falida jajaja",
+            gestionMensajes(
+                    "Actualización Falida",
                     "Confirmación ",
                     JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    
-    public void eliminarServicio(String ID) {
-        id_Seleccionado = ID;
-        if (modelo.borrarServicio(id_Seleccionado) == 1) {
-            JOptionPane.showMessageDialog(null,
+    public static void eliminarServicio(int ID) {
+        RoomServicesDAO modelo = new RoomServicesDAO();
+        if (modelo.borrarServicio(ID) == 1) {
+            gestionMensajes(
                     "Registro Borrado con éxtio",
                     "Confirmación de acción",
                     JOptionPane.INFORMATION_MESSAGE);
-            extraerId();
-            crearIdServicio();
-
         } else {
-            JOptionPane.showMessageDialog(null,
+            gestionMensajes(
                     "Error al borrar",
                     "Confirmación de acción",
                     JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+
+    public static int getNum_servicio() {
+        return num_servicio;
+    }
+
+    public static void setNum_servicio(int num_servicio) {
+        ControllerServicios.num_servicio = num_servicio;
+    }
+
+    public static void gestionMensajes(String mensaje, String titulo, int icono) {
+        JOptionPane.showMessageDialog(null, mensaje, titulo, icono);
+    }
+
+    public static String getOpcionEjec() {
+        return opcionEjec;
+        
+    }
+
+    public static void setOpcionEjec(String opcionEjec) {
+        ControllerServicios.opcionEjec = opcionEjec;
     }
 
 }

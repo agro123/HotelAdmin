@@ -5,9 +5,13 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControllerServicios;
+import Modelo.RoomServices;
+import Vistas.Jframe.Services;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -21,19 +25,15 @@ public class panelAgregarServicio extends javax.swing.JPanel {
      */
     String validadorBoton; //valida si se requiere hacer una actuslizacion o una ingreso del un registro
     
-
-    public panelAgregarServicio() {
-        validadorBoton = "guardar";
+    Services frame_servicio;
+    public panelAgregarServicio(Services frame_servicio) {
         initComponents();
+        this.frame_servicio = frame_servicio;
     }
 
-    public void setValidadorBoton(String validador) {
-        this.validadorBoton = validador;
-    }
+    
 
-    public String getValidador() {
-        return validadorBoton;
-    }
+    
 
   
 
@@ -82,11 +82,6 @@ public class panelAgregarServicio extends javax.swing.JPanel {
         jTNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTNombreFocusGained(evt);
-            }
-        });
-        jTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTNombreKeyTyped(evt);
             }
         });
         add(jTNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 184, 276, 25));
@@ -152,58 +147,81 @@ public class panelAgregarServicio extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
-        // TODO add your handling code here:
+        setearCampos();
+        if(ControllerServicios.getOpcionEjec().equals("actualizar")){ 
+            ControllerServicios.setOpcionEjec("guardar");
+            frame_servicio.mostrarPanelLista();
+        }
     }//GEN-LAST:event_jBcancelarActionPerformed
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
-        // TODO add your handling code here:
+        if (validarCampos() == 1) {
+            if (ControllerServicios.getOpcionEjec().equals("guardar")) {
+                ControllerServicios.extraerId();
+                ControllerServicios.registrarServicio(infoServicio());
+                setearCampos();
+            } else if (ControllerServicios.getOpcionEjec().equals("actualizar")) {
+                ControllerServicios.actualizarServicio(infoServicio());
+                setearCampos();
+                frame_servicio.mostrarPanelLista();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese Todos los "
+                    + "Campos Requeridos");
+        }
     }//GEN-LAST:event_jBguardarActionPerformed
 
+    
     private void jTNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTNombreFocusGained
         // TODO add your handling code here:
-        if (jTNombre.getText().equalsIgnoreCase("****")) {
-            jTNombre.setForeground(Color.BLACK);
-            jTNombre.setText("");
+       if (jTNombre.getText().equalsIgnoreCase("****")) {
+            setearFormato(jTNombre);
         }
     }//GEN-LAST:event_jTNombreFocusGained
 
+    
     private void jTcantidadFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcantidadFocusGained
         // TODO add your handling code here:
         if (jTcantidad.getText().equalsIgnoreCase("****")) {
-            jTcantidad.setForeground(Color.BLACK);
-            jTcantidad.setText("");
+            setearFormato(jTcantidad);
         }
     }//GEN-LAST:event_jTcantidadFocusGained
 
     private void jTprecioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTprecioFocusGained
         // TODO add your handling code here:
         if (jTprecio.getText().equalsIgnoreCase("****")) {
-            jTprecio.setForeground(Color.BLACK);
-            jTprecio.setText("");
+            setearFormato(jTprecio);
         }
     }//GEN-LAST:event_jTprecioFocusGained
 
-    private void jTNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyTyped
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jTNombreKeyTyped
-
+    
     private void jTcantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTcantidadKeyTyped
         // TODO add your handling code here:
         validaNumero(evt.getKeyChar(), evt);
     }//GEN-LAST:event_jTcantidadKeyTyped
 
+    
     private void jTprecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTprecioKeyTyped
         // TODO add your handling code here:
         validaNumero(evt.getKeyChar(), evt);
     }//GEN-LAST:event_jTprecioKeyTyped
 
     
+    
+    
+    
     public void setearCampos() {
         jTNombre.setText("");
         jTcantidad.setText("");
         jTprecio.setText("");
 
+    }
+    
+    
+    
+    public void setearFormato(JTextField t) {
+        t.setForeground(new Color(153, 153, 153));
+        t.setText("");
     }
     
      
@@ -232,31 +250,40 @@ public class panelAgregarServicio extends javax.swing.JPanel {
         return rtdo;
     }
     
+    public void llenarFormulario(RoomServices roomService) {
+        String nombre_ser = roomService.getNombrePro();
+        double precio_ser = roomService.getPrecio();
+        int cantidad = roomService.getCantidad();
+        jTNombre.setText(nombre_ser);
+        jTcantidad.setText("" + cantidad);
+        jTprecio.setText("" + precio_ser);
+    }
+    
+     private RoomServices infoServicio() {
+        RoomServices servicio = new RoomServices();
+        int numSer = ControllerServicios.getNum_servicio();
+        servicio.setId_servicio(numSer);
+        servicio.setNombrePro(jTNombre.getText().trim());
+        servicio.setCantidad(Integer.parseInt(jTcantidad.getText().trim()));
+        servicio.setPrecio(Double.parseDouble(jTprecio.getText().trim()));
+        return servicio;
+    }
+    
+    
+    
     public void mostrarCamposVacios(JTextField jt) {
         jt.setForeground(Color.blue);
         jt.setText("****");
     }
+    
     
     public void validaNumero(char c, KeyEvent evt) {
         if (!Character.isDigit(c)) {
             evt.consume();
         }
     }
-    public JButton getjBcancelar() {
-        return jBcancelar;
-    }
-
-    public JTextField getjTNombre() {
-        return jTNombre;
-    }
-
-    public JTextField getjTcantidad() {
-        return jTcantidad;
-    }
-
-    public JTextField getjTprecio() {
-        return jTprecio;
-    }
+    
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
