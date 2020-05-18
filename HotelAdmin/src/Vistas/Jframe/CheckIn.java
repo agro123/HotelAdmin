@@ -19,7 +19,7 @@ public class CheckIn extends javax.swing.JPanel {
      * Creates new form NewJPanel
      */
    //--------------------------------------------------------------------------
-    int numEmpleado;
+    private int numEmpleado;
     //--------------------------------------------------------------------------
       public CheckIn(int numE) {
          numEmpleado = numE;

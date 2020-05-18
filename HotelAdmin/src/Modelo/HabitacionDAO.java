@@ -64,7 +64,7 @@ public class HabitacionDAO {
      * @param h Objeto de la clase Habitacion a modificar
      * @return rtdo resultado de la operación modificar
      */
-public int modificarHabitacion(Habitacion h){      
+    public int modificarHabitacion(Habitacion h){      
         Connection con = null;
         PreparedStatement pstm;
         pstm = null;
@@ -74,7 +74,8 @@ public int modificarHabitacion(Habitacion h){
             con = Fachada.getConnection(); 
             String sql = "UPDATE habitacion " +
                          "SET id_habitacion = ?, tipo_habitacion= ?, "
-                    + "piso = ?, cantidad_personas = ?, precio_hab = ? , num_camas =?" 
+                    + "piso = ?, cantidad_personas = ?, precio_hab = ? "
+                    + ", num_camas =?" 
                     +    "WHERE id_habitacion = ? ";
             pstm = con.prepareStatement(sql);      
             

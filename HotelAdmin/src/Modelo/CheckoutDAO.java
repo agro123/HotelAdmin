@@ -19,8 +19,9 @@ import javax.swing.JOptionPane;
 public class CheckoutDAO {
  private void mensajeError(SQLException ex){
 
-        JOptionPane.showMessageDialog(null,"Código "+
-                    ex.getErrorCode() + "\n Error" + ex.getMessage());
+        JOptionPane.showMessageDialog(null,"Código: "+
+                    ex.getErrorCode() 
+                + "\n Ocurrio un error al realizar la operacion con checkout");
     }
     public int grabarCheckout(Checkout c){
         Connection con = null;
@@ -70,8 +71,7 @@ public class CheckoutDAO {
             rs = pstm.executeQuery();
             
             while (rs.next()) {
-                id = rs.getInt("id_checkout");
-                
+                id = rs.getInt("id_checkout"); 
             }
         } catch (SQLException ex) {
             mensajeError(ex);
@@ -89,5 +89,52 @@ public class CheckoutDAO {
         }
         return id;
     }
-    
+    public Checkout extraerCheckout (int idcliente)
+    {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+
+        Checkout c = new Checkout();
+        try {
+            con = Fachada.getConnection();
+            String sql = "";
+
+            sql
+                    = "SELECT * FROM cuenta" //cuenta es una vista      
+                    + " WHERE estado = true "
+                    + "AND id_cliente = ?";   
+            
+            pstm = con.prepareStatement(sql);
+            pstm.setInt(1, idcliente);
+            rs = pstm.executeQuery();
+            
+            while (rs.next()) {                
+                c.setIdCliente(rs.getInt("id_cliente"));
+                c.setIdhabitacion(rs.getInt("habitacion"));
+                c.setValorTotal(rs.getInt("valortotal"));
+                c.setPreciohabitacion(rs.getInt("precio_hab"));
+                c.setTipo(rs.getString("tipo_habitacion"));
+                c.setFechaIngreso(rs.getTimestamp("fecha_ingreso"));
+                c.setFechaSalida(rs.getTimestamp("fecha_salida"));
+                c.setIdCheckout(rs.getInt("id_checkout"));                   
+            }
+        } catch (SQLException ex) {
+            mensajeError(ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException ex) {
+                mensajeError(ex);
+            }
+        }
+        return c;
+        
+    }
+
 }

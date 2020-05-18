@@ -19,11 +19,17 @@ public class ControladorCheckout {
         return hd.extraerUltimoId();
        
     }       
-       public static int grabarChekout(Checkout c)
+    public static int grabarChekout(Checkout c)
     {
         CheckoutDAO hd = new CheckoutDAO();
         c.setIdCheckout(extraerId()+1);
         int resultado = hd.grabarCheckout(c);
         return resultado; 
     }
+    public static Checkout getCheckout(int idcliente){
+        CheckoutDAO cd = new CheckoutDAO();
+        return cd.extraerCheckout(idcliente);
+    }
+    
+    
 }

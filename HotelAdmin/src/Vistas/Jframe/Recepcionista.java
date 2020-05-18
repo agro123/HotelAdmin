@@ -44,7 +44,7 @@ public class Recepcionista extends javax.swing.JFrame {
         jBreservar.setSelected(false);
         jBservicios.setSelected(false);
         jBcheckIn.setSelected(true);
-        CheckIn check = new CheckIn(numEmpleado);
+        CheckIn check = new CheckIn(numEmpleado);//-----------------------------
         jPcontenedor.removeAll();
         jPcontenedor.add(check);
         jPcontenedor.revalidate();
@@ -231,7 +231,9 @@ public class Recepcionista extends javax.swing.JFrame {
         jBcheckOut.setSelected(true);
         
         jPcontenedor.setVisible(false);
-        CheckOut check = new CheckOut();
+        CheckOut check = new CheckOut(numEmpleado);//---------------------------
+        
+        
         jPcontenedor.removeAll();
         jPcontenedor.add(check);
         jPcontenedor.revalidate();
