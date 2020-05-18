@@ -24,10 +24,10 @@ public class ControllerHabitacion {
 
     Habitaciones vista;
     //HabitacionListaGUI vista_actualizar_eliminar;
-    HabitacionesDAO modelo;
+    HabitacionDAO modelo;
     int id_seleccionado;
 
-    public ControllerHabitacion(Habitaciones vista_agregar, HabitacionesDAO modelo) {
+    public ControllerHabitacion(Habitaciones vista_agregar, HabitacionDAO modelo) {
 
         this.vista = vista_agregar;
         this.modelo = modelo;
@@ -73,18 +73,21 @@ public class ControllerHabitacion {
             if (ae.getSource() == vista.getPanelAgregar().getjBcancelar()) {
                 if (vista.getPanelAgregar().getValidador() == "guardar") {
                     if (vista.getPanelAgregar().validarCampos() == 0) {
-                        JOptionPane.showMessageDialog(null, "Introduce los campos");
+                        JOptionPane.showMessageDialog
+                                                (null, "Introduce los campos");
                     } else {
 
                         registrarHabitacion();
                         vista.getPanelAgregar().setearCampos();
                     }
 
-                } else if (vista.getPanelAgregar().getValidador() == "actualizar") {
+                } else if (vista.getPanelAgregar()
+                        .getValidador() == "actualizar") {
                     actualizarHabitacion();
                     vista.getPanelAgregar().setearCampos();
 
-                } else if (vista.getPanelAgregar().getValidador() == "eliminar") {
+                } else if (vista.getPanelAgregar()
+                        .getValidador() == "eliminar") {
                     eliminarhabitacion(id_seleccionado);
                 }
 
@@ -112,18 +115,25 @@ public class ControllerHabitacion {
     public void registrarHabitacion() {
 
         if (vista.getPanelAgregar().getjTnumeroHabitacion().equals("")) {
-            vista.getPanelAgregar().gestionMensajes("Ingrese el id de habitación",
+            vista.getPanelAgregar().gestionMensajes
+                 ("Ingrese el id de habitación",
                     "Error de Entrada", JOptionPane.ERROR_MESSAGE);
 
         } else {
             Habitacion habitacion = new Habitacion();
 
-            habitacion.setId_habitacion(Integer.parseInt(vista.getPanelAgregar().getjTnumeroHabitacion().getText()));
-            habitacion.setTipo_habitacion(vista.getPanelAgregar().getjCtipoHabi().getSelectedItem().toString());
+            habitacion.setId_habitacion(Integer.parseInt(vista.getPanelAgregar()
+                    .getjTnumeroHabitacion().getText()));
+            habitacion.setTipo_habitacion(vista.getPanelAgregar()
+                    .getjCtipoHabi().getSelectedItem().toString());
             habitacion.setPiso(vista.getPanelAgregar().getjTpiso().getText());
-            habitacion.setCantidadPersonas(Integer.parseInt(vista.getPanelAgregar().getjTcapacidad().getText()));
-            habitacion.setPrecio_hab(Integer.parseInt(vista.getPanelAgregar().getjTprecio().getText()));
-            habitacion.setNum_camas(Integer.parseInt(vista.getPanelAgregar().getjCnumeroCamas().getSelectedItem().toString()));
+            habitacion.setCantidadPersonas(
+                    Integer.parseInt(vista.getPanelAgregar().getjTcapacidad()
+                            .getText()));
+            habitacion.setPrecio_hab(Integer.parseInt(vista.getPanelAgregar()
+                    .getjTprecio().getText()));
+            habitacion.setNum_camas(Integer.parseInt(vista.getPanelAgregar()
+                    .getjCnumeroCamas().getSelectedItem().toString()));
             //habitacion.setEstado(vista_agregar.getPanelAM().getjTpiso().setVisible(true)); // Se debe cambiar por estado
             //
 
@@ -131,11 +141,14 @@ public class ControllerHabitacion {
             resultado = modelo.grabarHabitacion(habitacion);
 
             if (resultado == 1) {
-                vista.getPanelAgregar().gestionMensajes("Registro Grabado con éxito",
-                        "Mensaje grabar habitación", JOptionPane.INFORMATION_MESSAGE);
+                vista.getPanelAgregar().gestionMensajes
+                        ("Registro Grabado con éxito",
+                        "Mensaje grabar habitación", 
+                        JOptionPane.INFORMATION_MESSAGE);
 
             } else {
-                vista.getPanelAgregar().gestionMensajes("Error al grabar habitación",
+                vista.getPanelAgregar().gestionMensajes
+                         ("Error al grabar habitación",
                         "Mensaje grabar habitación", JOptionPane.ERROR_MESSAGE);
             }
 
@@ -153,11 +166,15 @@ public class ControllerHabitacion {
         habitacion.setId_habitacion(id_seleccionado);
 
         //habitacion.setId_habitacion(Integer.parseInt(vista_agregar.getPanelAM().getjTnumeroHabitacion().getText()));
-        habitacion.setTipo_habitacion(vista.getPanelAgregar().getjCtipoHabi().getSelectedItem().toString().trim());
+        habitacion.setTipo_habitacion(vista.getPanelAgregar()
+                .getjCtipoHabi().getSelectedItem().toString().trim());
         habitacion.setPiso(vista.getPanelAgregar().getjTpiso().getText());
-        habitacion.setCantidadPersonas(Integer.parseInt(vista.getPanelAgregar().getjTcapacidad().getText()));
-        habitacion.setPrecio_hab(Integer.parseInt(vista.getPanelAgregar().getjTprecio().getText().trim()));
-        habitacion.setNum_camas(Integer.parseInt(vista.getPanelAgregar().getjCnumeroCamas().getSelectedItem().toString().trim()));
+        habitacion.setCantidadPersonas(Integer.parseInt(vista.getPanelAgregar()
+                .getjTcapacidad().getText()));
+        habitacion.setPrecio_hab(Integer.parseInt(vista.getPanelAgregar()
+                .getjTprecio().getText().trim()));
+        habitacion.setNum_camas(Integer.parseInt(vista.getPanelAgregar()
+                .getjCnumeroCamas().getSelectedItem().toString().trim()));
         //habitacion.setEstado(vista_agregar.getPanelAM().getjTpiso().setVisible(true)); // Se debe cambiar por estado
 
         if (modelo.modificarHabitacion(habitacion) == 1) {

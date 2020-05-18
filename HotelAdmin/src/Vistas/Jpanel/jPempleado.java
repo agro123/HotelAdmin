@@ -5,7 +5,10 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControladorEmpleado;
 import Modelo.Empleado;
+import Vistas.Jframe.Empleados;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +19,7 @@ public class jPempleado extends javax.swing.JPanel {
     private Empleado datosEmp;
     private int id;
     private String nombre,cargo;
+    Empleados frame_empleados;
     /**
      * Creates new form jPempleado
      * 
@@ -23,8 +27,10 @@ public class jPempleado extends javax.swing.JPanel {
      * @param datosEmp ES EL ARREGLO CON TODOS LOS DATOS DE ESE EMPLEADO
      * PARA PODER LLENAR EL FORMULARIO DE EDITAR A LA HORA DE HACER ESTO
      */
-    public jPempleado(Empleado datos) {
+    public jPempleado(Empleado datos,
+            Empleados s) {
         
+        this.frame_empleados = s;
         this.datosEmp = datos;
         this.id = datosEmp.getID();
         this.nombre = datosEmp.getNombre() + " " +  datosEmp.getApellido();
@@ -35,6 +41,13 @@ public class jPempleado extends javax.swing.JPanel {
         jLnombre.setText(nombre);
         jLcargo.setText(cargo);
     }
+    
+     public void cambiarPanel() {
+        frame_empleados.FormularioModificar(
+                ControladorEmpleado.listadoEmpleado(id).get(0));
+        
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,7 +64,7 @@ public class jPempleado extends javax.swing.JPanel {
         jLid = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -68,9 +81,19 @@ public class jPempleado extends javax.swing.JPanel {
         add(jLid, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 30, 60, 10));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Empleado-jpanel.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 240, 130));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        cambiarPanel();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

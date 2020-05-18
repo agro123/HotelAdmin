@@ -5,32 +5,74 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControllerServicios;
+import Modelo.RoomServices;
+import Servicios.JFopciones;
+import Vistas.Jframe.Services;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nicol
  */
 public class jPservicio extends javax.swing.JPanel {
+
     private int id,cantidad;
-    private String nombre;
+    private String  nombre;
     private double precio;
+    
+   
+    Services frame_servicios;
+
     /**
      * Creates new form jPservicio
      */
-    public jPservicio(){
-        
+    public jPservicio() {
+
     }
-    public jPservicio(int id_,String nombre_,double precio_,int cantidad_) {
-        this.id = id_;
-        this.nombre = nombre_;
-        this.precio = precio_;
-        this.cantidad = cantidad_;
-        
+
+    public jPservicio(int id_, String nombre_, double precio_, int cantidad_, Services s) {
+        id = id_;
         initComponents();
         jLid.setText(String.valueOf(id_));
         jLnombre.setText(nombre_);
         jLprecio.setText(String.valueOf(precio_));
         jLcantidad.setText(String.valueOf(cantidad_));
+        frame_servicios = s;
     }
+
+   
+    
+
+    public void cambiarPanel() {
+        frame_servicios.mostrarPanelFormulario("actualizar");
+        RoomServices roomservice;
+        roomservice = ControllerServicios.leerServicio_porID(id);
+        ControllerServicios.setOpcionEjec("actualizar");
+        ControllerServicios.setNum_servicio(roomservice.getId_servicio());
+        frame_servicios.llenarFormulario(roomservice);
+    }
+    
+    public void deleteServiceFromPanel(){
+        ControllerServicios.eliminarServicio(id);
+        frame_servicios.mostrarPanelLista();                   
+    }
+    
+    
+    public void manejaOpciones(String validadorPanel){
+        
+        int dialog = JOptionPane.YES_NO_OPTION;
+        int result = JOptionPane.showConfirmDialog
+                    (this, "Desea continuar?", "Eliminar", dialog);
+        if (result == 0) {
+            if(validadorPanel == "actualizar"){
+                cambiarPanel();
+            } else if(validadorPanel == "eliminar") {
+                deleteServiceFromPanel();
+            }
+        }
+    }
+            
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,7 +94,7 @@ public class jPservicio extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLnombre.setFont(new java.awt.Font("Decker", 0, 11)); // NOI18N
-        add(jLnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 50, 58, 10));
+        add(jLnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 46, 60, 15));
 
         jLid.setFont(new java.awt.Font("Decker", 0, 11)); // NOI18N
         add(jLid, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 32, 48, 10));
@@ -64,9 +106,19 @@ public class jPservicio extends javax.swing.JPanel {
         add(jLprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 65, 70, 10));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Servicio-jpanel.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 220, 130));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        new JFopciones(this);            
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

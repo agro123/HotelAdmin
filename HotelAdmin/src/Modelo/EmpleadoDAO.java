@@ -30,7 +30,9 @@ public class EmpleadoDAO {
        try{
             con = Fachada.getConnection();
             String sql = "INSERT INTO empleado values (?,?,?,?,?,?,?,?,?,?)";
+            
             pstm = con.prepareStatement(sql);
+            
             pstm.setInt(1, c.getID());
             pstm.setString(2, c.getNombre());
             pstm.setString(3, c.getApellido());
@@ -38,8 +40,11 @@ public class EmpleadoDAO {
             pstm.setString(5, c.getDireccion());
             pstm.setString(6, c.getTelefono());
             pstm.setString(7, c.getCargo());
-            pstm.setBoolean(8, c.getEstado());
+            pstm.setInt(8, c.getSalario());
             pstm.setTimestamp(9, c.getIngreso());
+            pstm.setBoolean(10, c.getEstado());
+            
+            
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){
@@ -69,10 +74,10 @@ public class EmpleadoDAO {
         try{
             con = Fachada.getConnection();
             String sql = "UPDATE empleado " +
-                         "SET id_empleado = ?, nombre_emp = ?,apellido_emp = ?, "
-                    + "direccion_emp = ?,  email_emp = ?,  telefono_emp = ?, "
-                    + "cargo_emp = ?, fecha_ingreso = ?, estado = ?"
-                    +    "WHERE id_empleado = ?";
+                         "SET id_empleado = ?, nombre_emp = ?,apellido_emp = ?,"
+                    +  "email_emp = ?, direccion_emp = ?, telefono_emp = ?, "
+                    + "cargo_emp = ?, salario_emp = ?, estado = ?, "
+                    + "fecha_ingreso = ? WHERE id_empleado = ?";
             pstm = con.prepareStatement(sql);  
             pstm.setInt(1, c.getID());
             pstm.setString(2, c.getNombre());
@@ -81,8 +86,10 @@ public class EmpleadoDAO {
             pstm.setString(5, c.getDireccion());
             pstm.setString(6, c.getTelefono());
             pstm.setString(7, c.getCargo());
-            pstm.setBoolean(8, c.getEstado());
-            pstm.setTimestamp(9, c.getIngreso());
+            pstm.setInt(8, c.getSalario());
+            pstm.setBoolean(9, c.getEstado());
+            pstm.setTimestamp(10, c.getIngreso());
+             pstm.setInt(11, c.getID());
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){
@@ -134,6 +141,7 @@ public class EmpleadoDAO {
                 empleado.setCorreo(rs.getString("email_emp"));
                 empleado.setTelefono(rs.getString("telefono_emp"));
                 empleado.setCargo(rs.getString("cargo_emp"));
+                empleado.setSalario(rs.getInt("salario_emp"));
                 empleado.setFechaIngreso(rs.getTimestamp("fecha_ingreso"));
                 empleado.setEstado(rs.getBoolean("estado"));
                 listado.add(empleado);

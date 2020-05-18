@@ -5,7 +5,7 @@
  */
 package Vistas.Jframe;
 
-import Vistas.Jpanel.EmpleadoAgregarModificarGUI;
+import Vistas.Jpanel.EmpleadoFormulario;
 import Vistas.Jpanel.ServiciosAgregarModificarGUI;
 import Vistas.Jpanel.ServiciosListaGUI;
 import Vistas.Jpanel.jPservicio;

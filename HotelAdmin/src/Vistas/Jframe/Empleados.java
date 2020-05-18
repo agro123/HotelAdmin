@@ -5,11 +5,14 @@
  */
 package Vistas.Jframe;
 
-import Vistas.Jpanel.EmpleadoAgregarModificarGUI;
-import Vistas.Jpanel.EmpleadoListaGUI;
+import Controladores.ControladorEmpleado;
+import Modelo.Empleado;
+import Vistas.Jpanel.EmpleadoFormulario;
+import Vistas.Jpanel.EmpleadoPanelListar;
 import Vistas.Jpanel.HabitacionAgregarModificarGUI;
 import Vistas.Jpanel.HabitacionListaGUI;
 import Vistas.Jpanel.jPhabitacion;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,10 +23,70 @@ public class Empleados extends javax.swing.JPanel {
     /**
      * Creates new form EmpleadoGUI
      */
-    public Empleados() {
+    
+    /*public Empleados() {
         initComponents();
         seleccionarPrimero();
         
+    }*/
+    EmpleadoFormulario formulario;
+    EmpleadoPanelListar panelListar;
+    ControladorEmpleado controlador;
+    
+    public Empleados()
+    {
+        initComponents();
+        formulario = new EmpleadoFormulario(this);
+        
+        seleccionarPrimero(formulario);
+    }
+    
+    public void setControladorEmpleado(ControladorEmpleado s){
+        
+        this.controlador = s;
+        
+    }
+    
+    public ControladorEmpleado getControladorEmpleado()
+    {
+        return controlador;
+    }
+    
+    
+    public void AgregarEmpleado(Empleado c)
+    {
+        controlador.grabarEmpleado(c);
+    }
+    
+    
+    public void FormularioModificar(Empleado llenar){
+        //jBeliminar.setSelected(false);
+        jBmodificar.setSelected(true);
+        jBagregar.setSelected(false); 
+        jPcontenedor.removeAll();
+        formulario.llenarValores(llenar);
+        formulario.setValidar("modificar");
+        jPcontenedor.add(formulario);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
+    }
+    
+    
+    public void btnModificar()
+    {
+        panelListar = new EmpleadoPanelListar(this);
+        jBagregar.setSelected(false);
+//        jBeliminar.setSelected(false);
+        jBmodificar.setSelected(true);
+        jPcontenedor.setVisible(false);
+        jPcontenedor.setVisible(true);
+        jPcontenedor.removeAll();
+        
+        jPcontenedor.add(panelListar);
+        
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
     }
 
     /**
@@ -36,105 +99,63 @@ public class Empleados extends javax.swing.JPanel {
     private void initComponents() {
 
         jBmodificar = new javax.swing.JButton();
-        jBeliminar = new javax.swing.JButton();
         jBagregar = new javax.swing.JButton();
-        jLmenuCrud = new javax.swing.JLabel();
         jPcontenedor = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
-        setOpaque(false);
+        setBackground(new java.awt.Color(239, 239, 239));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBmodificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-modificarGris.png"))); // NOI18N
+        jBmodificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BotonModificarSinSele.png"))); // NOI18N
         jBmodificar.setBorder(null);
         jBmodificar.setBorderPainted(false);
         jBmodificar.setContentAreaFilled(false);
         jBmodificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jBmodificar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-modificar.png"))); // NOI18N
+        jBmodificar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BotonModificarSele.png"))); // NOI18N
         jBmodificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBmodificarActionPerformed(evt);
             }
         });
-        add(jBmodificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, 90, -1));
+        add(jBmodificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 115, 56, 30));
 
-        jBeliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-eliminarGris.png"))); // NOI18N
-        jBeliminar.setBorder(null);
-        jBeliminar.setBorderPainted(false);
-        jBeliminar.setContentAreaFilled(false);
-        jBeliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jBeliminar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/seleccion-eliminar.png"))); // NOI18N
-        jBeliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBeliminarActionPerformed(evt);
-            }
-        });
-        add(jBeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, 100, 40));
-
-        jBagregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-agregarGris.png"))); // NOI18N
+        jBagregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BotonAgregarSinSele.png"))); // NOI18N
         jBagregar.setBorder(null);
         jBagregar.setBorderPainted(false);
         jBagregar.setContentAreaFilled(false);
         jBagregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jBagregar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Seleccion-agregar.png"))); // NOI18N
+        jBagregar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BotonAgregarSele.png"))); // NOI18N
         jBagregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBagregarActionPerformed(evt);
             }
         });
-        add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 30, -1, -1));
+        add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 115, 49, 30));
 
-        jLmenuCrud.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu-crud.png"))); // NOI18N
-        add(jLmenuCrud, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 23, -1, -1));
-
-        jPcontenedor.setOpaque(false);
+        jPcontenedor.setBackground(new java.awt.Color(255, 255, 255));
         jPcontenedor.setLayout(new java.awt.BorderLayout());
-        add(jPcontenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 770, 480));
+        add(jPcontenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 146, 1021, 534));
+
+        jLabel1.setFont(new java.awt.Font("Decker", 0, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(112, 112, 112));
+        jLabel1.setText("Empleado");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
         // TODO add your handling code here:
-        jBagregar.setSelected(false);
-        jBeliminar.setSelected(false);
-        jBmodificar.setSelected(true);
-        
-       jPcontenedor.setVisible(false);
-        jPcontenedor.setVisible(true);
-        EmpleadoListaGUI panelE = new EmpleadoListaGUI();
-       // EmpleadoAgregarModificarGUI panelE = new EmpleadoAgregarModificarGUI();
-        jPcontenedor.removeAll();
-        jPcontenedor.add(panelE);
-        jPcontenedor.revalidate();
-        jPcontenedor.repaint();
-        
-        
+       btnModificar();
     }//GEN-LAST:event_jBmodificarActionPerformed
 
-    private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
-        // TODO add your handling code here:
-        jBagregar.setSelected(false);
-        jBmodificar.setSelected(false);
-        jBeliminar.setSelected(true);
-        
-        jPcontenedor.setVisible(false);
-        jPcontenedor.setVisible(true);
-        
-        EmpleadoListaGUI panelE = new EmpleadoListaGUI();
-        jPcontenedor.removeAll();
-        jPcontenedor.add(panelE);
-        jPcontenedor.revalidate();
-        jPcontenedor.repaint();    
-
-        
-        
-    }//GEN-LAST:event_jBeliminarActionPerformed
-
-    public void seleccionarPrimero(){
-        jBeliminar.setSelected(false);
+    public void seleccionarPrimero(EmpleadoFormulario formulario){
+        formulario.limpiarCampos();
+        formulario.setValidar("agregar");
+//        jBeliminar.setSelected(false);
         jBmodificar.setSelected(false);
         jBagregar.setSelected(true); 
-        EmpleadoAgregarModificarGUI panelE = new EmpleadoAgregarModificarGUI();
+        
         jPcontenedor.removeAll();
-        jPcontenedor.add(panelE);
+        jPcontenedor.add(formulario);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
@@ -144,16 +165,15 @@ public class Empleados extends javax.swing.JPanel {
         // TODO add your handling code here:
         
          jPcontenedor.removeAll();
-         seleccionarPrimero();
+         seleccionarPrimero(formulario);
 
     }//GEN-LAST:event_jBagregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBagregar;
-    private javax.swing.JButton jBeliminar;
     private javax.swing.JButton jBmodificar;
-    private javax.swing.JLabel jLmenuCrud;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPcontenedor;
     // End of variables declaration//GEN-END:variables
 }
