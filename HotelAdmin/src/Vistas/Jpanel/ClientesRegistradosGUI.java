@@ -73,6 +73,14 @@ public class ClientesRegistradosGUI extends javax.swing.JPanel {
         jTbuscador.setForeground(new java.awt.Color(191, 191, 191));
         jTbuscador.setText("Buscar cliente por ID");
         jTbuscador.setBorder(null);
+        jTbuscador.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTbuscadorFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTbuscadorFocusLost(evt);
+            }
+        });
         jTbuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTbuscadorActionPerformed(evt);
@@ -105,6 +113,14 @@ public class ClientesRegistradosGUI extends javax.swing.JPanel {
     private void jTbuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbuscadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTbuscadorActionPerformed
+
+    private void jTbuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTbuscadorFocusLost
+        // TODO add your handling code here
+    }//GEN-LAST:event_jTbuscadorFocusLost
+
+    private void jTbuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTbuscadorFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTbuscadorFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

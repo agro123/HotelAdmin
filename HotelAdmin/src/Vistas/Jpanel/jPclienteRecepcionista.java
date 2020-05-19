@@ -65,34 +65,34 @@ public class jPclienteRecepcionista extends javax.swing.JPanel {
         jLnumeroCliente.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
         jLnumeroCliente.setForeground(new java.awt.Color(112, 112, 112));
         jLnumeroCliente.setText("Número");
-        add(jLnumeroCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 28, 44, 13));
+        add(jLnumeroCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 28, 60, 13));
 
         jLnombreCliente.setBackground(new java.awt.Color(112, 112, 112));
         jLnombreCliente.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
         jLnombreCliente.setForeground(new java.awt.Color(112, 112, 112));
         jLnombreCliente.setText("Nombre");
-        add(jLnombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 28, 44, 13));
+        add(jLnombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 80, 13));
 
         jLApellidoCli.setBackground(new java.awt.Color(112, 112, 112));
         jLApellidoCli.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
         jLApellidoCli.setForeground(new java.awt.Color(112, 112, 112));
         jLApellidoCli.setText("Apellido");
-        add(jLApellidoCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 28, -1, -1));
+        add(jLApellidoCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, 100, -1));
 
         jLTelefonoCli.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
         jLTelefonoCli.setForeground(new java.awt.Color(112, 112, 112));
         jLTelefonoCli.setText("Telefono");
-        add(jLTelefonoCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 28, -1, -1));
+        add(jLTelefonoCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 60, -1));
 
         jLcorreoCli.setBackground(new java.awt.Color(112, 112, 112));
         jLcorreoCli.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
         jLcorreoCli.setForeground(new java.awt.Color(112, 112, 112));
         jLcorreoCli.setText("correo");
-        add(jLcorreoCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(665, 28, -1, -1));
+        add(jLcorreoCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 30, -1));
 
         jBeditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconEditar.png"))); // NOI18N
         jBeditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jBeditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 25, 16, 16));
+        add(jBeditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 16, 16));
 
         jBtodoPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CliSinSele.png"))); // NOI18N
         jBtodoPanel.setBorderPainted(false);

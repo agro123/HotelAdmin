@@ -454,6 +454,11 @@ public class HabitacionAgregarModificarGUI extends javax.swing.JPanel {
         
     }
     
+    
+    public void addListenerBtnNuevo(ActionListener listenPelicula) {
+        jBguardar.addActionListener(listenPelicula);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBcancelar;
     private javax.swing.JButton jBguardar;
