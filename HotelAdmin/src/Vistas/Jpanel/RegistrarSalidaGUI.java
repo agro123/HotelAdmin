@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import Controladores.ControladorCheckout;
+import Controladores.ControladorServiciosAdicionado;
 import Modelo.Checkout;
+import Modelo.ServiciosAdicionado;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,13 +23,12 @@ import java.util.Date;
  */
 public class RegistrarSalidaGUI extends javax.swing.JPanel {
 
-    private int idCliente;
+  
     private int idEmpleado;
-    private int idHabitacion;
-    private String fechaIngreso;
-    private String fechaSalida;
-    private double precio;
+    private int idcheckout;
     private ArrayList<String> servicios;
+    boolean found;
+    private int valorTotal;
     
     /**
      * Creates new form RegistrarSalidaGUI
@@ -43,24 +44,30 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
        String id = jTbuscador.getText().trim();
        Checkout co = new Checkout();
        int idcliente;
-       boolean found=false;
+       found=false;
        if(id.equalsIgnoreCase("")||
              id.equalsIgnoreCase("Buscar factura por ID de cliente")){
             JOptionPane.showMessageDialog(null,
                "Debe de ingresar la identificacion de un cliente "
                        + "para encontrar la factura");
             vaciarCampos();
-        }
+        } else if(id.length()>10){
+        JOptionPane.showMessageDialog(null,
+               "La identificación no debe de tener mas de 10 caracateres.");
+            vaciarCampos();
+       }
         else{
           idcliente = Integer.parseInt(id);
           co = cc.getCheckout(idcliente);
+          idcheckout = co.getIdCheckout();
           if(co.getIdCheckout()!=0){
               jLcliente.setText(co.getIdCliente()+"");
               jLempleado.setText(idEmpleado+"");
               jLhabitacion.setText(co.getIdhabitacion()+"");    
               jLfechaIngreso.setText(co.getfechaIngreso()+"");
               jLfechaSalida.setText(co.getfechaSalida()+"");
-              jLprecio.setText(co.getValorTotal()+"$");
+              calcularValorTotal(co.getValorTotal());
+              jLprecio.setText(valorTotal+"$");
               found = true;
            }else {
               JOptionPane.showMessageDialog(null,
@@ -68,43 +75,46 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
                        + " verifique si fue ingresado correctamente");
               vaciarCampos();
             }   
-        }   
-       
+        }          
       //LISTA DE SERVICIOS 
        if(found){
+   
           int n = numDias(); 
           int p = co.getPrecioH();
-         DefaultListModel modelo = new DefaultListModel();
-         modelo.addElement(1+". "+"Habitacion " + co.getTipoH()
-                 +" "+ n +" días.");
-         modelo.addElement( "    Valor: " + n*p+ "$");
-         /*for(int i = 2; i<=10; i++){
-            modelo.addElement(i+" ");
+          servicios = new ArrayList();
+          DefaultListModel modelo = new DefaultListModel();
+          servicios.add(1+". "+"Habitacion " + co.getTipoH()
+                 +" "+ n +" días");
+          servicios.add( "    \nValor por día: " + p + "$");
+          servicios.add( "    \nValor de estadía: " + n*p+ "$");
+          adicionarServicios();
+         for(int i = 0; i<servicios.size(); i++){
+            modelo.addElement(servicios.get(i));
          }
-         */
+         
           jListServicios.setModel(modelo);
        }
-      
+    }
     
-      }
-      private int numDias(){
-         int dias=0;
-         try {
-         String fi = jLfechaIngreso.getText();
-         String fs = jLfechaSalida.getText();
-         fi = fi.substring(0, fi.indexOf(" "));
-         fs = fs.substring(0, fs.indexOf(" "));
-         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");       
-         Date fechaInicial = dateFormat.parse(fi);
-         Date fechaFinal = dateFormat.parse(fs);
-         dias=(int) ((fechaFinal.getTime()-fechaInicial.getTime())/86400000);      
-       } catch(ParseException e){
-        JOptionPane.showMessageDialog(null,
+    private int numDias(){
+        int dias=0;
+        try {
+              String fi = jLfechaIngreso.getText();
+              String fs = jLfechaSalida.getText();
+              fi = fi.substring(0, fi.indexOf(" "));
+              fs = fs.substring(0, fs.indexOf(" "));
+              SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");       
+              Date fechaInicial = dateFormat.parse(fi);
+              Date fechaFinal = dateFormat.parse(fs);
+              dias=(int) ((fechaFinal.getTime()-fechaInicial.getTime())
+                      /86400000);      
+        } catch(ParseException e){
+            JOptionPane.showMessageDialog(null,
                  "Ocurrio un error al realizar el Hospedaje");
        } finally {
            return dias;
        }
-      }
+    }
 
       
     private void vaciarCampos(){
@@ -116,6 +126,48 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
               jLprecio.setText("  ");
               DefaultListModel modelo = new DefaultListModel();
               jListServicios.setModel(modelo);
+    }
+    private void imprimirFactura(){
+        ArrayList<String>info = new ArrayList();      
+        info.add("C.C. empleado: "+jLempleado.getText()+"\n");
+        info.add("C.C. cliente: " + jLcliente.getText()+ "\n");
+        info.add("Habitación: "+jLhabitacion.getText()+"\n");
+        info.add("Fecha de ingreso: "+jLfechaIngreso.getText()+"\n");
+        info.add("Fecha de salida: "+jLfechaSalida.getText()+"\n");   
+        info.add("\n-------------------------------------------\n");
+        info.add("Servicios consumidos:\n");
+        for(int i= 0; i<servicios.size();i++){
+            info.add(servicios.get(i));
+        }
+        info.add("\n-------------------------------------------\n");
+        info.add("Total a pagar: "+jLprecio.getText()+"\n");
+        info.add("Medio de pago: "+"____"+"\n");
+        ControladorCheckout.imprimirFactura(info, idcheckout);
+    }
+    
+    private void adicionarServicios(){
+        ArrayList<ServiciosAdicionado>h = ControladorServiciosAdicionado
+                .listadoSH(idcheckout);
+        int item = 1;
+        String t;
+        for(int i = 0; i<h.size(); i++){
+            item++;
+            t ="\n" +item+". "+h.get(i).getNombreProducto()
+                    +" x"+h.get(i).getcantidad();
+            servicios.add(t);
+            t = "    \nValor por unidad: " + h.get(i).getPrecio() + "$";
+            servicios.add(t);
+            t = "    \nValor total: " + h.get(i).getTotal() + "$";
+            servicios.add(t);
+         }
+    }
+    private void calcularValorTotal(int h){
+        valorTotal = h;
+        ArrayList<ServiciosAdicionado>s = ControladorServiciosAdicionado
+                .listadoSH(idcheckout);
+        for(int i = 0; i<s.size(); i++){
+           valorTotal += s.get(i).getTotal();
+         }
     }
     
     /**
@@ -259,7 +311,10 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jBcancelarActionPerformed
 
     private void jBcheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcheckOutActionPerformed
-        // TODO add your handling code here:
+        if(found){
+        imprimirFactura();
+        found = false;
+        }
     }//GEN-LAST:event_jBcheckOutActionPerformed
 
     private void jTbuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTbuscadorFocusLost

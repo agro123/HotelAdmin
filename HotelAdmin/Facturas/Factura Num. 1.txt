@@ -1,0 +1,27 @@
+--------------ADMIN H S.A.S----------------
+Factura de hospedaje Numero: 1
+Fecha: 2020-05-19 03:15:36.787
+-------------------------------------------
+C.C. empleado: 123
+C.C. cliente: 1
+Habitación: 301
+Fecha de ingreso: 2020-05-21 00:00:00.0
+Fecha de salida: 2020-05-28 00:00:00.0
+
+-------------------------------------------
+Servicios consumidos:
+1. Habitacion MATRIMONIAL 7 días    
+Valor por día: 250000$    
+Valor de estadía: 1750000$
+2. Cocacola x4    
+Valor por unidad: 2000$    
+Valor total: 8000$
+3. Aguardiente Blanco del valle x1    
+Valor por unidad: 7000$    
+Valor total: 7000$
+4. Jack Daniel's x1    
+Valor por unidad: 150000$    
+Valor total: 150000$
+-------------------------------------------
+Total a pagar: 1915000$
+Medio de pago: ____

@@ -24,6 +24,7 @@ public class HospedajeDAO {
                     ex.getErrorCode() + "\n Error" + ex.getMessage());
     }
     public int grabarHospedaje(Hospedaje c){
+        
         Connection con = null;
         PreparedStatement pstm;
         pstm = null;
@@ -31,7 +32,10 @@ public class HospedajeDAO {
         rtdo = 0;
        try{
             con = Fachada.getConnection();
-            String sql = "INSERT INTO Hospedaje values (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Hospedaje (id_hospedaje,id_habitacion,"
+                    + "id_cliente,id_empleado,FECHA_INGRESO,FECHA_SALIDA,"
+                    + "NUM_PERSONAS,estado,id_reserva) "
+                    + " VALUES (?,?,?,?,?,?,?,?,?)";
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, c.getIdHospedaje());
             pstm.setInt(2, c.getIdHabitacion());
@@ -170,10 +174,10 @@ public class HospedajeDAO {
             con = Fachada.getConnection();
             String sql="";
             if(s==0){
-                sql = "SELECT * FROM hospedaje ORDER BY estado";            
+                sql = "SELECT * FROM hospedaje WHERE estado = TRUE"; //---------           
             }else{
-                sql = "SELECT * FROM datos_hospedaje "
-                    + "ORDER BY habitacion";      
+                sql = "SELECT * FROM datos_hospedaje "//---------
+                    + "ORDER BY id_hospedaje";      
             }                     
             pstm = con.prepareStatement(sql);            
             

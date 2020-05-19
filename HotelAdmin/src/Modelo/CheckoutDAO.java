@@ -17,11 +17,10 @@ import javax.swing.JOptionPane;
  * @author crist
  */
 public class CheckoutDAO {
- private void mensajeError(SQLException ex){
+    private void mensajeError(SQLException ex){
 
-        JOptionPane.showMessageDialog(null,"Código: "+
-                    ex.getErrorCode() 
-                + "\n Ocurrio un error al realizar la operacion con checkout");
+        JOptionPane.showMessageDialog(null,"Código "+
+                    ex.getErrorCode() + "\n Error" + ex.getMessage());
     }
     public int grabarCheckout(Checkout c){
         Connection con = null;
@@ -31,11 +30,13 @@ public class CheckoutDAO {
         rtdo = 0;
        try{
             con = Fachada.getConnection();
-            String sql = "INSERT INTO checkout VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO checkout (id_checkout,id_hospedaje,"
+                    + "valortotal,medio_pago,fecha)"
+                    + "VALUES (?,?,?,?,?)";
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, c.getIdCheckout());
             pstm.setInt(2, c.getIdHospedaje());
-            pstm.setFloat(3, c.getValorTotal());
+            pstm.setInt(3, c.getValorTotal());
             pstm.setString(4, c.getMediodepago());
             pstm.setTimestamp(5, c.getFpago());
             
@@ -133,8 +134,7 @@ public class CheckoutDAO {
                 mensajeError(ex);
             }
         }
-        return c;
-        
+        return c;    
     }
 
 }

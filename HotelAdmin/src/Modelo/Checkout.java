@@ -15,7 +15,7 @@ import java.util.Date;
 public class Checkout {
     private String medio_pago;
     private int id_checkout,id_hospedaje;
-    private float valorTotal;
+    private int valorTotal;
     private Timestamp fPago;
     
    //--------Vista cuenta
@@ -31,19 +31,19 @@ public class Checkout {
      this.fPago = new Timestamp(1900,1 , 1, 00, 00, 00, 00);
      this.tipo = "";
     }
-    public Checkout(int iho ,int ich,String mp,float vt,Timestamp fp){
+    public Checkout(int iho ,int ich,String mp,int vt,Timestamp fp){
      this.id_hospedaje  = iho;
      this.id_checkout  = ich;
      this.medio_pago= mp;
-     this.valorTotal= vt;
+     this.valorTotal = vt;
      this.fPago = fp;
     }
-    public Checkout(int iho ,int ich,String mp,float vt,Timestamp fp, 
+    public Checkout(int iho ,int ich,String mp,int vt,Timestamp fp, 
             int ic,int ih, Timestamp fi, Timestamp fs,String t, int ph){
      this.id_hospedaje  = iho;
      this.id_checkout  = ich;
      this.medio_pago= mp;
-     this.valorTotal= vt;
+     this.valorTotal = vt;
      this.fPago = fp;
      this.id_cliente = ic;
      this.id_habitacion = ih;
@@ -106,7 +106,7 @@ public class Checkout {
     {
         return this.medio_pago;
     }
-    public float getValorTotal()
+    public int getValorTotal()
     {
         return this.valorTotal;
     }
