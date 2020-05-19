@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import Controladores.ControladorCliente;
 import Modelo.Cliente;
 import javax.swing.JOptionPane;
+import Vistas.Jframe.Clientes;
 
 /**
  *
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 public class ClienteListaGUI extends javax.swing.JPanel {
 
     ControladorCliente controladorCliente = new ControladorCliente();
+    
 
     private ArrayList<jPcliente> clientes;
 
@@ -27,6 +29,7 @@ public class ClienteListaGUI extends javax.swing.JPanel {
         clientes = new ArrayList<>();
         initComponents();
         CargarLista(0);
+        
     }
 
     /**
@@ -49,7 +52,8 @@ public class ClienteListaGUI extends javax.swing.JPanel {
 
         jTbuscador.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jTbuscador.setForeground(new java.awt.Color(204, 204, 204));
-        jTbuscador.setText("Buscador...");
+        jTbuscador.setText("Ingrese la cédula del cliente...");
+        jTbuscador.setToolTipText("");
         jTbuscador.setBorder(null);
         jTbuscador.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -68,6 +72,11 @@ public class ClienteListaGUI extends javax.swing.JPanel {
         jScrollPane2.setMaximumSize(new java.awt.Dimension(706, 374));
 
         jPmensajes.setBackground(new java.awt.Color(255, 255, 255));
+        jPmensajes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPmensajesMouseClicked(evt);
+            }
+        });
         jPmensajes.setLayout(new java.awt.GridLayout(0, 3, 0, 1));
         jScrollPane2.setViewportView(jPmensajes);
 
@@ -113,18 +122,15 @@ public class ClienteListaGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jBbuscarActionPerformed
 
     private void jTbuscadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbuscadorMouseClicked
-        try{
-            if(jTbuscador.getText().length()>0)
-        {
-         } else{
+        if(jTbuscador.getText().equalsIgnoreCase("Ingrese la cédula del cliente...")){
             jTbuscador.setText("");
-        }}
-        
-        catch(Exception e){
-                    }
-        
+        } else{}
         
     }//GEN-LAST:event_jTbuscadorMouseClicked
+
+    private void jPmensajesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPmensajesMouseClicked
+        System.out.println(evt.getSource());
+    }//GEN-LAST:event_jPmensajesMouseClicked
 
     private void cleanLista() {
 
@@ -143,9 +149,11 @@ public class ClienteListaGUI extends javax.swing.JPanel {
         for (int i = 0; i < listaClientes.size(); i++) {
             Integer cedula = listaClientes.get(i).getID();
             Integer telefono = Integer.parseInt(listaClientes.get(i).getTelefono());
-            String nombre = listaClientes.get(i).getNombre() + " " + listaClientes.get(i).getApellido();
+            String nombre = listaClientes.get(i).getNombre();
+            String apellido = listaClientes.get(i).getApellido();
             String correo = listaClientes.get(i).getCorreo();
-            jPcliente jp = new jPcliente(cedula, telefono, nombre, correo);
+            // String direccion = listaClientes.get(i).getDireccion();
+            jPcliente jp = new jPcliente(cedula, nombre, apellido, correo, telefono);
             if (id == 0) {
                 clientes.add(jp);
             } else {

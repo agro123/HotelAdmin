@@ -5,27 +5,48 @@
  */
 package Vistas.Jpanel;
 
+import Vistas.Jpanel.ClientesAgregarModificarGUI;
+import Modelo.Cliente;
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  *
  * @author nicol
  */
+
+
+
 public class jPcliente extends javax.swing.JPanel {
     private int cedula, telefono;
-    private String nombre, correo;
+    private String nombre, apellido, correo;
+   
     /**
      * Creates new form jPcliente
      */
-    public jPcliente(int cedula_,int telefono_,String nombre_,String correo_) {
+    
+    
+    public boolean changeTab = false;
+    
+    Cliente tempClient=new Cliente();
+    Integer tempClientID=0;
+    
+    public jPcliente(){}
+    
+    public jPcliente(int cedula_, String nombre_, String apellido_, String correo_, int telefono_) {
         this.cedula = cedula_;
         this.telefono = telefono_;
         this.nombre = nombre_;
+        this.apellido = apellido_;
         this.correo = correo_;
+        //this.direccion = direccion_;
         initComponents();
         
         jLcedula.setText(String.valueOf(cedula_));
         jLtelefono.setText(String.valueOf(telefono_));
-        jLnombre.setText(nombre_);
+        jLnombre.setText(nombre_ + " " + apellido_);
         jLcorreo.setText(correo_);
+        
     }
 
     /**
@@ -43,7 +64,7 @@ public class jPcliente extends javax.swing.JPanel {
         jLtelefono = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -60,8 +81,25 @@ public class jPcliente extends javax.swing.JPanel {
         add(jLtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 63, 85, 10));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cliente-jpanel.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 240, 130));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+           System.out.println("touch!");
+           tempClientID = cedula;
+            
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    // Envía el id directamente al padre (ClientesAgregarModificarGUI)
+    public Integer getClientID(){
+        changeTab=true;
+        return tempClientID;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -72,3 +110,4 @@ public class jPcliente extends javax.swing.JPanel {
     private javax.swing.JLabel jLtelefono;
     // End of variables declaration//GEN-END:variables
 }
+

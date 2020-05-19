@@ -4,8 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/liquidv0id/Desktop/proDSi/Desarrollo/HotelAdmin/src/Vistas/Jpanel/ClientesAgregarModificarGUI.java</file>
+            <file>file:/home/liquidv0id/Desktop/proDSi/Desarrollo/HotelAdmin/src/Vistas/Jframe/Clientes.java</file>
             <file>file:/home/liquidv0id/Desktop/proDSi/Desarrollo/HotelAdmin/src/Vistas/Jpanel/ClienteListaGUI.java</file>
-            <file>file:/home/liquidv0id/Desktop/proDSi/Desarrollo/HotelAdmin/src/Vistas/Jpanel/jPmensaje.java</file>
+            <file>file:/home/liquidv0id/Desktop/proDSi/Desarrollo/HotelAdmin/src/Vistas/Jpanel/jPcliente.java</file>
+            <file>file:/home/liquidv0id/Desktop/proDSi/Desarrollo/HotelAdmin/src/Modelo/Cliente.java</file>
         </group>
     </open-files>
 </project-private>

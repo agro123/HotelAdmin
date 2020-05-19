@@ -5,10 +5,10 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControladorCliente;
 import Modelo.Cliente;
 import Modelo.ClientDAO;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,20 +18,21 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
     
     
     ClientDAO clientDAO = new ClientDAO();
+    jPcliente jpCliente = new jPcliente();
     
-
     /**
      * Creates new form ClientesAgregarModificarGUI
      */
     public ClientesAgregarModificarGUI() {
         
         initComponents();
-        
+        System.out.println(jpCliente.changeTab);
         
     }
+    
+    
 
     public void llenarValores(Cliente cliente) {
-
         String Cedula = String.valueOf(cliente.getID());
         jTCedula.setText(Cedula);
         jTnombre.setText(cliente.getNombre() + " " + cliente.getApellido());
@@ -78,6 +79,30 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
        catch(Exception e){}
     }
     
+    public Cliente getClient(Integer id){
+        
+        ArrayList<Cliente> listaClientes = new ArrayList<>();
+        listaClientes = ControladorCliente.listClients(0);
+        Cliente clienteTemp=new Cliente();
+
+        for (int i = 0; i < listaClientes.size(); i++) {
+            if(id==listaClientes.get(i).getID()){
+                Integer cedula = listaClientes.get(i).getID();
+                Integer telefono = Integer.parseInt(listaClientes.get(i).getTelefono());
+                String nombre = listaClientes.get(i).getNombre();
+                String apellido = listaClientes.get(i).getApellido();
+                String correo = listaClientes.get(i).getCorreo();
+                String direccion = listaClientes.get(i).getDireccion();
+                clienteTemp=new Cliente(cedula, nombre, apellido, correo, direccion, telefono);
+                return clienteTemp;
+            }
+            else{;}
+        }
+        
+        return clienteTemp;
+        
+    }
+    
     public boolean verifyData(Cliente gClient) {
        int cedula, telefono;
        String nombre, apellido, correo, direccion;
@@ -116,6 +141,8 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
        return true;
        
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

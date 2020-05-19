@@ -7,19 +7,27 @@ package Vistas.Jframe;
 
 import Vistas.Jpanel.ClienteListaGUI;
 import Vistas.Jpanel.ClientesAgregarModificarGUI;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import Vistas.Jpanel.jPcliente;
+import Modelo.Cliente;
 
 /**
  *
- * @author nicol
+ * @author nicol & Luis
  */
-public class Clientes extends javax.swing.JPanel {
+public class Clientes extends javax.swing.JPanel{
 
-    /**
-     * Creates new form Clientes
-     */
+    
+    ClienteListaGUI panelE = new ClienteListaGUI();
+    ClientesAgregarModificarGUI panelAM = new ClientesAgregarModificarGUI();
+    
+    
     public Clientes() {
         initComponents();
+        
         seleccionarPrimero();
+        
     }
 
     /**
@@ -80,7 +88,7 @@ public class Clientes extends javax.swing.JPanel {
                
         jPcontenedor.setVisible(false);
         jPcontenedor.setVisible(true);
-        ClienteListaGUI panelE = new ClienteListaGUI();
+        
         // EmpleadoAgregarModificarGUI panelE = new EmpleadoAgregarModificarGUI();
         jPcontenedor.removeAll();
         jPcontenedor.add(panelE);
@@ -91,8 +99,7 @@ public class Clientes extends javax.swing.JPanel {
 
     public void seleccionarPrimero(){
         jBmodificar.setSelected(false);
-        jBagregar.setSelected(true); 
-        ClientesAgregarModificarGUI panelAM = new ClientesAgregarModificarGUI();
+        jBagregar.setSelected(true);
         jPcontenedor.removeAll();
         jPcontenedor.add(panelAM);
         jPcontenedor.revalidate();
@@ -105,6 +112,31 @@ public class Clientes extends javax.swing.JPanel {
         seleccionarPrimero();
     }//GEN-LAST:event_jBagregarActionPerformed
 
+    
+    
+    public void switchTabs(){
+        
+        System.out.println("switchTabs");
+        
+        seleccionarPrimero();
+        //panelAM.llenarValores(cliente);
+    }
+    
+    // Falta que se determine constantemente el valor de jpcliente.changeTab,
+    // pensaba en un listener en alguna parte
+    
+    
+    ActionListener actionListener = new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        boolean selectedjp = false;
+        boolean enable = jPcontenedor.isShowing() && selectedjp; 
+        //llenarValores();
+    }
+};
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBagregar;
@@ -112,4 +144,6 @@ public class Clientes extends javax.swing.JPanel {
     private javax.swing.JLabel jLmenuCrud;
     private javax.swing.JPanel jPcontenedor;
     // End of variables declaration//GEN-END:variables
+
+    
 }
