@@ -236,10 +236,10 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         jdFechaSalida.setBackground(new java.awt.Color(255, 255, 255));
         jdFechaSalida.setForeground(new java.awt.Color(191, 191, 191));
         jdFechaSalida.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jdFechaSalidaInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jdFechaSalida.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -390,8 +390,8 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         jLabel1.setBackground(new java.awt.Color(112, 112, 112));
         jLabel1.setFont(new java.awt.Font("Decker", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(112, 112, 112));
-        jLabel1.setText("Número    Tipo     Precio   Capacidad");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 89, -1, -1));
+        jLabel1.setText("Número      Tipo                  Precio   Capacidad");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 90, 250, -1));
 
         jComboBox1.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(204, 204, 204));

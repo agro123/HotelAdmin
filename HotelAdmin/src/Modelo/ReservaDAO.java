@@ -388,18 +388,24 @@ public class ReservaDAO {
             con = Fachada.getConnection(); 
             String sql="";
                        
-            sql = "SELECT * FROM HABITACION " +
-                    "WHERE ID_HABITACION " +
-                    "NOT IN(SELECT ID_HABITACION FROM RESERVA " +
-                    "WHERE " +
-                    "(FECHA_INGRESO BETWEEN ? AND ?) " +
-                    "OR (FECHA_SALIDA BETWEEN ? AND ?))";            
+            sql = "SELECT * FROM HABITACION WHERE ID_HABITACION " 
+                + "NOT IN (SELECT ID_HABITACION FROM RESERVA "
+                + "WHERE ((FECHA_INGRESO BETWEEN ? AND ?) " 
+                + "OR (FECHA_SALIDA BETWEEN ? AND ?)) "
+                + "UNION SELECT ID_HABITACION FROM HOSPEDAJE "
+                + "WHERE((FECHA_INGRESO BETWEEN ? AND ?) "
+                + "OR (FECHA_SALIDA BETWEEN ? AND ?))) "
+                + "ORDER BY ID_HABITACION";            
                
             pstm = con.prepareStatement(sql);
             pstm.setTimestamp(1, fi);
             pstm.setTimestamp(2, fs);
             pstm.setTimestamp(3, fi);
             pstm.setTimestamp(4, fs);
+            pstm.setTimestamp(5, fi);
+            pstm.setTimestamp(6, fs);
+            pstm.setTimestamp(7, fi);
+            pstm.setTimestamp(8, fs);
             rs = pstm.executeQuery();
                         
             Habitacion objhabitacion = null;
