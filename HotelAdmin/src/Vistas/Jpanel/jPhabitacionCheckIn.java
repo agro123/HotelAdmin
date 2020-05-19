@@ -88,22 +88,22 @@ public class jPhabitacionCheckIn extends javax.swing.JPanel {
         jLcapacidad.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLcapacidad.setForeground(new java.awt.Color(112, 112, 112));
         jLcapacidad.setText("2");
-        add(jLcapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
+        add(jLcapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 10, -1));
 
         jLnumero.setFont(new java.awt.Font("Decker", 1, 12)); // NOI18N
-        jLnumero.setForeground(new java.awt.Color(112, 112, 112));
+        jLnumero.setForeground(new java.awt.Color(0, 153, 255));
         jLnumero.setText("09");
-        add(jLnumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
+        add(jLnumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 30, -1, -1));
 
         jLtipo.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLtipo.setForeground(new java.awt.Color(112, 112, 112));
-        jLtipo.setText("Simple");
-        add(jLtipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
+        jLtipo.setText("MATRIMONIAL");
+        add(jLtipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 80, -1));
 
         jLprecio.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLprecio.setForeground(new java.awt.Color(112, 112, 112));
         jLprecio.setText("56");
-        add(jLprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+        add(jLprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 50, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/HabitacionChe.png"))); // NOI18N
         jButton1.setBorder(null);
