@@ -31,7 +31,10 @@ public class HospedajeDAO {
         rtdo = 0;
        try{
             con = Fachada.getConnection();
-            String sql = "INSERT INTO Hospedaje values (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Hospedaje (id_hospedaje,id_habitacion,"
+                    + "id_cliente,id_empleado,FECHA_INGRESO,FECHA_SALIDA,"
+                    + "NUM_PERSONAS,estado,id_reserva) "
+                    + " VALUES (?,?,?,?,?,?,?,?,?)";
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, c.getIdHospedaje());
             pstm.setInt(2, c.getIdHabitacion());
