@@ -44,7 +44,7 @@ public class Recepcionista extends javax.swing.JFrame {
         jBreservar.setSelected(false);
         jBservicios.setSelected(false);
         jBcheckIn.setSelected(true);
-        CheckIn check = new CheckIn(numEmpleado);//-----------------------------
+        CheckIn check = new CheckIn(numEmpleado);
         jPcontenedor.removeAll();
         jPcontenedor.add(check);
         jPcontenedor.revalidate();
@@ -185,18 +185,15 @@ public class Recepcionista extends javax.swing.JFrame {
         jBservicios.setSelected(false);
         jBcheckIn.setSelected(false);
         jBreservar.setSelected(true);
-        
         jPcontenedor.setVisible(false);
+        Reservas JframeReservas;
         JframeReservas = new Reservas();
         jPcontenedor.removeAll();
         jPcontenedor.add(JframeReservas);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
-        
-        ReservaDAO modelo = new ReservaDAO();
-        ControllerReserva controlador = new ControllerReserva(JframeReservas,modelo);
-        controlador.setNumEmpleado(numEmpleado);
+        ControllerReserva.setNumEmpleado(numEmpleado);
         
     }//GEN-LAST:event_jBreservarActionPerformed
 
@@ -231,9 +228,7 @@ public class Recepcionista extends javax.swing.JFrame {
         jBcheckOut.setSelected(true);
         
         jPcontenedor.setVisible(false);
-        CheckOut check = new CheckOut(numEmpleado);//---------------------------
-        
-        
+        CheckOut check = new CheckOut(numEmpleado);
         jPcontenedor.removeAll();
         jPcontenedor.add(check);
         jPcontenedor.revalidate();

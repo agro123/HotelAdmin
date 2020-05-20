@@ -17,7 +17,8 @@ public class ControladorHospedaje {
     public static int extraerId()
     {
         HospedajeDAO hd = new HospedajeDAO();  
-        return hd.extraerUltimoId();      
+        return hd.extraerUltimoId();
+       
     }       
        public static int grabarHospedaje(Hospedaje c)
     {
@@ -27,7 +28,7 @@ public class ControladorHospedaje {
         return resultado; 
     }
 
-     public static ArrayList<Hospedaje>listadoHospedaje(int s)
+     public static ArrayList<Hospedaje> listadoHospedaje(int s)
     {
         ArrayList<Hospedaje> listado;
         listado = new ArrayList();
@@ -41,16 +42,16 @@ public class ControladorHospedaje {
         int resultado = a.borrarHospedaje(s);
         return resultado; 
     }
-    public static int modificarHospedaje(Hospedaje c)
+           public static int modificarHospedaje(Hospedaje c)
     {
         HospedajeDAO a = new HospedajeDAO();
         int resultado =a.modificarHospedaje(c);
         return resultado; 
     }
-     public static int cambiarEstado(int idhospedaje)
+    public static int cambiarEstado(int idhospedaje)
     {
         HospedajeDAO a = new HospedajeDAO();
         int resultado =a.cambiarEstado(idhospedaje);
         return resultado; 
-    }   
+    }  
 }

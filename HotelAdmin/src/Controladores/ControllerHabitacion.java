@@ -27,21 +27,18 @@ public class ControllerHabitacion {
     HabitacionDAO modelo;
     int id_seleccionado;
 
-    public ControllerHabitacion(Habitaciones vista_agregar, 
-            HabitacionDAO modelo) {
+    public ControllerHabitacion(Habitaciones vista_agregar, HabitacionDAO modelo) {
 
         this.vista = vista_agregar;
         this.modelo = modelo;
 
         HabitacionListener manejadoreventos = new HabitacionListener();
-        this.vista.getPanelAgregar().getjBcancelar()
-                .addActionListener(manejadoreventos);
+        this.vista.getPanelAgregar().getjBcancelar().addActionListener(manejadoreventos);
 
         this.vista.getjBagregar().addActionListener(manejadoreventos);
         this.vista.getjBmodificar().addActionListener(manejadoreventos);
         this.vista.getjBeliminar().addActionListener(manejadoreventos);
     }
-    
     //--------------------------------------------------------------------------
     public ControllerHabitacion(){
         
@@ -60,6 +57,7 @@ public class ControllerHabitacion {
         hd.cambiarEstadoHabitacion(idHabitacion);
     }      
     //--------------------------------------------------------------------------
+
     /*public ControllerHabitacion (HabitacionListaGUI vista_actualizar_eliminar, HabitacionDAO modelo){
         
         this.vista_actualizar_eliminar = vista_actualizar_eliminar;
