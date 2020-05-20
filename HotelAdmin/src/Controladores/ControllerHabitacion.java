@@ -55,6 +55,10 @@ public class ControllerHabitacion {
         precio = h.getPrecio_hab();
         return precio;
     }
+    public static void cambiarEstadoHabitacion(int idHabitacion){
+        HabitacionDAO hd = new HabitacionDAO();
+        hd.cambiarEstadoHabitacion(idHabitacion);
+    }      
     //--------------------------------------------------------------------------
     /*public ControllerHabitacion (HabitacionListaGUI vista_actualizar_eliminar, HabitacionDAO modelo){
         

@@ -22,6 +22,7 @@ public class CheckoutDAO {
         JOptionPane.showMessageDialog(null,"Código "+
                     ex.getErrorCode() + "\n Error" + ex.getMessage());
     }
+    //--------------------------------------------------------------------------
     public int grabarCheckout(Checkout c){
         Connection con = null;
         PreparedStatement pstm;
@@ -55,6 +56,7 @@ public class CheckoutDAO {
         }
         return rtdo;
     }
+    //--------------------------------------------------------------------------
     public int extraerUltimoId()
     {
         Connection con = null;
@@ -90,6 +92,7 @@ public class CheckoutDAO {
         }
         return id;
     }
+    //--------------------------------------------------------------------------
     public Checkout extraerCheckout (int idcliente)
     {
         Connection con = null;
@@ -135,6 +138,39 @@ public class CheckoutDAO {
             }
         }
         return c;    
+    }
+    //--------------------------------------------------------------------------
+    public int modificarCheckout(Checkout c){      
+        Connection con = null;
+        PreparedStatement pstm;
+        pstm = null;
+        int rtdo;
+        rtdo = 0;
+        try{
+            con = Fachada.getConnection();
+            String sql = "UPDATE checkout " +
+                         "SET fecha = ?, valorTotal = ?,medio_pago = ?"
+                       + "WHERE id_checkout = ?";
+            pstm = con.prepareStatement(sql);  
+            pstm.setTimestamp(1, c.getFpago());
+            pstm.setInt(2, c.getValorTotal());
+            pstm.setString(3, c.getMediodepago());
+            pstm.setInt(4, c.getIdCheckout());
+            
+            rtdo = pstm.executeUpdate();  
+        }
+        catch(SQLException ex){
+            mensajeError(ex);
+        }
+        finally{
+            try{
+                if(pstm!=null) pstm.close();                
+            }
+            catch(SQLException ex){
+                mensajeError(ex);
+            }
+        }
+        return rtdo;
     }
 
 }

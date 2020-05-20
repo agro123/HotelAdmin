@@ -41,10 +41,16 @@ public class ControladorHospedaje {
         int resultado = a.borrarHospedaje(s);
         return resultado; 
     }
-           public static int modificarHospedaje(Hospedaje c)
+    public static int modificarHospedaje(Hospedaje c)
     {
         HospedajeDAO a = new HospedajeDAO();
         int resultado =a.modificarHospedaje(c);
         return resultado; 
-    }     
+    }
+     public static int cambiarEstado(int idhospedaje)
+    {
+        HospedajeDAO a = new HospedajeDAO();
+        int resultado =a.cambiarEstado(idhospedaje);
+        return resultado; 
+    }   
 }

@@ -90,7 +90,7 @@ public class CheckInReservaPreviaGUI extends javax.swing.JPanel {
        h.setId_reserva(Integer.parseInt(jLnumeroReserva.getText()));
        
        int i = ch.grabarHospedaje(h);
-       crearCheckout(ch.extraerId());
+       crearCheckout(ch.extraerId());//---------------
       if(i==1){
           JOptionPane.showMessageDialog(null,
                  "Hospedaje registrado con exito."); 

@@ -71,5 +71,9 @@ public class ControladorCheckout {
 		}
 	} 
     }
+    public static int registrarSalida(Checkout c){
+        CheckoutDAO cd = new CheckoutDAO();
+        return cd.modificarCheckout(c);
+    }
     
 }

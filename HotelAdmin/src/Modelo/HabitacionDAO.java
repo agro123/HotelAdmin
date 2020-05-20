@@ -233,9 +233,35 @@ public Habitacion extraerHabitaciones_porID(int idHabitacion)
         return habitacion;
         
     }
-
-
-
-
-    
+    //--------------------------------------------------------------------------
+    public int cambiarEstadoHabitacion(int idhabitacion){      
+        Connection con = null;
+        PreparedStatement pstm;
+        pstm = null;
+        int rtdo;
+        rtdo = 0;
+        try{
+            con = Fachada.getConnection(); 
+            String sql = "UPDATE habitacion " 
+                    +    "SET estado = ? "
+                    + "WHERE id_habitacion = ?"; 
+                  
+            pstm = con.prepareStatement(sql);
+            pstm.setBoolean(1, true);
+            pstm.setInt(2, idhabitacion);
+            rtdo = pstm.executeUpdate();  
+        }
+        catch(SQLException ex){
+            mensajeError(ex);
+        }
+        finally{
+            try{
+                if(pstm!=null) pstm.close();                
+            }
+            catch(SQLException ex){
+                mensajeError(ex);
+            }
+        }
+        return rtdo;
+    }
 }

@@ -10,31 +10,34 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import Controladores.ControladorCheckout;
+import Controladores.ControladorHospedaje;
 import Controladores.ControladorServiciosAdicionado;
+import Controladores.ControllerHabitacion;
 import Modelo.Checkout;
 import Modelo.ServiciosAdicionado;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 /**
  *
  * @author nicol
  */
-public class RegistrarSalidaGUI extends javax.swing.JPanel {
-
-  
+public class RegistrarSalidaGUI extends javax.swing.JPanel {  
     private int idEmpleado;
     private int idcheckout;
     private ArrayList<String> servicios;
-    boolean found;
+    private boolean found;
     private int valorTotal;
+    private Timestamp fecha_de_hoy;
+    private int habitacion;
     
     /**
      * Creates new form RegistrarSalidaGUI
      */
     public RegistrarSalidaGUI(int ide) {
         initComponents();
+         this.fecha_de_hoy = new Timestamp(System.currentTimeMillis());
          this.idEmpleado = ide;
     }
     
@@ -63,7 +66,8 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
           if(co.getIdCheckout()!=0){
               jLcliente.setText(co.getIdCliente()+"");
               jLempleado.setText(idEmpleado+"");
-              jLhabitacion.setText(co.getIdhabitacion()+"");    
+              jLhabitacion.setText(co.getIdhabitacion()+"");
+              habitacion = co.getIdhabitacion();
               jLfechaIngreso.setText(co.getfechaIngreso()+"");
               jLfechaSalida.setText(co.getfechaSalida()+"");
               calcularValorTotal(co.getValorTotal());
@@ -114,9 +118,7 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
        } finally {
            return dias;
        }
-    }
-
-      
+    }    
     private void vaciarCampos(){
               jLcliente.setText("  ");
               jLempleado.setText("  ");
@@ -126,12 +128,17 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
               jLprecio.setText("  ");
               DefaultListModel modelo = new DefaultListModel();
               jListServicios.setModel(modelo);
+              found = false;
+              idcheckout = 0;
+              valorTotal = 0;
+              habitacion = 0;
     }
+    
     private void imprimirFactura(){
         ArrayList<String>info = new ArrayList();      
         info.add("C.C. empleado: "+jLempleado.getText()+"\n");
         info.add("C.C. cliente: " + jLcliente.getText()+ "\n");
-        info.add("Habitación: "+jLhabitacion.getText()+"\n");
+        info.add("Habitación: "+habitacion+"\n");
         info.add("Fecha de ingreso: "+jLfechaIngreso.getText()+"\n");
         info.add("Fecha de salida: "+jLfechaSalida.getText()+"\n");   
         info.add("\n-------------------------------------------\n");
@@ -169,7 +176,16 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
            valorTotal += s.get(i).getTotal();
          }
     }
-    
+    private void registrarSalida(){
+        Checkout c = new Checkout();
+        c.setIdCheckout(idcheckout);
+        c.setFpago(fecha_de_hoy);
+        c.setValorTotal(valorTotal);
+        ControladorCheckout.registrarSalida(c);
+       // c.setmediodepago(String value); //-------------------------------------------------------------FALTA
+        ControladorHospedaje.cambiarEstado(idcheckout);
+        ControllerHabitacion.cambiarEstadoHabitacion(habitacion);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -313,6 +329,7 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
     private void jBcheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcheckOutActionPerformed
         if(found){
         imprimirFactura();
+        registrarSalida();
         found = false;
         }
     }//GEN-LAST:event_jBcheckOutActionPerformed
@@ -324,7 +341,8 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jTbuscadorFocusLost
 
     private void jTbuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTbuscadorFocusGained
-        jTbuscador.setText(""); 
+        jTbuscador.setText("");
+        vaciarCampos();
     }//GEN-LAST:event_jTbuscadorFocusGained
 
     private void jTbuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyTyped
