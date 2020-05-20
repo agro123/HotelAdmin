@@ -9,14 +9,15 @@ import java.awt.event.KeyEvent;
 import Modelo.Reserva;
 import Controladores.ControladorHospedaje;
 import Modelo.Hospedaje;
+import Controladores.ControladorCheckout;
+import Controladores.ControllerHabitacion;
+import Modelo.Checkout;
 import Controladores.ControllerReserva;
 import javax.swing.JOptionPane;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.text.ParseException;
 /**
  *
  * @author nicol
@@ -53,7 +54,11 @@ public class CheckInReservaPreviaGUI extends javax.swing.JPanel {
                " Debe ingresar la identificacion de un cliente "
                        + "para encontrar la reserva");
             vaciarCampos();
-        }
+        }else if(id.length()>10){
+           JOptionPane.showMessageDialog(null,
+               "La identificación no debe de tener mas de 10 caracateres.");
+            vaciarCampos();
+       }
         else{
           idcliente = Integer.parseInt(id);
           r = rc.getReserva(idcliente);
@@ -78,7 +83,7 @@ public class CheckInReservaPreviaGUI extends javax.swing.JPanel {
    private void hacerHospedaje(){
        Hospedaje h = new Hospedaje();
        ControladorHospedaje ch = new ControladorHospedaje();
-       
+            
        h.setIdHabitacion(Integer.parseInt(jLidHabitacion.getText()));
        h.setIdCliente(Integer.parseInt(jLidCliente.getText()));
        h.setNumeroPesonas(Integer.parseInt(jLnumeroPersonas.getText()));
@@ -88,7 +93,8 @@ public class CheckInReservaPreviaGUI extends javax.swing.JPanel {
        h.setIdEmpleado(numEmpleado);
        h.setId_reserva(Integer.parseInt(jLnumeroReserva.getText()));
        
-      int i = ch.grabarHospedaje(h);
+       int i = ch.grabarHospedaje(h);
+       crearCheckout(ch.extraerId());//---------------
       if(i==1){
           JOptionPane.showMessageDialog(null,
                  "Hospedaje registrado con exito."); 
@@ -111,7 +117,37 @@ public class CheckInReservaPreviaGUI extends javax.swing.JPanel {
               jLfechaIngreso.setText("  ");
               jLfechaSalida.setText("  "); 
   }
-
+  //----------------------------
+   private void crearCheckout(int idhospedaje){
+      Checkout c = new Checkout();
+      ControladorCheckout co = new ControladorCheckout(); 
+      ControllerHabitacion ch = new ControllerHabitacion();
+      
+      int valorTotal = numDias()*
+             ch.getPrecioHabitacion(Integer.parseInt(jLidHabitacion.getText()));
+      c.setIdHospedaje(idhospedaje);
+      c.setValorTotal(valorTotal);
+      co.grabarChekout(c);
+  }
+   private int numDias(){
+       int dias=0;
+       try {
+       String fi = jLfechaIngreso.getText();
+       String fs = jLfechaSalida.getText();
+       fi = fi.substring(0, fi.indexOf(" "));
+       fs = fs.substring(0, fs.indexOf(" "));
+       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");       
+       Date fechaInicial = dateFormat.parse(fi);
+       Date fechaFinal = dateFormat.parse(fs);
+       dias=(int) ((fechaFinal.getTime()-fechaInicial.getTime())/86400000);      
+       } catch(ParseException e){
+        JOptionPane.showMessageDialog(null,
+                 "Ocurrio un error al realizar el Hospedaje");
+       } finally {
+           return dias;
+       }
+    }
+  //----------------------------
  
     /**
      * This method is called from within the constructor to initialize the form.
@@ -260,9 +296,8 @@ public class CheckInReservaPreviaGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jTbuscadorActionPerformed
 
     private void jTbuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTbuscadorFocusGained
- 
-        jTbuscador.setText("");
-       
+
+        jTbuscador.setText("");      
     }//GEN-LAST:event_jTbuscadorFocusGained
 
     private void jTbuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTbuscadorFocusLost
@@ -279,7 +314,8 @@ public class CheckInReservaPreviaGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jTbuscadorKeyPressed
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
-        vaciarCampos();
+
+        vaciarCampos();      
     }//GEN-LAST:event_jBcancelarActionPerformed
 
     private void jTbuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyTyped
