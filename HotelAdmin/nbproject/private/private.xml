@@ -12,10 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jpanel/CheckInSinReservaGUI.java</file>
-            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jframe/Principal.java</file>
-            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jpanel/RealizarReservaGUI.java</file>
-            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jframe/Recepcionista.java</file>
+            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jpanel/jPserviciosRecepcionista.java</file>
+            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jpanel/AgregarServicioRecepGUI.java</file>
+            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jpanel/jPservicio.java</file>
+            <file>file:/C:/Users/nicol/Documents/NetBeansProjects/Desarrollo/HotelAdmin/src/Vistas/Jpanel/jPserviciosRecepcionista2.java</file>
         </group>
     </open-files>
 </project-private>

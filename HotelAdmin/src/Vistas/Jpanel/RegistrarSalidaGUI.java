@@ -80,11 +80,11 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
 
         jTbuscador = new javax.swing.JTextField();
         jLcliente = new javax.swing.JLabel();
-        jLempleado = new javax.swing.JLabel();
         jLhabitacion = new javax.swing.JLabel();
         jLfechaIngreso = new javax.swing.JLabel();
         jLfechaSalida = new javax.swing.JLabel();
         jLprecio = new javax.swing.JLabel();
+        jCBmedioPago = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListServicios = new javax.swing.JList<>();
@@ -101,35 +101,35 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
         jTbuscador.setBorder(null);
         add(jTbuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 47, -1, -1));
 
-        jLcliente.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
+        jLcliente.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLcliente.setForeground(new java.awt.Color(112, 112, 112));
         jLcliente.setText("123456789");
-        add(jLcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 153, -1, -1));
+        add(jLcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 205, -1, -1));
 
-        jLempleado.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
-        jLempleado.setForeground(new java.awt.Color(112, 112, 112));
-        jLempleado.setText("123456789");
-        add(jLempleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 178, -1, -1));
-
-        jLhabitacion.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
+        jLhabitacion.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLhabitacion.setForeground(new java.awt.Color(112, 112, 112));
         jLhabitacion.setText("123456789");
-        add(jLhabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 203, -1, -1));
+        add(jLhabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 222, -1, -1));
 
-        jLfechaIngreso.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
+        jLfechaIngreso.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLfechaIngreso.setForeground(new java.awt.Color(112, 112, 112));
         jLfechaIngreso.setText("123456789");
-        add(jLfechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 227, -1, -1));
+        add(jLfechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 238, -1, -1));
 
-        jLfechaSalida.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
+        jLfechaSalida.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLfechaSalida.setForeground(new java.awt.Color(112, 112, 112));
         jLfechaSalida.setText("123456789");
-        add(jLfechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 250, -1, -1));
+        add(jLfechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 255, -1, -1));
 
         jLprecio.setFont(new java.awt.Font("Decker", 1, 20)); // NOI18N
         jLprecio.setForeground(new java.awt.Color(112, 112, 112));
         jLprecio.setText("600.000");
-        add(jLprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 315, -1, -1));
+        add(jLprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 148, -1, -1));
+
+        jCBmedioPago.setBackground(new java.awt.Color(241, 242, 246));
+        jCBmedioPago.setForeground(new java.awt.Color(112, 112, 112));
+        jCBmedioPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jCBmedioPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 273, 110, 18));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar-azul.png"))); // NOI18N
         jButton1.setBorder(null);
@@ -149,7 +149,7 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
 
         jScrollPane2.setViewportView(jListServicios);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 373, 260, 45));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 335, 320, 120));
 
         jLfactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Factura.png"))); // NOI18N
         add(jLfactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 88, -1, -1));
@@ -164,7 +164,7 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
                 jBcancelarActionPerformed(evt);
             }
         });
-        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 445, 130, 50));
+        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 470, 130, 50));
 
         jBcheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/botonCheckOutSinSele.png"))); // NOI18N
         jBcheckOut.setBorder(null);
@@ -177,7 +177,7 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
                 jBcheckOutActionPerformed(evt);
             }
         });
-        add(jBcheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(506, 445, 140, -1));
+        add(jBcheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(506, 470, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -197,8 +197,8 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
     private javax.swing.JButton jBcancelar;
     private javax.swing.JButton jBcheckOut;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jCBmedioPago;
     private javax.swing.JLabel jLcliente;
-    private javax.swing.JLabel jLempleado;
     private javax.swing.JLabel jLfactura;
     private javax.swing.JLabel jLfechaIngreso;
     private javax.swing.JLabel jLfechaSalida;
