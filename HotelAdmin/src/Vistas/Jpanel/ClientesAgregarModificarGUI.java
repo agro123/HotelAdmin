@@ -5,6 +5,7 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControladorCliente;
 import Modelo.Cliente;
 import Modelo.ClientDAO;
 import Vistas.Jframe.ClienteRecepcionista;
@@ -17,118 +18,125 @@ import javax.swing.JOptionPane;
  * @author nicol
  */
 public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
-    
-    
+
     ClientDAO clientDAO = new ClientDAO();
     ClienteRecepcionista panel_prin;
     String validar_panel;
 
+    public String getValidar_panel() {
+        return validar_panel;
+    }
+
+    public void setValidar_panel(String value) {
+        this.validar_panel = value;
+    }
+
     /**
      * Creates new form ClientesAgregarModificarGUI
      */
-    
-     public ClientesAgregarModificarGUI() {
-        
+    public ClientesAgregarModificarGUI() {
+
         initComponents();
-           
+
     }
-     
+
     public ClientesAgregarModificarGUI(ClienteRecepcionista cr) {
         this.panel_prin = cr;
         initComponents();
-           
+
     }
 
- 
     public void llenarValores(Cliente cliente) {
 
         String Cedula = String.valueOf(cliente.getID());
         jTCedula.setText(Cedula);
-        jTnombre.setText(cliente.getNombre() + " " + cliente.getApellido());
+        jTnombre.setText(cliente.getNombre());
+        jTapellido.setText(cliente.getApellido());
         jTcorreo.setText(cliente.getCorreo());
         jTtelefono.setText(cliente.getTelefono());
         jTdireccion.setText(cliente.getDireccion());
     }
-    
-    
 
-    
     public Cliente getData() {
         int cedula, telefono;
         String nombre, apellido, correo, direccion;
-       
-       // Se extrae la info de los campos y se guardan en una var(gClient) que cambiará de valor cada vez 
-       // que se oprima "Guardar", luego en añadir se enviará toda esta info a la BD
-    
+
+        // Se extrae la info de los campos y se guardan en una var(gClient) que cambiará de valor cada vez 
+        // que se oprima "Guardar", luego en añadir se enviará toda esta info a la BD
         Cliente gClient = new Cliente();
-       //Extraer el nombre y apellido de jTnombre
-       String[] names = jTnombre.getText().split(" ");
-       gClient.setNombre(names[0]);
-       if(names.length>1){
-           gClient.setApellido(names[1]);
+        //Extraer el nombre y apellido de jTnombre
+        String[] names = jTnombre.getText().split(" ");
+        gClient.setNombre(names[0]);
+        if (names.length > 1) {
+            gClient.setApellido(names[1]);
         } else {
-           apellido= "";
-       }
-       
-       gClient.setID(Integer.parseInt(jTCedula.getText().trim())) ;
-       gClient.setCorreo(jTcorreo.getText().trim());
-       gClient.setDireccion(jTdireccion.getText().trim());
-       gClient.setTelefono(jTtelefono.getText().trim());
-       
-       return gClient;
-        
+            apellido = "";
+        }
+
+        gClient.setID(Integer.parseInt(jTCedula.getText().trim()));
+        gClient.setApellido(jTapellido.getText().trim());
+        gClient.setCorreo(jTcorreo.getText().trim());
+        gClient.setDireccion(jTdireccion.getText().trim());
+        gClient.setTelefono(jTtelefono.getText().trim());
+
+        return gClient;
+
     }
-    
-    
+
     public void saveData() {
-       try{
-           Cliente cliente=getData();
-           if(verifyData(cliente)){
+        try {
+            Cliente cliente = getData();
+            if (verifyData(cliente)) {
                 clientDAO.addClient(cliente);
                 JOptionPane.showMessageDialog(null, "Cliente agregado!");
             }
-       }
-       catch(Exception e){}
+        } catch (Exception e) {
+        }
     }
-    
+
     public boolean verifyData(Cliente gClient) {
-       int cedula, telefono;
-       String nombre, apellido, correo, direccion;
-       String regexEmail = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|"
-               + "}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-        correo="";
-       try{
-            cedula=gClient.getID();
-            try{
-                telefono=Integer.parseInt(gClient.getTelefono());
-            }
-            catch(Exception e)
-            {
+        int cedula, telefono;
+        String nombre, apellido, correo, direccion;
+        String regexEmail = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|"
+                + "}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        correo = "";
+        try {
+            cedula = gClient.getID();
+            try {
+                telefono = Integer.parseInt(gClient.getTelefono());
+            } catch (Exception e) {
                 // TODO :: Add the report of an invalid field on a notification
-                telefono=999101999;
+                telefono = 999101999;
                 System.out.println("Error // Phone:" + e.toString());
             };
 
-            nombre=gClient.getNombre();
-            apellido=gClient.getApellido();
-            try{
-                if(gClient.getCorreo().matches(regexEmail)) {
-                correo=gClient.getCorreo();
+            nombre = gClient.getNombre();
+            apellido = gClient.getApellido();
+            try {
+                if (gClient.getCorreo().matches(regexEmail)) {
+                    correo = gClient.getCorreo();
                 }
-                
-              
+
+            } catch (Exception e) {
             }
-            catch(Exception e){}
-            direccion=gClient.getDireccion();
-            
-       } catch(Exception e){
-           System.out.println("Error: " + e.toString());
-           return false;
-       }
-        
-       
-       return true;
-       
+            direccion = gClient.getDireccion();
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.toString());
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public void limpiarCampos() {
+        jTCedula.setText("");
+        jTnombre.setText("");
+        jTapellido.setText("");
+        jTcorreo.setText("");
+        jTtelefono.setText("");
+        jTdireccion.setText("");
     }
 
     /**
@@ -269,18 +277,36 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
-        saveData(); // Se ejecuta, se envia la data a la BD 
-        jBcancelarActionPerformed(evt);
-        
+
+        if(validar_panel == "guardar")
+        {
+            //saveData();
+           ControladorCliente.addClient(getData());
+           JOptionPane.showMessageDialog(null,"Cliente agregado exitosamente");
+           
+        }else {           
+            
+            try
+            {
+                ControladorCliente.modificarCliente(getData());
+                
+            }
+            catch (Error error)
+            {
+                JOptionPane.showMessageDialog(null, "Se ha producido un error "
+                        + "modificando");
+            }
+            JOptionPane.showMessageDialog(null, "Se ha modificado con "
+                        + "éxito");
+            limpiarCampos();
+        }
+        //saveData(); // Se ejecuta, se envia la data a la BD 
+        //jBcancelarActionPerformed(evt);
+
     }//GEN-LAST:event_jBguardarActionPerformed
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
-        jTCedula.setText("");
-        jTnombre.setText("");
-        jTapellido.setText("");
-        jTcorreo.setText("");
-        jTtelefono.setText("");
-        jTdireccion.setText("");
+        limpiarCampos();
     }//GEN-LAST:event_jBcancelarActionPerformed
 
     private void jTCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCedulaActionPerformed

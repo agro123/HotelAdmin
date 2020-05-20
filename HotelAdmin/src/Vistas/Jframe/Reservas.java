@@ -22,28 +22,15 @@ public class Reservas extends javax.swing.JPanel {
     /**
      * Creates new form Reserva
      */
-    
-    ListaReservasGUI pListareserva;
-    RealizarReservaGUI pRealizarReserva;
+   
     
     public Reservas() {
         initComponents();
-        pListareserva = new ListaReservasGUI();
-        pRealizarReserva = new RealizarReservaGUI();
-        seleccionarPrimero();
+        PanelRealizarReserva(); 
         
     }
     
-    public void seleccionarPrimero(){
-        jBlistaReserva.setSelected(false); 
-        jBrrealizarReserva.setSelected(true);
-                
-        jPcontenedor.removeAll();
-        jPcontenedor.add(pRealizarReserva);
-        jPcontenedor.revalidate();
-        jPcontenedor.repaint();
-        jPcontenedor.setVisible(true);
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,77 +87,45 @@ public class Reservas extends javax.swing.JPanel {
 
     private void jBrrealizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBrrealizarReservaActionPerformed
         // TODO add your handling code here:
-
-        jPcontenedor.removeAll();
-        seleccionarPrimero();
+        PanelRealizarReserva();
+       
+        
     }//GEN-LAST:event_jBrrealizarReservaActionPerformed
 
     private void jBlistaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlistaReservaActionPerformed
         // TODO add your handling code here:        
+        panelListarReserva();
+    }//GEN-LAST:event_jBlistaReservaActionPerformed
+
+    public void panelListarReserva(){
         jBrrealizarReserva.setSelected(false);
-        jBlistaReserva.setSelected(true); 
-           
-        jPcontenedor.setVisible(false);
+        jBlistaReserva.setSelected(true);  
         jPcontenedor.setVisible(true);
         jPcontenedor.removeAll();
-        pListareserva = new ListaReservasGUI();
-
+        ListaReservasGUI pListareserva;
+        pListareserva = new ListaReservasGUI(this);
         jPcontenedor.add(pListareserva);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
-        
-    }//GEN-LAST:event_jBlistaReservaActionPerformed
-
+    }
     
-    public void CargarHabitaciones(ArrayList<Habitacion> lista){
+    
+    public RealizarReservaGUI  PanelRealizarReserva(){
         
-        pRealizarReserva.agregarHabitaciones(lista);
-        
-    }
-
-    public ListaReservasGUI getpListareserva() {
-        return pListareserva;
-    }
-
-    public RealizarReservaGUI getpRealizarReserva() {
+        jBlistaReserva.setSelected(false); 
+        jBrrealizarReserva.setSelected(true);  
+        jPcontenedor.removeAll();
+        RealizarReservaGUI pRealizarReserva;
+        pRealizarReserva = new RealizarReservaGUI();
+        jPcontenedor.add(pRealizarReserva);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
         return pRealizarReserva;
     }
     
     
-    
-    
-   
-
-    public String getTextjTfechaRserva() {
-        return pRealizarReserva.getjTnumPersonas().getText().trim();
-    }
-
-  
-    public String getTextjTidCliente() {
-        return pRealizarReserva.getjTidCliente().getText().trim();
-    }
-
-    public String getTextjTidHabitacion() {
-        return pRealizarReserva.getjTidHabitacion().getText().trim();
-        
-    }
-    
-    public Timestamp getFechaIngreso(){
-        return Fecha.cambiarFecha(pRealizarReserva.getJdFechaIngreso().getDate());
-    }
-    
-    public Timestamp getFechaSalida(){
-        return Fecha.cambiarFecha(pRealizarReserva.getJdFechaSalida().getDate());
-    }
-
-    
-    public void gestionMensajes(String mensaje, String titulo, int icono) {
-        JOptionPane.showMessageDialog(this, mensaje, titulo, icono);
-    }
-    
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBlistaReserva;
     private javax.swing.JButton jBrrealizarReserva;

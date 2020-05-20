@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -25,14 +26,14 @@ public class ReservaDAO {
     
    
     
-    public void mensajeError(SQLException ex){
+    public static void mensajeError(SQLException ex){
 
         JOptionPane.showMessageDialog(null,"Código "+
                     ex.getErrorCode() + "\n Error" + ex.getMessage());
     }
     
     
-    public int extraerUltimoId()
+    public static int extraerUltimoId()
     {
         Connection con = null;
         PreparedStatement pstm = null;
@@ -74,7 +75,7 @@ public class ReservaDAO {
     
     
     
-    public int grabarReserva (Reserva reserva)
+    public static int grabarReserva (Reserva reserva)
     {
         Connection con = null;
         PreparedStatement pstm;
@@ -115,7 +116,7 @@ public class ReservaDAO {
     
     
         
-    public ArrayList <Reserva> listadoReservas(){      
+    public static  ArrayList <Reserva> listadoReservas(){      
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -124,7 +125,9 @@ public class ReservaDAO {
             con = Fachada.getConnection(); 
             String sql="";
                        
-            sql = "SELECT * FROM reserva WHERE estado = TRUE ORDER BY id_reserva";             
+            sql = "SELECT * FROM reserva ORDER BY fecha_ingreso";   
+            
+            
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery();
             Reserva objReserva = null;
@@ -159,7 +162,54 @@ public class ReservaDAO {
     }
     
     
-    public Reserva extraerReserva_porID(int idReserva)
+    public  ArrayList <Reserva> listReservasLike(int i){      
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        ArrayList <Reserva> listadoReservas = new ArrayList<>();
+        try{
+            con = Fachada.getConnection(); 
+            String sql="";
+                       
+            sql = " select * from Reserva where "
+                    + "(SELECT CAST (id_cliente AS varchar(1))) like '"+i+"%'";   
+            
+            
+            pstm = con.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            Reserva objReserva = null;
+            
+            while(rs.next()){
+                
+                objReserva = new Reserva();
+                objReserva.setNumero_reserva(rs.getInt("id_reserva"));
+                objReserva.setNum_Habitacion(rs.getInt("id_habitacion"));
+                objReserva.setNumCliente(rs.getInt("id_cliente"));
+                objReserva.setNum_Empleado(rs.getInt("id_empleado"));
+                objReserva.setFecha_reserva(rs.getTimestamp("fecha_reserva"));
+                objReserva.setFecha_ingreso(rs.getTimestamp("fecha_ingreso"));
+                objReserva.setFecha_salida(rs.getTimestamp("fecha_salida"));
+                objReserva.setNum_Personas(rs.getInt("num_personas"));
+                listadoReservas.add(objReserva);
+            }
+        }
+        catch(SQLException ex){
+            mensajeError(ex);
+        }
+        finally{
+            try{
+                if(rs!=null) rs.close();
+                if(pstm!=null) pstm.close();                
+            }
+            catch(SQLException ex){
+                mensajeError(ex);
+            }
+        }
+        return listadoReservas;
+    }
+    
+    
+    public static Reserva extraerReserva_porID(int idReserva)
     {
         Connection con = null;
         PreparedStatement pstm = null;
@@ -249,7 +299,8 @@ public class ReservaDAO {
         return rtdo;
     }
     
- //----------------------------------------------------------------------------
+    
+    
     public Reserva getReserva(int idcliente)
     {
         Connection con = null;
@@ -297,7 +348,7 @@ public class ReservaDAO {
         }
         return objReserva;    
     }
-//------------------------------------------------------------------------------    
+    
     
     public int borrarReserva(int id_reserva){      
         Connection con = null;
@@ -325,6 +376,67 @@ public class ReservaDAO {
         }
         return rtdo;
     }
+    
+    
+    
+    public ArrayList <Habitacion> listadoHabitacion(Timestamp fi, Timestamp fs){      
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        ArrayList <Habitacion> listadoHabitacion = new ArrayList<>();
+        try{
+            con = Fachada.getConnection(); 
+            String sql="";
+                       
+            sql = "SELECT * FROM HABITACION " +
+                    "WHERE ID_HABITACION " +
+                    "NOT IN(SELECT ID_HABITACION FROM RESERVA " +
+                    "WHERE " +
+                    "(FECHA_INGRESO BETWEEN ? AND ?) " +
+                    "OR (FECHA_SALIDA BETWEEN ? AND ?))";            
+               
+            pstm = con.prepareStatement(sql);
+            pstm.setTimestamp(1, fi);
+            pstm.setTimestamp(2, fs);
+            pstm.setTimestamp(3, fi);
+            pstm.setTimestamp(4, fs);
+            rs = pstm.executeQuery();
+                        
+            Habitacion objhabitacion = null;
+            while(rs.next()){
+                
+                objhabitacion = new Habitacion();
+                objhabitacion.setId_habitacion(rs.getInt("id_habitacion"));
+                objhabitacion.setTipo_habitacion(
+                rs.getString("tipo_habitacion"));
+                objhabitacion.setPiso(rs.getString("piso"));
+                objhabitacion.setCantidadPersonas(
+                rs.getInt("cantidad_personas"));
+                objhabitacion.setPrecio_hab(rs.getInt("precio_hab"));
+                objhabitacion.setNum_camas(rs.getInt("num_camas"));
+                objhabitacion.setEstado(rs.getBoolean("estado"));
+                listadoHabitacion.add(objhabitacion);
+            }
+        }
+        catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"Código : " + 
+                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+        }
+        finally{
+            try{
+                if(rs!=null) rs.close();
+                if(pstm!=null) pstm.close();                
+            }
+            catch(SQLException ex){
+                JOptionPane.showMessageDialog(null,"Habitación : " + 
+                        ex.getErrorCode() + "\nError :" + ex.getMessage());
+            }
+        }
+        return listadoHabitacion;
+    
+    }
+    
+    
     
     
 }

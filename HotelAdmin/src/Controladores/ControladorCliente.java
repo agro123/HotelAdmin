@@ -26,7 +26,7 @@ public class ControladorCliente {
         return clientList; 
     }
      
-           public static int modificarCliente(Cliente c)
+     public static int modificarCliente(Cliente c)
     {
         ClientDAO clientDAO = new ClientDAO();
         int resultado = clientDAO.modifyClient(c);

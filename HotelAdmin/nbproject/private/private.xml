@@ -12,9 +12,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/vanes/Desktop/PROYECTO%20DESARROLLO/Vanesa/Desarrollo/HotelAdmin/src/Vistas/Jpanel/ClientesAgregarModificarGUI.java</file>
-            <file>file:/C:/Users/vanes/Desktop/PROYECTO%20DESARROLLO/Vanesa/Desarrollo/HotelAdmin/src/Vistas/Jpanel/jPclienteRecepcionista.java</file>
             <file>file:/C:/Users/vanes/Desktop/PROYECTO%20DESARROLLO/Vanesa/Desarrollo/HotelAdmin/src/Vistas/Jpanel/ClientesRegistradosGUI.java</file>
+            <file>file:/C:/Users/vanes/Desktop/PROYECTO%20DESARROLLO/Vanesa/Desarrollo/HotelAdmin/src/Modelo/ClientDAO.java</file>
+            <file>file:/C:/Users/vanes/Desktop/PROYECTO%20DESARROLLO/Vanesa/Desarrollo/HotelAdmin/src/Modelo/Persona.java</file>
+            <file>file:/C:/Users/vanes/Desktop/PROYECTO%20DESARROLLO/Vanesa/Desarrollo/HotelAdmin/src/Controladores/ControladorCliente.java</file>
+            <file>file:/C:/Users/vanes/Desktop/PROYECTO%20DESARROLLO/Vanesa/Desarrollo/HotelAdmin/src/Vistas/Jframe/ClienteRecepcionista.java</file>
+            <file>file:/C:/Users/vanes/Desktop/PROYECTO%20DESARROLLO/Vanesa/Desarrollo/HotelAdmin/src/Vistas/Jpanel/ClientesAgregarModificarGUI.java</file>
         </group>
     </open-files>
 </project-private>

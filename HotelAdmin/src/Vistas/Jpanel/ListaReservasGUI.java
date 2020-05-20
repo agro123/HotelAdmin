@@ -5,6 +5,11 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControllerReserva;
+import Modelo.Reserva;
+import Vistas.Jframe.Reservas;
+import java.util.ArrayList;
+
 /**
  *
  * @author nicol
@@ -14,9 +19,14 @@ public class ListaReservasGUI extends javax.swing.JPanel {
     /**
      * Creates new form listaReservas
      */
-    public ListaReservasGUI() {
-        initComponents();        
-        agregarReservas();
+    
+    Reservas frame_reservas;
+    public ListaReservasGUI(Reservas frame_reservas) {
+        this.frame_reservas = frame_reservas;
+        initComponents(); 
+        ArrayList<Reserva> listaReservas;
+        listaReservas = ControllerReserva.listarReservas();
+        cargarListaReservas(listaReservas);
         
     }
     
@@ -31,6 +41,55 @@ public class ListaReservasGUI extends javax.swing.JPanel {
        }
         jPcontenido.revalidate();
         jPcontenido.repaint();
+    }
+    
+    public void establecerLayout(ArrayList<Reserva> listaReservas){
+        //Establece un gridlayout al panel que contiene las reservas,
+        //deacuerdo al numero de reservas que exista
+        jPcontenido.removeAll();
+        int row;
+        if(listaReservas.size() < 6)
+        {
+            row = 6;
+        }else{
+            row = listaReservas.size();
+        }
+        jPcontenido.setLayout(new java.awt.GridLayout(row,1,1,1));
+    }
+    
+    
+    
+    public void cargarListaReservas(ArrayList<Reserva> listaReservas){
+        establecerLayout(listaReservas);
+        
+        for (int i = 0; i < listaReservas.size(); i++) {
+            
+            int num_res = listaReservas.get(i).getNumero_reserva();
+            int id_cli = listaReservas.get(i).getNumCliente();
+            int id_hab = listaReservas.get(i).getNum_Habitacion();
+            int cant_per = listaReservas.get(i).getNum_Personas();
+            
+            String fech_in = listaReservas.get(i).getFecha_ingreso().toString();
+            String fech_out = listaReservas.get(i).getFecha_salida().toString();
+        
+           
+            
+            
+            jPreservasHospedaje jp = new jPreservasHospedaje
+                    (num_res,id_cli,id_hab,cant_per,fech_in,fech_out);
+            jp.setFrame_reservas(frame_reservas);
+            
+            
+            
+            jPcontenido.add(jp);  
+              
+           
+        }
+        
+        jPcontenido.revalidate();
+        jPcontenido.repaint();
+        
+        
     }
 
     /**
@@ -57,7 +116,8 @@ public class ListaReservasGUI extends javax.swing.JPanel {
         jScrollPane2.setOpaque(false);
 
         jPcontenido.setBackground(new java.awt.Color(255, 255, 255));
-        jPcontenido.setLayout(new java.awt.GridLayout(0, 1, 0, 1));
+        jPcontenido.setAutoscrolls(true);
+        jPcontenido.setLayout(new java.awt.GridLayout());
         jScrollPane2.setViewportView(jPcontenido);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 140, 860, 330));
@@ -69,6 +129,19 @@ public class ListaReservasGUI extends javax.swing.JPanel {
         jTextField1.setForeground(new java.awt.Color(191, 191, 191));
         jTextField1.setText("Buscar reserva por ID de cliente");
         jTextField1.setBorder(null);
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField1FocusLost(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
         add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 47, -1, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar-azul.png"))); // NOI18N
@@ -86,6 +159,27 @@ public class ListaReservasGUI extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        ArrayList<Reserva> listaReservas;
+        
+        if(jTextField1.getText().equals("")){
+            listaReservas = ControllerReserva.listarReservas();
+            cargarListaReservas(listaReservas);
+        }else{
+            int numReserva = Integer.parseInt(jTextField1.getText());
+            listaReservas = ControllerReserva.listarReservasLike(numReserva);
+            cargarListaReservas(listaReservas);
+        } 
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+        jTextField1.setText("");
+    }//GEN-LAST:event_jTextField1FocusGained
+
+    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        jTextField1.setText("Buscar reserva por ID de cliente");
+    }//GEN-LAST:event_jTextField1FocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

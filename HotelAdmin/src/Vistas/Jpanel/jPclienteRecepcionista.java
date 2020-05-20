@@ -5,6 +5,7 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControladorCliente;
 import Modelo.Cliente;
 import Vistas.Jframe.ClienteRecepcionista;
 
@@ -39,6 +40,12 @@ public class jPclienteRecepcionista extends javax.swing.JPanel {
         jLApellidoCli.setText(apellido);
         jLTelefonoCli.setText(telefono);
         jLcorreoCli.setText(correo);
+    }
+    
+         public void cambiarPanel() {
+        frame_cliente_rec.FormularioModificar(
+                ControladorCliente.listClients(id).get(0));
+        
     }
 
     /**
@@ -92,6 +99,11 @@ public class jPclienteRecepcionista extends javax.swing.JPanel {
 
         jBeditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconEditar.png"))); // NOI18N
         jBeditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBeditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBeditarMouseClicked(evt);
+            }
+        });
         add(jBeditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 16, 16));
 
         jBtodoPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CliSinSele.png"))); // NOI18N
@@ -109,6 +121,12 @@ public class jPclienteRecepcionista extends javax.swing.JPanel {
     private void jBtodoPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtodoPanelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtodoPanelActionPerformed
+
+    private void jBeditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBeditarMouseClicked
+        // TODO add your handling code here:
+        cambiarPanel();
+        
+    }//GEN-LAST:event_jBeditarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

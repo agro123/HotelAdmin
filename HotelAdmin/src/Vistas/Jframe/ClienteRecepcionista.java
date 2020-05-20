@@ -16,26 +16,48 @@ import Vistas.Jpanel.ClientesRegistradosGUI;
  */
 public class ClienteRecepcionista extends javax.swing.JPanel {
 
-    
     ClientesAgregarModificarGUI formulario;
     ClientesRegistradosGUI panelListar;
     ControladorCliente controlador;
-    
 
     public ClienteRecepcionista() {
-       
+
         initComponents();
-        formulario = new ClientesAgregarModificarGUI (this);
+        formulario = new ClientesAgregarModificarGUI(this);
         seleccionarPrimero(formulario);
-    
+
     }
-    
-    
-    public void AgregarCliente (Cliente  c)
-    {
+
+    public void AgregarCliente(Cliente c) {
         controlador.addClient(c);
     }
+
+    public void panelListarCliente() {
+        panelListar = new ClientesRegistradosGUI(this);
+        jBregistrar.setSelected(false);
+        jBlistaClientes.setSelected(true);
+        jPcontenedor.setVisible(false);
+        jPcontenedor.setVisible(true);
+        jPcontenedor.removeAll();
+        jPcontenedor.add(panelListar);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+    }
     
+    public void FormularioModificar(Cliente llenar ){
+        
+        jBlistaClientes.setSelected(false);
+        jBregistrar.setSelected(true); 
+        jPcontenedor.removeAll();
+        formulario.llenarValores(llenar);
+        jPcontenedor.add(formulario);   
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
+ 
+        
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,22 +113,11 @@ public class ClienteRecepcionista extends javax.swing.JPanel {
 
     private void jBlistaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlistaClientesActionPerformed
         // TODO add your handling code here:
-        panelListar = new ClientesRegistradosGUI(this);
-        jBregistrar.setSelected(false);
-        jBlistaClientes.setSelected(true);            
-        jPcontenedor.setVisible(false);
-        jPcontenedor.setVisible(true);
-       // ClientesRegistradosGUI panelE = new ClientesRegistradosGUI();
-        jPcontenedor.removeAll();
-        jPcontenedor.add(panelListar);
-        jPcontenedor.revalidate();
-        jPcontenedor.repaint();
-        
-        
+        panelListarCliente();
     }//GEN-LAST:event_jBlistaClientesActionPerformed
 
-     public void seleccionarPrimero(ClientesAgregarModificarGUI formulario){
-     
+    public void seleccionarPrimero(ClientesAgregarModificarGUI formulario) {
+
         jBlistaClientes.setSelected(false);
         jBregistrar.setSelected(true);
         jPcontenedor.removeAll();
@@ -114,11 +125,11 @@ public class ClienteRecepcionista extends javax.swing.JPanel {
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
-     }
-     
-     
+    }
+
+
     private void jBregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBregistrarActionPerformed
-   
+
         jPcontenedor.removeAll();
         seleccionarPrimero(formulario);
     }//GEN-LAST:event_jBregistrarActionPerformed
