@@ -16,7 +16,10 @@ public class CheckOut extends javax.swing.JPanel {
     /**
      * Creates new form CheckOut
      */
-    public CheckOut() {
+    private int idempleado;//---------------------------------------------------
+    
+    public CheckOut(int ide) {      
+        idempleado = ide;
         initComponents();
         seleccionar();
     }
@@ -57,7 +60,7 @@ public class CheckOut extends javax.swing.JPanel {
 
     private void seleccionar(){
         jBregistrarSalida.setSelected(true);
-        RegistrarSalidaGUI check = new RegistrarSalidaGUI();
+        RegistrarSalidaGUI check = new RegistrarSalidaGUI(idempleado);//--------
         jPcontenedor.removeAll();
         jPcontenedor.add(check);
         jPcontenedor.revalidate();

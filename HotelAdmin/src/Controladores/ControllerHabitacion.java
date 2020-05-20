@@ -39,6 +39,24 @@ public class ControllerHabitacion {
         this.vista.getjBmodificar().addActionListener(manejadoreventos);
         this.vista.getjBeliminar().addActionListener(manejadoreventos);
     }
+    //--------------------------------------------------------------------------
+    public ControllerHabitacion(){
+        
+    }
+    
+    public int getPrecioHabitacion(int idHabitacion){
+        int precio= 0;
+        HabitacionDAO hd = new HabitacionDAO();
+        Habitacion h = new Habitacion();
+        h = hd.extraerHabitaciones_porID(idHabitacion);
+        precio = h.getPrecio_hab();
+        return precio;
+    }
+    public static void cambiarEstadoHabitacion(int idHabitacion){
+        HabitacionDAO hd = new HabitacionDAO();
+        hd.cambiarEstadoHabitacion(idHabitacion);
+    }      
+    //--------------------------------------------------------------------------
 
     /*public ControllerHabitacion (HabitacionListaGUI vista_actualizar_eliminar, HabitacionDAO modelo){
         

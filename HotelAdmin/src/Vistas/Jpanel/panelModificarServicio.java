@@ -23,7 +23,7 @@ public class panelModificarServicio extends javax.swing.JPanel {
     /**
      * Creates new form ServiciosListaGUI
      */
-    jPservicio jp;
+    
     
                            
     
@@ -31,7 +31,7 @@ public class panelModificarServicio extends javax.swing.JPanel {
     public panelModificarServicio(Services s) {
         frame_Servicios = s;
         initComponents();
-        jp = new jPservicio();
+        CargarLista();
 
     }
 
@@ -90,55 +90,27 @@ public class panelModificarServicio extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTbuscadorActionPerformed
 
-    public jPservicio getJp() {
-        return jp;
-    }
+   
 
-
-    /*
-    public void CargarLista(){
-        
-        //TODA LOS SERVICIOS SON AGREGADAS AL JPANEL 
-        //EN DONDE SE MUESTRA LOS DATOS PRINCIPALES DE LOS SERVICIOS
-        
-        for(int i=0;i<100;i++){
-        jPservicio jp = new jPservicio(956,"Comida",5443.5,5); 
-        servicios.add(jp);
-          
-       }
-        for(int i=0;i<servicios.size();i++){          
-        jPmensajes.add(servicios.get(i));
-        
-        jPmensajes.revalidate();
-        jPmensajes.repaint();}
-    }*/
-    public void CargarLista(ArrayList<RoomServices> lista_roomServices,String validador) {
+    public void CargarLista() {
 
         //TODA LAS HABITACIONES SON AGREGADAS AL JPANEL 
         //EN DONDE SE MUESTRA LOS DATOS PRINCIPALES DE LAS HABITACIONES
-        
+        ArrayList<RoomServices> lista_roomServices;
+        lista_roomServices = ControllerServicios.desplegarServicios();
         jPmensajes.removeAll();
         for (int i = 0; i < lista_roomServices.size(); i++) {
-            String id_ser = lista_roomServices.get(i).getId_servicio();
+            int id_ser = lista_roomServices.get(i).getId_servicio();
             String nombre_ser = lista_roomServices.get(i).getNombrePro();
             double precio_ser = lista_roomServices.get(i).getPrecio();
             int cantidad = lista_roomServices.get(i).getCantidad();
-            jp = new jPservicio(id_ser, nombre_ser, precio_ser, cantidad,frame_Servicios);
-            jp.setValidadorPanel(validador);
+            jPservicio jp;
+            jp = new jPservicio(id_ser, nombre_ser, precio_ser, cantidad, frame_Servicios);
             jPmensajes.add(jp);
         }
     }
     
-    public void llenarFormulario(RoomServices roomService)
-    {
-            //String id_ser = lista_roomServices.get(i).getId_servicio();
-            String nombre_ser = roomService.getNombrePro();
-            double precio_ser = roomService.getPrecio();
-            int cantidad = roomService.getCantidad();
-            frame_Servicios.getPanelAgregar().getjTNombre().setText(nombre_ser);
-            frame_Servicios.getPanelAgregar().getjTcantidad().setText(""+cantidad);
-            frame_Servicios.getPanelAgregar().getjTprecio().setText(""+precio_ser); 
-    }
+    
     
 
 

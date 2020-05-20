@@ -5,8 +5,10 @@
  */
 package Vistas.Jpanel;
 
-import javax.swing.JLabel;
+
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
@@ -33,20 +35,35 @@ public class jPhabitacionCheckIn extends javax.swing.JPanel {
      
     public jPhabitacionCheckIn(int numeroHabitacion_,String tipo_,
         int precio_, int capacidad_) {
-         initComponents();
-      
+        initComponents();
         this.numeroHabitacion = numeroHabitacion_;
         this.tipo = tipo_;
         this.precio = precio_;
-        this.capacidad = capacidad_;
-        
-        
-        
+        this.capacidad = capacidad_;    
         jLnumero.setText(String.valueOf(numeroHabitacion_));
         jLtipo.setText(tipo_);
         jLprecio.setText(String.valueOf(precio_));
         jLcapacidad.setText(String.valueOf(capacidad_));
-       
+    }
+    
+    
+    public void setRoomSelected(){
+        jButton1.setBorder(javax.swing.BorderFactory.createMatteBorder
+                            (2, 2, 2, 2, new java.awt.Color(0, 102, 255))); 
+            jLabelHab.setText(""+numeroHabitacion);
+            JPanel panel = (JPanel)getParent();
+            for(int a = 0; a < panel.getComponentCount(); a++){
+                if(!panel.getComponent(a).equals(this)){
+                    jPhabitacionCheckIn panelsito;
+                    panelsito = (jPhabitacionCheckIn)panel.getComponent(a);
+                    panelsito.jButton1.setBorder(null);
+                    System.out.println("No son Iguales"+" "+a);
+                }   
+            }
+    }
+
+    public JButton getjButton1() {
+        return jButton1;
     }
 
     /**
@@ -66,35 +83,27 @@ public class jPhabitacionCheckIn extends javax.swing.JPanel {
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setOpaque(false);
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                formMousePressed(evt);
-            }
-        });
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLcapacidad.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLcapacidad.setForeground(new java.awt.Color(112, 112, 112));
         jLcapacidad.setText("2");
-        add(jLcapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
+        add(jLcapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 10, -1));
 
         jLnumero.setFont(new java.awt.Font("Decker", 1, 12)); // NOI18N
-        jLnumero.setForeground(new java.awt.Color(112, 112, 112));
+        jLnumero.setForeground(new java.awt.Color(0, 153, 255));
         jLnumero.setText("09");
-        add(jLnumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
+        add(jLnumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 30, -1, -1));
 
         jLtipo.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLtipo.setForeground(new java.awt.Color(112, 112, 112));
-        jLtipo.setText("Simple");
-        add(jLtipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
+        jLtipo.setText("MATRIMONIAL");
+        add(jLtipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 80, -1));
 
         jLprecio.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLprecio.setForeground(new java.awt.Color(112, 112, 112));
         jLprecio.setText("56");
-        add(jLprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+        add(jLprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 50, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/HabitacionChe.png"))); // NOI18N
         jButton1.setBorder(null);
@@ -109,23 +118,8 @@ public class jPhabitacionCheckIn extends javax.swing.JPanel {
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        
-    }//GEN-LAST:event_formMouseClicked
-
-    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-        // TODO add your handling code here:
-         
-    }//GEN-LAST:event_formMousePressed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int dialog = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null, "Desea "
-            + "seleccionar la Habitación "+numeroHabitacion, "Eliminar", dialog);
-        if (result == 0){
-            jLabelHab.setText(""+numeroHabitacion);
-            
-        }     
+        setRoomSelected();   
           
     }//GEN-LAST:event_jButton1ActionPerformed
 

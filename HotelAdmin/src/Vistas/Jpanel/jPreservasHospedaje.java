@@ -5,11 +5,23 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControllerReserva;
+import Modelo.Reserva;
+import Servicios.Fecha;
+import Vistas.Jframe.Reservas;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nicol
  */
+
+
 public class jPreservasHospedaje extends javax.swing.JPanel {
+        Reservas frame_reservas;
         int numero;
         int idCliente;
         int idHabitacion;
@@ -27,9 +39,9 @@ public class jPreservasHospedaje extends javax.swing.JPanel {
         this.numero = numero_;
         this.idCliente = idCliente_;
         this.idHabitacion = idHabitacion_;
-        this.cantPersonas = cantPersonas;
-        this.ingreso = ingreso;
-        this.salida = salida;
+        this.cantPersonas = cantPersonas_;
+        this.ingreso = ingreso_;
+        this.salida = salida_;
         
         initComponents();
         
@@ -39,8 +51,31 @@ public class jPreservasHospedaje extends javax.swing.JPanel {
         jLcantPersonas.setText(String.valueOf(cantPersonas_));
         jLfechaIngreso.setText(ingreso_);
         jLfechaSalida.setText(salida_);
+        
+        /*if(Fecha.toTimestamp(ingreso).getTime()>Fecha.crearFechaTimestamp().getTime()){
+            jBtodoPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ReservSele.png")));
+        }*/
             
     }
+
+    public void setFrame_reservas(Reservas frame_reservas) {
+        this.frame_reservas = frame_reservas;
+    }
+    
+    
+    public void llenarFormulario(){
+        //ENVIA UNA RESERVA PARA LLENAR EL FORMULARIO 
+        RealizarReservaGUI panel = frame_reservas.PanelRealizarReserva();
+        Reserva reserva = new Reserva();
+        reserva.setFecha_ingreso(Fecha.toTimestamp(ingreso));
+        reserva.setFecha_salida(Fecha.toTimestamp(salida));
+        reserva.setNum_Habitacion(idHabitacion);
+        reserva.setNumero_reserva(numero);
+        reserva.setNum_Personas(cantPersonas);
+        reserva.setNumCliente(idCliente);
+        panel.llenarFormulario(reserva);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -101,10 +136,20 @@ public class jPreservasHospedaje extends javax.swing.JPanel {
 
         jBeliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconEliminar.png"))); // NOI18N
         jBeliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBeliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBeliminarMouseClicked(evt);
+            }
+        });
         add(jBeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 25, 16, 16));
 
         jBeditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconEditar.png"))); // NOI18N
         jBeditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBeditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBeditarMouseClicked(evt);
+            }
+        });
         add(jBeditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 25, 16, 16));
 
         jBtodoPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ReservSinSele.png"))); // NOI18N
@@ -122,6 +167,20 @@ public class jPreservasHospedaje extends javax.swing.JPanel {
     private void jBtodoPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtodoPanelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtodoPanelActionPerformed
+
+    private void jBeliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBeliminarMouseClicked
+        int dialog = JOptionPane.YES_NO_OPTION;
+        int result = JOptionPane.showConfirmDialog
+                    (this, "Desea continuar?", "Eliminar", dialog);
+        if (result == 0) {
+            ControllerReserva.eliminarReserva(numero);
+            frame_reservas.panelListarReserva();
+        }    
+    }//GEN-LAST:event_jBeliminarMouseClicked
+
+    private void jBeditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBeditarMouseClicked
+        llenarFormulario();
+    }//GEN-LAST:event_jBeditarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
