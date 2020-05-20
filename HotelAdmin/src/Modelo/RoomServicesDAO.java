@@ -26,14 +26,13 @@ public class RoomServicesDAO {
         pstm= null;
         int rtdo;
         rtdo= 0;
-        
         try{
             con = Fachada.getConnection();
             String sql = "INSERT INTO roomservices values(?,?,?,?)";
             
             pstm = con.prepareStatement(sql);
             
-            pstm.setString(1, rs.getId_servicio());
+            pstm.setInt(1, rs.getId_servicio());
             pstm.setString(2,rs.getNombrePro());
             pstm.setInt(3, rs.getCantidad());
             pstm.setDouble(4, rs.getPrecio());
@@ -79,7 +78,7 @@ public class RoomServicesDAO {
             while(rs.next()){
                 
                 objRoomServices = new RoomServices();
-                objRoomServices.setId_servicio(rs.getString("id_servicio"));
+                objRoomServices.setId_servicio(rs.getInt("id_servicio"));
                 objRoomServices.setNombrePro(rs.getString("nombre_pro"));
                 objRoomServices.setPrecio(rs.getDouble("precio"));
                 objRoomServices.setCantidad(rs.getInt("cantidad"));
@@ -104,7 +103,7 @@ public class RoomServicesDAO {
     
     }
     
-     public RoomServices extraerServicio_porID(String idServicio)
+     public RoomServices extraerServicio_porID(int idServicio)
     {
         Connection con = null;
         PreparedStatement pstm = null;
@@ -120,11 +119,11 @@ public class RoomServicesDAO {
                     + " WHERE id_Servicio = ?";   
             
             pstm = con.prepareStatement(sql);
-            pstm.setString(1, idServicio);
+            pstm.setInt(1, idServicio);
             rs = pstm.executeQuery();
             
             while (rs.next()) {
-                servicio.setId_servicio(rs.getString("id_servicio"));
+                servicio.setId_servicio(rs.getInt("id_servicio"));
                 servicio.setNombrePro(rs.getString("nombre_pro"));
                 servicio.setCantidad(rs.getInt("cantidad"));
                 servicio.setPrecio(rs.getDouble("precio")); 
@@ -150,12 +149,12 @@ public class RoomServicesDAO {
         
     }
      
-    public String extraerUltimoId()
+    public int extraerUltimoId()
     {
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String id= "";
+        int id= 0;
 
         
         try {
@@ -170,7 +169,7 @@ public class RoomServicesDAO {
             rs = pstm.executeQuery();
             
             while (rs.next()) {
-                id = rs.getString("id_servicio");
+                id = rs.getInt("id_servicio");
                 
             }
         } catch (SQLException ex) {
@@ -205,12 +204,11 @@ public class RoomServicesDAO {
                     +    "WHERE id_Servicio = ?";
 
             pstm = con.prepareStatement(sql);   
-
-            pstm.setString(1, roomServices.getId_servicio());
+            pstm.setInt(1, roomServices.getId_servicio());
             pstm.setString(2,roomServices.getNombrePro());
             pstm.setInt(3, roomServices.getCantidad());
             pstm.setDouble(4, roomServices.getPrecio());
-            pstm.setString(5, roomServices.getId_servicio());
+            pstm.setInt(5, roomServices.getId_servicio());
 
             rtdo = pstm.executeUpdate();  
         }
@@ -231,7 +229,7 @@ public class RoomServicesDAO {
     }
     
     
-    public int borrarServicio(String id_servicio){      
+    public int borrarServicio(int id_servicio){      
         Connection con = null;
         PreparedStatement pstm = null;
         int rtdo;
@@ -240,7 +238,7 @@ public class RoomServicesDAO {
             con = Fachada.getConnection();
             String sql = "DELETE FROM roomServices WHERE id_servicio = ?";
             pstm = con.prepareStatement(sql);
-            pstm.setString(1, id_servicio);
+            pstm.setInt(1, id_servicio);
             rtdo = pstm.executeUpdate(); 
             return rtdo;
         }

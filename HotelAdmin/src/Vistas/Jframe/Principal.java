@@ -226,9 +226,6 @@ public class Principal extends javax.swing.JFrame {
 
         RoomServicesDAO modelo = new RoomServicesDAO();
         JframeServices = new Services();
-        ControllerServicios controladorServicios
-        = new ControllerServicios(JframeServices, modelo);
-        JframeServices.setControladorServicios(controladorServicios);
         jPcontenedor.removeAll();
         jPcontenedor.add(JframeServices);
         jPcontenedor.revalidate();
@@ -280,6 +277,14 @@ public class Principal extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

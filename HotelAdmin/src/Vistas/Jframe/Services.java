@@ -6,6 +6,7 @@
 package Vistas.Jframe;
 
 import Controladores.ControllerServicios;
+import Modelo.RoomServices;
 import Modelo.RoomServicesDAO;
 import Vistas.Jpanel.EmpleadoFormulario;
 import Vistas.Jpanel.panelAgregarServicio;
@@ -28,23 +29,19 @@ public class Services extends javax.swing.JPanel {
      * Creates new form Servicios
      */
   
-    panelAgregarServicio panelAgregar;
-    panelModificarServicio panelModificar;
-    panelModificarServicio panelEliminar;
-    ControllerServicios controladorServicios;
+    panelAgregarServicio panelFormulario;
+    
+   
+    
       
     public Services() {
         initComponents();
-
-        
-        panelAgregar = new panelAgregarServicio();
-        panelModificar = new panelModificarServicio(this);
-        panelEliminar = new panelModificarServicio(this);
-        mostrarPanelAgregar();
+        panelFormulario = new panelAgregarServicio(this);
+        mostrarPanelFormulario("");
     }
 
     public void setControladorServicios(ControllerServicios controladorServicios) {
-        this.controladorServicios = controladorServicios;
+        
     }
 
     
@@ -58,7 +55,6 @@ public class Services extends javax.swing.JPanel {
     private void initComponents() {
 
         jBmodificar = new javax.swing.JButton();
-        jBeliminar = new javax.swing.JButton();
         jBagregar = new javax.swing.JButton();
         jPcontenedor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -78,19 +74,6 @@ public class Services extends javax.swing.JPanel {
             }
         });
         add(jBmodificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 115, 56, 30));
-
-        jBeliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BotonEliminarSinSele.png"))); // NOI18N
-        jBeliminar.setBorder(null);
-        jBeliminar.setBorderPainted(false);
-        jBeliminar.setContentAreaFilled(false);
-        jBeliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jBeliminar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BotonEliminarSele.png"))); // NOI18N
-        jBeliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBeliminarActionPerformed(evt);
-            }
-        });
-        add(jBeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 115, 48, 30));
 
         jBagregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BotonAgregarSinSele.png"))); // NOI18N
         jBagregar.setBorder(null);
@@ -116,111 +99,60 @@ public class Services extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
-
+        mostrarPanelLista();
     }//GEN-LAST:event_jBmodificarActionPerformed
 
-    public JPanel getjPcontenedor() {
-        return jPcontenedor;
-    }
-
-    public JButton getjBagregar() {
-        return jBagregar;
-    }
+    
+    private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
+        mostrarPanelFormulario("");
+        ControllerServicios.setOpcionEjec("guardar");
+        panelFormulario.setearCampos();
+    }//GEN-LAST:event_jBagregarActionPerformed
 
     
-    
-
-    public ControllerServicios getControladorServicios() {
-        return controladorServicios;
-    }
-   
-
-    
-    public void mostrarPanelModificar()
-    {
+    public void mostrarPanelLista(){
         jBagregar.setSelected(false);
-        jBeliminar.setSelected(false);
         jBmodificar.setSelected(true);
         jPcontenedor.removeAll();
-        jPcontenedor.add(panelModificar);
-        jPcontenedor.revalidate();
-        jPcontenedor.repaint();
-        jPcontenedor.setVisible(true);       
-    }
-    
-    
-    public void mostrarPanelAgregar(){
-       jBeliminar.setSelected(false);
-        jBmodificar.setSelected(false);
-        jBagregar.setSelected(true); 
-        jPcontenedor.removeAll();
-        jPcontenedor.add(panelAgregar);
-        jPcontenedor.revalidate();
-        jPcontenedor.repaint();
-        jPcontenedor.setVisible(true); 
-    }
-    
-    public void mostrarPanelEliminar()
-    {
-        jBeliminar.setSelected(true);
-        jBmodificar.setSelected(false);
-        jBagregar.setSelected(false); 
-        jPcontenedor.removeAll();
-        jPcontenedor.add(panelEliminar);
+        panelModificarServicio panelLista;
+        panelLista = new panelModificarServicio(this);
+        jPcontenedor.add(panelLista);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
     }
-        
     
-    private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBagregarActionPerformed
-
-    private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
-        // TODO add your handling code here
-    }//GEN-LAST:event_jBeliminarActionPerformed
-
     
-
-    public panelAgregarServicio getPanelAgregar() {
-        return panelAgregar;
-    }
-
-    public panelModificarServicio getPanelModificar() {
-        return panelModificar;
+    public void mostrarPanelFormulario(String msjValidador){
+        if(msjValidador.equals("actualizar")){
+            jBmodificar.setSelected(true);
+            jBagregar.setSelected(false);
+        }else{
+            jBmodificar.setSelected(false);
+            jBagregar.setSelected(true);
+        }
+        jPcontenedor.removeAll();
+        jPcontenedor.add(panelFormulario);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
     }
     
-    public panelModificarServicio getPanelEliminar() {
-        return panelEliminar;
-    }
-
-    public JButton getjBeliminar() {
-        return jBeliminar;
-    }
-
-    public JButton getjBmodificar() {
-        return jBmodificar;
-    }
-    
-    
-    
-    
-      public void gestionMensajes(String mensaje, String titulo, int icono) {
+    public void gestionMensajes(String mensaje, String titulo, int icono) {
         JOptionPane.showMessageDialog(this, mensaje, titulo, icono);
     }
+    
       
       
-      
+    public void llenarFormulario(RoomServices roomService){
+        panelFormulario.llenarFormulario(roomService);
+    }
     
 
-  
-
     
-
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBagregar;
-    private javax.swing.JButton jBeliminar;
     private javax.swing.JButton jBmodificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPcontenedor;

@@ -5,18 +5,15 @@
  */
 package Controladores;
 
+import static Controladores.ControllerServicios.gestionMensajes;
 import Modelo.HabitacionDAO;
 import Modelo.Reserva;
 import Modelo.ReservaDAO;
-import Modelo.RoomServices;
+
 import Modelo.ClientDAO;
 import Modelo.Cliente;
-import Servicios.Fecha;
-import Vistas.Jframe.Reservas;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import Modelo.Habitacion;
+import Modelo.RoomServicesDAO;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -27,155 +24,122 @@ import javax.swing.JOptionPane;
  */
 public class ControllerReserva {
 
+    static int numeroReserva;
+    static boolean verCliente;
+    static int numEmpleado;
     
-    Reservas vista;
-    ReservaDAO modelo;
-    HabitacionDAO modeloHab;
-    int numeroReserva;
-    int numEmpleado;
-    boolean verCliente;
     
-    public ControllerReserva(){
-        
-    }
-    public ControllerReserva(Reservas vista,ReservaDAO modelo) {
+    public ControllerReserva() {
         verCliente = false;
-        ReservasListener escucha = new ReservasListener();
-        this.vista = vista;
-        this.modelo = modelo;
-        modeloHab = new HabitacionDAO();
-        cargarListaHabitaciones();
         extraerId();
-        
-        
-        
-        
-        vista.getpRealizarReserva().getjComboBox1().addItemListener(escucha);
-        vista.getpRealizarReserva().getjBguardar().addActionListener(escucha);
-        vista.getpRealizarReserva().getjBcancelar().addActionListener(escucha);
-        
-    }
-    
-    public void extraerId()
-    {
-        
-    
-        numeroReserva = modelo.extraerUltimoId();
-       
     }
     
     
-    
-    
-    public void cargarListaHabitaciones()
-    {
-        vista.CargarHabitaciones(modeloHab.listadoHabitacion());
-        
-    }
-    
-    
-    public void registrarReserva() {
 
-        Reserva reserva = new Reserva();
-        numeroReserva += 1;
-        int idHab = Integer.parseInt(vista.getTextjTidHabitacion());
-        int idCli = Integer.parseInt(vista.getTextjTidCliente());
-        Timestamp fecha = Fecha.crearFechaTimeStamp();
-        int numPer = Integer.parseInt(vista.getTextjTfechaRserva());
-        
-        reserva.setNumero_reserva(numeroReserva);
-        reserva.setNum_Habitacion(idHab);
-        reserva.setNumCliente(idCli);
-        reserva.setNum_Empleado(numEmpleado);
-        reserva.setFecha_reserva(fecha);
-        reserva.setFecha_ingreso(vista.getFechaIngreso());
-        reserva.setFecha_salida(vista.getFechaSalida());
-        reserva.setNum_Personas(numPer);
-        
-        int resultado = 0;
-
-        resultado = modelo.grabarReserva(reserva);
-
-        if (resultado == 1) {
-            vista.gestionMensajes("Registro Grabado con éxito",
-                    "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-            //crearIdServicio();
-
-        } else {
-            vista.gestionMensajes("Error al grabar",
-                    "Confirmación", JOptionPane.ERROR_MESSAGE);
-        }
+    public static boolean isVerCliente() {
+        return verCliente;
     }
-   
+
+    public static void setNumeroReserva(int numeroReserva) {
+        ControllerReserva.numeroReserva = numeroReserva;
+    }
+
+    public static int getNumeroReserva() {
+        return numeroReserva;
+    }
+
+    public static int getNumEmpleado() {
+        return numEmpleado;
+    }
     
-    public void verificarCliente(String idClien){
-        ClientDAO modelo = new ClientDAO();
-        ArrayList<Cliente> listaClientes;
-        listaClientes = modelo.listCliente(0);
-        for(int a=0;a < listaClientes.size();a++){
-            
-            String id = ""+listaClientes.get(a).getID();
-            System.out.println(id+""+""+idClien+"s");
-            if(id.equalsIgnoreCase(idClien)){
-                verCliente = true;
-                a = listaClientes.size();
-            }
-            else{
-                verCliente = false;
-            }
-        }
-            
-        
-    }
-//------------------------------------------------------------------------------           
+    
     public Reserva getReserva(int idcliente){
         ReservaDAO modelo = new ReservaDAO();
         Reserva r =  modelo.getReserva(idcliente);        
         return r;
     }
-//------------------------------------------------------------------------------    
     
     
-    public class ReservasListener implements ItemListener, ActionListener{
-
-        @Override
-        public void itemStateChanged(ItemEvent ie) {
-            cargarListaHabitaciones();
+    public static ArrayList<Habitacion> cargarListaHabitaciones(Timestamp fi,Timestamp fs){
+        ArrayList<Habitacion> lista;
+        ReservaDAO modeloHab = new ReservaDAO();
+        lista = modeloHab.listadoHabitacion(fi, fs);
+        System.out.println(lista.size());
+        return lista; 
+    }
+    
+    
+    public static void extraerId(){
+        ReservaDAO modelo = new ReservaDAO();
+        numeroReserva = modelo.extraerUltimoId();
+    }
+    
+    public static ArrayList<Reserva> listarReservas()
+    {
+        ReservaDAO modelo = new ReservaDAO();
+        ArrayList<Reserva> lista_reservas;
+        lista_reservas = modelo.listadoReservas();
+        return lista_reservas;
+    }
+    
+    public static void registrarReserva(Reserva reserva) {
+        int resultado = 0;
+        ReservaDAO modelo = new ReservaDAO();
+        resultado = modelo.grabarReserva(reserva);
+        if (resultado == 1) {
+            gestionMensajes("Registro Grabado con éxito",
+                    "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            gestionMensajes("Error al grabar",
+                    "Confirmación", JOptionPane.ERROR_MESSAGE);
         }
-        
-        @Override
-        public void actionPerformed(ActionEvent ae){
-            if(ae.getSource() == vista.getpRealizarReserva().getjBguardar()){
-                verificarCliente(vista.getpRealizarReserva()
-                        .getjTidCliente().getText());
-                
-                if(vista.getpRealizarReserva().validarCampos()==1)
-                {
-                    if(verCliente == true){
-                    
-                        registrarReserva();
-                        vista.getpRealizarReserva().setearCampos();
-                        cargarListaHabitaciones();
-                    }else{
-                        JOptionPane.showMessageDialog(null,
-                                "No existe el cliente en la base de datos");
-                    }
-                        
-                }
-            }else
-            if(ae.getSource() == vista.getpRealizarReserva().getjBcancelar()){
-                vista.getpRealizarReserva().setearCampos();
-                
-            }else 
-            if(ae.getSource() == vista.getpRealizarReserva().getjBbuscar()){
-                
-                
+    }
+   
+    
+    public static void verificarCliente(String idClien){
+        ClientDAO modelo = new ClientDAO();
+        ArrayList<Cliente> listaClientes;
+        listaClientes = modelo.listCliente(0);
+        for(int a = 0; a < listaClientes.size(); a++){
+            String id = ""+listaClientes.get(a).getID();
+            if(id.equalsIgnoreCase(idClien)){
+                verCliente = true;
+                a = listaClientes.size();
             }
-        }  
+        }     
+    }
+    
+    public static ArrayList<Reserva> listarReservasLike(int numReserva){
+        ReservaDAO modelo = new ReservaDAO();
+        ArrayList<Reserva> lista_reservas;
+        lista_reservas = modelo.listReservasLike(numReserva);
+        return lista_reservas;
+    }
+    
+    
+    
+    public static void eliminarReserva(int ID) {
+        ReservaDAO modelo = new ReservaDAO();
+        if (modelo.borrarReserva(ID) == 1) {
+            gestionMensajes(
+                    "Registro Borrado con éxtio",
+                    "Confirmación de acción",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            gestionMensajes(
+                    "Error al borrar",
+                    "Confirmación de acción",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+                        
+        
+    public static void gestionMensajes(String mensaje, String titulo, int icono) {
+        JOptionPane.showMessageDialog(null, mensaje, titulo, icono);
     }
 
-    public void setNumEmpleado(int numEmpleado) {
-        this.numEmpleado = numEmpleado;
+    public static void setNumEmpleado(int numEmpl) {
+        numEmpleado = numEmpl;
     }
     
     

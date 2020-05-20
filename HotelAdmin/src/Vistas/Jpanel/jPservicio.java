@@ -6,9 +6,9 @@
 package Vistas.Jpanel;
 
 import Controladores.ControllerServicios;
-import Modelo.RoomServicesDAO;
+import Modelo.RoomServices;
+import Servicios.JFopciones;
 import Vistas.Jframe.Services;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,10 +17,10 @@ import javax.swing.JOptionPane;
  */
 public class jPservicio extends javax.swing.JPanel {
 
-    private int cantidad;
-    private String id, nombre;
+    private int id,cantidad;
+    private String  nombre;
     private double precio;
-    String validadorPanel; 
+    
    
     Services frame_servicios;
 
@@ -31,14 +31,8 @@ public class jPservicio extends javax.swing.JPanel {
 
     }
 
-    public jPservicio(String id_, String nombre_, double precio_, int cantidad_, Services s) {
-        /*this.id = id_;
-        this.nombre = nombre_;
-        this.precio = precio_;
-        this.cantidad = cantidad_;*/
-        
+    public jPservicio(int id_, String nombre_, double precio_, int cantidad_, Services s) {
         id = id_;
-
         initComponents();
         jLid.setText(String.valueOf(id_));
         jLnombre.setText(nombre_);
@@ -47,47 +41,38 @@ public class jPservicio extends javax.swing.JPanel {
         frame_servicios = s;
     }
 
-    public void setValidadorPanel(String validadorPanel) {
-        this.validadorPanel = validadorPanel;
-    }
-
+   
     
-    public JLabel getjLabel1() {
-        return jLabel1;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public String getId() {
-        return id;
-    }
 
     public void cambiarPanel() {
-        frame_servicios.mostrarPanelAgregar();
-        frame_servicios.getControladorServicios().leerServicio_porID(id);
+        frame_servicios.mostrarPanelFormulario("actualizar");
+        RoomServices roomservice;
+        roomservice = ControllerServicios.leerServicio_porID(id);
+        ControllerServicios.setOpcionEjec("actualizar");
+        ControllerServicios.setNum_servicio(roomservice.getId_servicio());
+        frame_servicios.llenarFormulario(roomservice);
     }
     
-    public void deleteOfPanel()
-    {
-        frame_servicios.getControladorServicios().eliminarServicio(id);
-        frame_servicios.mostrarPanelEliminar();
-        frame_servicios.getControladorServicios().leerServicios();          
-                
+    public void deleteServiceFromPanel(){
+        ControllerServicios.eliminarServicio(id);
+        frame_servicios.mostrarPanelLista();                   
     }
+    
+    
+    public void manejaOpciones(String validadorPanel){
+        
+        int dialog = JOptionPane.YES_NO_OPTION;
+        int result = JOptionPane.showConfirmDialog
+                    (this, "Desea continuar?", "Eliminar", dialog);
+        if (result == 0) {
+            if(validadorPanel == "actualizar"){
+                cambiarPanel();
+            } else if(validadorPanel == "eliminar") {
+                deleteServiceFromPanel();
+            }
+        }
+    }
+            
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,7 +94,7 @@ public class jPservicio extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLnombre.setFont(new java.awt.Font("Decker", 0, 11)); // NOI18N
-        add(jLnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 50, 58, 10));
+        add(jLnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 46, 60, 15));
 
         jLid.setFont(new java.awt.Font("Decker", 0, 11)); // NOI18N
         add(jLid, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 32, 48, 10));
@@ -130,19 +115,10 @@ public class jPservicio extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
-        int dialog = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null, "Desea continuar?", "Eliminar", dialog);
-        if (result == 0) {
-            if(validadorPanel == "actualizar"){
-                cambiarPanel();
-            } else if(validadorPanel == "eliminar") {
-                deleteOfPanel();
-            }
-        }
-
+        new JFopciones(this);            
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
