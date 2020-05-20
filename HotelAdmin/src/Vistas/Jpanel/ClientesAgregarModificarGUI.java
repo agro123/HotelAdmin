@@ -9,8 +9,7 @@ import Controladores.ControladorCliente;
 import Modelo.Cliente;
 import Modelo.ClientDAO;
 import Vistas.Jframe.ClienteRecepcionista;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +19,7 @@ import javax.swing.JOptionPane;
 public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
 
     ClientDAO clientDAO = new ClientDAO();
+    ControladorCliente Controladorcliente = new ControladorCliente();
     ClienteRecepcionista panel_prin;
     String validar_panel;
 
@@ -82,14 +82,36 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         return gClient;
 
     }
+    
+    public boolean idFound(Integer id){
+        ArrayList<Cliente> listadoCli = new ArrayList<>();
+        listadoCli = Controladorcliente.listClients(0);
+        boolean found = false;
+        
+        for (int i = 0; i < listadoCli.size(); i++) {
+            if(id==listadoCli.get(i).getID()){
+                found=true;
+            }
+        }
+        
+        return found;
+        
+    }
 
     public void saveData() {
         try {
             Cliente cliente = getData();
-            if (verifyData(cliente)) {
-                clientDAO.addClient(cliente);
-                JOptionPane.showMessageDialog(null, "Cliente agregado!");
-            }
+            if(idFound(cliente.getID())){
+                if (verifyData(cliente)) {
+                        clientDAO.modifyClient(cliente);
+                        JOptionPane.showMessageDialog(null, "Cliente modificado!");
+                    }
+                } else {
+                    if (verifyData(cliente)) {
+                    clientDAO.addClient(cliente);
+                    JOptionPane.showMessageDialog(null, "Cliente agregado!");
+                }
+        }
         } catch (Exception e) {
         }
     }
@@ -278,7 +300,7 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
 
-        if(validar_panel == "guardar")
+        if(!idFound(getData().getID()))
         {
             //saveData();
            ControladorCliente.addClient(getData());
