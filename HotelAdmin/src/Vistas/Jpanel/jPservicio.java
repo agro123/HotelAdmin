@@ -31,7 +31,8 @@ public class jPservicio extends javax.swing.JPanel {
 
     }
 
-    public jPservicio(int id_, String nombre_, double precio_, int cantidad_, Services s) {
+    public jPservicio(int id_, String nombre_, double precio_, 
+            int cantidad_, Services s) {
         id = id_;
         initComponents();
         jLid.setText(String.valueOf(id_));
@@ -40,9 +41,6 @@ public class jPservicio extends javax.swing.JPanel {
         jLcantidad.setText(String.valueOf(cantidad_));
         frame_servicios = s;
     }
-
-   
-    
 
     public void cambiarPanel() {
         frame_servicios.mostrarPanelFormulario("actualizar");

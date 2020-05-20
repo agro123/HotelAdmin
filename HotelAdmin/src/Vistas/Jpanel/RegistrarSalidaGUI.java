@@ -18,12 +18,15 @@ import Modelo.ServiciosAdicionado;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Date;    
+
+
 /**
  *
  * @author nicol
  */
-public class RegistrarSalidaGUI extends javax.swing.JPanel {  
+public class RegistrarSalidaGUI extends javax.swing.JPanel {
+
     private int idEmpleado;
     private int idcheckout;
     private ArrayList<String> servicios;
@@ -65,7 +68,6 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
           idcheckout = co.getIdCheckout();
           if(co.getIdCheckout()!=0){
               jLcliente.setText(co.getIdCliente()+"");
-              jLempleado.setText(idEmpleado+"");
               jLhabitacion.setText(co.getIdhabitacion()+"");
               habitacion = co.getIdhabitacion();
               jLfechaIngreso.setText(co.getfechaIngreso()+"");
@@ -121,7 +123,6 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
     }    
     private void vaciarCampos(){
               jLcliente.setText("  ");
-              jLempleado.setText("  ");
               jLhabitacion.setText("  ");
               jLfechaIngreso.setText("  ");
               jLfechaSalida.setText("  "); 
@@ -136,7 +137,7 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
     
     private void imprimirFactura(){
         ArrayList<String>info = new ArrayList();      
-        info.add("C.C. empleado: "+jLempleado.getText()+"\n");
+        info.add("C.C. empleado: "+idEmpleado+"\n");
         info.add("C.C. cliente: " + jLcliente.getText()+ "\n");
         info.add("Habitación: "+habitacion+"\n");
         info.add("Fecha de ingreso: "+jLfechaIngreso.getText()+"\n");
@@ -148,7 +149,7 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
         }
         info.add("\n-------------------------------------------\n");
         info.add("Total a pagar: "+jLprecio.getText()+"\n");
-        info.add("Medio de pago: "+"____"+"\n");
+        info.add("Medio de pago: "+jCBmedioPago.getSelectedItem()+"\n");
         ControladorCheckout.imprimirFactura(info, idcheckout);
     }
     
@@ -182,7 +183,7 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
         c.setFpago(fecha_de_hoy);
         c.setValorTotal(valorTotal);
         ControladorCheckout.registrarSalida(c);
-       // c.setmediodepago(String value); //-------------------------------------------------------------FALTA
+        c.setmediodepago(jCBmedioPago.getSelectedItem()+"");
         ControladorHospedaje.cambiarEstado(idcheckout);
         ControllerHabitacion.cambiarEstadoHabitacion(habitacion);
     }
@@ -197,11 +198,11 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
 
         jTbuscador = new javax.swing.JTextField();
         jLcliente = new javax.swing.JLabel();
-        jLempleado = new javax.swing.JLabel();
         jLhabitacion = new javax.swing.JLabel();
         jLfechaIngreso = new javax.swing.JLabel();
         jLfechaSalida = new javax.swing.JLabel();
         jLprecio = new javax.swing.JLabel();
+        jCBmedioPago = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListServicios = new javax.swing.JList<>();
@@ -214,7 +215,7 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
 
         jTbuscador.setFont(new java.awt.Font("Decker", 0, 15)); // NOI18N
         jTbuscador.setForeground(new java.awt.Color(191, 191, 191));
-        jTbuscador.setText("Buscar hospedaje por ID de cliente");
+        jTbuscador.setText("Buscar reserva por ID de cliente");
         jTbuscador.setBorder(null);
         jTbuscador.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -222,11 +223,6 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTbuscadorFocusLost(evt);
-            }
-        });
-        jTbuscador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTbuscadorActionPerformed(evt);
             }
         });
         jTbuscador.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -237,37 +233,37 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
                 jTbuscadorKeyTyped(evt);
             }
         });
-        add(jTbuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 47, 230, -1));
+        add(jTbuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 47, -1, -1));
 
-        jLcliente.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
+        jLcliente.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLcliente.setForeground(new java.awt.Color(112, 112, 112));
         jLcliente.setText("  ");
-        add(jLcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 80, -1));
+        add(jLcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 205, 70, -1));
 
-        jLempleado.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
-        jLempleado.setForeground(new java.awt.Color(112, 112, 112));
-        jLempleado.setText("  ");
-        add(jLempleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, 80, -1));
-
-        jLhabitacion.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
+        jLhabitacion.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLhabitacion.setForeground(new java.awt.Color(112, 112, 112));
         jLhabitacion.setText("  ");
-        add(jLhabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 80, -1));
+        add(jLhabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 222, 110, -1));
 
-        jLfechaIngreso.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
+        jLfechaIngreso.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLfechaIngreso.setForeground(new java.awt.Color(112, 112, 112));
         jLfechaIngreso.setText("  ");
-        add(jLfechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, 80, -1));
+        add(jLfechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 238, 110, -1));
 
-        jLfechaSalida.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
+        jLfechaSalida.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
         jLfechaSalida.setForeground(new java.awt.Color(112, 112, 112));
         jLfechaSalida.setText("  ");
-        add(jLfechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 250, 80, -1));
+        add(jLfechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 255, 110, -1));
 
         jLprecio.setFont(new java.awt.Font("Decker", 1, 20)); // NOI18N
         jLprecio.setForeground(new java.awt.Color(112, 112, 112));
         jLprecio.setText("  ");
-        add(jLprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, 260, -1));
+        add(jLprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 148, 80, -1));
+
+        jCBmedioPago.setBackground(new java.awt.Color(241, 242, 246));
+        jCBmedioPago.setForeground(new java.awt.Color(112, 112, 112));
+        jCBmedioPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Credio", "Debito", "Efectivo"}));
+        add(jCBmedioPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 273, 110, 18));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar-azul.png"))); // NOI18N
         jButton1.setBorder(null);
@@ -287,10 +283,10 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
 
         jScrollPane2.setViewportView(jListServicios);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 260, 45));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 335, 320, 120));
 
         jLfactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Factura.png"))); // NOI18N
-        add(jLfactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, -1));
+        add(jLfactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 88, -1, -1));
 
         jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
         jBcancelar.setContentAreaFilled(false);
@@ -302,7 +298,7 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
                 jBcancelarActionPerformed(evt);
             }
         });
-        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 445, 130, 50));
+        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 470, 130, 50));
 
         jBcheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/botonCheckOutSinSele.png"))); // NOI18N
         jBcheckOut.setBorder(null);
@@ -315,9 +311,10 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
                 jBcheckOutActionPerformed(evt);
             }
         });
-        add(jBcheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(506, 445, 140, -1));
+        add(jBcheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(506, 470, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         agregarDatosFactura();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -351,23 +348,19 @@ public class RegistrarSalidaGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jTbuscadorKeyTyped
 
     private void jTbuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyPressed
-       int key = evt.getKeyCode();
+        int key = evt.getKeyCode();
         if(key == KeyEvent.VK_ENTER){
         agregarDatosFactura();
         }
     }//GEN-LAST:event_jTbuscadorKeyPressed
-
-    private void jTbuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbuscadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTbuscadorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBcancelar;
     private javax.swing.JButton jBcheckOut;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jCBmedioPago;
     private javax.swing.JLabel jLcliente;
-    private javax.swing.JLabel jLempleado;
     private javax.swing.JLabel jLfactura;
     private javax.swing.JLabel jLfechaIngreso;
     private javax.swing.JLabel jLfechaSalida;

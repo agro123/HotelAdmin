@@ -16,13 +16,14 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
     public AgregarServicioRecepGUI() {
         initComponents();
         AgregarListaHabitaciones();
-        ListaServcios();
+        ServciosAgregarCantidad();
+        listaServiciosAñadidos();
     }
 
     private void AgregarListaHabitaciones(){
         
         //MOSTRAR HABITACIÓN POR SU TIPO
-       jPnumeroHabitacion habi = new jPnumeroHabitacion();
+       jPnumeroHabitacion habi = new jPnumeroHabitacion(01);
        for(int i=0;i<10;i++){           
         jPcontenido.add(habi);       
         jPcontenido.revalidate();
@@ -30,8 +31,27 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
        }   
     }
     
-    private void ListaServcios(){
-        //AGREGAR LISTA SERVICIOS A JCOMBOBOX
+    private void ServciosAgregarCantidad(){
+        
+        //AGREGAR CANTIDAD A SERVICIOS POR AÑADIR    
+        jPserviciosRecepcionista ser = new jPserviciosRecepcionista("chocololate",55.000,9);
+             for(int i=0;i<10;i++){           
+              jPingresoCantidad.add(ser);       
+              jPingresoCantidad.revalidate();
+                jPingresoCantidad.repaint();
+       } 
+       //jCservicios.add();
+    }
+    
+     private void listaServiciosAñadidos(){
+        
+        //AGREGAR CANTIDAD A SERVICIOS POR AÑADIR    
+        jPserviciosRecepcionista2 ser = new jPserviciosRecepcionista2("chocololate",55.000,9);
+             for(int i=0;i<10;i++){           
+              jPlistaServicios.add(ser);       
+              jPlistaServicios.revalidate();
+                jPlistaServicios.repaint();
+       } 
        //jCservicios.add();
     }
     /** This method is called from within the constructor to
@@ -43,36 +63,53 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
         jPcontenido = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jPlistaServicios = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jPingresoCantidad = new javax.swing.JPanel();
         jCtipoHabitacion = new javax.swing.JComboBox();
-        jCservicios = new javax.swing.JComboBox();
+        jBañadir = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jBcancelar = new javax.swing.JButton();
         jBguardar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(165, 165, 165));
-        jLabel4.setText("Servicios");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(723, 127, -1, -1));
+        jScrollPane4.setBorder(null);
+        jScrollPane4.setHorizontalScrollBar(null);
+
+        jPcontenido.setBackground(new java.awt.Color(255, 255, 255));
+        jPcontenido.setLayout(new java.awt.GridLayout(0, 3, 0, 1));
+        jScrollPane4.setViewportView(jPcontenido);
+
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 98, 530, 370));
 
         jScrollPane3.setBorder(null);
         jScrollPane3.setHorizontalScrollBar(null);
 
-        jPcontenido.setBackground(new java.awt.Color(255, 255, 255));
-        jPcontenido.setLayout(new java.awt.GridLayout(0, 3, 0, 1));
-        jScrollPane3.setViewportView(jPcontenido);
+        jPlistaServicios.setBackground(new java.awt.Color(255, 255, 255));
+        jPlistaServicios.setLayout(new java.awt.GridLayout(0, 3, 0, 1));
+        jScrollPane3.setViewportView(jPlistaServicios);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 90, 550, 400));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 330, 204, 80));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/marcoServiciosLista.png"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 78, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 92, -1, -1));
+
+        jScrollPane5.setBorder(null);
+        jScrollPane5.setHorizontalScrollBar(null);
+
+        jPingresoCantidad.setBackground(new java.awt.Color(255, 255, 255));
+        jPingresoCantidad.setLayout(new java.awt.GridLayout(0, 3, 0, 1));
+        jScrollPane5.setViewportView(jPingresoCantidad);
+
+        add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 114, 171, 90));
 
         jCtipoHabitacion.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
         jCtipoHabitacion.setForeground(new java.awt.Color(204, 204, 204));
@@ -85,24 +122,21 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
         });
         add(jCtipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 37, 122, 20));
 
-        jCservicios.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
-        jCservicios.setForeground(new java.awt.Color(204, 204, 204));
-        jCservicios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Simple" }));
-        jCservicios.setBorder(null);
-        jCservicios.addActionListener(new java.awt.event.ActionListener() {
+        jBañadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BotonAñadir.png"))); // NOI18N
+        jBañadir.setBorder(null);
+        jBañadir.setContentAreaFilled(false);
+        jBañadir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBañadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCserviciosActionPerformed(evt);
+                jBañadirActionPerformed(evt);
             }
         });
-        add(jCservicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 127, 122, 20));
+        add(jBañadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(855, 203, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(165, 165, 165));
         jLabel3.setText("Habitaciones :");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 37, -1, -1));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MarcoServicioAgregar.png"))); // NOI18N
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 78, -1, -1));
 
         jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
         jBcancelar.setContentAreaFilled(false);
@@ -114,7 +148,7 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
                 jBcancelarActionPerformed(evt);
             }
         });
-        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 350, 130, 50));
+        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(693, 441, 130, 50));
 
         jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-SinSele.png"))); // NOI18N
         jBguardar.setBorder(null);
@@ -127,16 +161,18 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
                 jBguardarActionPerformed(evt);
             }
         });
-        add(jBguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(842, 350, 140, -1));
+        add(jBguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 441, 140, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ListaServiciosAgregar.png"))); // NOI18N
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(693, 45, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ListaServicios2.png"))); // NOI18N
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(693, 258, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCtipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtipoHabitacionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCtipoHabitacionActionPerformed
-
-    private void jCserviciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCserviciosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCserviciosActionPerformed
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
         // TODO add your handling code here:
@@ -148,18 +184,26 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jBguardarActionPerformed
 
+    private void jBañadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBañadirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBañadirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBañadir;
     private javax.swing.JButton jBcancelar;
     private javax.swing.JButton jBguardar;
-    private javax.swing.JComboBox jCservicios;
     private javax.swing.JComboBox jCtipoHabitacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPcontenido;
+    private javax.swing.JPanel jPingresoCantidad;
+    private javax.swing.JPanel jPlistaServicios;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     // End of variables declaration//GEN-END:variables
 
 }

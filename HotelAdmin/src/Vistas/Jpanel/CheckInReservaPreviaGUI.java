@@ -54,7 +54,11 @@ public class CheckInReservaPreviaGUI extends javax.swing.JPanel {
                " Debe ingresar la identificacion de un cliente "
                        + "para encontrar la reserva");
             vaciarCampos();
-        }
+        }else if(id.length()>10){
+           JOptionPane.showMessageDialog(null,
+               "La identificación no debe de tener mas de 10 caracateres.");
+            vaciarCampos();
+       }
         else{
           idcliente = Integer.parseInt(id);
           r = rc.getReserva(idcliente);

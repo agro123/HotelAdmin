@@ -14,14 +14,14 @@ public class jPnumeroHabitacion extends javax.swing.JPanel {
     /**
      * Creates new form jPnumeroHabitacion
      */
-    public jPnumeroHabitacion() {
+    public jPnumeroHabitacion(int idHabitacion) {        
         initComponents();
+        this.numeroHabitacion = idHabitacion;       
+        jLnumeroHabitacion.setText(String.valueOf(idHabitacion));
     }
 
-    public jPnumeroHabitacion(int idHabitacion){
-        this.numeroHabitacion = idHabitacion;
-        
-        jLnumeroHabitacion.setText(String.valueOf(idHabitacion));
+    public jPnumeroHabitacion(){
+       
     }
     /**
      * This method is called from within the constructor to initialize the form.
