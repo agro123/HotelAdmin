@@ -7,7 +7,6 @@ package Vistas.Jpanel;
 
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -46,18 +45,21 @@ public class jPhabitacionCheckIn extends javax.swing.JPanel {
         jLcapacidad.setText(String.valueOf(capacidad_));
     }
     
+    public void pintarPanel(){
+        jButton1.setBorder(javax.swing.BorderFactory.createMatteBorder
+                            (2, 2, 2, 2, new java.awt.Color(0, 102, 255)));
+    }
+    
     
     public void setRoomSelected(){
-        jButton1.setBorder(javax.swing.BorderFactory.createMatteBorder
-                            (2, 2, 2, 2, new java.awt.Color(0, 102, 255))); 
             jLabelHab.setText(""+numeroHabitacion);
+            pintarPanel();
             JPanel panel = (JPanel)getParent();
             for(int a = 0; a < panel.getComponentCount(); a++){
                 if(!panel.getComponent(a).equals(this)){
                     jPhabitacionCheckIn panelsito;
                     panelsito = (jPhabitacionCheckIn)panel.getComponent(a);
                     panelsito.jButton1.setBorder(null);
-                    System.out.println("No son Iguales"+" "+a);
                 }   
             }
     }

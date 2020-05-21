@@ -56,10 +56,12 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         if(validaOperacion.equals("guardar")){
             cargarHabitaciones(ControllerReserva.
                         loadListRooms(fi,fs,"save",0));
+            
         }else
         if(validaOperacion.equals("actualizar")){
             cargarHabitaciones(ControllerReserva.
                     loadListRooms(fi,fs,"update",numeroReserva));
+            
         }
     }
     
@@ -148,6 +150,21 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         }
     }
     
+    public void setBorderPanel(int numHab){
+        for(int i = 0; i < jPcontenido.getComponentCount();i++){
+            jPhabitacionCheckIn jp;
+            jp = (jPhabitacionCheckIn)jPcontenido.getComponent(i);
+            
+             System.out.println(numHab+"  jdjd" + jp.numeroHabitacion);
+            if(jp.numeroHabitacion == numHab){
+               
+                jp.pintarPanel();
+                i = jPcontenido.getComponentCount();
+                
+            }     
+        }
+    }
+    
     
     public void llenarFormulario(Reserva reserva){
         cambiarCombobobox(reserva.getNum_Habitacion());
@@ -160,6 +177,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         validaOperacion = "actualizar";
         jLabel5.setText("Actualización");
         resetListRooms();
+        setBorderPanel(reserva.getNum_Habitacion());
     }
     
     public void cambiarCombobobox(int numHab){
@@ -191,7 +209,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jPhabitacionCheckIn jp;
                 jp = new jPhabitacionCheckIn(num,Tipo,prec,capac);
                 jp.setjThabitacion(jTidHabitacion);
-                jPcontenido.add(jp); 
+                jPcontenido.add(jp);
             }
         }
         jPcontenido.revalidate();
@@ -458,13 +476,15 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
 
     private void jdFechaSalidaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaSalidaPropertyChange
         if(jdFechaIngreso.getDate() != null && jdFechaSalida.getDate() != null){
-            resetListRooms();       
+            resetListRooms(); 
+            jTidHabitacion.setText("Número de habitación");
         }
     }//GEN-LAST:event_jdFechaSalidaPropertyChange
 
     private void jdFechaIngresoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaIngresoPropertyChange
         if(jdFechaIngreso.getDate() != null && jdFechaSalida.getDate() != null){
             resetListRooms();
+            jTidHabitacion.setText("Número de habitación");
             Date f = Fecha.dateTomorrow(jdFechaIngreso.getDate());
             jdFechaSalida.setMinSelectableDate(f);
         } 
