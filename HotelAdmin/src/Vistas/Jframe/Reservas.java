@@ -5,13 +5,10 @@
  */
 package Vistas.Jframe;
 
-import Modelo.Habitacion;
-import Servicios.Fecha;
+
 import Vistas.Jpanel.ListaReservasGUI;
 import Vistas.Jpanel.RealizarReservaGUI;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -27,7 +24,6 @@ public class Reservas extends javax.swing.JPanel {
     public Reservas() {
         initComponents();
         PanelRealizarReserva(); 
-        
     }
     
     
@@ -86,14 +82,10 @@ public class Reservas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBrrealizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBrrealizarReservaActionPerformed
-        // TODO add your handling code here:
-        PanelRealizarReserva();
-       
-        
+        PanelRealizarReserva();        
     }//GEN-LAST:event_jBrrealizarReservaActionPerformed
 
     private void jBlistaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlistaReservaActionPerformed
-        // TODO add your handling code here:        
         panelListarReserva();
     }//GEN-LAST:event_jBlistaReservaActionPerformed
 
@@ -117,7 +109,9 @@ public class Reservas extends javax.swing.JPanel {
         jBrrealizarReserva.setSelected(true);  
         jPcontenedor.removeAll();
         RealizarReservaGUI pRealizarReserva;
-        pRealizarReserva = new RealizarReservaGUI();
+        pRealizarReserva = new RealizarReservaGUI(this);
+        pRealizarReserva.establecerInterfaz();
+        pRealizarReserva.resetListRooms();
         jPcontenedor.add(pRealizarReserva);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
