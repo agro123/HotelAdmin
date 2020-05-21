@@ -82,36 +82,36 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         return gClient;
 
     }
-    
-    public boolean idFound(Integer id){
+
+    public boolean idFound(Integer id) {
         ArrayList<Cliente> listadoCli = new ArrayList<>();
         listadoCli = Controladorcliente.listClients(0);
         boolean found = false;
-        
+
         for (int i = 0; i < listadoCli.size(); i++) {
-            if(id==listadoCli.get(i).getID()){
-                found=true;
+            if (id == listadoCli.get(i).getID()) {
+                found = true;
             }
         }
-        
+
         return found;
-        
+
     }
 
     public void saveData() {
         try {
             Cliente cliente = getData();
-            if(idFound(cliente.getID())){
+            if (idFound(cliente.getID())) {
                 if (verifyData(cliente)) {
-                        clientDAO.modifyClient(cliente);
-                        JOptionPane.showMessageDialog(null, "Cliente modificado!");
-                    }
-                } else {
-                    if (verifyData(cliente)) {
+                    clientDAO.modifyClient(cliente);
+                    JOptionPane.showMessageDialog(null, "Cliente modificado!");
+                }
+            } else {
+                if (verifyData(cliente)) {
                     clientDAO.addClient(cliente);
                     JOptionPane.showMessageDialog(null, "Cliente agregado!");
                 }
-        }
+            }
         } catch (Exception e) {
         }
     }
@@ -300,26 +300,22 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
 
-        if(!idFound(getData().getID()))
-        {
+        if (!idFound(getData().getID())) {
             //saveData();
-           ControladorCliente.addClient(getData());
-           JOptionPane.showMessageDialog(null,"Cliente agregado exitosamente");
-           
-        }else {           
-            
-            try
-            {
+            ControladorCliente.addClient(getData());
+            JOptionPane.showMessageDialog(null, "Cliente agregado exitosamente");
+            limpiarCampos();
+        } else {
+
+            try {
                 ControladorCliente.modificarCliente(getData());
-                
-            }
-            catch (Error error)
-            {
+
+            } catch (Error error) {
                 JOptionPane.showMessageDialog(null, "Se ha producido un error "
                         + "modificando");
             }
             JOptionPane.showMessageDialog(null, "Se ha modificado con "
-                        + "éxito");
+                    + "éxito");
             limpiarCampos();
         }
         //saveData(); // Se ejecuta, se envia la data a la BD 
