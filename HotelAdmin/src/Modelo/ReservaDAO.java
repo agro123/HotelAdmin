@@ -389,14 +389,26 @@ public class ReservaDAO {
             con = Fachada.getConnection(); 
             String sql="";
             if(modo.equals("save")){
-                sql = "SELECT * FROM HABITACION WHERE ID_HABITACION " 
-                + "NOT IN (SELECT ID_HABITACION FROM RESERVA "
-                + "WHERE ((FECHA_INGRESO BETWEEN ? AND ?) " 
+                sql = 
+                  "SELECT * FROM HABITACION "
+                + "WHERE ID_HABITACION "
+                + "NOT IN "
+                + "(SELECT ID_HABITACION FROM RESERVA "
+                + "WHERE ((FECHA_INGRESO BETWEEN ? AND ?) "
                 + "OR (FECHA_SALIDA BETWEEN ? AND ?)) "
-                + "UNION SELECT ID_HABITACION FROM HOSPEDAJE "
-                + "WHERE((FECHA_INGRESO BETWEEN ? AND ?) "
-                + "OR (FECHA_SALIDA BETWEEN ? AND ?))) "
+                + "OR((? BETWEEN FECHA_INGRESO AND FECHA_SALIDA ) "
+                + "AND (? BETWEEN FECHA_INGRESO AND FECHA_SALIDA))) "
+                + "INTERSECT "
+                + "SELECT * FROM HABITACION "
+                + "WHERE ID_HABITACION "
+                + "NOT IN "
+                + "(SELECT ID_HABITACION FROM HOSPEDAJE "
+                + "WHERE ((FECHA_INGRESO BETWEEN ? AND ?) "
+                + "OR (FECHA_SALIDA BETWEEN ? AND ?)) "
+                + "OR((? BETWEEN FECHA_INGRESO AND FECHA_SALIDA ) "
+                + "AND (? BETWEEN FECHA_INGRESO AND FECHA_SALIDA))) "
                 + "ORDER BY ID_HABITACION";
+
                 
                 pstm = con.prepareStatement(sql);
                 pstm.setTimestamp(1, fi);
@@ -407,8 +419,16 @@ public class ReservaDAO {
                 pstm.setTimestamp(6, fs);
                 pstm.setTimestamp(7, fi);
                 pstm.setTimestamp(8, fs);
+                pstm.setTimestamp(9, fi);
+                pstm.setTimestamp(10, fs);
+                pstm.setTimestamp(11, fi);
+                pstm.setTimestamp(12, fs);
+                
+                System.out.println("Modo save");
                 
             }else if(modo.equals("update")){
+                
+                System.err.println("modoe update");
                 sql =
                   "SELECT * FROM HABITACION WHERE ID_HABITACION = "
                 + "(SELECT ID_HABITACION FROM RESERVA WHERE ID_RESERVA = ?) " 
@@ -419,18 +439,26 @@ public class ReservaDAO {
                 + "AND (FECHA_INGRESO BETWEEN ? AND ? OR " 
                 + "FECHA_SALIDA BETWEEN ? AND ?))AS R " 
                 + "WHERE R.ID_HABITACION = HABITACION.ID_HABITACION"
-                + " AND R.ID_RESERVA <> ?)"
+                + " AND R.ID_RESERVA <> ?) "
                
                         
-                        
-                +"UNION SELECT * FROM HABITACION "
-                + "WHERE ID_HABITACION " 
-                + "NOT IN (SELECT ID_HABITACION FROM RESERVA "
-                + "WHERE ((FECHA_INGRESO BETWEEN ? AND ?) " 
+                + "UNION SELECT * FROM HABITACION "
+                + "WHERE ID_HABITACION "
+                + "NOT IN "
+                + "(SELECT ID_HABITACION FROM RESERVA "
+                + "WHERE ((FECHA_INGRESO BETWEEN ? AND ?) "
                 + "OR (FECHA_SALIDA BETWEEN ? AND ?)) "
-                + "UNION SELECT ID_HABITACION FROM HOSPEDAJE "
-                + "WHERE((FECHA_INGRESO BETWEEN ? AND ?) "
-                + "OR (FECHA_SALIDA BETWEEN ? AND ?))) "
+                + "OR((? BETWEEN FECHA_INGRESO AND FECHA_SALIDA ) "
+                + "AND (? BETWEEN FECHA_INGRESO AND FECHA_SALIDA))) "
+                + "INTERSECT "
+                + "SELECT * FROM HABITACION "
+                + "WHERE ID_HABITACION "
+                + "NOT IN "
+                + "(SELECT ID_HABITACION FROM HOSPEDAJE "
+                + "WHERE ((FECHA_INGRESO BETWEEN ? AND ?) "
+                + "OR (FECHA_SALIDA BETWEEN ? AND ?)) "
+                + "OR((? BETWEEN FECHA_INGRESO AND FECHA_SALIDA ) "
+                + "AND (? BETWEEN FECHA_INGRESO AND FECHA_SALIDA))) "
                 + "ORDER BY ID_HABITACION";
                 
                 pstm = con.prepareStatement(sql);
@@ -449,6 +477,10 @@ public class ReservaDAO {
                 pstm.setTimestamp(13, fs);
                 pstm.setTimestamp(14, fi);
                 pstm.setTimestamp(15, fs);
+                pstm.setTimestamp(16, fi);
+                pstm.setTimestamp(17, fs);
+                pstm.setTimestamp(18, fi);
+                pstm.setTimestamp(19, fs);
             }
               
             rs = pstm.executeQuery();

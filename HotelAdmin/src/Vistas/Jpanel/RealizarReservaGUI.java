@@ -220,6 +220,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
             if(validaOperacion.equals("actualizar")){
                 if(ControllerReserva.actualizarReserva(infoRerserva()) == 1){
                     frame_reservas.panelListarReserva();
+                    //validaOperacion = "guardar";
                 }
             }
         }
