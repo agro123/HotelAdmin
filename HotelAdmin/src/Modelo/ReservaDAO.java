@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.sql.Types;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -100,7 +99,7 @@ public class ReservaDAO {
             rtdo = pstm.executeUpdate();
         }
         catch(SQLException ex){
-            mensajeError(ex);
+            
         }
         finally{
             try{
@@ -108,7 +107,7 @@ public class ReservaDAO {
             }
             catch(SQLException ex)
             {
-                mensajeError(ex);
+                
             }
         }
         return rtdo;
@@ -266,11 +265,11 @@ public class ReservaDAO {
         rtdo = 0;
         try{
             con = Fachada.getConnection();
-            String sql = "UPDATE reserva " +
-                         "SET id_reserva = ?, id_habitacion = ?, id_cliente = ?,"
-                    +    "id_empleado = ?, fecha_reserva ?,fecha_ingreso ?,"
-                    +    "fecha_salida = ?,  "
-                    +    "WHERE id_Servicio = ?, num_personas = ?";
+            String sql = "UPDATE reserva " 
+                    +    "SET id_reserva = ?, id_habitacion = ?, id_cliente = ?,"
+                    +    " id_empleado = ?, fecha_reserva = ?, fecha_ingreso = ?,"
+                    +    " fecha_salida = ?, num_personas = ? "
+                    +    "WHERE id_reserva = ?";
 
             pstm = con.prepareStatement(sql);   
 
@@ -282,6 +281,7 @@ public class ReservaDAO {
             pstm.setTimestamp(6, reserva.getFecha_ingreso());
             pstm.setTimestamp(7, reserva.getFecha_salida());
             pstm.setInt(8, reserva.getNum_Personas());
+            pstm.setInt(9, reserva.getNumero_reserva());
 
             rtdo = pstm.executeUpdate();  
         }
@@ -379,7 +379,8 @@ public class ReservaDAO {
     
     
     
-    public ArrayList <Habitacion> listadoHabitacion(Timestamp fi, Timestamp fs){      
+    public ArrayList <Habitacion> listadoHabitacion
+                        (Timestamp fi, Timestamp fs,String modo,int idReserva){      
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -387,26 +388,71 @@ public class ReservaDAO {
         try{
             con = Fachada.getConnection(); 
             String sql="";
-                       
-            sql = "SELECT * FROM HABITACION WHERE ID_HABITACION " 
+            if(modo.equals("save")){
+                sql = "SELECT * FROM HABITACION WHERE ID_HABITACION " 
                 + "NOT IN (SELECT ID_HABITACION FROM RESERVA "
                 + "WHERE ((FECHA_INGRESO BETWEEN ? AND ?) " 
                 + "OR (FECHA_SALIDA BETWEEN ? AND ?)) "
                 + "UNION SELECT ID_HABITACION FROM HOSPEDAJE "
                 + "WHERE((FECHA_INGRESO BETWEEN ? AND ?) "
                 + "OR (FECHA_SALIDA BETWEEN ? AND ?))) "
-                + "ORDER BY ID_HABITACION";            
+                + "ORDER BY ID_HABITACION";
+                
+                pstm = con.prepareStatement(sql);
+                pstm.setTimestamp(1, fi);
+                pstm.setTimestamp(2, fs);
+                pstm.setTimestamp(3, fi);
+                pstm.setTimestamp(4, fs);
+                pstm.setTimestamp(5, fi);
+                pstm.setTimestamp(6, fs);
+                pstm.setTimestamp(7, fi);
+                pstm.setTimestamp(8, fs);
+                
+            }else if(modo.equals("update")){
+                sql =
+                  "SELECT * FROM HABITACION WHERE ID_HABITACION = "
+                + "(SELECT ID_HABITACION FROM RESERVA WHERE ID_RESERVA = ?) " 
+                + "AND ID_HABITACION NOT IN " 
+                + "(SELECT HABITACION.ID_HABITACION FROM HABITACION , "        
+                + "(SELECT * FROM RESERVA WHERE ID_HABITACION IN " 
+                + "(SELECT ID_HABITACION FROM RESERVA WHERE ID_RESERVA = ?) "
+                + "AND (FECHA_INGRESO BETWEEN ? AND ? OR " 
+                + "FECHA_SALIDA BETWEEN ? AND ?))AS R " 
+                + "WHERE R.ID_HABITACION = HABITACION.ID_HABITACION"
+                + " AND R.ID_RESERVA <> ?)"
                
-            pstm = con.prepareStatement(sql);
-            pstm.setTimestamp(1, fi);
-            pstm.setTimestamp(2, fs);
-            pstm.setTimestamp(3, fi);
-            pstm.setTimestamp(4, fs);
-            pstm.setTimestamp(5, fi);
-            pstm.setTimestamp(6, fs);
-            pstm.setTimestamp(7, fi);
-            pstm.setTimestamp(8, fs);
+                        
+                        
+                +"UNION SELECT * FROM HABITACION "
+                + "WHERE ID_HABITACION " 
+                + "NOT IN (SELECT ID_HABITACION FROM RESERVA "
+                + "WHERE ((FECHA_INGRESO BETWEEN ? AND ?) " 
+                + "OR (FECHA_SALIDA BETWEEN ? AND ?)) "
+                + "UNION SELECT ID_HABITACION FROM HOSPEDAJE "
+                + "WHERE((FECHA_INGRESO BETWEEN ? AND ?) "
+                + "OR (FECHA_SALIDA BETWEEN ? AND ?))) "
+                + "ORDER BY ID_HABITACION";
+                
+                pstm = con.prepareStatement(sql);
+                pstm.setInt(1, idReserva);
+                pstm.setInt(2, idReserva);
+                pstm.setTimestamp(3, fi);
+                pstm.setTimestamp(4, fs);
+                pstm.setTimestamp(5, fi);
+                pstm.setTimestamp(6, fs);
+                pstm.setInt(7, idReserva);
+                pstm.setTimestamp(8, fi);
+                pstm.setTimestamp(9, fs);
+                pstm.setTimestamp(10, fi);
+                pstm.setTimestamp(11, fs);
+                pstm.setTimestamp(12, fi);
+                pstm.setTimestamp(13, fs);
+                pstm.setTimestamp(14, fi);
+                pstm.setTimestamp(15, fs);
+            }
+              
             rs = pstm.executeQuery();
+            
                         
             Habitacion objhabitacion = null;
             while(rs.next()){

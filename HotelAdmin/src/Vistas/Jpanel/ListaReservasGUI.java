@@ -26,22 +26,10 @@ public class ListaReservasGUI extends javax.swing.JPanel {
         initComponents(); 
         ArrayList<Reserva> listaReservas;
         listaReservas = ControllerReserva.listarReservas();
-        cargarListaReservas(listaReservas);
-        
+        cargarListaReservas(listaReservas);   
     }
     
     
-    private void agregarReservas(){
-        
-        jPcontenido.removeAll();
-        for (int i=0;i<9;i++){
-        jPreservasHospedaje jp = new jPreservasHospedaje(9,0,9,8,"23-04-2000 12:00 PM","23-04-2000 12:00 PM");
-        jPcontenido.add(jp);
-          
-       }
-        jPcontenido.revalidate();
-        jPcontenido.repaint();
-    }
     
     public void establecerLayout(ArrayList<Reserva> listaReservas){
         //Establece un gridlayout al panel que contiene las reservas,
@@ -63,33 +51,19 @@ public class ListaReservasGUI extends javax.swing.JPanel {
         establecerLayout(listaReservas);
         
         for (int i = 0; i < listaReservas.size(); i++) {
-            
             int num_res = listaReservas.get(i).getNumero_reserva();
             int id_cli = listaReservas.get(i).getNumCliente();
             int id_hab = listaReservas.get(i).getNum_Habitacion();
             int cant_per = listaReservas.get(i).getNum_Personas();
-            
             String fech_in = listaReservas.get(i).getFecha_ingreso().toString();
             String fech_out = listaReservas.get(i).getFecha_salida().toString();
-        
-           
-            
-            
             jPreservasHospedaje jp = new jPreservasHospedaje
-                    (num_res,id_cli,id_hab,cant_per,fech_in,fech_out);
+                        (num_res,id_cli,id_hab,cant_per,fech_in,fech_out);
             jp.setFrame_reservas(frame_reservas);
-            
-            
-            
             jPcontenido.add(jp);  
-              
-           
         }
-        
         jPcontenido.revalidate();
         jPcontenido.repaint();
-        
-        
     }
 
     /**
@@ -117,7 +91,7 @@ public class ListaReservasGUI extends javax.swing.JPanel {
 
         jPcontenido.setBackground(new java.awt.Color(255, 255, 255));
         jPcontenido.setAutoscrolls(true);
-        jPcontenido.setLayout(new java.awt.GridLayout());
+        jPcontenido.setLayout(new java.awt.GridLayout(1, 0));
         jScrollPane2.setViewportView(jPcontenido);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 140, 860, 330));
@@ -148,21 +122,11 @@ public class ListaReservasGUI extends javax.swing.JPanel {
         jButton1.setBorder(null);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 44, 24, 24));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         ArrayList<Reserva> listaReservas;
-        
         if(jTextField1.getText().equals("")){
             listaReservas = ControllerReserva.listarReservas();
             cargarListaReservas(listaReservas);
