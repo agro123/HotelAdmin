@@ -111,6 +111,7 @@ public class HabitacionAgregarModificarGUI extends javax.swing.JPanel {
         add(jLnumCamas, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 284, 180, 20));
 
         jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
+        jBcancelar.setBorder(null);
         jBcancelar.setContentAreaFilled(false);
         jBcancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBcancelar.setInheritsPopupMenu(true);

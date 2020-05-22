@@ -12,8 +12,22 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/vanes/Desktop/PROYECTO%20DESARROLLO/Master/Desarrollo/HotelAdmin/src/Vistas/Jpanel/ClientesRegistradosGUI.java</file>
-            <file>file:/C:/Users/vanes/Desktop/PROYECTO%20DESARROLLO/Master/Desarrollo/HotelAdmin/src/Vistas/Jpanel/ClientesAgregarModificarGUI.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Vistas/Jpanel/AgregarServicioRecepGUI.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Vistas/Jpanel/jPhospedaje.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Modelo/ReservaDAO.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Controladores/ControladorHospedaje.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Vistas/Jframe/CheckIn.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Vistas/Jpanel/CheckInSinReservaGUI.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Vistas/Jpanel/CheckInReservaPreviaGUI.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Vistas/Jpanel/jPhabitacionCheckIn.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Modelo/ClientDAO.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Imagenes/panel-azul.png</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Servicios/jdbc.properties</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Vistas/Jpanel/jPreservasHospedaje.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Modelo/CheckoutDAO.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Vistas/Jpanel/jPnumeroHabitacion.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Vistas/Jframe/ClienteRecepcionista.java</file>
+            <file>file:/C:/Users/Usuario/Documents/protecto_desarrollo/Desarrollo/HotelAdmin/src/Modelo/HabitacionesDAO.java</file>
         </group>
     </open-files>
 </project-private>

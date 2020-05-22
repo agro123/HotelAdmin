@@ -42,7 +42,7 @@ public class jPclienteRecepcionista extends javax.swing.JPanel {
         jLcorreoCli.setText(correo);
     }
     
-         public void cambiarPanel() {
+        public void cambiarPanel() {
         frame_cliente_rec.FormularioModificar(
                 ControladorCliente.listClients(id).get(0));
         

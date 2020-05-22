@@ -9,6 +9,7 @@ import Controladores.ControladorCliente;
 import Modelo.Cliente;
 import Modelo.ClientDAO;
 import Vistas.Jframe.ClienteRecepcionista;
+import Vistas.Jframe.Clientes;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
     ClientDAO clientDAO = new ClientDAO();
     ControladorCliente Controladorcliente = new ControladorCliente();
     ClienteRecepcionista panel_prin;
+    Clientes panel_admin;
     String validar_panel;
 
     public String getValidar_panel() {
@@ -45,6 +47,12 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
 
     public ClientesAgregarModificarGUI(ClienteRecepcionista cr) {
         this.panel_prin = cr;
+        initComponents();
+
+    }
+    
+    public ClientesAgregarModificarGUI(Clientes cli) {
+        this.panel_admin = cli;
         initComponents();
 
     }
