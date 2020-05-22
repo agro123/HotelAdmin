@@ -9,8 +9,11 @@ import Controladores.ControladorCliente;
 import Modelo.Cliente;
 import Modelo.ClientDAO;
 import Vistas.Jframe.ClienteRecepcionista;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -161,6 +164,60 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jTdireccion.setText("");
     }
 
+    public int validarCampos() {
+        int rtdo = 1;
+
+        if (jTCedula.getText().equals("") || jTCedula.getText().equals("***")) {
+
+            rtdo = 0;
+            mostrarCamposVacios(jTCedula);
+
+        }
+        if (jTcorreo.getText().equals("") || jTcorreo.getText().equals("***")) {
+            rtdo = 0;
+
+            mostrarCamposVacios(jTcorreo);
+        }
+        if (jTnombre.getText().equals("") || jTnombre.getText().equals("***")) {
+            rtdo = 0;
+
+            mostrarCamposVacios(jTnombre);
+        }
+        if (jTtelefono.getText().equals("") || jTtelefono.getText().equals("***")) {
+            rtdo = 0;
+
+            mostrarCamposVacios(jTtelefono);
+        }
+        if (jTapellido.getText().equals("") || jTapellido.getText().equals("***")) {
+            rtdo = 0;
+
+            mostrarCamposVacios(jTapellido);
+        }
+        if (jTdireccion.getText().equals("") || jTdireccion.getText().equals("***")) {
+            rtdo = 0;
+
+            mostrarCamposVacios(jTdireccion);
+        }
+
+        return rtdo;
+    }
+
+    public void mostrarCamposVacios(JTextField jt) {
+        jt.setForeground(Color.black);
+        jt.setText("***");
+    }
+
+    public void validaNumero(char c, KeyEvent evt) {
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }
+    
+    public void setearFormato(JTextField t) {
+        t.setForeground(new Color(153, 153, 153));
+        t.setText("");
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -215,20 +272,40 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jTdireccion.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTdireccion.setForeground(new java.awt.Color(153, 153, 153));
         jTdireccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jTdireccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTdireccionFocusGained(evt);
+            }
+        });
         add(jTdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 310, 276, 25));
 
         jTnombre.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTnombre.setForeground(new java.awt.Color(153, 153, 153));
         jTnombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jTnombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTnombreFocusGained(evt);
+            }
+        });
         add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 246, 276, 25));
 
         jTCedula.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTCedula.setForeground(new java.awt.Color(153, 153, 153));
         jTCedula.setToolTipText("");
         jTCedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jTCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTCedulaFocusGained(evt);
+            }
+        });
         jTCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTCedulaActionPerformed(evt);
+            }
+        });
+        jTCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTCedulaKeyTyped(evt);
             }
         });
         add(jTCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 188, 276, 25));
@@ -236,6 +313,11 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jTcorreo.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTcorreo.setForeground(new java.awt.Color(153, 153, 153));
         jTcorreo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jTcorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTcorreoFocusGained(evt);
+            }
+        });
         jTcorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTcorreoActionPerformed(evt);
@@ -246,6 +328,11 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jTtelefono.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTtelefono.setForeground(new java.awt.Color(153, 153, 153));
         jTtelefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jTtelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTtelefonoFocusGained(evt);
+            }
+        });
         jTtelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTtelefonoActionPerformed(evt);
@@ -256,6 +343,11 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         jTapellido.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTapellido.setForeground(new java.awt.Color(153, 153, 153));
         jTapellido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jTapellido.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTapellidoFocusGained(evt);
+            }
+        });
         add(jTapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 310, 276, 25));
 
         jLabel1.setFont(new java.awt.Font("Decker", 0, 17)); // NOI18N
@@ -300,28 +392,34 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
 
-        if (!idFound(getData().getID())) {
-            //saveData();
-            ControladorCliente.addClient(getData());
-            JOptionPane.showMessageDialog(null, "Cliente agregado exitosamente");
-            limpiarCampos();
-        } else {
+        if (validarCampos() == 1) {
+            if (!idFound(getData().getID())) {
+                //saveData();
+                ControladorCliente.addClient(getData());
+                JOptionPane.showMessageDialog(null, "Cliente agregado exitosamente");
+                limpiarCampos();
+            } else {
 
-            try {
-                ControladorCliente.modificarCliente(getData());
+                try {
+                    ControladorCliente.modificarCliente(getData());
 
-            } catch (Error error) {
-                JOptionPane.showMessageDialog(null, "Se ha producido un error "
-                        + "modificando");
+                } catch (Error error) {
+                    JOptionPane.showMessageDialog(null, "Se ha producido un error "
+                            + "modificando");
+                }
+                JOptionPane.showMessageDialog(null, "Se ha modificado con "
+                        + "éxito");
+                limpiarCampos();
             }
-            JOptionPane.showMessageDialog(null, "Se ha modificado con "
-                    + "éxito");
-            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese Todos los "
+                    + "Campos Requeridos");
         }
         //saveData(); // Se ejecuta, se envia la data a la BD 
         //jBcancelarActionPerformed(evt);
 
     }//GEN-LAST:event_jBguardarActionPerformed
+
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
         limpiarCampos();
@@ -338,6 +436,58 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
     private void jTcorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTcorreoActionPerformed
+
+    private void jTCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTCedulaKeyTyped
+
+        validaNumero(evt.getKeyChar(), evt);
+
+    }//GEN-LAST:event_jTCedulaKeyTyped
+
+    private void jTCedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTCedulaFocusGained
+     
+        if (jTCedula.getText().equalsIgnoreCase("***")) {
+            setearFormato(jTCedula);
+        }     
+    }//GEN-LAST:event_jTCedulaFocusGained
+
+    private void jTcorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcorreoFocusGained
+        
+        if (jTcorreo.getText().equalsIgnoreCase("***")) {
+            setearFormato(jTcorreo);
+        }    
+        
+    }//GEN-LAST:event_jTcorreoFocusGained
+
+    private void jTnombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTnombreFocusGained
+       
+        if (jTnombre.getText().equalsIgnoreCase("***")) {
+            setearFormato(jTnombre);
+        }  
+        
+    }//GEN-LAST:event_jTnombreFocusGained
+
+    private void jTtelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTtelefonoFocusGained
+        
+        if (jTtelefono.getText().equalsIgnoreCase("***")) {
+            setearFormato(jTtelefono);
+        }  
+        
+    }//GEN-LAST:event_jTtelefonoFocusGained
+
+    private void jTapellidoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTapellidoFocusGained
+        
+        if (jTapellido.getText().equalsIgnoreCase("***")) {
+            setearFormato(jTapellido);
+        }  
+    }//GEN-LAST:event_jTapellidoFocusGained
+
+    private void jTdireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTdireccionFocusGained
+       
+        if (jTdireccion.getText().equalsIgnoreCase("***")) {
+            setearFormato(jTdireccion);
+        } 
+        
+    }//GEN-LAST:event_jTdireccionFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

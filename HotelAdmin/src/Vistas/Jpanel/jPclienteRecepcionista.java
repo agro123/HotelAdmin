@@ -95,7 +95,7 @@ public class jPclienteRecepcionista extends javax.swing.JPanel {
         jLcorreoCli.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
         jLcorreoCli.setForeground(new java.awt.Color(112, 112, 112));
         jLcorreoCli.setText("correo");
-        add(jLcorreoCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 30, -1));
+        add(jLcorreoCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 120, -1));
 
         jBeditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconEditar.png"))); // NOI18N
         jBeditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
