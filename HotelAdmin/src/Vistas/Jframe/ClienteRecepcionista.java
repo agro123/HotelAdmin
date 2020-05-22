@@ -113,8 +113,8 @@ public class ClienteRecepcionista extends javax.swing.JPanel {
 
     private void jBlistaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlistaClientesActionPerformed
         // TODO add your handling code here:
-        formulario.limpiarCampos();
         panelListarCliente();
+        formulario.limpiarCampos();
     }//GEN-LAST:event_jBlistaClientesActionPerformed
 
     public void seleccionarPrimero(ClientesAgregarModificarGUI formulario) {
