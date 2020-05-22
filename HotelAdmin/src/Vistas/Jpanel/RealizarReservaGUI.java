@@ -114,7 +114,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Seleccione una Habitación");
         }else
         if(jTnumPersonas.getText().equals("") || 
-                jTnumPersonas.getText().equalsIgnoreCase("Cantidad de personas"))
+            jTnumPersonas.getText().equalsIgnoreCase("Cantidad de personas"))
         {
             rtdo = 0;
             JOptionPane.showMessageDialog(this,"Hay Campos Vacios");
@@ -275,6 +275,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -286,12 +287,12 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(191, 191, 191));
         jLabel4.setText("Fecha Salida:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 345, 110, 23));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 220, 110, 23));
 
         jLabel3.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(191, 191, 191));
         jLabel3.setText("Fecha ingreso:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 300, 110, 23));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 175, 110, 23));
 
         jdFechaSalida.setBackground(new java.awt.Color(255, 255, 255));
         jdFechaSalida.setForeground(new java.awt.Color(191, 191, 191));
@@ -300,7 +301,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jdFechaSalidaPropertyChange(evt);
             }
         });
-        add(jdFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 345, 160, 25));
+        add(jdFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 220, 160, 25));
         jdFechaSalida.getAccessibleContext().setAccessibleName("");
 
         jdFechaIngreso.setBackground(new java.awt.Color(255, 255, 255));
@@ -312,7 +313,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jdFechaIngresoPropertyChange(evt);
             }
         });
-        add(jdFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 301, 160, 25));
+        add(jdFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 175, 160, 25));
 
         jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
         jBcancelar.setBorder(null);
@@ -325,7 +326,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jBcancelarActionPerformed(evt);
             }
         });
-        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 395, 125, 40));
+        add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 405, 125, 40));
 
         jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-SinSele.png"))); // NOI18N
         jBguardar.setBorder(null);
@@ -337,7 +338,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jBguardarActionPerformed(evt);
             }
         });
-        add(jBguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(706, 395, 125, 40));
+        add(jBguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(706, 405, 125, 40));
 
         jTidCliente.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jTidCliente.setForeground(new java.awt.Color(191, 191, 191));
@@ -356,7 +357,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jTidClienteKeyTyped(evt);
             }
         });
-        add(jTidCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 152, 276, 25));
+        add(jTidCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 265, 276, 25));
 
         jTnumPersonas.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
         jTnumPersonas.setForeground(new java.awt.Color(191, 191, 191));
@@ -375,28 +376,13 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 jTnumPersonasKeyTyped(evt);
             }
         });
-        add(jTnumPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 252, 276, 25));
+        add(jTnumPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 310, 276, 25));
 
-        jTidHabitacion.setFont(new java.awt.Font("Decker", 0, 16)); // NOI18N
-        jTidHabitacion.setForeground(new java.awt.Color(191, 191, 191));
-        jTidHabitacion.setText("Número de habitación");
-        jTidHabitacion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 191, 191)));
-        jTidHabitacion.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTidHabitacionFocusLost(evt);
-            }
-        });
-        jTidHabitacion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTidHabitacionMouseClicked(evt);
-            }
-        });
-        jTidHabitacion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTidHabitacionKeyTyped(evt);
-            }
-        });
-        add(jTidHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 203, 276, 25));
+        jTidHabitacion.setEditable(false);
+        jTidHabitacion.setBackground(new java.awt.Color(204, 204, 204));
+        jTidHabitacion.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        jTidHabitacion.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        add(jTidHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 355, 80, 25));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
@@ -414,7 +400,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         jBbuscar.setBorder(null);
         jBbuscar.setContentAreaFilled(false);
         jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(837, 153, 24, 24));
+        add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(837, 265, 24, 24));
 
         jLformulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MarcoReserva.png"))); // NOI18N
         add(jLformulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 85, 575, 397));
@@ -440,60 +426,21 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(165, 165, 165));
         jLabel2.setText("Habitaciones :");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 37, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(191, 191, 191));
+        jLabel6.setText("NUMERO DE HABITACIÓN");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 355, 180, 25));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTidClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidClienteKeyTyped
-        validaNumero(evt.getKeyChar(), evt);
-    }//GEN-LAST:event_jTidClienteKeyTyped
-
-    private void jTnumPersonasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTnumPersonasKeyTyped
-        validaNumero(evt.getKeyChar(), evt);
-    }//GEN-LAST:event_jTnumPersonasKeyTyped
-
-    private void jTidClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidClienteFocusGained
-        if(jTidCliente.getText().equalsIgnoreCase("Cliente")){
-            jTidCliente.setText(""); 
-        }
-    }//GEN-LAST:event_jTidClienteFocusGained
-
-    private void jTnumPersonasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTnumPersonasFocusGained
-        if(jTnumPersonas.getText().equalsIgnoreCase("Cantidad de personas")){
-            jTnumPersonas.setText("");
-        }
-    }//GEN-LAST:event_jTnumPersonasFocusGained
-
-    private void jTidClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidClienteFocusLost
-        if(jTidCliente.getText().equals("")){
-            jTidCliente.setText("Cliente");
-        }
-    }//GEN-LAST:event_jTidClienteFocusLost
-
-    private void jTnumPersonasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTnumPersonasFocusLost
-        if(jTnumPersonas.getText().equals("")){
-            jTnumPersonas.setText("Cantidad de personas");
-        }
-    }//GEN-LAST:event_jTnumPersonasFocusLost
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        resetListRooms();
+        jTidHabitacion.setText("");
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
         saveORupdate();
-        
     }//GEN-LAST:event_jBguardarActionPerformed
-
-    private void jdFechaSalidaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaSalidaPropertyChange
-        if(jdFechaIngreso.getDate() != null && jdFechaSalida.getDate() != null){
-            resetListRooms(); 
-            jTidHabitacion.setText("Número de habitación");
-        }
-    }//GEN-LAST:event_jdFechaSalidaPropertyChange
-
-    private void jdFechaIngresoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaIngresoPropertyChange
-        if(jdFechaIngreso.getDate() != null && jdFechaSalida.getDate() != null){
-            resetListRooms();
-            jTidHabitacion.setText("Número de habitación");
-            Date f = Fecha.dateTomorrow(jdFechaIngreso.getDate());
-            jdFechaSalida.setMinSelectableDate(f);
-        } 
-    }//GEN-LAST:event_jdFechaIngresoPropertyChange
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
         if(validaOperacion.equals("guardar")){
@@ -502,30 +449,56 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         }else if(validaOperacion.equals("actualizar")){
             frame_reservas.panelListarReserva();
         }
-        
+
     }//GEN-LAST:event_jBcancelarActionPerformed
 
-    private void jTidHabitacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidHabitacionKeyTyped
+    private void jdFechaSalidaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaSalidaPropertyChange
+        if(jdFechaIngreso.getDate() != null && jdFechaSalida.getDate() != null){
+            resetListRooms();
+            jTidHabitacion.setText("");
+        }
+    }//GEN-LAST:event_jdFechaSalidaPropertyChange
+
+    private void jdFechaIngresoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaIngresoPropertyChange
+        if(jdFechaIngreso.getDate() != null && jdFechaSalida.getDate() != null){
+            resetListRooms();
+            jTidHabitacion.setText("");
+            Date f = Fecha.dateTomorrow(jdFechaIngreso.getDate());
+            jdFechaSalida.setMinSelectableDate(f);
+        }
+    }//GEN-LAST:event_jdFechaIngresoPropertyChange
+
+    private void jTnumPersonasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTnumPersonasKeyTyped
         validaNumero(evt.getKeyChar(), evt);
-    }//GEN-LAST:event_jTidHabitacionKeyTyped
+    }//GEN-LAST:event_jTnumPersonasKeyTyped
 
-    private void jTidHabitacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTidHabitacionMouseClicked
-        if(jTidHabitacion.getText().equalsIgnoreCase("Número de habitación")){
-            JOptionPane.showMessageDialog
-            (null,"Seleccione una Habitacion de la lista");
+    private void jTnumPersonasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTnumPersonasFocusLost
+        if(jTnumPersonas.getText().equals("")){
+            jTnumPersonas.setText("Cantidad de personas");
         }
-    }//GEN-LAST:event_jTidHabitacionMouseClicked
+    }//GEN-LAST:event_jTnumPersonasFocusLost
 
-    private void jTidHabitacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidHabitacionFocusLost
-        if(jTidHabitacion.getText().equals("")){
-            jTidHabitacion.setText("Número de Habitación");
+    private void jTnumPersonasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTnumPersonasFocusGained
+        if(jTnumPersonas.getText().equalsIgnoreCase("Cantidad de personas")){
+            jTnumPersonas.setText("");
         }
-    }//GEN-LAST:event_jTidHabitacionFocusLost
+    }//GEN-LAST:event_jTnumPersonasFocusGained
 
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        resetListRooms();
-        jTidHabitacion.setText("Número de habitación");
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
+    private void jTidClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidClienteKeyTyped
+        validaNumero(evt.getKeyChar(), evt);
+    }//GEN-LAST:event_jTidClienteKeyTyped
+
+    private void jTidClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidClienteFocusLost
+        if(jTidCliente.getText().equals("")){
+            jTidCliente.setText("Cliente");
+        }
+    }//GEN-LAST:event_jTidClienteFocusLost
+
+    private void jTidClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTidClienteFocusGained
+        if(jTidCliente.getText().equalsIgnoreCase("Cliente")){
+            jTidCliente.setText("");
+        }
+    }//GEN-LAST:event_jTidClienteFocusGained
 
     
     
@@ -541,6 +514,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLformulario;
     private javax.swing.JPanel jPcontenido;
     private javax.swing.JScrollPane jScrollPane1;

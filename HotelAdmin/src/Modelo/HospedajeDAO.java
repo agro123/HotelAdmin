@@ -51,14 +51,14 @@ public class HospedajeDAO {
             rtdo = pstm.executeUpdate();  
         }
         catch(SQLException ex){
-            mensajeError(ex);
+            //mensajeError(ex);
         }
         finally{
             try{
                 if(pstm!=null) pstm.close();                
             }
             catch(SQLException ex){
-                mensajeError(ex);
+                //mensajeError(ex);
             }
         }
         return rtdo;
