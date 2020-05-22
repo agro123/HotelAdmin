@@ -190,28 +190,11 @@ public class ClientesRegistradosGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jBbuscarMouseClicked
 
     private void jTbuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyPressed
-        int key = evt.getKeyCode();
-        if(key == KeyEvent.VK_ENTER){
-        try {
-            
-            cleanLista();
-            if (jTbuscador.getText().isEmpty()) {
-                cargarLista(0);
-            }
-            if (jTbuscador.getText().matches("[0-9]*")) {
-                cargarLista(Integer.parseInt(jTbuscador.getText()));
-            } else {
-                cleanLista();
-                jPcontenido.add(new jPmensaje("Tu búsqueda no tuvo resultados!"));
-            }
-
-        } catch (Exception e) {
-        }
-        }
+       
     }//GEN-LAST:event_jTbuscadorKeyPressed
 
     private void jTbuscadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbuscadorMouseClicked
-        System.out.println("qwerwr");
+        
         if(jTbuscador.getText().equalsIgnoreCase("Buscar cliente por ID")){
             jTbuscador.setText("");
         } else{}
@@ -220,7 +203,11 @@ public class ClientesRegistradosGUI extends javax.swing.JPanel {
     private void jTbuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyTyped
         int key = evt.getKeyCode();
         if(key == KeyEvent.VK_ENTER){
+            if (jTbuscador.getText().isEmpty() || jTbuscador.getText() == "") {
+                cargarLista(0);
+            }else{
          cargarLista(Integer.parseInt(jTbuscador.getText()));
+            }
         }
     }//GEN-LAST:event_jTbuscadorKeyTyped
 

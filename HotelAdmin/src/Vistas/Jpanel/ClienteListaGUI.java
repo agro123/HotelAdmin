@@ -8,6 +8,7 @@ package Vistas.Jpanel;
 import java.util.ArrayList;
 import Controladores.ControladorCliente;
 import Modelo.Cliente;
+import Vistas.Jframe.Clientes;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,14 +16,16 @@ import javax.swing.JOptionPane;
  * @author nicol
  */
 public class ClienteListaGUI extends javax.swing.JPanel {
-    
-    ControladorCliente controladorCliente =  new ControladorCliente();
-    
+
+    ControladorCliente controladorCliente = new ControladorCliente();
     private ArrayList<jPcliente> clientes;
+    Clientes panel_prin;
+
     /**
      * Creates new form ClienteListaGUI
      */
-    public ClienteListaGUI() {
+    public ClienteListaGUI(Clientes c) {
+        this.panel_prin = c;
         clientes = new ArrayList<>();
         initComponents();
         CargarLista(0);
@@ -81,35 +84,33 @@ public class ClienteListaGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTbuscadorActionPerformed
 
-        
-    private void cleanLista(){
-        
+    private void cleanLista() {
+
         clientes.clear();
         jPmensajes.removeAll();
         jPmensajes.revalidate();
         jPmensajes.repaint();
-        
-        
+
     }
-     public void CargarLista(int id){
-       
+
+    public void CargarLista(int id) {
+
         ArrayList<Cliente> listaClientes = new ArrayList<>();
         listaClientes = ControladorCliente.listClients(0);
-        
-        
-        for(int i=0;i<listaClientes.size();i++){
+
+        for (int i = 0; i < listaClientes.size(); i++) {
             int cedula = listaClientes.get(i).getID();
-            
+
             String telefono = listaClientes.get(i).getTelefono();
-            
-            String nombre = listaClientes.get(i).getNombre() + " " 
+
+            String nombre = listaClientes.get(i).getNombre() + " "
                     + listaClientes.get(i).getApellido();
             String correo = listaClientes.get(i).getCorreo();
-            jPcliente jp = new jPcliente(cedula, telefono, nombre, correo);
-            if(id==0){
+            jPcliente jp = new jPcliente(listaClientes.get(i), panel_prin);
+            if (id == 0) {
                 clientes.add(jp);
-            }else{
-                if (id==cedula) {
+            } else {
+                if (id == cedula) {
                     cleanLista();
                     clientes.add(jp);
                     break;
@@ -119,14 +120,15 @@ public class ClienteListaGUI extends javax.swing.JPanel {
                             new jPmensaje("Tu búsqueda no tuvo resultados!"));
                 }
             }
-          
-       }
-        
+
+        }
+
         //LA LISTA ES CARGADA EN UN JPANEL 
-        for(int i=0;i<clientes.size();i++){          
-        jPmensajes.add(clientes.get(i));
-        jPmensajes.revalidate();
-        jPmensajes.repaint();}
+        for (int i = 0; i < clientes.size(); i++) {
+            jPmensajes.add(clientes.get(i));
+            jPmensajes.revalidate();
+            jPmensajes.repaint();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
