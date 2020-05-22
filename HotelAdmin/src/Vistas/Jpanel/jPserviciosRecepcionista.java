@@ -13,6 +13,7 @@ public class jPserviciosRecepcionista extends javax.swing.JPanel {
        private String nombre;
        private double precio;
        private int cantidad;
+       private boolean estado;
     /**
      * Creates new form jPserviciosRecepcionista
      */
@@ -21,6 +22,7 @@ public class jPserviciosRecepcionista extends javax.swing.JPanel {
         jLnombre.setText(nombre_);
         jLprecio.setText(String.valueOf(precio_));
         jTcantidad.setText(String.valueOf(cantidad_));
+        estado = false;
         
     }
 
@@ -39,6 +41,11 @@ public class jPserviciosRecepcionista extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
 
         setOpaque(false);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLnombre.setFont(new java.awt.Font("Decker", 0, 12)); // NOI18N
@@ -57,7 +64,31 @@ public class jPserviciosRecepcionista extends javax.swing.JPanel {
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 32, 170, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        setEstado(true);
+    }//GEN-LAST:event_formMouseClicked
 
+    
+    
+    public boolean getEstado()
+    {
+        return estado;
+    }
+    
+    public void setEstado(boolean state)
+    {
+        this.estado = state;
+    }
+    
+    public String getNombre()
+    {
+        return nombre;
+    }
+
+    public double getPrecio()
+    {
+        return precio;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLnombre;
     private javax.swing.JLabel jLprecio;

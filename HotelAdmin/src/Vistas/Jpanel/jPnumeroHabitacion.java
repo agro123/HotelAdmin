@@ -42,12 +42,12 @@ public class jPnumeroHabitacion extends javax.swing.JPanel {
         jLnumeroHabitacion.setFont(new java.awt.Font("Decker", 1, 13)); // NOI18N
         jLnumeroHabitacion.setForeground(new java.awt.Color(112, 112, 112));
         jLnumeroHabitacion.setText("01");
-        add(jLnumeroHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 70, 20, -1));
+        add(jLnumeroHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 40, -1));
 
         jLnumero.setFont(new java.awt.Font("Decker", 1, 13)); // NOI18N
         jLnumero.setForeground(new java.awt.Color(112, 112, 112));
-        jLnumero.setText("Número:");
-        add(jLnumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 70, 60, -1));
+        jLnumero.setText("No.");
+        add(jLnumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 70, 40, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/jPnumeroH.png"))); // NOI18N
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

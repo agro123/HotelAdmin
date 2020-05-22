@@ -5,6 +5,12 @@
  */
 
 package Vistas.Jpanel;
+import Modelo.Habitacion;
+import Controladores.ControllerHabitacion;
+import Controladores.ControllerServicios;
+import Modelo.RoomServices;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,6 +18,9 @@ package Vistas.Jpanel;
  */
 public class AgregarServicioRecepGUI extends javax.swing.JPanel {
 
+    int cantidadProductos;
+    ArrayList<jPserviciosRecepcionista> aux = new ArrayList<>();
+ 
     /** Creates new form AgregarServicioRecepGUI */
     public AgregarServicioRecepGUI() {
         initComponents();
@@ -20,38 +29,64 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
         listaServiciosAñadidos();
     }
 
+    
+    
     private void AgregarListaHabitaciones(){
         
-        //MOSTRAR HABITACIÓN POR SU TIPO
-       jPnumeroHabitacion habi = new jPnumeroHabitacion(01);
-       for(int i=0;i<10;i++){           
+        //MOSTRAR HABITACIÓN POR SU TIPO 
+         ArrayList<Habitacion> listado = new ArrayList<>();
+       ControllerHabitacion controlador = new ControllerHabitacion();
+       listado = ControllerHabitacion.listadoHabitacionesOcupadas();
+       
+       cantidadProductos = listado.size();
+       
+       for(int i=0; i<listado.size(); i++){
+        jPnumeroHabitacion habi = new jPnumeroHabitacion(listado.get(i).getId_habitacion());           
         jPcontenido.add(habi);       
         jPcontenido.revalidate();
         jPcontenido.repaint();
        }   
     }
     
-    private void ServciosAgregarCantidad(){
+    
+    private ArrayList<RoomServices> HacerListaServ(){
+        
+        ArrayList<RoomServices> listado = new ArrayList<>();
+        ControllerServicios controlador = new ControllerServicios();
+        listado = ControllerServicios.desplegarServicios();
+        
+        return listado;
+    }
+    
+    private ArrayList<RoomServices> ServciosAgregarCantidad(){
         
         //AGREGAR CANTIDAD A SERVICIOS POR AÑADIR    
-        jPserviciosRecepcionista ser = new jPserviciosRecepcionista("chocololate",55.000,9);
-             for(int i=0;i<10;i++){           
-              jPingresoCantidad.add(ser);       
-              jPingresoCantidad.revalidate();
-                jPingresoCantidad.repaint();
+      ArrayList<jPserviciosRecepcionista> aux1 = new ArrayList<>();
+        
+       ArrayList<RoomServices> listado = new ArrayList<>();
+       
+       listado = HacerListaServ();
+       
+       for(int i=0; i<listado.size(); i++){
+                 jPserviciosRecepcionista ser = new jPserviciosRecepcionista(
+                         listado.get(i).getNombrePro(),
+                         listado.get(i).getPrecio(),
+                         listado.get(i).getCantidad()
+                 );
+                 aux.add(ser);
+                 jPingresoCantidad.add(ser);
+                 
+                 jPingresoCantidad.revalidate();
+                 jPingresoCantidad.repaint();
        } 
-       //jCservicios.add();
+        System.out.println(aux.size() + aux.get(2).getNombre());
+       return listado;
     }
     
      private void listaServiciosAñadidos(){
         
         //AGREGAR CANTIDAD A SERVICIOS POR AÑADIR    
-        jPserviciosRecepcionista2 ser = new jPserviciosRecepcionista2("chocololate",55.000,9);
-             for(int i=0;i<10;i++){           
-              jPlistaServicios.add(ser);       
-              jPlistaServicios.revalidate();
-                jPlistaServicios.repaint();
-       } 
+        
        //jCservicios.add();
     }
     /** This method is called from within the constructor to
@@ -94,10 +129,10 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
         jScrollPane3.setHorizontalScrollBar(null);
 
         jPlistaServicios.setBackground(new java.awt.Color(255, 255, 255));
-        jPlistaServicios.setLayout(new java.awt.GridLayout(0, 3, 0, 1));
+        jPlistaServicios.setLayout(new java.awt.GridLayout(0, 1, 0, 1));
         jScrollPane3.setViewportView(jPlistaServicios);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 330, 204, 80));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 330, 240, 80));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/marcoServiciosLista.png"))); // NOI18N
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 92, -1, -1));
@@ -106,10 +141,10 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
         jScrollPane5.setHorizontalScrollBar(null);
 
         jPingresoCantidad.setBackground(new java.awt.Color(255, 255, 255));
-        jPingresoCantidad.setLayout(new java.awt.GridLayout(0, 3, 0, 1));
+        jPingresoCantidad.setLayout(new java.awt.GridLayout(0, 1, 0, 1));
         jScrollPane5.setViewportView(jPingresoCantidad);
 
-        add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 114, 171, 90));
+        add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 114, 200, 90));
 
         jCtipoHabitacion.setFont(new java.awt.Font("Decker", 0, 13)); // NOI18N
         jCtipoHabitacion.setForeground(new java.awt.Color(204, 204, 204));
@@ -125,7 +160,12 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
         jBañadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BotonAñadir.png"))); // NOI18N
         jBañadir.setBorder(null);
         jBañadir.setContentAreaFilled(false);
-        jBañadir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBañadir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jBañadir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBañadirMouseClicked(evt);
+            }
+        });
         jBañadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBañadirActionPerformed(evt);
@@ -140,9 +180,14 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
 
         jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-sinSeleccion.png"))); // NOI18N
         jBcancelar.setContentAreaFilled(false);
-        jBcancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBcancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jBcancelar.setInheritsPopupMenu(true);
         jBcancelar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar-seleccionado.png"))); // NOI18N
+        jBcancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBcancelarMouseClicked(evt);
+            }
+        });
         jBcancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBcancelarActionPerformed(evt);
@@ -153,7 +198,7 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
         jBguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar-SinSele.png"))); // NOI18N
         jBguardar.setBorder(null);
         jBguardar.setContentAreaFilled(false);
-        jBguardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBguardar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jBguardar.setInheritsPopupMenu(true);
         jBguardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/GuardarSele.png"))); // NOI18N
         jBguardar.addActionListener(new java.awt.event.ActionListener() {
@@ -187,6 +232,50 @@ public class AgregarServicioRecepGUI extends javax.swing.JPanel {
     private void jBañadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBañadirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBañadirActionPerformed
+
+    
+   
+    
+    private void jBañadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBañadirMouseClicked
+        
+        
+        int posicion = -1;
+         for(int i=0; i<aux.size(); i++)
+         {
+             if(aux.get(i).getEstado() == true);
+             {
+                 posicion = i;
+             }
+         }
+         
+       
+           System.out.print(aux.get(posicion).getEstado());
+         
+           aux.get(posicion).setEstado(false);
+      
+         
+         if(posicion != -1)
+         {
+            jPserviciosRecepcionista2 añadido = new jPserviciosRecepcionista2(
+                     aux.get(posicion).getNombre(),
+                     aux.get(posicion).getPrecio(),
+                     1);
+            
+              jPlistaServicios.add(añadido);       
+              jPlistaServicios.revalidate();
+              jPlistaServicios.repaint();
+         }
+        
+      
+       
+       
+       
+    
+    }//GEN-LAST:event_jBañadirMouseClicked
+
+    private void jBcancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBcancelarMouseClicked
+        jPlistaServicios.removeAll();
+    }//GEN-LAST:event_jBcancelarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

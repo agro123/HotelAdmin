@@ -229,5 +229,14 @@ public class ControllerHabitacion {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    public static ArrayList<Habitacion> listadoHabitacionesOcupadas()
+    {
+        ArrayList<Habitacion> listado;
+        listado = new ArrayList();
+        HabitacionDAO habitaciones = new HabitacionDAO();
+        listado = habitaciones.listarHabitacionesOcupadas();
+        return listado; 
+    }
 
 }

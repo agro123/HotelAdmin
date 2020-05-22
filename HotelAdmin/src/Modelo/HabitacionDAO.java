@@ -263,6 +263,55 @@ public Habitacion extraerHabitaciones_porID(int idHabitacion)
         }
         return rtdo;
     } 
+//------------------------------------------------------------------------------
+    public ArrayList<Habitacion> listarHabitacionesOcupadas()
+    {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        ArrayList<Habitacion> listado = new ArrayList<>();        
+        try {
+            con = Fachada.getConnection();
+            String sql = "";
 
+            sql
+                    = "SELECT * FROM habitacion"      
+                    + " WHERE estado = ?";   
+            
+            pstm = con.prepareStatement(sql);
+            pstm.setBoolean(1, true);
+            rs = pstm.executeQuery();
+            Habitacion habitacion = null;
+            while (rs.next()) {
+                habitacion = new Habitacion();
+                
+                habitacion.setId_habitacion(
+                        rs.getInt("id_habitacion"));
+                habitacion.setTipo_habitacion(rs.getString("tipo_habitacion"));
+                habitacion.setPiso(rs.getString("piso"));
+                habitacion.setCantidadPersonas(rs.getInt("cantidad_personas"));
+                habitacion.setPrecio_hab(rs.getInt("precio_hab"));
+                habitacion.setNum_camas(rs.getInt("num_camas"));
+                habitacion.setEstado(rs.getBoolean("estado"));
+                
+                listado.add(habitacion);
+                               
+            }
+        } catch (SQLException ex) {
+            mensajeError(ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException ex) {
+                mensajeError(ex);
+            }
+        }
+        return listado;   
+    }
 
 }
