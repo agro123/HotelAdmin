@@ -63,7 +63,7 @@ public class jPservicio extends javax.swing.JPanel {
         
         int dialog = JOptionPane.YES_NO_OPTION;
         int result = JOptionPane.showConfirmDialog
-                    (this, "Desea continuar?", "Eliminar", dialog);
+                    (this, "Desea continuar?", "Mensaje", dialog);
         if (result == 0) {
             if(validadorPanel == "actualizar"){
                 cambiarPanel();

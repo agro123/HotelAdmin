@@ -5,6 +5,8 @@
  */
 package Vistas.Jframe;
 
+import Controladores.ControladorCliente;
+import Modelo.Cliente;
 import Vistas.Jpanel.ClienteListaGUI;
 import Vistas.Jpanel.ClientesAgregarModificarGUI;
 
@@ -17,11 +19,52 @@ public class Clientes extends javax.swing.JPanel {
     /**
      * Creates new form Clientes
      */
+    
+    ClientesAgregarModificarGUI formulario;
+    ClienteListaGUI panel_listar;
+    ControladorCliente controlador;
+    
     public Clientes() {
         initComponents();
+        formulario = new ClientesAgregarModificarGUI();
         seleccionarPrimero();
     }
 
+    public ControladorCliente getControlador() {
+        return controlador;
+    }
+    
+    
+    public void AgregarCliente(Cliente c) {
+        controlador.addClient(c);
+    }
+    
+    public void PanelListarCliente(){
+        
+        panel_listar = new ClienteListaGUI(this);
+        jBagregar.setSelected(false);
+        jBmodificar.setSelected(true);          
+        jPcontenedor.setVisible(false);
+        jPcontenedor.setVisible(true);  
+        jPcontenedor.removeAll();
+        jPcontenedor.add(panel_listar);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+    }
+    
+    
+    public void FormularioModificar(Cliente llenar){
+        
+        jBagregar.setSelected(false);
+        jBmodificar.setSelected(true);
+        jPcontenedor.removeAll();
+        formulario.llenarValores(llenar);
+        jPcontenedor.add(formulario);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
+    } 
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,18 +120,7 @@ public class Clientes extends javax.swing.JPanel {
 
     private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
         // TODO add your handling code here:
-        jBagregar.setSelected(false);
-        jBmodificar.setSelected(true);
-               
-        jPcontenedor.setVisible(false);
-        jPcontenedor.setVisible(true);
-        ClienteListaGUI panelE = new ClienteListaGUI();
-        // EmpleadoAgregarModificarGUI panelE = new EmpleadoAgregarModificarGUI();
-        jPcontenedor.removeAll();
-        jPcontenedor.add(panelE);
-        jPcontenedor.revalidate();
-        jPcontenedor.repaint();
-
+       PanelListarCliente();
     }//GEN-LAST:event_jBmodificarActionPerformed
 
     public void seleccionarPrimero(){

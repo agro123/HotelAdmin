@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Vistas.Jpanel;
+
 import Controladores.ControladorCliente;
 import Modelo.Cliente;
 import Vistas.Jframe.Clientes;
@@ -13,16 +14,17 @@ import Vistas.Jframe.Clientes;
  * @author nicol
  */
 public class jPcliente extends javax.swing.JPanel {
-    
-    private Cliente datosCliente;
+  
+    private Cliente datosCliente; // datos cliente
     private int id;
-    private String nombre,apellido, telefono, correo;
+    private String nombre, apellido, telefono, correo;
     Clientes frame_cliente;
     /**
      * Creates new form jPcliente
      */
-    public jPcliente(Cliente datosCli, Clientes cli) {
-        this.frame_cliente= cli;
+    public jPcliente(Cliente datosCli, Clientes cr) {
+        
+        this.frame_cliente = cr;
         this.datosCliente = datosCli;
         this.id = datosCliente.getID();
         this.nombre = datosCliente.getNombre();
@@ -30,16 +32,16 @@ public class jPcliente extends javax.swing.JPanel {
         this.telefono = datosCliente.getTelefono();
         this.correo = datosCliente.getCorreo();
         initComponents();
-        
+         
         jLcedula.setText(String.valueOf(id));
-        jLtelefono.setText(telefono);
-        jLnombre.setText(nombre + " " + apellido);
+        jLnombre.setText(nombre);
+        jLtelefono.setText(String.valueOf(telefono));      
         jLcorreo.setText(correo);
     }
     
-    public void cambiarPanel() {
-        //frame_cliente.FormularioModificar(
-                //ControladorCliente.listClients(id).get(0));
+       public void cambiarPanel() {
+        frame_cliente.FormularioModificar(
+                ControladorCliente.listClients(id).get(0));
         
     }
 
@@ -56,7 +58,7 @@ public class jPcliente extends javax.swing.JPanel {
         jLcedula = new javax.swing.JLabel();
         jLnombre = new javax.swing.JLabel();
         jLtelefono = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelElegirjp = new javax.swing.JLabel();
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setOpaque(false);
@@ -74,22 +76,23 @@ public class jPcliente extends javax.swing.JPanel {
         jLtelefono.setFont(new java.awt.Font("Decker", 0, 11)); // NOI18N
         add(jLtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 63, 85, 10));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cliente-jpanel.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelElegirjp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cliente-jpanel.png"))); // NOI18N
+        jLabelElegirjp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                jLabelElegirjpMouseClicked(evt);
             }
         });
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 240, 130));
+        add(jLabelElegirjp, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 240, 130));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void jLabelElegirjpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelElegirjpMouseClicked
+        // TODO add your handling code here:
         cambiarPanel();
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_jLabelElegirjpMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelElegirjp;
     private javax.swing.JLabel jLcedula;
     private javax.swing.JLabel jLcorreo;
     private javax.swing.JLabel jLnombre;

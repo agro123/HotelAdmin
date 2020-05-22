@@ -229,7 +229,7 @@ public class HabitacionAgregarModificarGUI extends javax.swing.JPanel {
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
         // TODO add your handling code here:
-       
+       setearCampos();
     }//GEN-LAST:event_jBcancelarActionPerformed
 
     private void jTpisoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTpisoKeyTyped
