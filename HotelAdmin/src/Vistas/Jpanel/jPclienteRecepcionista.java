@@ -5,6 +5,10 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControladorCliente;
+import Modelo.Cliente;
+import Vistas.Jframe.ClienteRecepcionista;
+
 /**
  *
  * @author nicol
@@ -14,8 +18,34 @@ public class jPclienteRecepcionista extends javax.swing.JPanel {
     /**
      * Creates new form jPclienteRecepcionista
      */
-    public jPclienteRecepcionista() {
+    
+    private Cliente datosCliente; // datos cliente
+    private int id;
+    private String nombre,apellido, telefono, correo;
+    ClienteRecepcionista frame_cliente_rec;
+    
+    public jPclienteRecepcionista(Cliente datosCli, ClienteRecepcionista cr){
+        
+        this.frame_cliente_rec = cr;
+        this.datosCliente = datosCli;
+        this.id = datosCliente.getID();
+        this.nombre = datosCliente.getNombre();
+        this.apellido = datosCliente.getApellido();
+        this.telefono = datosCliente.getTelefono();
+        this.correo = datosCliente.getCorreo();
         initComponents();
+        
+        jLnumeroCliente.setText(String.valueOf(id));
+        jLnombreCliente.setText(nombre);
+        jLApellidoCli.setText(apellido);
+        jLTelefonoCli.setText(telefono);
+        jLcorreoCli.setText(correo);
+    }
+    
+         public void cambiarPanel() {
+        frame_cliente_rec.FormularioModificar(
+                ControladorCliente.listClients(id).get(0));
+        
     }
 
     /**
@@ -27,54 +57,54 @@ public class jPclienteRecepcionista extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLnumeroReserva = new javax.swing.JLabel();
-        jLidCliente = new javax.swing.JLabel();
-        jLidHabitacion = new javax.swing.JLabel();
-        jLcantPersonas = new javax.swing.JLabel();
-        jLfechaIngreso = new javax.swing.JLabel();
-        jBeliminar = new javax.swing.JLabel();
+        jLnumeroCliente = new javax.swing.JLabel();
+        jLnombreCliente = new javax.swing.JLabel();
+        jLApellidoCli = new javax.swing.JLabel();
+        jLTelefonoCli = new javax.swing.JLabel();
+        jLcorreoCli = new javax.swing.JLabel();
         jBeditar = new javax.swing.JLabel();
         jBtodoPanel = new javax.swing.JButton();
 
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLnumeroReserva.setBackground(new java.awt.Color(112, 112, 112));
-        jLnumeroReserva.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
-        jLnumeroReserva.setForeground(new java.awt.Color(112, 112, 112));
-        jLnumeroReserva.setText("Número");
-        add(jLnumeroReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 28, 44, 13));
+        jLnumeroCliente.setBackground(new java.awt.Color(112, 112, 112));
+        jLnumeroCliente.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
+        jLnumeroCliente.setForeground(new java.awt.Color(112, 112, 112));
+        jLnumeroCliente.setText("Número");
+        add(jLnumeroCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 28, 60, 13));
 
-        jLidCliente.setBackground(new java.awt.Color(112, 112, 112));
-        jLidCliente.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
-        jLidCliente.setForeground(new java.awt.Color(112, 112, 112));
-        jLidCliente.setText("Nombre");
-        add(jLidCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 28, 44, 13));
+        jLnombreCliente.setBackground(new java.awt.Color(112, 112, 112));
+        jLnombreCliente.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
+        jLnombreCliente.setForeground(new java.awt.Color(112, 112, 112));
+        jLnombreCliente.setText("Nombre");
+        add(jLnombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 80, 13));
 
-        jLidHabitacion.setBackground(new java.awt.Color(112, 112, 112));
-        jLidHabitacion.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
-        jLidHabitacion.setForeground(new java.awt.Color(112, 112, 112));
-        jLidHabitacion.setText("Apellido");
-        add(jLidHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 28, -1, -1));
+        jLApellidoCli.setBackground(new java.awt.Color(112, 112, 112));
+        jLApellidoCli.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
+        jLApellidoCli.setForeground(new java.awt.Color(112, 112, 112));
+        jLApellidoCli.setText("Apellido");
+        add(jLApellidoCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, 100, -1));
 
-        jLcantPersonas.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
-        jLcantPersonas.setForeground(new java.awt.Color(112, 112, 112));
-        jLcantPersonas.setText("Telefono");
-        add(jLcantPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 28, -1, -1));
+        jLTelefonoCli.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
+        jLTelefonoCli.setForeground(new java.awt.Color(112, 112, 112));
+        jLTelefonoCli.setText("Telefono");
+        add(jLTelefonoCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 60, -1));
 
-        jLfechaIngreso.setBackground(new java.awt.Color(112, 112, 112));
-        jLfechaIngreso.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
-        jLfechaIngreso.setForeground(new java.awt.Color(112, 112, 112));
-        jLfechaIngreso.setText("correo");
-        add(jLfechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(665, 28, -1, -1));
-
-        jBeliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconEliminar.png"))); // NOI18N
-        jBeliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jBeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 25, 16, 16));
+        jLcorreoCli.setBackground(new java.awt.Color(112, 112, 112));
+        jLcorreoCli.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
+        jLcorreoCli.setForeground(new java.awt.Color(112, 112, 112));
+        jLcorreoCli.setText("correo");
+        add(jLcorreoCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 120, -1));
 
         jBeditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconEditar.png"))); // NOI18N
         jBeditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jBeditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 25, 16, 16));
+        jBeditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBeditarMouseClicked(evt);
+            }
+        });
+        add(jBeditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 16, 16));
 
         jBtodoPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CliSinSele.png"))); // NOI18N
         jBtodoPanel.setBorderPainted(false);
@@ -92,15 +122,20 @@ public class jPclienteRecepcionista extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtodoPanelActionPerformed
 
+    private void jBeditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBeditarMouseClicked
+        // TODO add your handling code here:
+        cambiarPanel();
+        
+    }//GEN-LAST:event_jBeditarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jBeditar;
-    private javax.swing.JLabel jBeliminar;
     private javax.swing.JButton jBtodoPanel;
-    private javax.swing.JLabel jLcantPersonas;
-    private javax.swing.JLabel jLfechaIngreso;
-    private javax.swing.JLabel jLidCliente;
-    private javax.swing.JLabel jLidHabitacion;
-    private javax.swing.JLabel jLnumeroReserva;
+    private javax.swing.JLabel jLApellidoCli;
+    private javax.swing.JLabel jLTelefonoCli;
+    private javax.swing.JLabel jLcorreoCli;
+    private javax.swing.JLabel jLnombreCliente;
+    private javax.swing.JLabel jLnumeroCliente;
     // End of variables declaration//GEN-END:variables
 }

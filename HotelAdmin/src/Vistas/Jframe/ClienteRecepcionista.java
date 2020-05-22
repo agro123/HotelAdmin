@@ -5,23 +5,56 @@
  */
 package Vistas.Jframe;
 
+import Controladores.ControladorCliente;
+import Modelo.Cliente;
 import Vistas.Jpanel.ClienteListaGUI;
 import Vistas.Jpanel.ClientesAgregarModificarGUI;
 import Vistas.Jpanel.ClientesRegistradosGUI;
 
 /**
- *
  * @author nicol
  */
 public class ClienteRecepcionista extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ClienteRecepcionista
-     */
+    ClientesAgregarModificarGUI formulario;
+    ClientesRegistradosGUI panelListar;
+    ControladorCliente controlador;
+
     public ClienteRecepcionista() {
+
         initComponents();
-        seleccionarPrimero();
+        formulario = new ClientesAgregarModificarGUI(this);
+        seleccionarPrimero(formulario);
+
+    }
+
+    public void AgregarCliente(Cliente c) {
+        controlador.addClient(c);
+    }
+
+    public void panelListarCliente() {
+        panelListar = new ClientesRegistradosGUI(this);
+        jBregistrar.setSelected(false);
+        jBlistaClientes.setSelected(true);
+        jPcontenedor.setVisible(false);
+        jPcontenedor.setVisible(true);
+        jPcontenedor.removeAll();
+        jPcontenedor.add(panelListar);
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+    }
+    
+    public void FormularioModificar(Cliente llenar ){
         
+        jBlistaClientes.setSelected(false);
+        jBregistrar.setSelected(true); 
+        jPcontenedor.removeAll();
+        formulario.llenarValores(llenar);
+        jPcontenedor.add(formulario);   
+        jPcontenedor.revalidate();
+        jPcontenedor.repaint();
+        jPcontenedor.setVisible(true);
+ 
         
     }
 
@@ -80,37 +113,26 @@ public class ClienteRecepcionista extends javax.swing.JPanel {
 
     private void jBlistaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlistaClientesActionPerformed
         // TODO add your handling code here:
-
-        jBregistrar.setSelected(false);
-        jBlistaClientes.setSelected(true);
-               
-        jPcontenedor.setVisible(false);
-        jPcontenedor.setVisible(true);
-        ClientesRegistradosGUI panelE = new ClientesRegistradosGUI();
-        // EmpleadoAgregarModificarGUI panelE = new EmpleadoAgregarModificarGUI();
-        jPcontenedor.removeAll();
-        jPcontenedor.add(panelE);
-        jPcontenedor.revalidate();
-        jPcontenedor.repaint();
+        formulario.limpiarCampos();
+        panelListarCliente();
     }//GEN-LAST:event_jBlistaClientesActionPerformed
 
-     public void seleccionarPrimero(){
-     
+    public void seleccionarPrimero(ClientesAgregarModificarGUI formulario) {
+
         jBlistaClientes.setSelected(false);
         jBregistrar.setSelected(true);
-        
-        ClientesAgregarModificarGUI panelAM = new ClientesAgregarModificarGUI();
         jPcontenedor.removeAll();
-        jPcontenedor.add(panelAM);
+        jPcontenedor.add(formulario);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);
-     }
-     
+    }
+
+
     private void jBregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBregistrarActionPerformed
-   
+
         jPcontenedor.removeAll();
-        seleccionarPrimero();
+        seleccionarPrimero(formulario);
     }//GEN-LAST:event_jBregistrarActionPerformed
 
 

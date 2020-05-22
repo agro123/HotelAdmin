@@ -5,6 +5,13 @@
  */
 package Vistas.Jpanel;
 
+import Controladores.ControladorCliente;
+import Modelo.Cliente;
+import Vistas.Jframe.ClienteRecepcionista;
+import Vistas.Jpanel.jPmensaje;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+
 /**
  *
  * @author nicol
@@ -14,21 +21,64 @@ public class ClientesRegistradosGUI extends javax.swing.JPanel {
     /**
      * Creates new form ClientesRegistradosGUI
      */
-    public ClientesRegistradosGUI() {
+    
+    ControladorCliente Controladorcliente = new ControladorCliente();
+    ClienteRecepcionista panel_prin;
+    private ArrayList<jPclienteRecepcionista> clientes;
+
+    
+    public ClientesRegistradosGUI(ClienteRecepcionista cr) {
+        this.panel_prin = cr;
+        clientes = new ArrayList<>();
         initComponents();
-        cargarLista();
+        cargarLista(0);
     }
     
-    public void cargarLista(){
-        jPclienteRecepcionista cli = new jPclienteRecepcionista();
-        for (int i = 0; i < 9; i++) {
-            jPcontenido.add(cli);
+    public void cargarLista(Integer id) {
+        try{
+            ArrayList<Cliente> listadoCli = new ArrayList<>();
+            listadoCli = Controladorcliente.listClients(0);
 
-            jPcontenido.revalidate();
-            jPcontenido.repaint();
+            jPcontenido.removeAll();
+            for (int i = 0; i < listadoCli.size(); i++) {
+                jPclienteRecepcionista jpcli = new 
+                    jPclienteRecepcionista(listadoCli.get(i), panel_prin);
+                if(id==0 || jTbuscador.getText()==""){
+                    clientes.add(jpcli);
+                }else{
+                    if (id==listadoCli.get(i).getID()) {
+                        cleanLista();
+                        clientes.add(jpcli);
+                        break;
+                    } else {
+                        cleanLista();
+                        jPcontenido.add(
+                                new jPmensaje("Tu búsqueda no tuvo resultados!"));
+                    }
+                }
+                
+
+            }
+            for (int i = 0; i < clientes.size(); i++) {
+                jPcontenido.add(clientes.get(i));
+                jPcontenido.revalidate();
+                jPcontenido.repaint();
+            }
         }
-    }
+        catch(Exception e){}
 
+    }
+    
+    private void cleanLista(){
+        
+        clientes.clear();
+        jPcontenido.removeAll();
+        jPcontenido.revalidate();
+        jPcontenido.repaint();
+        
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,9 +101,27 @@ public class ClientesRegistradosGUI extends javax.swing.JPanel {
         jTbuscador.setForeground(new java.awt.Color(191, 191, 191));
         jTbuscador.setText("Buscar cliente por ID");
         jTbuscador.setBorder(null);
+        jTbuscador.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTbuscadorFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTbuscadorFocusLost(evt);
+            }
+        });
+        jTbuscador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbuscadorMouseClicked(evt);
+            }
+        });
         jTbuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTbuscadorActionPerformed(evt);
+            }
+        });
+        jTbuscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTbuscadorKeyTyped(evt);
             }
         });
         add(jTbuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 47, 174, 19));
@@ -62,7 +130,12 @@ public class ClientesRegistradosGUI extends javax.swing.JPanel {
         jBbuscar.setBorder(null);
         jBbuscar.setBorderPainted(false);
         jBbuscar.setContentAreaFilled(false);
-        jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jBbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBbuscarMouseClicked(evt);
+            }
+        });
         add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 44, 24, 24));
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
@@ -81,8 +154,53 @@ public class ClientesRegistradosGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTbuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbuscadorActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTbuscadorActionPerformed
+
+    private void jTbuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTbuscadorFocusLost
+        // TODO add your handling code here
+    }//GEN-LAST:event_jTbuscadorFocusLost
+
+    private void jTbuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTbuscadorFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTbuscadorFocusGained
+
+    private void jBbuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBbuscarMouseClicked
+       try {
+            
+            cleanLista();
+            if (jTbuscador.getText().isEmpty()) {
+                cargarLista(0);
+            }
+            if (jTbuscador.getText().matches("[0-9]*")) {
+                cargarLista(Integer.parseInt(jTbuscador.getText()));
+            } else {
+                cleanLista();
+                jPcontenido.add(new jPmensaje("Tu búsqueda no tuvo resultados!"));
+            }
+
+        } catch (Exception e) {
+        }
+        
+    }//GEN-LAST:event_jBbuscarMouseClicked
+
+    private void jTbuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTbuscadorKeyPressed
+
+    private void jTbuscadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbuscadorMouseClicked
+        System.out.println("qwerwr");
+        if(jTbuscador.getText().equalsIgnoreCase("Buscar cliente por ID")){
+            jTbuscador.setText("");
+        } else{}
+    }//GEN-LAST:event_jTbuscadorMouseClicked
+
+    private void jTbuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyTyped
+        int key = evt.getKeyCode();
+        if(key == KeyEvent.VK_ENTER){
+         cargarLista(Integer.parseInt(jTbuscador.getText()));
+        }
+    }//GEN-LAST:event_jTbuscadorKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
