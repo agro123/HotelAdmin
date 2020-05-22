@@ -152,7 +152,6 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
         }
 
         return true;
-
     }
 
     public void limpiarCampos() {
@@ -198,6 +197,11 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
 
             mostrarCamposVacios(jTdireccion);
         }
+        if(jTCedula.getText().length()>10){
+           JOptionPane.showMessageDialog(null,
+               "La identificación no debe de tener mas de 10 caracateres.");
+           rtdo = 0;
+       }
 
         return rtdo;
     }
@@ -396,7 +400,8 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
             if (!idFound(getData().getID())) {
                 //saveData();
                 ControladorCliente.addClient(getData());
-                JOptionPane.showMessageDialog(null, "Cliente agregado exitosamente");
+                JOptionPane.showMessageDialog
+        (null, "Cliente agregado exitosamente");
                 limpiarCampos();
             } else {
 
