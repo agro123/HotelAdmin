@@ -31,6 +31,8 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
     int numeroReserva;
     String validaOperacion; 
     Reservas frame_reservas;
+    
+    
     public RealizarReservaGUI(Reservas frame_reservas){
         initComponents();
         this.frame_reservas = frame_reservas;
@@ -55,8 +57,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         Timestamp fs = Fecha.formatearFechaSalida(jdFechaSalida.getDate()); 
         if(validaOperacion.equals("guardar")){
             cargarHabitaciones(ControllerReserva.
-                        loadListRooms(fi,fs,"save",0));
-            
+                        loadListRooms(fi,fs,"save",0));  
         }else
         if(validaOperacion.equals("actualizar")){
             cargarHabitaciones(ControllerReserva.
@@ -93,6 +94,8 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         reserva.setNum_Personas(numPer);
         return reserva;   
     }
+    
+    
     
     public int validarCampos() {
         int rtdo = 1;
@@ -180,6 +183,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
         setBorderPanel(reserva.getNum_Habitacion());
     }
     
+    
     public void cambiarCombobobox(int numHab){
     /*ESTABLECE EL COMBOBOBOX EN LA CATEGORIA DE LA HABITACION SELECCIONADA 
       PARA ACTUALIZAR*/
@@ -230,6 +234,7 @@ public class RealizarReservaGUI extends javax.swing.JPanel {
                 if(ControllerReserva.registrarReserva(infoRerserva()) == 1){
                     setearCampos();
                     reestablecerBorderPanel();
+                    numeroReserva += 1;
                 }else{
                     JOptionPane.showMessageDialog(null,"No existe el cliente "
                         + "en la base de datos");

@@ -34,10 +34,11 @@ public class ControllerHabitacion {
 
         HabitacionListener manejadoreventos = new HabitacionListener();
         this.vista.getPanelAgregar().getjBcancelar().addActionListener(manejadoreventos);
-
+        this.vista.getPanelAgregar().getjBguardar().addActionListener(manejadoreventos);
         this.vista.getjBagregar().addActionListener(manejadoreventos);
         this.vista.getjBmodificar().addActionListener(manejadoreventos);
         this.vista.getjBeliminar().addActionListener(manejadoreventos);
+        
     }
     //--------------------------------------------------------------------------
     public ControllerHabitacion(){
@@ -88,7 +89,7 @@ public class ControllerHabitacion {
         @Override
         public void actionPerformed(ActionEvent ae) {
 
-            if (ae.getSource() == vista.getPanelAgregar().getjBcancelar()) {
+            if (ae.getSource() == vista.getPanelAgregar().getjBguardar()) {
                 if (vista.getPanelAgregar().getValidador() == "guardar") {
                     if (vista.getPanelAgregar().validarCampos() == 0) {
                         JOptionPane.showMessageDialog

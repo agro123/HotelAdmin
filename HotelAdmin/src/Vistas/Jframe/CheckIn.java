@@ -31,9 +31,8 @@ public class CheckIn extends javax.swing.JPanel {
         jBsinReserva.setSelected(false);
         jBhospedajes.setSelected(false);
         jBreservaPrevia.setSelected(true); 
-        
         CheckInReservaPreviaGUI check = 
-                new CheckInReservaPreviaGUI(numEmpleado);
+        new CheckInReservaPreviaGUI(numEmpleado);
         jPcontenedor.removeAll();
         jPcontenedor.add(check);
         jPcontenedor.revalidate();
@@ -119,12 +118,10 @@ public class CheckIn extends javax.swing.JPanel {
         // TODO add your handling code here:
         jBreservaPrevia.setSelected(false); 
         jBhospedajes.setSelected(false); 
-        jBsinReserva.setSelected(true);
-              
-        jPcontenedor.setVisible(false);
-        jPcontenedor.setVisible(true);
+        jBsinReserva.setSelected(true);  
+        CheckInSinReservaGUI check = new CheckInSinReservaGUI(numEmpleado); 
+        // check.resetListCheck-in();
         jPcontenedor.removeAll();
-        CheckInSinReservaGUI check = new CheckInSinReservaGUI();      
         jPcontenedor.add(check);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
@@ -135,16 +132,10 @@ public class CheckIn extends javax.swing.JPanel {
         // TODO add your handling code here:
         jBreservaPrevia.setSelected(false); 
         jBsinReserva.setSelected(false);
-        jBhospedajes.setSelected(true);
-                  
-        jPcontenedor.setVisible(false);
-        jPcontenedor.setVisible(true);
-        jPcontenedor.removeAll();
+        jBhospedajes.setSelected(true);     
         ListaHospedajesGUI lista = new ListaHospedajesGUI();
-      //  CheckInSinReservaGUI check = new CheckInSinReservaGUI();      
+        jPcontenedor.removeAll();
         jPcontenedor.add(lista);
-       // ListaHospedajesGUI list = new ListaHospedajesGUI();      
-      //  jPcontenedor.add(list);
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
         jPcontenedor.setVisible(true);

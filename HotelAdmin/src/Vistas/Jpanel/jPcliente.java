@@ -38,8 +38,8 @@ public class jPcliente extends javax.swing.JPanel {
     }
     
     public void cambiarPanel() {
-        frame_cliente.FormularioModificar(
-                ControladorCliente.listClients(id).get(0));
+        //frame_cliente.FormularioModificar(
+                //ControladorCliente.listClients(id).get(0));
         
     }
 
