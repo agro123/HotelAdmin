@@ -8,7 +8,11 @@ package Vistas.Jpanel;
 import java.util.ArrayList;
 import Controladores.ControladorCliente;
 import Modelo.Cliente;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import Vistas.Jframe.Clientes;
+import Vistas.Jpanel.jPcliente;
+import Vistas.Jpanel.jPmensaje;
 
 /**
  *
@@ -17,13 +21,18 @@ import javax.swing.JOptionPane;
 public class ClienteListaGUI extends javax.swing.JPanel {
     
     ControladorCliente controladorCliente =  new ControladorCliente();
+    Clientes panel_prin;
+    
     
     private ArrayList<jPcliente> clientes;
     /**
      * Creates new form ClienteListaGUI
      */
-    public ClienteListaGUI() {
+    public ClienteListaGUI(){}
+    
+    public ClienteListaGUI(Clientes cli) {
         clientes = new ArrayList<>();
+        this.panel_prin = cli;
         initComponents();
         CargarLista(0);
     }
@@ -62,9 +71,22 @@ public class ClienteListaGUI extends javax.swing.JPanel {
         jTbuscador.setForeground(new java.awt.Color(191, 191, 191));
         jTbuscador.setText("Buscar cliente por ID");
         jTbuscador.setBorder(null);
+        jTbuscador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbuscadorMouseClicked(evt);
+            }
+        });
         jTbuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTbuscadorActionPerformed(evt);
+            }
+        });
+        jTbuscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTbuscadorKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTbuscadorKeyPressed(evt);
             }
         });
         add(jTbuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 47, 174, 19));
@@ -73,13 +95,47 @@ public class ClienteListaGUI extends javax.swing.JPanel {
         jBbuscar.setBorder(null);
         jBbuscar.setBorderPainted(false);
         jBbuscar.setContentAreaFilled(false);
-        jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jBbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBbuscarMouseClicked(evt);
+            }
+        });
         add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 44, 24, 24));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTbuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbuscadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTbuscadorActionPerformed
+
+    private void jBbuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBbuscarMouseClicked
+        if (jTbuscador.getText().isEmpty() || jTbuscador.getText() == "") {
+                CargarLista(0);
+            }else{
+        CargarLista(Integer.parseInt(jTbuscador.getText().trim()));
+        }
+    }//GEN-LAST:event_jBbuscarMouseClicked
+
+    private void jTbuscadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbuscadorMouseClicked
+         if(jTbuscador.getText().equalsIgnoreCase("Buscar cliente por ID")){
+            jTbuscador.setText("");
+        } else{}
+    }//GEN-LAST:event_jTbuscadorMouseClicked
+
+    private void jTbuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyTyped
+      
+    }//GEN-LAST:event_jTbuscadorKeyTyped
+
+    private void jTbuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyPressed
+        int key = evt.getKeyCode();
+        if(key == KeyEvent.VK_ENTER){
+            if (jTbuscador.getText().isEmpty() || jTbuscador.getText() == "") {
+                CargarLista(0);
+            }else{
+         CargarLista(Integer.parseInt(jTbuscador.getText()));
+            }
+        }
+    }//GEN-LAST:event_jTbuscadorKeyPressed
 
         
     private void cleanLista(){
@@ -93,33 +149,30 @@ public class ClienteListaGUI extends javax.swing.JPanel {
     }
      public void CargarLista(int id){
        
-        ArrayList<Cliente> listaClientes = new ArrayList<>();
-        listaClientes = ControladorCliente.listClients(0);
-        
-        
-        for(int i=0;i<listaClientes.size();i++){
-            int cedula = listaClientes.get(i).getID();
-            
-            String telefono = listaClientes.get(i).getTelefono();
-            
-            String nombre = listaClientes.get(i).getNombre() + " " 
-                    + listaClientes.get(i).getApellido();
-            String correo = listaClientes.get(i).getCorreo();
-            jPcliente jp = new jPcliente(cedula, telefono, nombre, correo);
-            if(id==0){
-                clientes.add(jp);
-            }else{
-                if (id==cedula) {
-                    cleanLista();
-                    clientes.add(jp);
-                    break;
-                } else {
-                    cleanLista();
-                    jPmensajes.add(
-                            new jPmensaje("Tu búsqueda no tuvo resultados!"));
+        ArrayList<Cliente> listadoCli = new ArrayList<>();
+            listadoCli = controladorCliente.listClients(0);
+
+            jPmensajes.removeAll();
+            for (int i = 0; i < listadoCli.size(); i++) {
+                jPcliente jpcli = new 
+                    jPcliente(listadoCli.get(i), panel_prin);
+                if(id==0 || jTbuscador.getText()==""){
+                    clientes.add(jpcli);
+                }else{
+                    if (id==listadoCli.get(i).getID()) {
+                        cleanLista();
+                        clientes.add(jpcli);
+                        break;
+                    } else {
+                        cleanLista();
+                       jPmensajes.add(
+                                new jPmensaje
+                                         ("Tu búsqueda no tuvo resultados!"));
+                    }
                 }
-            }
-          
+                
+
+            
        }
         
         //LA LISTA ES CARGADA EN UN JPANEL 
