@@ -287,7 +287,20 @@ public class HabitacionAgregarModificarGUI extends javax.swing.JPanel {
         validaNumero(evt.getKeyChar(), evt);
     }//GEN-LAST:event_jTprecioKeyTyped
 
+    /*public void Modificar(int numero_){
+        
+       //SE BUSCA EN LA BASE DE DATOS EL NÚMERO DE HABITACIÓN Y SE COMPARA
+       /* Por hacer*/
+   //    int numeroH = Integer.parseInt(jTnumeroHabitacion.getText());
+        
+     //  if(numero_ == numeroH){
+           //LOS DATOS QUE DEVUELVE SE PONE EN LA INTERFAZ
+     //  }
+        
+    //}
     
+    
+   
     public JButton getjBcancelar() {
         return jBcancelar;
     }

@@ -212,7 +212,7 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
             evt.consume();
         }
     }
-    
+
     public void setearFormato(JTextField t) {
         t.setForeground(new Color(153, 153, 153));
         t.setText("");
@@ -444,49 +444,49 @@ public class ClientesAgregarModificarGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jTCedulaKeyTyped
 
     private void jTCedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTCedulaFocusGained
-     
+
         if (jTCedula.getText().equalsIgnoreCase("***")) {
             setearFormato(jTCedula);
-        }     
+        }
     }//GEN-LAST:event_jTCedulaFocusGained
 
     private void jTcorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcorreoFocusGained
-        
+
         if (jTcorreo.getText().equalsIgnoreCase("***")) {
             setearFormato(jTcorreo);
-        }    
-        
+        }
+
     }//GEN-LAST:event_jTcorreoFocusGained
 
     private void jTnombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTnombreFocusGained
-       
+
         if (jTnombre.getText().equalsIgnoreCase("***")) {
             setearFormato(jTnombre);
-        }  
-        
+        }
+
     }//GEN-LAST:event_jTnombreFocusGained
 
     private void jTtelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTtelefonoFocusGained
-        
+
         if (jTtelefono.getText().equalsIgnoreCase("***")) {
             setearFormato(jTtelefono);
-        }  
-        
+        }
+
     }//GEN-LAST:event_jTtelefonoFocusGained
 
     private void jTapellidoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTapellidoFocusGained
-        
+
         if (jTapellido.getText().equalsIgnoreCase("***")) {
             setearFormato(jTapellido);
-        }  
+        }
     }//GEN-LAST:event_jTapellidoFocusGained
 
     private void jTdireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTdireccionFocusGained
-       
+
         if (jTdireccion.getText().equalsIgnoreCase("***")) {
             setearFormato(jTdireccion);
-        } 
-        
+        }
+
     }//GEN-LAST:event_jTdireccionFocusGained
 
 

@@ -88,7 +88,6 @@ public class Empleados extends javax.swing.JPanel {
         jPcontenedor.revalidate();
         jPcontenedor.repaint();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.

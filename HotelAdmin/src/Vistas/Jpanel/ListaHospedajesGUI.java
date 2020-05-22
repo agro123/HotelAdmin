@@ -20,14 +20,16 @@ public class ListaHospedajesGUI extends javax.swing.JPanel {
     /**
      * Creates new form ListaHospedajesGUI
      */
+    private boolean first;
     private ArrayList<Hospedaje>h;
     private int nElementos;
     public ListaHospedajesGUI() {
         initComponents();
         ControladorHospedaje ch = new ControladorHospedaje();
         h = ch.listadoHospedaje(1);
+        first = false;
         AgregarLista();
-      
+       first = true;
     }
 
     
@@ -44,30 +46,38 @@ public class ListaHospedajesGUI extends javax.swing.JPanel {
          nElementos++;
          jPcontenido.add(jp);
        }
+       if(first){
        verficarNumeroElementos(0);
+       }
        jPcontenido.revalidate();
        jPcontenido.repaint();   
     }
     
     private void filtrarBusqueda(){
-       int cliente = Integer.parseInt(jTextField1.getText().trim());   
-       nElementos=0;
-       jPcontenido.removeAll();
-       for (int i=0;i<h.size();i++){
-         if(cliente==h.get(i).getIdCliente()){
-           int idhospedaje = h.get(i).getIdHospedaje();
-           int idcliente = h.get(i).getIdCliente();
-           int idhabitacion = h.get(i).getIdHabitacion();
-           int piso = h.get(i).getPiso();
-           jPhospedaje jp = new jPhospedaje(idhospedaje,idcliente,
-                idhabitacion,piso);
-           nElementos++;
-           jPcontenido.add(jp);
-         }        
+        if(jTextField1.getText().trim().length()>10){
+        JOptionPane.showMessageDialog(null,
+               "La identificación no debe de tener mas de 10 caracateres.");
+         jTextField1.setText("");
+       }else {
+          int cliente = Integer.parseInt(jTextField1.getText().trim());   
+          nElementos=0;
+          jPcontenido.removeAll();
+          for (int i=0;i<h.size();i++){
+              if(cliente==h.get(i).getIdCliente()){
+                  int idhospedaje = h.get(i).getIdHospedaje();
+                  int idcliente = h.get(i).getIdCliente();
+                  int idhabitacion = h.get(i).getIdHabitacion();
+                  int piso = h.get(i).getPiso();
+                  jPhospedaje jp = new jPhospedaje(idhospedaje,idcliente,
+                  idhabitacion,piso);
+                  nElementos++;
+                  jPcontenido.add(jp);
+                }        
+           }
+          verficarNumeroElementos(1);
+          jPcontenido.revalidate();
+          jPcontenido.repaint();
        }
-       verficarNumeroElementos(1);
-       jPcontenido.revalidate();
-       jPcontenido.repaint();
     }
     private boolean verificarCampoBuscar(){
         if(jTextField1.getText().trim().equalsIgnoreCase("")||

@@ -5,15 +5,12 @@
  */
 package Controladores;
 
-import static Controladores.ControllerServicios.gestionMensajes;
-import Modelo.HabitacionDAO;
+
+
+import static Controladores.ControllerServicios.opcionEjec;
 import Modelo.Reserva;
 import Modelo.ReservaDAO;
-
-import Modelo.ClientDAO;
-import Modelo.Cliente;
 import Modelo.Habitacion;
-import Modelo.RoomServicesDAO;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -25,28 +22,23 @@ import javax.swing.JOptionPane;
 public class ControllerReserva {
 
     static int numeroReserva;
-    static boolean verCliente;
     static int numEmpleado;
     
     
-    public ControllerReserva() {
-        verCliente = false;
+    public ControllerReserva() { 
         extraerId();
     }
     
-    
-
-    public static boolean isVerCliente() {
-        return verCliente;
+    public static void setNumEmpleado(int numEmpl) {
+        numEmpleado = numEmpl;
     }
+
 
     public static void setNumeroReserva(int numeroReserva) {
         ControllerReserva.numeroReserva = numeroReserva;
     }
 
-    public static int getNumeroReserva() {
-        return numeroReserva;
-    }
+    
 
     public static int getNumEmpleado() {
         return numEmpleado;
@@ -54,83 +46,84 @@ public class ControllerReserva {
     
     
     public Reserva getReserva(int idcliente){
-        ReservaDAO modelo = new ReservaDAO();
-        Reserva r =  modelo.getReserva(idcliente);        
-        return r;
+        ReservaDAO modelo = new ReservaDAO();    
+        return modelo.getReserva(idcliente);
     }
     
     
-    public static ArrayList<Habitacion> cargarListaHabitaciones(Timestamp fi,Timestamp fs){
-        ArrayList<Habitacion> lista;
+    public static ArrayList<Habitacion> loadListRooms
+                (Timestamp fi,Timestamp fs,String modo,int numReserva){
         ReservaDAO modeloHab = new ReservaDAO();
-        lista = modeloHab.listadoHabitacion(fi, fs);
-        System.out.println(lista.size());
-        return lista; 
+        return  modeloHab.listadoHabitacion(fi, fs, modo, numReserva); 
     }
     
     
-    public static void extraerId(){
+    public static int extraerId(){
         ReservaDAO modelo = new ReservaDAO();
-        numeroReserva = modelo.extraerUltimoId();
+        return modelo.extraerUltimoId();
     }
     
-    public static ArrayList<Reserva> listarReservas()
-    {
-        ReservaDAO modelo = new ReservaDAO();
-        ArrayList<Reserva> lista_reservas;
-        lista_reservas = modelo.listadoReservas();
-        return lista_reservas;
+    public static ArrayList<Reserva> listarReservas(){
+        ReservaDAO modelo = new ReservaDAO(); 
+        return modelo.listadoReservas();
     }
     
-    public static void registrarReserva(Reserva reserva) {
+    public static int registrarReserva(Reserva reserva) {
         int resultado = 0;
         ReservaDAO modelo = new ReservaDAO();
         resultado = modelo.grabarReserva(reserva);
         if (resultado == 1) {
             gestionMensajes("Registro Grabado con éxito",
                     "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+            return 1;
         } else {
-            gestionMensajes("Error al grabar",
-                    "Confirmación", JOptionPane.ERROR_MESSAGE);
+            return 0;
         }
     }
    
     
-    public static void verificarCliente(String idClien){
-        ClientDAO modelo = new ClientDAO();
-        ArrayList<Cliente> listaClientes;
-        listaClientes = modelo.listCliente(0);
-        for(int a = 0; a < listaClientes.size(); a++){
-            String id = ""+listaClientes.get(a).getID();
-            if(id.equalsIgnoreCase(idClien)){
-                verCliente = true;
-                a = listaClientes.size();
-            }
-        }     
-    }
+        
     
     public static ArrayList<Reserva> listarReservasLike(int numReserva){
         ReservaDAO modelo = new ReservaDAO();
-        ArrayList<Reserva> lista_reservas;
-        lista_reservas = modelo.listReservasLike(numReserva);
-        return lista_reservas;
+        return modelo.listReservasLike(numReserva);
     }
     
     
     
-    public static void eliminarReserva(int ID) {
+    public static int eliminarReserva(int ID) {
         ReservaDAO modelo = new ReservaDAO();
         if (modelo.borrarReserva(ID) == 1) {
             gestionMensajes(
                     "Registro Borrado con éxtio",
                     "Confirmación de acción",
                     JOptionPane.INFORMATION_MESSAGE);
+            return 1;
         } else {
             gestionMensajes(
                     "Error al borrar",
                     "Confirmación de acción",
                     JOptionPane.ERROR_MESSAGE);
+            return 0;
         }
+    }
+    
+    public static int actualizarReserva(Reserva reserva){
+         ReservaDAO modelo = new ReservaDAO();
+        if (modelo.modificarReserva(reserva) == 1) {
+            gestionMensajes(
+                    "Actualización exitosa",
+                    "Confirmación ",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return 1;
+        } else {
+            gestionMensajes(
+                    "Actualización Falida",
+                    "Confirmación ",
+                    JOptionPane.ERROR_MESSAGE);
+            return 0;
+        }
+        
     }
                         
         
@@ -138,9 +131,7 @@ public class ControllerReserva {
         JOptionPane.showMessageDialog(null, mensaje, titulo, icono);
     }
 
-    public static void setNumEmpleado(int numEmpl) {
-        numEmpleado = numEmpl;
-    }
+    
     
     
 }

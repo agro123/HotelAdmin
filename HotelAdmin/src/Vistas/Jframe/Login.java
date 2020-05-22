@@ -51,6 +51,10 @@ public class Login extends javax.swing.JFrame {
                 pri.setVisible(true);
                 dispose();
                 
+            }else if(usuario.length()>10){
+                 JOptionPane.showMessageDialog(null,
+                  "El usuario no debe de tener mas de 10 caracateres.");
+                   
             } else {
                 LoginControlador login = new LoginControlador();
 
@@ -81,12 +85,10 @@ public class Login extends javax.swing.JFrame {
             if (!found) {
                 JOptionPane.showMessageDialog(null, "Datos incorrectos");
             }
-
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(
                     null, "Ha ocurrido un error durante la verificacion "
-                    + "\nError :" + ex.getMessage());
-               
+                    + "\nError :" + ex.getMessage());       
         }
     }
     public void registrar(){
@@ -96,12 +98,16 @@ public class Login extends javax.swing.JFrame {
         String ccontrasena = jTconfirmarContraseña.getText();
         String cadmin = jTcontraseñaAdmin.getText();
      
-        if(usuario.equalsIgnoreCase("Usuario")
+        if(usuario.equalsIgnoreCase("Identificación del empleado")
                 ||contrasena.equalsIgnoreCase("Contraseña")
                 ||ccontrasena.equalsIgnoreCase("Confirmar contraseña")
                 ||cadmin.equalsIgnoreCase("Contraseña administrador")){           
             JOptionPane.showMessageDialog(null,"Hay campos vacios!");
             
+        }else if(usuario.length()>10){
+                 JOptionPane.showMessageDialog(null,
+                  "El usuario no debe de tener mas de 10 caracateres.");
+                   
         }else if(!cadmin.equalsIgnoreCase("admin")){
             JOptionPane.showMessageDialog(null,"La contraseña del administrador"
                     + " no es correcta");
@@ -164,7 +170,6 @@ public class Login extends javax.swing.JFrame {
         jLfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1118, 680));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(69, 170, 242));
@@ -247,7 +252,7 @@ public class Login extends javax.swing.JFrame {
 
         jTusuario.setFont(new java.awt.Font("Decker", 0, 14)); // NOI18N
         jTusuario.setForeground(new java.awt.Color(204, 204, 204));
-        jTusuario.setText("Usuario");
+        jTusuario.setText("Identificación del empleado");
         jTusuario.setBorder(null);
         jTusuario.setOpaque(false);
         jTusuario.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -256,6 +261,16 @@ public class Login extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTusuarioFocusLost(evt);
+            }
+        });
+        jTusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTusuarioActionPerformed(evt);
+            }
+        });
+        jTusuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTusuarioKeyTyped(evt);
             }
         });
         jPRegistro.add(jTusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 190, 30));
@@ -298,6 +313,11 @@ public class Login extends javax.swing.JFrame {
         jPRegistro.add(jBrgistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inputText.png"))); // NOI18N
+        jLabel3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jLabel3FocusLost(evt);
+            }
+        });
         jPRegistro.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inputText.png"))); // NOI18N
@@ -471,7 +491,7 @@ public class Login extends javax.swing.JFrame {
     private void jTusuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTusuarioFocusLost
         // TODO add your handling code here:
          if(jTusuario.getText().equalsIgnoreCase("")){ 
-        jTusuario.setText("Usuario");
+        jTusuario.setText("Identificación del empleado");
         }
       
     }//GEN-LAST:event_jTusuarioFocusLost
@@ -519,7 +539,7 @@ public class Login extends javax.swing.JFrame {
     private void jTconfirmarContraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTconfirmarContraseñaFocusLost
         // TODO add your handling code here:
         if(jTconfirmarContraseña.getText().equalsIgnoreCase("")){
-            jTconfirmarContraseña.setText("Nombre");
+            jTconfirmarContraseña.setText("Confirmar contraeña");
         }
     }//GEN-LAST:event_jTconfirmarContraseñaFocusLost
 
@@ -536,7 +556,7 @@ public class Login extends javax.swing.JFrame {
     private void jTcontraseñaAdminFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTcontraseñaAdminFocusLost
         // TODO add your handling code here:
         if(jTcontraseñaAdmin.getText().equalsIgnoreCase("")){
-            jTcontraseñaAdmin.setText("Cédula");
+            jTcontraseñaAdmin.setText("Contraseña administrador");
         }
     }//GEN-LAST:event_jTcontraseñaAdminFocusLost
 
@@ -544,6 +564,19 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         jTcontraseñaAdmin.setText("");
     }//GEN-LAST:event_jTcontraseñaAdminFocusGained
+
+    private void jTusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTusuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTusuarioActionPerformed
+
+    private void jTusuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTusuarioKeyTyped
+        char car = evt.getKeyChar();
+        if((car<'0' || car>'9')) evt.consume();
+    }//GEN-LAST:event_jTusuarioKeyTyped
+
+    private void jLabel3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLabel3FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel3FocusLost
 
     
     

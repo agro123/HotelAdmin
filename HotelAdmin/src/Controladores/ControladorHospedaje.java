@@ -47,5 +47,11 @@ public class ControladorHospedaje {
         HospedajeDAO a = new HospedajeDAO();
         int resultado =a.modificarHospedaje(c);
         return resultado; 
-    }     
+    }
+    public static int cambiarEstado(int idhospedaje)
+    {
+        HospedajeDAO a = new HospedajeDAO();
+        int resultado =a.cambiarEstado(idhospedaje);
+        return resultado; 
+    }  
 }

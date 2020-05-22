@@ -23,7 +23,9 @@ public class HospedajeDAO {
         JOptionPane.showMessageDialog(null,"Código "+
                     ex.getErrorCode() + "\n Error" + ex.getMessage());
     }
+    //--------------------------------------------------------------------------
     public int grabarHospedaje(Hospedaje c){
+        
         Connection con = null;
         PreparedStatement pstm;
         pstm = null;
@@ -31,7 +33,10 @@ public class HospedajeDAO {
         rtdo = 0;
        try{
             con = Fachada.getConnection();
-            String sql = "INSERT INTO Hospedaje values (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Hospedaje (id_hospedaje,id_habitacion,"
+                    + "id_cliente,id_empleado,FECHA_INGRESO,FECHA_SALIDA,"
+                    + "NUM_PERSONAS,estado,id_reserva) "
+                    + " VALUES (?,?,?,?,?,?,?,?,?)";
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, c.getIdHospedaje());
             pstm.setInt(2, c.getIdHabitacion());
@@ -58,6 +63,7 @@ public class HospedajeDAO {
         }
         return rtdo;
     } 
+    //--------------------------------------------------------------------------
     public int modificarHospedaje(Hospedaje c){      
         Connection con = null;
         PreparedStatement pstm;
@@ -70,7 +76,7 @@ public class HospedajeDAO {
                         "SET id_habitacion = ?,id_cliente = ?, id_empleado = ?,"
                     + " fecha_ingreso = ?, fecha_salida = ?, num_personas = ?,"
                     + " estado = ?"
-                    +    "WHERE id_hospedaje=?";
+                    + " WHERE id_hospedaje=?";
             pstm = con.prepareStatement(sql);            
             pstm.setInt(8, c.getIdHospedaje());
             pstm.setInt(1, c.getIdHabitacion());
@@ -96,7 +102,7 @@ public class HospedajeDAO {
         }
         return rtdo;
     }
-     
+    //-------------------------------------------------------------------------- 
     public int borrarHospedaje(String id_hospedaje){      
         Connection con = null;
         PreparedStatement pstm = null;
@@ -124,6 +130,7 @@ public class HospedajeDAO {
         }
         return rtdo;
     }
+    //--------------------------------------------------------------------------
     public int extraerUltimoId()
     {
         Connection con = null;
@@ -160,6 +167,7 @@ public class HospedajeDAO {
         }
         return id;
     }
+    //--------------------------------------------------------------------------
     public ArrayList<Hospedaje> listadoHospedaje(int s){ 
           //si s=1 entonces muestra una vista con datos de la habitacion
         Connection con = null;
@@ -170,10 +178,10 @@ public class HospedajeDAO {
             con = Fachada.getConnection();
             String sql="";
             if(s==0){
-                sql = "SELECT * FROM hospedaje ORDER BY estado";            
+                sql = "SELECT * FROM hospedaje WHERE estado = TRUE"; //---------           
             }else{
-                sql = "SELECT * FROM datos_hospedaje "
-                    + "ORDER BY habitacion";      
+                sql = "SELECT * FROM datos_hospedaje "//---------
+                    + "ORDER BY id_hospedaje";      
             }                     
             pstm = con.prepareStatement(sql);            
             
@@ -217,5 +225,35 @@ public class HospedajeDAO {
             }
         }
         return listado;
-    } 
+    }
+    //--------------------------------------------------------------------------
+    public int cambiarEstado(int idHospedaje){      
+        Connection con = null;
+        PreparedStatement pstm;
+        pstm = null;
+        int rtdo;
+        rtdo = 0;
+        try{
+            con = Fachada.getConnection();
+            String sql = "UPDATE hospedaje " +
+                       "SET estado = false"
+                    + " WHERE id_hospedaje=?";
+            pstm = con.prepareStatement(sql);            
+            pstm.setInt(1, idHospedaje);
+            rtdo = pstm.executeUpdate();  
+        }
+        catch(SQLException ex){
+            mensajeError(ex);
+        }
+        finally{
+            try{
+                if(pstm!=null) pstm.close();                
+            }
+            catch(SQLException ex){
+                mensajeError(ex);
+            }
+        }
+        return rtdo;
+    }
 }
+
