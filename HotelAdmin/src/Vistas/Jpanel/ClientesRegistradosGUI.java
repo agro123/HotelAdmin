@@ -11,6 +11,7 @@ import Vistas.Jframe.ClienteRecepcionista;
 import Vistas.Jpanel.jPmensaje;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,8 +53,9 @@ public class ClientesRegistradosGUI extends javax.swing.JPanel {
                         break;
                     } else {
                         cleanLista();
-                        jPcontenido.add(
-                                new jPmensaje("Tu búsqueda no tuvo resultados!"));
+                       jPcontenido.add(
+                                new jPmensaje
+                                         ("Tu búsqueda no tuvo resultados!"));
                     }
                 }
                 
@@ -120,6 +122,9 @@ public class ClientesRegistradosGUI extends javax.swing.JPanel {
             }
         });
         jTbuscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTbuscadorKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTbuscadorKeyTyped(evt);
             }
@@ -185,7 +190,24 @@ public class ClientesRegistradosGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jBbuscarMouseClicked
 
     private void jTbuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyPressed
-        // TODO add your handling code here:
+        int key = evt.getKeyCode();
+        if(key == KeyEvent.VK_ENTER){
+        try {
+            
+            cleanLista();
+            if (jTbuscador.getText().isEmpty()) {
+                cargarLista(0);
+            }
+            if (jTbuscador.getText().matches("[0-9]*")) {
+                cargarLista(Integer.parseInt(jTbuscador.getText()));
+            } else {
+                cleanLista();
+                jPcontenido.add(new jPmensaje("Tu búsqueda no tuvo resultados!"));
+            }
+
+        } catch (Exception e) {
+        }
+        }
     }//GEN-LAST:event_jTbuscadorKeyPressed
 
     private void jTbuscadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbuscadorMouseClicked
