@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+CLIENTE RECEPCIONISTA
  */
 package Vistas.Jframe;
 
@@ -113,8 +111,8 @@ public class ClienteRecepcionista extends javax.swing.JPanel {
 
     private void jBlistaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlistaClientesActionPerformed
         // TODO add your handling code here:
-        formulario.limpiarCampos();
         panelListarCliente();
+        formulario.limpiarCampos();
     }//GEN-LAST:event_jBlistaClientesActionPerformed
 
     public void seleccionarPrimero(ClientesAgregarModificarGUI formulario) {
