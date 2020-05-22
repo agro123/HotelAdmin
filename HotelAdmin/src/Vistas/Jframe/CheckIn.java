@@ -119,7 +119,7 @@ public class CheckIn extends javax.swing.JPanel {
         jBreservaPrevia.setSelected(false); 
         jBhospedajes.setSelected(false); 
         jBsinReserva.setSelected(true);  
-        CheckInSinReservaGUI check = new CheckInSinReservaGUI(); 
+        CheckInSinReservaGUI check = new CheckInSinReservaGUI(numEmpleado); 
         // check.resetListCheck-in();
         jPcontenedor.removeAll();
         jPcontenedor.add(check);

@@ -65,16 +65,14 @@ public class ClientDAO {
         rtdo = 0;
         try{
             con = Fachada.getConnection();
-<<<<<<< HEAD
+
             String sql = "UPDATE Cliente "
                         + "SET id_cliente = ?, nombre_cli = ?,apellido_cli = ?,"
                         + "telefono_cli = ?,  direccion_cli = ?,  email_cli = ?"
                         + "WHERE id_cliente = ?";
-=======
-            String sql = "UPDATE Cliente SET id_cliente=?, nombre_cli=?, apellido_cli=?, telefono_cli=?, " +
-                    "direccion_cli=?, email_cli=? WHERE id_cliente = ?";
+
             
->>>>>>> 04114ad6478af0efb99428b2011e827a205acdb3
+
             pstm = con.prepareStatement(sql);  
             
             pstm.setInt(1, c.getID());
@@ -83,23 +81,17 @@ public class ClientDAO {
             pstm.setString(4, c.getTelefono());
             pstm.setString(5, c.getDireccion());
             pstm.setString(6, c.getCorreo());
-<<<<<<< HEAD
-            
-=======
->>>>>>> 04114ad6478af0efb99428b2011e827a205acdb3
+
             pstm.setInt(7, c.getID());
             
             rtdo = pstm.executeUpdate();  
         }
         // id_cliente | nombre_cli | apellido_cli |  telefono_cli   |    direccion_cli     |         email_cli
         catch(SQLException ex){
-<<<<<<< HEAD
+
             JOptionPane.showMessageDialog(null,"Code modificar: " + 
                         ex.getErrorCode() + "\nError: " + ex.getMessage());
-=======
-            JOptionPane.showMessageDialog(null,"Code: " + 
-                        ex.getErrorCode() + "\nError: " + ex.getMessage() );
->>>>>>> 04114ad6478af0efb99428b2011e827a205acdb3
+
         }
         finally{
             try{

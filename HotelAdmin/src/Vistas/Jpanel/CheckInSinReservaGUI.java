@@ -4,13 +4,21 @@
  * and open the template in the editor.
  */
 package Vistas.Jpanel;
+import Controladores.ControladorCheckout;
+import Controladores.ControladorHospedaje;
+import Controladores.ControllerHabitacion;
 import Controladores.ControllerReserva;
+import Modelo.Checkout;
 import Modelo.Habitacion;
+import Modelo.Hospedaje;
 import Servicios.Fecha;
 import java.awt.event.KeyEvent;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,9 +32,9 @@ public class CheckInSinReservaGUI extends javax.swing.JPanel {
     
     
     String validaOperacion;
+    int numEmpleado;
     
-    
-    public CheckInSinReservaGUI() {
+    public CheckInSinReservaGUI(int nummEmpleado) {
         initComponents();
         establecerInterfaz();
         Timestamp fi = Fecha.formatearFechaIngreso(jdFechaIngreso.getDate());
@@ -47,19 +55,6 @@ public class CheckInSinReservaGUI extends javax.swing.JPanel {
     }
             
     
-    
-    /*private void agregarHabitaciones(){
-        
-        // jPcontenido.removeAll();
-        for (int i=0;i<9;i++){
-        jPhabitacionCheckIn jp = new jPhabitacionCheckIn(05,"Simple",56,02);
-        jPcontenido.add(jp);
-          
-       }
-        jPcontenido.revalidate();
-        jPcontenido.repaint();
-        
-    }*/
     
     
     public void cargarHabitaciones(ArrayList<Habitacion> lista) {
@@ -107,6 +102,97 @@ public class CheckInSinReservaGUI extends javax.swing.JPanel {
             evt.consume();
         }
     }
+    
+    
+    
+    private void hacerHospedaje(){
+       Hospedaje h = new Hospedaje();
+       ControladorHospedaje ch = new ControladorHospedaje();
+            
+       h.setIdHabitacion(Integer.parseInt(jTidHabitacion.getText()));
+       h.setIdCliente(Integer.parseInt(jTidCliente.getText()));
+       h.setNumeroPesonas(Integer.parseInt(jTcantidadPersonas.getText()));
+       h.setFechaIngreso(Timestamp.valueOf (jdFechaIngreso.getDateFormatString()));
+       h.setFechaSalida(Timestamp.valueOf (jdFechaSalida.getDateFormatString()));
+       h.setEstado(true);
+       h.setIdEmpleado(numEmpleado);
+       h.setId_reserva(numEmpleado);
+       
+       int i = ch.grabarHospedaje(h);
+       crearCheckout(ch.extraerId());//---------------
+      if(i==1){
+          JOptionPane.showMessageDialog(null,
+                 "Hospedaje registrado con exito."); 
+            setearCampos();
+      }
+      else {
+          JOptionPane.showMessageDialog(null,
+                 "Ocurrio un error al realizar el Hospedaje.");
+        setearCampos();
+      }
+   }
+    
+    
+    private void crearCheckout(int idhospedaje){
+      Checkout c = new Checkout();
+      ControladorCheckout co = new ControladorCheckout(); 
+      ControllerHabitacion ch = new ControllerHabitacion();
+      
+      int valorTotal = numDias()*
+             ch.getPrecioHabitacion(Integer.parseInt(jTidHabitacion.getText()));
+      c.setIdHospedaje(idhospedaje);
+      c.setValorTotal(valorTotal);
+      co.grabarChekout(c);
+  }
+    
+    
+   private int numDias(){
+       int dias=0;
+       try {
+       String fi = jdFechaIngreso.getDateFormatString();
+       String fs = jdFechaSalida.getDateFormatString();
+       fi = fi.substring(0, fi.indexOf(" "));
+       fs = fs.substring(0, fs.indexOf(" "));
+       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");       
+       Date fechaInicial = dateFormat.parse(fi);
+       Date fechaFinal = dateFormat.parse(fs);
+       dias=(int) ((fechaFinal.getTime()-fechaInicial.getTime())/86400000);      
+       } catch(ParseException e){
+        JOptionPane.showMessageDialog(null,
+                 "Ocurrio un error al realizar el Hospedaje");
+       } finally {
+           return dias;
+       }
+    }
+   
+   
+   public int validarCampos() {
+        int rtdo = 1;
+
+        if (jTidCliente.getText().equals("")
+                ||jTidCliente.getText().equalsIgnoreCase("Cliente")){
+            
+            rtdo = 0;
+            JOptionPane.showMessageDialog(this,"Hay Campos Vacios");
+
+        }else
+        if (jTidHabitacion.getText().equals("") 
+            || jTidHabitacion.getText().equalsIgnoreCase("Número de habitación"))
+        {
+            rtdo = 0;
+            JOptionPane.showMessageDialog(this,"Seleccione una Habitación");
+        }else
+        if(jTcantidadPersonas.getText().equals("") || 
+                jTcantidadPersonas.getText().equalsIgnoreCase("Cantidad de personas"))
+        {
+            rtdo = 0;
+            JOptionPane.showMessageDialog(this,"Hay Campos Vacios");
+            
+        }   
+        return rtdo;
+    }
+   
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -286,14 +372,10 @@ public class CheckInSinReservaGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jdFechaIngresoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaIngresoPropertyChange
-        if(jdFechaIngreso.getDate() != null){
-
-            
-        }
     }//GEN-LAST:event_jdFechaIngresoPropertyChange
 
     private void jdFechaSalidaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaSalidaPropertyChange
