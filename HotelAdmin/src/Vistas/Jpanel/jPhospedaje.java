@@ -67,6 +67,7 @@ public class jPhospedaje extends javax.swing.JPanel {
 
         jLidCliente.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
         jLidCliente.setForeground(new java.awt.Color(112, 112, 112));
+        jLidCliente.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLidCliente.setText("09");
         add(jLidCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, 28, -1, -1));
 

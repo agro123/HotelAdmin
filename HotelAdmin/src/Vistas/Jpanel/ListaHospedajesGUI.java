@@ -7,6 +7,7 @@ package Vistas.Jpanel;
 
 import Controladores.ControladorHospedaje;
 import Modelo.Hospedaje;
+import Modelo.Reserva;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -34,6 +35,7 @@ public class ListaHospedajesGUI extends javax.swing.JPanel {
 
     
     public void AgregarLista(){
+        establecerLayout(h);
        nElementos=0;
        jPcontenido.removeAll();
        for (int i=0;i<h.size();i++){
@@ -52,6 +54,25 @@ public class ListaHospedajesGUI extends javax.swing.JPanel {
        jPcontenido.revalidate();
        jPcontenido.repaint();   
     }
+    
+    
+    public void establecerLayout(ArrayList<Hospedaje> listaCheckIN){
+        //Establece un gridlayout al panel que contiene las reservas,
+        //deacuerdo al numero de reservas que exista
+        jPcontenido.removeAll();
+        int row;
+        if(listaCheckIN.size() < 6)
+        {
+            row = 6;
+        }else{
+            row = listaCheckIN.size();
+        }
+        jPcontenido.setLayout(new java.awt.GridLayout(row,1,1,1));
+    }
+    
+    
+    
+    
     
     private void filtrarBusqueda(){
         if(jTextField1.getText().trim().length()>10){
