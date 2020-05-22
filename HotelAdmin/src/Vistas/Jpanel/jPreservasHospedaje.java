@@ -153,6 +153,7 @@ public class jPreservasHospedaje extends javax.swing.JPanel {
         add(jBeditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 25, 16, 16));
 
         jBtodoPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ReservSinSele.png"))); // NOI18N
+        jBtodoPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(153, 153, 153)));
         jBtodoPanel.setBorderPainted(false);
         jBtodoPanel.setContentAreaFilled(false);
         jBtodoPanel.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ReservSele.png"))); // NOI18N
