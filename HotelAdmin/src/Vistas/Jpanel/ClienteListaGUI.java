@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import Controladores.ControladorCliente;
 import Modelo.Cliente;
 import Vistas.Jframe.Clientes;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -65,9 +66,19 @@ public class ClienteListaGUI extends javax.swing.JPanel {
         jTbuscador.setForeground(new java.awt.Color(191, 191, 191));
         jTbuscador.setText("Buscar cliente por ID");
         jTbuscador.setBorder(null);
+        jTbuscador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbuscadorMouseClicked(evt);
+            }
+        });
         jTbuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTbuscadorActionPerformed(evt);
+            }
+        });
+        jTbuscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTbuscadorKeyTyped(evt);
             }
         });
         add(jTbuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 47, 174, 19));
@@ -76,13 +87,53 @@ public class ClienteListaGUI extends javax.swing.JPanel {
         jBbuscar.setBorder(null);
         jBbuscar.setBorderPainted(false);
         jBbuscar.setContentAreaFilled(false);
-        jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jBbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBbuscarMouseClicked(evt);
+            }
+        });
         add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 44, 24, 24));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTbuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbuscadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTbuscadorActionPerformed
+
+    private void jBbuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBbuscarMouseClicked
+        try {
+            
+            cleanLista();
+            if (jTbuscador.getText().isEmpty()) {
+                CargarLista(0);
+            }
+            if (jTbuscador.getText().matches("[0-9]*")) {
+                CargarLista(Integer.parseInt(jTbuscador.getText()));
+            } else {
+                cleanLista();
+                jPmensajes.add(new jPmensaje("Tu búsqueda no tuvo resultados!"));
+            }
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jBbuscarMouseClicked
+
+    private void jTbuscadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbuscadorMouseClicked
+        if(jTbuscador.getText().equalsIgnoreCase("Buscar cliente por ID")){
+            jTbuscador.setText("");
+        } else{}
+    }//GEN-LAST:event_jTbuscadorMouseClicked
+
+    private void jTbuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyTyped
+        int key = evt.getKeyCode();
+        if(key == KeyEvent.VK_ENTER){
+            if (jTbuscador.getText().isEmpty() || jTbuscador.getText() == "") {
+                CargarLista(0);
+            }else{
+         CargarLista(Integer.parseInt(jTbuscador.getText()));
+            }
+        }
+    }//GEN-LAST:event_jTbuscadorKeyTyped
 
     private void cleanLista() {
 
